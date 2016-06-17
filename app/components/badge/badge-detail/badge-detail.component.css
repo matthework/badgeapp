@@ -1,0 +1,157 @@
+h1 {
+  font-size: 1.8em;
+  color: #999;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.6em;
+  color: #999;
+  margin-top: 20px;
+  padding-top: 0;
+}
+h3 {
+  font-size: 1.3em;
+  color: #999;
+  margin-top: 20px;
+  padding-top: 0;
+}
+h4 {
+  font-size: 1.1em;
+  color: #999;
+  margin-top: 20px;
+  padding-top: 0;
+  font-weight: lighter;
+}
+p{
+  font-weight: lighter;
+  width: 60%; 
+  word-wrap: normal;
+  text-align: justify;
+}
+label {
+  display: inline-block;
+  width: 8em;
+  color: #999;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  margin-bottom: 20px;
+  color: #999;
+}
+button {
+  width: 100px !important;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 1em;
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer; 
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #ccc; 
+  cursor: auto;
+}
+li {
+margin-left: 0;
+}
+table {
+  table-layout: auto;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+textarea {
+  vertical-align: top;
+  font-size: 1em;
+  color: #999;
+  width: 350px;
+  height: 200px;
+  padding-left: .4em;
+  padding-top: .4em;
+  margin-bottom: 20px;
+}
+.ta-overview {
+  width: 500px;
+  height: 100px;
+  border: 1px solid #cccccc;
+  font-style: italic;
+  word-wrap: break-word;
+}
+.button-edit {
+  position: absolute; 
+  right: 30%;
+}
+.table-badgelevels {
+  margin-top: 20px;
+  table-layout: fixed;
+  width: 70%;
+  /*white-space: nowrap;*/
+  word-wrap: break-word;
+}
+/*.table-badgelevels td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}*/
+.th-level {
+  width: 7%;
+}
+.th-desc {
+  width: 60%;
+}
+.th-badgeset {
+  width: 20%;
+}
+.td-level {
+  text-align: center;
+}
+.td-desc {
+  font-style: italic;
+}
+.uli-bset{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.uli-bset:hover{
+  color: red;
+}
+.uli-bset:visited{
+  color: #607D8B;
+}
+.selected {
+  background-color: #CFD8DC !important;
+  color: white;
+}
+
+.check-core {
+  color: red;
+}
+
+
+

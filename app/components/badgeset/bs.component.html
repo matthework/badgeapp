@@ -1,0 +1,124 @@
+
+
+<h1>Badge Set</h1>
+<input [(ngModel)]="query" placeholder="Search for">
+<button class="button-showCom" *ngIf!="showCompare" (click)="showCompare=true;getComBS()">Compare</button>
+<button class="button-back" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
+<button class="button-more" *ngIf!="active" (click)="active=true">></button>
+<button class="button-add" *ngIf="active" (click)="addBadgeSet()">+</button>
+<button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
+
+<div *ngIf="badgesets">
+	<div *ngIf!="showCompare">
+	<table class="table-badgesets">
+	<tr>
+	  <th class="th-name">Name</th>
+	  <th class="th-bg">Badges</th>
+	  <th class="th-tier">Tier</th>
+	  <th class="th-grade">Grade</th>
+	  <th class="th-pay">$$</th>
+	  <th class="th-tags">Tags</th>
+	  <th class="th-inused">InUsed</th>
+	  <th class="th-last"></th>
+	</tr>
+	<tr *ngFor="#badgeset of badgesets | filter:query">
+	  <td (click)="onSelect(badgeset);toBSDetail(badgeset._id)" class="badgeset">{{badgeset.name}}</td>
+	  <td class="td-badges">
+	  <div *ngFor="#badgegroup of badgeset.badgegroups">
+	  <li>
+	  <text class="tooltip" (click)="toBadgeDetail(badgegroup.badge)"><text class="badge">{{badgegroup.badge}} {{badgegroup.level}}</text><text class="check-core">{{checkCore(badgeset,badgegroup.badge)}}</text><span class="tooltiptext"><li> <b>Level {{badgegroup.level-1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level-1)}}</li><br><li><b><u>Level {{badgegroup.level}}</u>: </b>{{getDesc(badgegroup.badge, badgegroup.level)}}</li><br><li><b>Level {{badgegroup.level+1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level+1)}}</li></span></text>
+	  </li>
+	  </div>
+	  </td>
+	  <td class="td-tier">{{badgeset.tier}}</td>
+	  <td class="td-grade">{{badgeset.grade}}</td>
+	  <td class="td-pay">${{getPay(badgeset.tier,badgeset.grade)}}K</td>
+	  <td class="td-tags">
+	  <text *ngFor="#tag of badgeset.tags"><text class="t-tag" (click)="groupByTag(tag)"> {{tag}}, </text></text>
+	  </td>
+	  <td class="td-inused">{{badgeset.inused | yes_no}}</td>
+	  <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgeSetPop(badgeset._id)">X</button><button class="button-s-e" (click)="toBSEdit(badgeset._id)">E</button></td>
+	</tr>
+	</table>
+	<br>
+	<br>
+	</div>
+
+	<div *ngIf="showCompare">
+		<h1>Compare Badge Sets</h1>
+		<button class="button-backbs" (click)="showCompare=false">Back</button><br>
+		<br>
+		<br>
+		<table class="table-big">
+		<tr>
+			<td>
+				<select class="select-bs" [(ngModel)]="bsname1"><option *ngFor="#badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
+				
+				<table class="table-c">
+				<tr>
+					<td class="badgeset" (click)="toBSDetail(getBS(bsname1)._id)">{{getBS(bsname1).name}}</td>
+				</tr>
+				<tr>
+					<td class="td-tier">{{getBS(bsname1).tier}}-{{getBS(bsname1).grade}} (${{getBS(bsname1).pay}}K)</td>
+				</tr>
+				<tr>
+				  <td>
+				  <div *ngFor="#badgegroup of getBS(bsname1).badgegroups">
+				  <li>
+				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</text>
+				  </li>
+				  </div>
+				  </td>
+				</tr>
+				</table>
+			</td>
+			<td>
+				<select class="select-bs" [(ngModel)]="bsname2"><option *ngFor="#badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
+				
+				<table class="table-c">
+				<tr>
+					<td class="badgeset" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}</td>
+				</tr>
+				<tr>
+					<td class="td-tier">{{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} (${{getBS(bsname2).pay}}K)</td>
+				</tr>
+				<tr>
+				  <td>
+				  <div *ngFor="#badgegroup of getBS(bsname2).badgegroups">
+				  <li>
+				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</text>
+				  </li>
+				  </div>
+				  </td>
+				</tr>
+				</table>
+			</td>
+			<td>
+				<select class="select-bs" [(ngModel)]="bsname3"><option *ngFor="#badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
+				
+				<table class="table-c">
+				<tr>
+					<td class="badgeset" (click)="toBSDetail(getBS(bsname3)._id)">{{getBS(bsname3).name}}</td>
+				</tr>
+				<tr>
+					<td class="td-tier">{{getBS(bsname3).tier}}-{{getBS(bsname3).grade}} (${{getBS(bsname3).pay}}K)</td>
+				</tr>
+				<tr>
+				  <td>
+				  <div *ngFor="#badgegroup of getBS(bsname3).badgegroups">
+				  <li>
+				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</text>
+				  </li>
+				  </div>
+				  </td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<br>
+	</div>
+
+</div>
+
+

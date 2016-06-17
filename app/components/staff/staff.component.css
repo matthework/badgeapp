@@ -1,0 +1,315 @@
+h1 {
+  font-size: 2em;
+  color: #999;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.5em;
+  color: #999;
+  margin-top: 0;
+  padding-top: 20px;
+}
+h3 {
+  width: 30%;
+  word-wrap: break-word;
+  font-size: 1.1em;
+  color: #999;
+  margin-top: 0;
+  padding-top: 5px;
+}
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  margin-bottom: 20px;
+}
+button {
+  margin-top: 10px;
+  margin-right: 10px;
+  font-size: 1em;
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+table, th , td  {
+  width: 60%;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.button-showbs {
+  position: absolute; 
+  right: 27%;
+  color: #039be5;
+  width: 150px;
+}
+.button-back {
+  position: absolute; 
+  right: 27%;
+  color: #039be5;
+  width: 150px;
+}
+.table-staffs {
+  table-layout: fixed;
+  width: 90%;
+  /*white-space: nowrap;*/
+  word-wrap: break-word;
+  border: 0;
+  margin-top: 10px;
+}
+.table-staffs td {
+
+}
+.table-staffs tr {
+  line-height: 25px; 
+}
+.th-name {
+  width: 20%;
+}
+.th-bg {
+  width: 25%;
+}
+.th-topbs {
+  width: 20%;
+}
+.th-pos {
+  width: 15%;
+}
+.th-salary {
+  width: 8%;
+}
+.th-email {
+  width: 20%;
+}
+.th-phone {
+  width: 15%;
+}
+.th-last {
+  width: 15%;
+  background-color: #ffffff;
+  border: 0;
+}
+.td-name {
+}
+.td-badges {
+  font-style: italic;
+}
+.td-position {
+}
+.td-salary {
+  text-align: center;
+}
+.td-email {
+  word-wrap: normal;
+}
+.td-phone {
+}
+.td-last{
+  background-color: #ffffff;
+  border: 0 ;
+}
+.table-sbs {
+  table-layout: fixed;
+  width: 90%;
+  /*white-space: nowrap;*/
+  word-wrap: break-word;
+  border: 0;
+  margin-top: 10px;
+}
+.th-sname {
+  width: 30%;
+}
+.th-bs {
+  width: 40%;
+}
+.th-tier {
+  width: 20%;
+}
+.th-pay {
+  width: 20%;
+}
+.table-sbs td {
+}
+.table-sbs tr {
+  line-height: 25px; 
+}
+.td-sname {
+}
+.td-bs {
+  font-style: italic;
+}
+.td-tier {
+  text-align: center;
+}
+.td-pay {
+  text-align: center;
+}
+.button-add {
+  position: absolute; 
+  right: 21.5%;
+  color: #039be5;
+}
+.button-add:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-more {
+  position: absolute; 
+  right: 21.5%;
+  color: #039be5;
+}
+.button-less {
+  position: absolute; 
+  right: 14.5%;
+  color: #039be5;
+}
+.button-s-x{
+  background-color: pink;
+  color: white;
+  width: 40px;
+  /*padding: 10px 10px;*/
+  text-align: center;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 5px;
+  margin-bottom: 0;
+}
+.button-s-x:hover {
+  background-color: red;
+  color: white;
+}
+.button-s-e{
+  /*border: 1px solid grey;*/
+  color: #039be5;
+  width: 40px;
+  text-align: center;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 5px;
+  margin-bottom: 0;
+}
+.staff{
+  font-size: 1.1em;
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.staff:hover{
+  color: red;
+}
+.staff:visited{
+  color: #607D8B;
+}
+.badge{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.badge:hover{
+  color: red;
+}
+.badge:visited{
+  color: #607D8B;
+}
+.badgeset{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.badgeset:hover{
+  color: red;
+}
+.badgeset:visited{
+  color: #607D8B;
+}
+.selected {
+  background-color: #CFD8DC !important;
+  color: white;
+}
+li {
+    width: 100%;
+    list-style-type: none;
+    /*padding: 6px 10px;*/
+}
+li:hover {
+    background: #cfd8dc;
+}
+.li-bs {
+  font-size: 1em;
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.li-bs :hover{
+  color: red;
+}
+.li-bs :visited{
+  color: #607D8B;
+}
+.animate-show {
+    -webkit-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+    opacity: 1;
+}
+
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove {
+    display: inline-block !important;
+}
+.animate-show.ng-hide {
+    opacity: 0;
+}
+.tooltip {
+  position: relative;
+  /*display: inline-block;*/
+  /*border-bottom: 1px dotted black;*/
+}
+.tooltip .tooltiptext {
+  overflow: hidden;
+  visibility: hidden;
+  /*max-height: none;*/
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  color: #999;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 15px;
+  border: 1px solid grey;
+/*    opacity: 0;
+  transition: opacity 1s;*/
+
+  bottom: 200%;
+  left: 60%;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  /*opacity: 1;*/
+}
+.tooltip:hover {
+  color: #039be5;
+}
+
+
+
+
+

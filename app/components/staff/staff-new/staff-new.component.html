@@ -1,0 +1,46 @@
+
+<h2>{{title}}</h2><br>
+
+<!-- <label>Index: </label>
+<input class="input-input" type="number" [(ngModel)]="newStaff.index" placeholder="Index" /><br> -->
+
+<label>*FName: </label>
+<input class="input-fname" type="text" [(ngModel)]="newStaff.fname" placeholder="First Name" /><br>
+
+<label>*LName: </label>
+<input class="input-lname" type="text" [(ngModel)]="newStaff.lname" placeholder="Last Name" /><br>
+
+<label>Position: </label>
+<input class="input-pos" type="text" [(ngModel)]="newStaff.position" placeholder="Position" /><br>
+
+<label>Salary: </label>
+<input class="input-salary" type="text" [(ngModel)]="newStaff.salary" placeholder="$"> K<br>
+
+<label>Email: </label>
+<input class="input-email" type="text" [(ngModel)]="newStaff.email" placeholder="Email" /><br>
+
+<label>Phone: </label>
+<input class="input-phone" type="text" [(ngModel)]="newStaff.phone" placeholder="Phone" /><br>
+
+<label>Brief: </label>
+<textarea class="ta-brief" type="text" [(ngModel)]="newStaff.others[brief]" placeholder="Brief"></textarea><br>
+
+<!-- <label>Others: </label>
+<input class="input-others" type="text" [(ngModel)]="newStaff.others" placeholder="Others" /><br> -->
+
+<br>
+<div *ngFor="#i of nums">
+<br>
+<label>Badge: </label>
+<select class="select-badge" [(ngModel)]="newStaff.badgegroups[i].badge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+<label class="label-level">Level: </label>
+<select class="select-level" [(ngModel)]="newStaff.badgegroups[i].level"><option *ngFor="#lo of getLevelsOptions(newStaff.badgegroups[i].badge)" [value]="lo">{{lo}}</option></select><br>
+<label>Description: </label>
+<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newStaff.badgegroups[i].badge,newStaff.badgegroups[i].level)}}</textarea><br>
+</div>
+
+<button class="button-add" [disabled]="!newStaff.fname||!newStaff.lname" (click)="addStaff()">Save</button>
+<button class="button-cancel" (click)="goBack()">Cancel</button>
+<br>
+<br>
+<br>

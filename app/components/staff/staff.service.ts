@@ -1,0 +1,44 @@
+import {Injectable} from 'angular2/core';
+import {Observable} from 'rxjs/Observable';
+import {Http,Response,Headers} from 'angular2/http';
+import 'rxjs/add/operator/map';
+// import {Staff} from './staff';
+
+
+@Injectable()
+export class StaffService {
+
+	// staffs: Staff[] = [];
+
+	constructor(private _http: Http) {}
+
+	getStaffs():Observable<any> {
+		return this._http.get('/api/staffs').map(r => r.json());
+	}
+
+	getStaff(id:string):Observable<any> {
+		return this._http.get('/api/staff/edit/'+id).map(r => r.json());
+	}
+
+	addStaff(value:string):Observable<any> {
+		let _messageStringified = value; //JSON.stringify(value);
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this._http.post('/api/staff/new', _messageStringified, {headers});
+	           //.map((r) => r.json());
+	}
+
+	updateStaff(id:string,value:string):Observable<any> {
+		let _messageStringified = value; //JSON.stringify(value);
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this._http.post('/api/staff/update/'+id, _messageStringified, {headers});
+	}
+
+	deleteStaff(id:string):Observable<any> {
+		return this._http.post('/api/staff/remove/'+id, "");
+	}
+
+
+}
+

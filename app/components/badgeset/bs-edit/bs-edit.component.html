@@ -1,0 +1,102 @@
+
+<div *ngIf="badgeset">
+	<h2>Edit Badge Set - {{badgeset.name}}</h2><br>
+
+	<label>Index: </label>
+	<input class="input-index" type="number" [(ngModel)]="badgeset.index" placeholder="Index"><br>
+
+	<label>Name: </label>
+	<input class="input-name" type="text" [(ngModel)]="badgeset.name" placeholder="Name"><br>
+
+	<label>Tags: </label>
+	<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder="Tags"><button class="button-t-add" (click)="addTag(newTag)">+</button><text *ngFor="#tag of badgeset.tags">{{tag}} <button class="button-t-delete" (click)="deleteTag(tag)">-</button></text><br>
+
+	<label>Tier: </label>
+	<select class="select-tier" [(ngModel)]="badgeset.tier"><option *ngFor="#to of getTiersOptions()" [value]="to">{{to}}</option></select>
+
+	<label class="label-grade">Grade: </label>
+	<select class="select-grade" [(ngModel)]="badgeset.grade"><option *ngFor="#go of gradesOptions" [value]="go">{{go}}</option></select><br>
+
+	<label>$$: </label>
+	<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br>
+
+	<br>
+	<label>InUsed: </label>
+	<input type="checkbox" [(ngModel)]="badgeset.inused" placeholder="InUsed" /><br>
+
+<!-- 	<label>Approved: </label>
+	<input type="checkbox" [(ngModel)]="badgeset.approved" placeholder="Approved" /><br> -->
+
+	<br>
+	<button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true;updateNumBadges(badgeset.badgegroups.length)">Prerequisite+</button><br>
+	<br>
+	<div *ngIf="prerequisite">
+		<h3>Prerequisite: </h3><br>
+		<label>Numbers: </label>
+		<input class="input-numBadges" type="number" [(ngModel)]="badgeset.numbadges" placeholder="Number of Badges"> Require {{badgeset.numbadges}} out of {{badgeset.badgegroups.length}} Badges<br>
+
+		<div *ngFor="#corebadge of badgeset.corebadges">
+		<label>Core Badge: </label>
+		<input readonly class="input-corebadge" type="text" placeholder="{{corebadge.badge}} - {{corebadge.level}}"><button class="button-c-delete" (click)="deleteCoreBadgePop(corebadge)">-</button><br>
+		</div>
+
+		<label>Add New: </label>
+		<select class="select-badge" [(ngModel)]="coreBadge"><option *ngFor="#cbo of getCoreBadgesOptions(badgeset.badgegroups)" [value]="cbo">{{cbo}}</option></select><button class="button-s-add" (click)="addCoreBadge(coreBadge)">+</button><br>
+		<!-- <button class="button-l-save" (click)="prerequisite=false">Save</button> -->
+		<button class="button-c-done" (click)="prerequisite=false">Done</button><br>
+	</div>
+
+	<div *ngIf!="prerequisite">
+		<div class="badgegroup-block" *ngFor="#badgegroup of badgeset.badgegroups">
+			<label>Badge: </label>
+			<select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+
+			<label class="label-level">Level: </label>
+			<select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="#lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br>
+
+			<label>Description: </label>
+			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(badgegroup.badge,badgegroup.level)}}</textarea>
+
+			<button class="button-s-delete" (click)="deleteBadgeGroupPop(badgegroup)">-</button>
+			
+		</div>
+
+		<br>
+		<button class="button-s-add" *ngIf!="active" (click)="active=true">+</button><br>
+		<br>
+
+		<div *ngIf="active">
+			<h3>Add New Badge</h3><br>
+			<label>Badge: </label>
+			<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+
+			<label class="label-level">Level: </label>
+			<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="#lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+
+			<label>Description: </label>
+			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+
+			<button (click)="addBadgeGroup();active=false">Done</button>
+<!-- 			<button class="button-l-cancel" (click)="active=false">Cancel</button><br> -->
+		</div>
+		<div *ngIf!="active">
+			<button class="button-add" (click)="addBadgeSet()">New</button>
+			<button class="button-delete" (click)="deleteBadgeSetPop()">Delete</button>
+			<button class="button-save" [disabled]="!badgeset.name" (click)="updateBadgeSet()">Save</button>
+			<button class="button-cancel" (click)="goBack()">Cancel</button>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+
+</div>
+
+<!-- <input class="input-level" type="text" [(ngModel)]="badgegroup.level" placeholder=""><br> -->
+<!-- 		<input class="input-badge" type="text" [(ngModel)]="badgegroup.badge" placeholder="Badge"> -->
+<!-- <input class="input-grade" type="text" [(ngModel)]="badgeset.grade" placeholder=""><br> -->
+<!-- <input class="input-tier" type="text" [(ngModel)]="badgeset.tier" placeholder=""> -->
+<!-- <text class="text-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</text> -->
+<!-- <text class="txt-tags" *ngFor="#tag of badgeset.tags">{{tag}} </text> -->
+
+

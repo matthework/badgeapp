@@ -1,0 +1,36 @@
+
+<div *ngIf="badge">
+	<h2>{{title}} - {{badge.name}}</h2>
+	<br>
+	<label>Overview: </label>
+	<textarea readonly class="ta-overview" placeholder="Overview">{{badge.overview}}</textarea><br>
+	
+	<label>Approved: </label>
+	<text>{{badge.approved | yes_no}}</text><br>
+
+	<label>InUsed: </label>
+	<text>{{badge.inused | yes_no}}</text><br>
+
+	<table class="table-badgelevels">
+		<tr>
+		  <th class="th-level">Level</th>
+		  <th class="th-desc">Description</th>
+		  <th class="th-badgeset">BadgeSet</th>
+		</tr>
+		<tr *ngFor="#badgelevel of badge.badgelevels">
+			<td *ngIf="badgelevel.level" class="td-level">{{badgelevel.level}}</td>
+			<td class="td-desc" *ngIf="badgelevel.level">{{badgelevel.desc}}</td>
+			<td *ngIf="badgelevel.level">
+			<div *ngFor="#bs of findBadgeSet(badge.name,badgelevel.level)">
+				<uli (click)="toBSDetail(bs._id)" class="uli-bset">{{bs.name}}</uli><text class="check-core">{{checkCore(bs,badge.name)}}</text>
+			</div>
+      		</td>
+		</tr>
+	</table>
+
+	<button (click)="toBadges()">Back</button>
+	<button class="button-edit" (click)="editBadge()">Edit</button>
+</div>
+
+
+

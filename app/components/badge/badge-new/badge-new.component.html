@@ -1,0 +1,59 @@
+
+
+<h2>Add New Badge</h2><br>
+
+<!-- <label>Index: </label>
+<input class="input-index" type="number" [(ngModel)]="newBadge.index" placeholder="Index" /><br> -->
+
+<label>*Name: </label>
+<input class="input-name" type="text" [(ngModel)]="newBadge.name" placeholder="Name" /><br>
+
+<label>Overview: </label>
+<textarea class="ta-big" [(ngModel)]="newBadge.overview" placeholder="Overview"></textarea><br>
+
+<label>Approved: </label>
+<input type="checkbox" [(ngModel)]="newBadge.approved" placeholder="Approved" /><br>
+
+<label>InUsed: </label>
+<input type="checkbox" [(ngModel)]="newBadge.inused" placeholder="InUsed" /><br>
+
+<br>
+<label>Level 1:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[0].desc" placeholder="Description"></textarea><br>
+
+<label>Level 2:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[1].desc" placeholder="Description"></textarea><br>
+
+<label>Level 3:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[2].desc" placeholder="Description"></textarea><br>
+
+<label>Level 4:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[3].desc" placeholder="Description"></textarea><br>
+
+<label>Level 5:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[4].desc" placeholder="Description"></textarea><br>
+
+<label>Level 6:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[5].desc" placeholder="Description"></textarea><br>
+
+<label>Level 7:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[6].desc" placeholder="Description"></textarea><br>
+
+<label>Level 8:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[7].desc" placeholder="Description"></textarea><br>
+
+<label>Level 9:</label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder="Description"></textarea><br>
+
+<button class="button-add" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
+<button class="button-cancel" (click)="goBack()">Cancel</button>
+<br>
+<br>
+<br>
+
+
+
+
+
+
+

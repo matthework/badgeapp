@@ -1,0 +1,50 @@
+
+<div *ngIf="badge">
+	<h2>Edit Badge - {{badge.name}}</h2><br>
+<!-- 
+	<label>Index: </label>
+	<input class="input-index" type="number" [(ngModel)]="badge.index" placeholder="Index" /><br> -->
+
+	<label>Name: </label>
+	<input class="input-name" type="text" [(ngModel)]="badge.name" placeholder="Name" /><br>
+
+	<label>Overview: </label>
+	<textarea class="ta-big" [(ngModel)]="badge.overview" placeholder="Overview"></textarea><br>
+
+	<label>Approved: </label>
+	<input type="checkbox" [(ngModel)]="badge.approved" placeholder="Approved" /><br>
+
+	<label>InUsed: </label>
+	<input type="checkbox" [(ngModel)]="badge.inused" placeholder="InUsed" /><br>
+
+	<div class="badgelevel-block" *ngFor="#badgelevel of badge.badgelevels">
+	  	<label>Level {{badgelevel.level}}:</label>
+		<textarea class="ta-small" [(ngModel)]="badgelevel.desc" placeholder="Description"></textarea>
+		<button class="button-s-delete" (click)="deleteBadgeLevelPop(badgelevel)">-</button><br>
+	</div>
+
+	<button class="button-s-add" *ngIf!="active" (click)="active=true">+</button><br>
+	<br>
+	<div *ngIf="active">
+		<h3>Add New Badge Level</h3><br>
+		<label>Level: </label>
+		<input class="input-level" type="number" [(ngModel)]="newLevel" placeholder="New Level" /><br>
+		<label>Desc: </label>
+		<textarea class="ta-small" [(ngModel)]="newDesc" placeholder="New Level Description"></textarea><br>
+		<button class="button-l-save" [disabled]="!newLevel" (click)="addBadgeLevel();active=false">Save</button>
+		<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
+	</div>
+	<div *ngIf!="active">
+		<button class="button-add" (click)="addBadge()">New</button>
+		<button class="button-delete" (click)="deleteBadgePop()">Delete</button>
+		<button class="button-save" [disabled]="!badge.name" (click)="updateBadge()">Save</button>
+		<button class="button-cancel" (click)="goBack()">Cancel</button>
+	</div>
+	<br>
+	<br>
+	<br>
+
+</div>
+
+
+

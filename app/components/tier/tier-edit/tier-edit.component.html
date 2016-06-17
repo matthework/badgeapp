@@ -1,0 +1,46 @@
+
+<div *ngIf="tier">
+	<h2>Edit Tier - {{tier.tier}}</h2><br>
+
+<!-- 	<label>Index: </label>
+	<input class="input-index" type="number" [(ngModel)]="tier.index" placeholder="Index"><br> -->
+
+	<label>Tier: </label>
+	<input class="input-tier" type="number" [(ngModel)]="tier.tier" placeholder="Tier"><br>
+
+	<label>Judgement: </label>
+	<textarea class="ta-judgement" [(ngModel)]="tier.judgement" placeholder="Judgement"></textarea><br>
+
+	<label>Expertise: </label>
+	<textarea class="ta-expertise" [(ngModel)]="tier.expertise" placeholder="Expertise"></textarea><br>
+
+	<label>Grade A: $</label>
+	<input class="input-grade" type="number" [(ngModel)]="tier.grades[0]" placeholder="$"> K<br>
+
+	<label>Grade B: $</label>
+	<input class="input-grade" type="number" [(ngModel)]="tier.grades[1]" placeholder="$"> K<br>
+
+	<label>Grade C: $</label>
+	<input class="input-grade" type="number" [(ngModel)]="tier.grades[2]" placeholder="$"> K<br>
+
+	<label>Grade D: $</label>
+	<input class="input-grade" type="number" [(ngModel)]="tier.grades[3]" placeholder="$"> K<br>
+
+	<label>Grade E: $</label>
+	<input class="input-grade" type="number" [(ngModel)]="tier.grades[4]" placeholder="$"> K<br>
+
+	<label>Grade F: $</label>
+	<input class="input-grade" type="number" [(ngModel)]="tier.grades[5]" placeholder="$"> K<br>
+
+	<button class="button-add" (click)="addTier()">New</button>
+	<button class="button-delete" (click)="deleteTierPop()">Delete</button>
+	<button class="button-save" [disabled]="!tier.tier" (click)="updateTier()">Save</button>
+	<button class="button-cancel" (click)="goBack()">Cancel</button>
+	<br>
+	<br>
+	<br>
+
+</div>
+
+
+

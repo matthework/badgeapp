@@ -1,0 +1,51 @@
+
+<div *ngIf="badgeset">
+	<h2>Badge Set - {{badgeset.name}}</h2><br>
+	
+	<label>Tier: </label>
+	<text>{{badgeset.tier}}</text><br>
+	
+	<label>Grade: </label>
+	<text>{{badgeset.grade}}</text><br>
+
+	<label>Pay: </label>
+	<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br>
+
+	<label>Tags: </label>
+	<text>{{badgeset.tags}}</text><br>
+
+	<label>Prerequisite: </label>
+	<text>Need at least {{badgeset.numbadges}} out of {{badgeset.badgegroups.length}} Badges to achieve this Badge Set. (Core Badges are required if any.)</text><br>
+
+	<label>Core Badges: </label>
+	<text *ngFor="#coreb of badgeset.corebadges">{{coreb.badge}} - {{coreb.level}}, </text><br>
+
+	<label>InUsed: </label>
+	<text>{{badgeset.inused | yes_no}}</text><br>
+
+<!-- 	<label>Approved: </label>
+	<text>{{badgeset.approved | yes_no}}</text><br> -->
+
+	<table class="table-badgegroups">
+		<tr>
+		  <th class="th-badge">Badge</th>
+		  <th class="th-desc">Description</th>
+		  <th class="th-core">Core Badge</th>
+		</tr>
+		<tr *ngFor="#badgegroup of badgeset.badgegroups">
+			<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
+			<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
+			<td class="td-core">{{checkCore(badgegroup.badge)}}</td>
+		</tr>
+	</table>
+
+	<br>
+	<button (click)="goBack()">Back</button>
+	<button class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button>
+	<br>
+	<br>
+	<br>
+
+</div>
+
+

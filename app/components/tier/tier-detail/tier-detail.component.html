@@ -1,0 +1,40 @@
+
+<div *ngIf="tier">
+	<h2>Tier - {{tier.tier}}</h2>
+	
+	<br>
+	<label>Badge Sets: </label>
+	<text *ngFor="#bs of getTierBS(tier.tier)">
+		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}, </uli>
+	</text><br>
+
+	<label>Judgement: </label>
+	<textarea readonly class="ta-judgement">{{tier.judgement}}</textarea><br>
+
+	<label>Expertise: </label>
+	<textarea readonly class="ta-expertise">{{tier.expertise}}</textarea><br>
+
+	<table class="table-grades">
+		<tr>
+		  <th class="th-grade">Grade</th>
+		  <th class="th-pay">$$</th>
+		  <th class="th-bs">Badge Set</th>
+		</tr>
+		<tr *ngFor="#i of gradesIndex">
+			<td class="td-grade">{{gmap[i]}}</td>
+			<td class="td-pay">${{tier.grades[i]}}K</td>
+			<td class="td-bs">
+			<div *ngFor="#bs of getTierGradeBS(tier.tier, gmap[i])">
+				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+			</div>
+      		</td>
+		</tr>
+	</table>
+
+	<br>
+	<button (click)="goBack()">Back</button>
+	<button class="button-edit" (click)="toTierEdit(tier._id)">Edit</button>
+	<br>
+	<br>
+	<br>
+</div>

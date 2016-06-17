@@ -1,0 +1,74 @@
+<h1>Person</h1>
+<input [(ngModel)]="query" placeholder="Search for">
+<button class="button-showbs" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
+<button class="button-back" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
+<button class="button-more" *ngIf!="active" (click)="active=true">></button>
+<button class="button-add" *ngIf="active" (click)="addStaff()">+</button>
+<button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
+
+<div *ngIf="staffs">
+	<div *ngIf!="showBS">
+	<table class="table-staffs">
+	  <tr>
+	    <th class="th-name">Name</th>
+	    <th class="th-bg">Badges</th>
+	    <th class="th-topbs">Top BadgeSet</th>
+	    <th class="th-pos">Position</th>
+	   	<!-- <th class="th-salary">Salary</th> -->
+	    <th class="th-email">Email</th>
+	    <th class="th-phone">Phone</th>
+	    <th class="th-last"></th>
+	  </tr>
+	  <tr *ngFor="#staff of staffs | filter:query">
+	    <td (click)="onSelect(staff);toStaffDetail(staff._id)" class="staff">{{staff.fname}} {{staff.lname}}</td>
+	    <td class="td-badges">
+		<div *ngFor="#badgegroup of staff.badgegroups">
+		<li>
+		<text class="tooltip" (click)="toBadgeDetail(badgegroup.badge)"><text class="badge">{{badgegroup.badge}} {{badgegroup.level}}</text><span class="tooltiptext"><li> <b>Level {{badgegroup.level-1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level-1)}}</li><br><li><b><u>Level {{badgegroup.level}}</u>: </b>{{getDesc(badgegroup.badge, badgegroup.level)}}</li><br><li><b>Level {{badgegroup.level+1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level+1)}}</li></span></text>
+		</li>
+		</div>
+		</td>
+		<td class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.badgegroups)[0])">{{getTopStaffBS(staff.badgegroups)[1]}}</td>
+	    <td (click)="onSelect(staff)">{{staff.position}}</td>
+	    <!-- <td class="td-salary" (click)="onSelect(staff)">${{staff.salary}}K</td> -->
+	    <td (click)="onSelect(staff)">{{staff.email}}</td>
+	    <td (click)="onSelect(staff)">{{staff.phone}}</td>
+	    <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteStaffPop(staff._id)">X</button><button class="button-s-e" (click)="toStaffEdit(staff._id)">E</button></td>
+	  </tr>
+	</table>
+	</div>
+
+	<div *ngIf="showBS">
+	<table class="table-sbs">
+	  <tr>
+	    <th class="th-sname">Name</th>
+	    <th class="th-bs">Badge Sets</th>
+	    <th class="th-tier">Tier / Grade</th>
+	    <th class="th-pay">$$</th>
+	    <th class="th-last"></th>
+	  </tr>
+	  <tr *ngFor="#staff of staffs | filter:query">
+	    <td (click)="onSelect(staff);toStaffDetail(staff._id)" class="staff">{{staff.fname}} {{staff.lname}}</td>
+	    <td class="td-bs">
+	    <div *ngFor="#bs of getSortStaffBS(staff.badgegroups)">
+			<li class="li-bs" (click)="toBSDetail(bs._id)">{{bs.name}}</li>
+		</div>
+		</td>
+	    <td class="td-tier" (click)="onSelect(staff)">
+	   	<div *ngFor="#bs of getSortStaffBS(staff.badgegroups)">
+			<li>{{bs.tier}} - {{bs.grade}}</li>
+		</div>
+		</td>
+	    <td class="td-pay" (click)="onSelect(staff)">
+	   	<div *ngFor="#bs of getSortStaffBS(staff.badgegroups)">
+			<li>${{bs.pay}}K</li>
+		</div>
+	    </td>
+	    <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteStaffPop(staff._id)">X</button><button class="button-s-e" (click)="toStaffEdit(staff._id)">E</button></td>
+	  </tr>
+	</table>
+	</div>
+	<br>
+	<br>
+	<br>
+</div>

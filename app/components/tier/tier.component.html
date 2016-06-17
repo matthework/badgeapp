@@ -1,0 +1,91 @@
+
+<h1>Tiers</h1>
+<input class="input-query" [(ngModel)]="query" placeholder="Search for">
+<button class="button-showbs" *ngIf!="toPay" (click)="toPay=true">Show BadgeSet</button>
+<button class="button-back" *ngIf="toPay" (click)="toPay=false">Show $$</button>
+<button class="button-more" *ngIf!="active" (click)="active=true">></button>
+<button class="button-add" *ngIf="active" (click)="addTier()">+</button>
+<button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
+
+<div *ngIf="tiers">
+	<div *ngIf!="toPay">
+	<table class="table-tiers">
+	  	<tr>
+		<th class="th-tier">Tier</th>
+		<th class="th-ga">A</th>
+		<th class="th-gb">B</th>
+		<th class="th-gc">C</th>
+		<th class="th-gd">D</th>
+		<th class="th-ge">E</th>
+		<th class="th-gf">F</th>
+		<th class="th-judge">Judgement</th>
+		<th class="th-expert">Expertise</th>
+		<th class="th-last"></th>
+		</tr>
+		<tr *ngFor="#tier of tiers | filter:query">
+		<td class="tiers" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</td>
+		<td class="td-ga" (click)="onSelect(tier)">${{tier.grades[0]}}K</td>
+		<td class="td-gb" (click)="onSelect(tier)">${{tier.grades[1]}}K</td>
+		<td class="td-gc" (click)="onSelect(tier)">${{tier.grades[2]}}K</td>
+		<td class="td-gd" (click)="onSelect(tier)">${{tier.grades[3]}}K</td>
+		<td class="td-ge" (click)="onSelect(tier)">${{tier.grades[4]}}K</td>
+		<td class="td-gf" (click)="onSelect(tier)">${{tier.grades[5]}}K</td>
+		<td class="td-judge" (click)="onSelect(tier)">{{tier.judgement}}</td>
+		<td class="td-expert" (click)="onSelect(tier)">{{tier.expertise}}</td>
+		<td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
+		</tr>
+	</table>
+	</div>
+
+	<div *ngIf="toPay">
+	<table class="table-tbs">
+	  	<tr>
+		<th class="th-tier">Tier</th>
+		<th class="th-bs">A</th>
+		<th class="th-bs">B</th>
+		<th class="th-bs">C</th>
+		<th class="th-bs">D</th>
+		<th class="th-bs">E</th>
+		<th class="th-bs">F</th>
+		<th class="th-last"></th>
+		</tr>
+		<tr *ngFor="#tier of tiers | filter:query">
+		<td class="tiers" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</td>
+		<td class="td-bs" (click)="onSelect(tier)">
+		<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[0])">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+		</td>
+		<td class="td-bs" (click)="onSelect(tier)">		
+		<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[1])">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+		</td>
+		<td class="td-bs" (click)="onSelect(tier)">		
+		<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[2])">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+		</td>
+		<td class="td-bs" (click)="onSelect(tier)">
+		<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[3])">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+		</td>
+		<td class="td-bs" (click)="onSelect(tier)">		
+		<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[4])">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+		</td>
+		<td class="td-bs" (click)="onSelect(tier)">		
+		<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[5])">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+		</td>
+		<td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
+		</tr>
+	</table>
+	</div>
+	<br>
+	<br>
+
+</div>

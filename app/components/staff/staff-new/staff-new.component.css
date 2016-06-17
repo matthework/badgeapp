@@ -1,0 +1,182 @@
+h1 {
+  font-size: 1.8em;
+  color: #999;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 1.6em;
+  color: #999;
+  margin-top: 20px;
+  padding-top: 0;
+}
+label {
+  display: inline-block;
+  width: 8em;
+  color: #999;
+  font-weight: bold;
+}
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  margin-bottom: 20px;
+  color: #999;
+}
+button {
+  width: 100px;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 1em;
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer; cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #ccc; 
+  cursor: auto;
+}
+li {
+margin-left: 0;
+}
+table {
+  table-layout: auto;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+textarea {
+  vertical-align: top;
+  font-size: 1em;
+  color: #999;
+  width: 350px;
+  height: 200px;
+  padding-left: .4em;
+  padding-top: .4em;
+  margin-bottom: 20px;
+}
+.input-index{
+  width: 350px;
+}
+.input-fname{
+  width: 350px;
+}
+.input-lname{
+  width: 350px;
+}
+.input-pos{
+  width: 350px;
+}
+.input-salary{
+  width: 350px;
+}
+.input-email{
+  width: 350px;
+}
+.input-phone{
+  width: 350px;
+}
+.input-others{
+  width: 350px;
+}
+.ta-brief {
+  width: 470px;
+  height: 100px;
+  border: 1px solid #cccccc;
+  font-style: italic;
+  word-wrap: break-word;
+}
+.badgegroup-block{
+  margin-top: 30px;
+}
+.input-badge{
+  width: 300px;
+  margin-right: 50px;
+}
+.select-badge {
+  background: transparent;
+  width: 300px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.select-level {
+  background: transparent;
+  width: 50px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-bottom: 30px;
+}
+.input-level{
+  width: 50px;
+}
+.ta-desc {
+  width: 470px;
+  height: 100px;
+  border: 1px solid #cccccc;
+  font-style: italic;
+  word-wrap: break-word;
+}
+.label-level {
+  width: 5em;
+}
+.ta-big {
+  border: 1px solid #cccccc;
+  width: 350px;
+  height: 150px;
+}
+.ta-small {
+  border: 1px solid #cccccc;
+  width: 350px;
+  height: 100px;
+}
+.button-small {
+  width: 45px;
+}
+.button-add {
+  width: 100px;
+  position: absolute; 
+  right: 55%;
+}
+.button-cancel {
+  position: absolute; 
+  right: 45%;
+}
+.staff-error {
+  border-bottom-color: #E22323;
+}
+.ng-valid[required] {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid {
+  border-left: 5px solid #a94442; /* red */
+}

@@ -1,0 +1,54 @@
+
+<div *ngIf="staff">
+	<h2>Person - {{staff.fname}} {{staff.lname}}</h2>
+	
+	<br>
+	<label>Position: </label>
+	<text>{{staff.position}}</text><br>
+
+	<label>Email: </label>
+	<text>{{staff.email}}</text><br>
+
+	<label>Phone: </label>
+	<text>{{staff.phone}}</text><br>
+
+	<label>Salary: </label>
+	<text>${{staff.salary}}K</text><br>
+
+	<label>Badge Sets: </label>
+	<text *ngFor="#bs of getSortStaffBS(staff.badgegroups)">
+		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
+	</text><br>
+
+<!-- 	<label>Top Badege Set: </label>
+	<text class="uli-bs" (click)="toBSDetail(getTopBS()._id)">{{getTopBS().name}}</text><br> -->
+
+	<label>Brief: </label>
+	<textarea readonly class="ta-brief">{{staff.others[brief]}}</textarea><br>
+
+	<table class="table-badgegroups">
+		<tr>
+		  <th class="th-badge">Badge</th>
+		  <th class="th-desc">Description</th>
+		  <th class="th-bs">Badge Set</th>
+		</tr>
+		<tr *ngFor="#badgegroup of staff.badgegroups">
+			<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
+			<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
+			<td class="td-bs">
+			<div *ngFor="#bs of findBadgeSet(badgegroup.badge,badgegroup.level)">
+				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+			</div>
+      		</td>
+		</tr>
+	</table>
+
+	<br>
+	<button (click)="goBack()">Back</button>
+	<button class="button-edit" (click)="toStaffEdit(staff._id)">Edit</button>
+	<br>
+	<br>
+	<br>
+</div>
+
+
