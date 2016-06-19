@@ -24,14 +24,13 @@
 			<td class="td-grade">{{gmap[i]}}</td>
 			<td class="td-pay">${{tier.grades[i]}}K</td>
 			<td class="td-bs">
-			<div *ngFor="#bs of getTierGradeBS(tier.tier, gmap[i])">
-				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
-			</div>
-      		</td>
+				<div *ngFor="#bs of getTierGradeBS(tier.tier, gmap[i])">
+					<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+				</div>
+      	</td>
 		</tr>
 	</table>
 
-	<br>
 	<button (click)="goBack()">Back</button>
 	<button class="button-edit" (click)="toTierEdit(tier._id)">Edit</button>
 	<br>

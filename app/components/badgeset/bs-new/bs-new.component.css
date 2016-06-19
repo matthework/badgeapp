@@ -221,24 +221,12 @@ textarea {
 }
 .button-add {
   width: 100px;
-  position: absolute; 
-  right: 55%;
-}
-.button-delete {
-  position: absolute; 
-  left: 13%;
+  position: relative; 
+  left: 50%;
 }
 .button-cancel {
-  position: absolute; 
-  right: 45%;
-}
-.button-l-save {
-  position: absolute; 
-  right: 59%;
-}
-.button-l-cancel {
-  position: absolute; 
-  right: 49%;
+  position: relative; 
+  left: 50%;
 }
 .button-c-delete {
   width: 40px;

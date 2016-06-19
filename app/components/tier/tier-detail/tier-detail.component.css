@@ -105,14 +105,10 @@ textarea {
   width: 470px;
   height: 100px;
 }
-.button-edit {
-  position: absolute; 
-  right: 30%;
-}
 .table-grades {
-  margin-top: 20px;
+  margin-top: 10px;
   table-layout: fixed;
-  width: 70%;
+  width: 75%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
 }
@@ -123,7 +119,7 @@ textarea {
   width: 20%;
 }
 .th-bs {
-  width: 30%;
+  width: 60%;
 }
 .td-grade {
   text-align: center;
@@ -133,6 +129,10 @@ textarea {
 }
 .td-bs {
 
+}
+.button-edit {
+  position: relative; 
+  left: 57%;
 }
 .uli-bs{
   cursor: pointer;

@@ -98,22 +98,18 @@ textarea {
 .ta-core {
   border: 0;
 }
-.button-edit {
-  position: absolute; 
-  right: 30%;
-}
 .table-badgegroups {
-  margin-top: 20px;
+  margin-top: 10px;
   table-layout: fixed;
-  width: 70%;
+  width: 75%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
 }
-/*.table-badgelevels td {
-  white-space: nowrap;
+.table-badgelevels td {
+/*  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-}*/
+  text-overflow: ellipsis;*/
+}
 .th-badge {
   width: 20%;
 }
@@ -121,7 +117,11 @@ textarea {
   width: 60%;
 }
 .th-core {
-  width: 10%;
+  width: 15%;
+}
+.button-edit {
+  position: relative; 
+  left: 57%;
 }
 .badge{
   cursor: pointer;

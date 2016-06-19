@@ -51,6 +51,9 @@ export class BSComponent implements OnInit {
 
 	getBadgeSets() {
 		this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
+		if (this.badgesets == null) {
+			this.active = true;
+		}
 		// this.badgesets.sort(this.toCompare);
 	}
 
@@ -171,12 +174,12 @@ export class BSComponent implements OnInit {
 	}
 
 	getBS(bsname:string) {
-		var result = null;
+		var result: BadgeSet;
 		if (this.badgesets != null) {
 			for (var i = 0; i < this.badgesets.length; i++) { 
-					if (this.badgesets[i].name == bsname) {
-						return this.badgesets[i];
-					}
+				if (this.badgesets[i].name == bsname) {
+					return this.badgesets[i];
+				}
 			}
 		}
 		return result;

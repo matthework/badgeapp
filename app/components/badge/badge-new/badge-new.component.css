@@ -107,13 +107,13 @@ textarea {
   height: 100px;
 }
 .button-add {
-  position: absolute; 
+  position: relative; 
+  left: 40%;
   width: 100px;
-  right: 58%;
 }
 .button-cancel {
-  position: absolute; 
-  right: 48%;
+  position: relative; 
+  left: 40%;
 }
 .badge-error {
   border-bottom-color: #E22323;

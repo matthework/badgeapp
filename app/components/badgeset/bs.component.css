@@ -64,31 +64,13 @@ th , td  {
   background-color: #CFD8DC !important;
   color: white;
 }
-.button-showCom {
-  position: absolute; 
-  right: 29.5%;
-  color: #039be5;
-  width: 110px;
-}
-.button-backbs {
-  position: absolute; 
-  right: 22%;
-  color: #039be5;
-  width: 110px;
-}
-.button-back {
-  position: absolute; 
-  right: 29.5%;
-  color: #039be5;
-  width: 110px;
-}
 .table-badgesets {
-  table-layout: fixed;
-  width: 85%;
+  /*table-layout: fixed;*/
+  width: 100%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
   border: 0;
-  margin-top: 10px;
+  margin-bottom: 50px;
 }
 .table-badgesets td {
 
@@ -100,19 +82,19 @@ th , td  {
   width: 20%;
 }
 .th-bg {
-  width: 30%;
+  width: 26%;
 }
 .th-tier {
   width: 5%;
 }
 .th-grade {
-  width: 6%;
+  width: 5%;
 }
 .th-pay {
   width: 6%;
 }
 .th-tags {
-  width: 15%;
+  width: 12%;
 }
 .th-inused {
   width: 6%;
@@ -144,24 +126,52 @@ th , td  {
 .td-inused {
   text-align: center;
 }
+.button-showCom {
+  position: relative; 
+  left: 60%;
+  color: #039be5;
+  width: 110px;
+  margin-left: 0;
+}
+.button-more {
+  position: relative; 
+  left: 60%;
+  color: #039be5;
+}
 .button-add {
-  position: absolute; 
-  right: 24.5%;
+  position: relative; 
+  left: 60%;
   color: #039be5;
 }
 .button-add:hover {
   color: white;
   background-color: limegreen;
 }
-.button-more {
-  position: absolute; 
-  right: 24.5%;
+.button-add2 {
+  position: relative; 
+  left: 70%;
   color: #039be5;
 }
+.button-add2:hover {
+  color: white;
+  background-color: limegreen;
+}
 .button-less {
-  position: absolute; 
-  right: 18%;
+  position: relative; 
+  left: 63%;
   color: #039be5;
+}
+.button-backbs {
+  position: relative; 
+  left: 75%;
+  color: #039be5;
+  width: 110px;
+}
+.button-back {
+  position: relative; 
+  left: 60%;
+  color: #039be5;
+  width: 110px;
 }
 .td-last{
   background-color: #ffffff;
@@ -175,7 +185,7 @@ th , td  {
   text-align: center;
   margin-top: 0;
   margin-left: 0;
-  margin-right: 5px;
+  margin-right: 7px;
   margin-bottom: 0;
 }
 .button-s-x:hover {
@@ -281,10 +291,11 @@ li:hover {
 }
 
 .table-big {
-  table-layout: fixed;
-  width: 80%;
+  /*table-layout: fixed;*/
+  width: 85%;
   border: 0;
   margin-top: 0px;
+  margin-bottom: 20px;
   background-color: white;
   text-align: top;
 }

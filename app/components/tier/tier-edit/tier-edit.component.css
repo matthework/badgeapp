@@ -65,16 +65,15 @@ margin-left: 0;
   width: 100px;
 }
 .button-delete {
-  position: absolute; 
-  left: 12%;
+  position: relative; 
 }
 .button-save {
-  position: absolute; 
-  right: 58%;
+  position: relative; 
+  left: 15%;
 }
 .button-cancel {
-  position: absolute; 
-  right: 48.5%;
+  position: relative; 
+  left: 15%;
 }
 .input-input {
   width: 300px;
@@ -96,48 +95,5 @@ margin-left: 0;
   height: 100px;
 }
 
-/*
-.label-pay {
-  width: 4.5em;
-}
-.input-pay {
-  width: 100px;
-}
-.button-small {
-  width: 45px;
-}
-.button-s-add {
-  width: 40px;
-  color: #039be5;
-}
-.button-s-add:hover {
-  color: white;
-  background-color: limegreen;
-}
-.button-s-delete {
-  width: 40px;
-  background-color: pink;
-  color: white;
-  vertical-align: bottom;
-  margin-left: 15px;
-  margin-bottom: 20px;
-}
-.button-s-delete:hover {
-  background-color: red;
-  color: white;
-}
-.button-g-save {
-  position: absolute; 
-  right: 60%;
-}
-.button-g-cancel {
-  position: absolute; 
-  right: 51%;
-}
-.button-g-delete:hover {
-  background-color: red;
-  color: white;
-}
-*/
 
 

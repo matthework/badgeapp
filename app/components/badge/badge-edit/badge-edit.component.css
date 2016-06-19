@@ -133,24 +133,23 @@ textarea {
   width: 100px;
 }
 .button-delete {
-  position: absolute; 
-  left: 13%;
+  position: relative; 
 }
 .button-save {
-  position: absolute; 
-  right: 55%;
+  position: relative; 
+  left: 20%;
 }
 .button-cancel {
-  position: absolute; 
-  right: 45%;
+  position: relative; 
+  left: 20%;
 }
 .button-l-save {
-  position: absolute; 
-  right: 60%;
+  position: relative; 
+  left: 40%;
 }
 .button-l-cancel {
-  position: absolute; 
-  right: 51%;
+  position: relative; 
+  left: 40%;
 }
 .selected {
   background-color: #CFD8DC !important;

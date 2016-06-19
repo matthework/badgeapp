@@ -102,24 +102,20 @@ textarea {
   font-style: italic;
   word-wrap: break-word;
 }
-.button-edit {
-  position: absolute; 
-  right: 30%;
-}
 .table-badgelevels {
-  margin-top: 20px;
+  margin-top: 10px;
   table-layout: fixed;
-  width: 70%;
+  width: 80%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
 }
-/*.table-badgelevels td {
-  white-space: nowrap;
+.table-badgelevels td {
+/*  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-}*/
+  text-overflow: ellipsis;*/
+}
 .th-level {
-  width: 7%;
+  width: 10%;
 }
 .th-desc {
   width: 60%;
@@ -144,11 +140,14 @@ textarea {
 .uli-bset:visited{
   color: #607D8B;
 }
+.button-edit {
+  position: relative; 
+  left: 62%;
+}
 .selected {
   background-color: #CFD8DC !important;
   color: white;
 }
-
 .check-core {
   color: red;
 }
