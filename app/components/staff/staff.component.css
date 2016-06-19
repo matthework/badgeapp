@@ -51,25 +51,13 @@ table tr:nth-child(odd) {
 table tr:nth-child(even) {
   background-color: #ffffff;
 }
-.button-showbs {
-  position: absolute; 
-  right: 27%;
-  color: #039be5;
-  width: 150px;
-}
-.button-back {
-  position: absolute; 
-  right: 27%;
-  color: #039be5;
-  width: 150px;
-}
 .table-staffs {
   table-layout: fixed;
-  width: 90%;
+  width: 100%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
   border: 0;
-  margin-top: 10px;
+  margin-bottom: 50px;
 }
 .table-staffs td {
 
@@ -124,17 +112,17 @@ table tr:nth-child(even) {
 }
 .table-sbs {
   table-layout: fixed;
-  width: 90%;
+  width: 100%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
   border: 0;
-  margin-top: 10px;
+  margin-bottom: 50px;
 }
 .th-sname {
   width: 30%;
 }
 .th-bs {
-  width: 40%;
+  width: 50%;
 }
 .th-tier {
   width: 20%;
@@ -158,9 +146,21 @@ table tr:nth-child(even) {
 .td-pay {
   text-align: center;
 }
+.button-showbs {
+  position: relative; 
+  left: 56%;
+  color: #039be5;
+  width: 150px;
+}
+.button-back {
+  position: relative; 
+  left: 56%;
+  color: #039be5;
+  width: 150px;
+}
 .button-add {
-  position: absolute; 
-  right: 21.5%;
+  position: relative; 
+  left: 56%;
   color: #039be5;
 }
 .button-add:hover {
@@ -168,14 +168,23 @@ table tr:nth-child(even) {
   background-color: limegreen;
 }
 .button-more {
-  position: absolute; 
-  right: 21.5%;
+  position: relative; 
+  left: 56%;
   color: #039be5;
 }
 .button-less {
-  position: absolute; 
-  right: 14.5%;
+  position: relative; 
+  left: 59%;
   color: #039be5;
+}
+.button-add2 {
+  position: relative; 
+  left: 70%;
+  color: #039be5;
+}
+.button-add2:hover {
+  color: white;
+  background-color: limegreen;
 }
 .button-s-x{
   background-color: pink;
@@ -185,7 +194,7 @@ table tr:nth-child(even) {
   text-align: center;
   margin-top: 0;
   margin-left: 0;
-  margin-right: 5px;
+  margin-right: 7px;
   margin-bottom: 0;
 }
 .button-s-x:hover {

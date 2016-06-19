@@ -66,6 +66,9 @@ System.register(['angular2/core', 'angular2/router', './bs-edit/bs-edit.componen
                 BSComponent.prototype.getBadgeSets = function () {
                     var _this = this;
                     this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
+                    if (this.badgesets == null) {
+                        this.active = true;
+                    }
                     // this.badgesets.sort(this.toCompare);
                 };
                 // toCompare(a,b) {
@@ -173,7 +176,7 @@ System.register(['angular2/core', 'angular2/router', './bs-edit/bs-edit.componen
                     }
                 };
                 BSComponent.prototype.getBS = function (bsname) {
-                    var result = null;
+                    var result;
                     if (this.badgesets != null) {
                         for (var i = 0; i < this.badgesets.length; i++) {
                             if (this.badgesets[i].name == bsname) {

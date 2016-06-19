@@ -110,10 +110,6 @@ textarea {
 .badgegroup-block {
   margin-top: 30px;
 }
-.input-badge {
-  width: 300px;
-  margin-right: 30px;
-}
 .select-badge {
   background: transparent;
   width: 300px;
@@ -127,6 +123,9 @@ textarea {
   margin-right: 30px;
   margin-bottom: 30px;
 }
+.label-level {
+  width: 5em;
+}
 .select-level {
   background: transparent;
   width: 50px;
@@ -138,9 +137,6 @@ textarea {
   border-radius: 3;
   border: 1px solid #cccccc;
   margin-bottom: 30px;
-}
-.input-level {
-  width: 50px;
 }
 .ta-desc {
   width: 470px;
@@ -183,24 +179,23 @@ textarea {
   width: 100px;
 }
 .button-delete {
-  position: absolute; 
-  left: 13%;
+  position: relative; 
 }
 .button-save {
-  position: absolute; 
-  right: 53.5%;
+  position: relative; 
+  left: 30%;
 }
 .button-cancel {
-  position: absolute; 
-  right: 43.5%;
+  position: relative; 
+  left: 30%;
 }
 .button-l-save {
-  position: absolute; 
-  right: 53.5%;
+  position: relative; 
+  left: 42%;
 }
 .button-l-cancel {
-  position: absolute; 
-  right: 43.5%;
+  position: relative; 
+  left: 42%;
 }
 .selected {
   background-color: #CFD8DC !important;

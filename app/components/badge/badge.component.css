@@ -61,11 +61,12 @@ th , td  {
   padding: 5px;
 }
 .table-badges {
-  table-layout: fixed;
-  width: 90%;
+  /*table-layout: fixed;*/
+  width: 100%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
   border: 0;
+  margin-bottom: 50px;
 }
 /*.table-badges td {
   white-space: nowrap;
@@ -76,22 +77,22 @@ th , td  {
   /*line-height: 30px; */
 }
 .th-name {
-  width: 10%;
+  width: 20%;
 }
 .th-overview {
-  width: 25%;
+  width: 38%;
 }
 .th-approved {
-  width: 5%;
+  width: 10%;
   text-align: center;
 }
 .th-inused {
-  width: 5%;
+  width: 10%;
   text-align: center;
 }
 .th-last {
   background-color: #ffffff;
-  width: 5%;
+  width: 10%;
   border: 0;
 }
 .td-overview {
@@ -104,8 +105,8 @@ th , td  {
   text-align: center;
 }
 .button-add {
-  position: absolute; 
-  right: 20%;
+  position: relative; 
+  left: 70%;
   color: #039be5;
 }
 .button-add:hover {
@@ -113,13 +114,13 @@ th , td  {
   background-color: limegreen;
 }
 .button-more {
-  position: absolute; 
-  right: 20%;
+  position: relative; 
+  left: 70%;
   color: #039be5;
 }
 .button-less {
-  position: absolute; 
-  right: 13%;
+  position: relative; 
+  left: 73%;
   color: #039be5;
 }
 .selected {
@@ -138,7 +139,7 @@ th , td  {
   text-align: center;
   margin-top: 0;
   margin-left: 0;
-  margin-right: 5px;
+  margin-right: 7px;
   margin-bottom: 0;
 }
 .button-s-x:hover {

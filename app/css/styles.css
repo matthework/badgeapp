@@ -16,6 +16,14 @@ body, input[text], button {
   color: #888; 
   font-family: Cambria, Georgia; 
 }
+
+#page-wrap {
+   /*text-align: center;*/
+   /*width: 90%;*/
+   width: 1200px;
+   margin: 0 auto;
+}
+
 a {
   cursor: pointer;
   cursor: hand;

@@ -239,30 +239,25 @@ textarea {
 }
 .button-delete {
   position: absolute; 
-  left: 13%;
 }
 .button-save {
-  position: absolute; 
-  right: 53.5%;
+  position: relative; 
+  left: 40%;
 }
 .button-cancel {
-  position: absolute; 
-  right: 43.5%;
-}
-.button-l-save {
-  position: absolute; 
-  right: 53.5%;
-}
-.button-l-cancel {
-  position: absolute; 
-  right: 43.5%;
-}
-.button-done {
-  position: absolute; 
-  right: 55%;
+  position: relative; 
+  left: 40%;
 }
 .input-corebadge{
   width: 300px;
+}
+.button-l-save {
+  position: relative; 
+  left: 42%;
+}
+.button-l-cancel {
+  position: relative; 
+  left: 42%;
 }
 .button-c-delete {
   width: 40px;

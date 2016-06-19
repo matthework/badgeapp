@@ -43,7 +43,7 @@
 		<label>Add New: </label>
 		<select class="select-badge" [(ngModel)]="coreBadge"><option *ngFor="#cbo of getCoreBadgesOptions(badgeset.badgegroups)" [value]="cbo">{{cbo}}</option></select><button class="button-s-add" (click)="addCoreBadge(coreBadge)">+</button><br>
 		<!-- <button class="button-l-save" (click)="prerequisite=false">Save</button> -->
-		<button class="button-c-done" (click)="prerequisite=false">Done</button><br>
+		<button (click)="prerequisite=false">Done</button><br>
 	</div>
 
 	<div *ngIf!="prerequisite">
@@ -76,9 +76,10 @@
 			<label>Description: </label>
 			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
 
-			<button (click)="addBadgeGroup();active=false">Done</button>
-<!-- 			<button class="button-l-cancel" (click)="active=false">Cancel</button><br> -->
+			<button class="button-l-save" (click)="addBadgeGroup();active=false">Save</button>
+			<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
 		</div>
+		
 		<div *ngIf!="active">
 			<button class="button-add" (click)="addBadgeSet()">New</button>
 			<button class="button-delete" (click)="deleteBadgeSetPop()">Delete</button>

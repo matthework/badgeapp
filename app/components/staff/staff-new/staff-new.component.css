@@ -163,13 +163,13 @@ textarea {
   width: 45px;
 }
 .button-add {
+  position: relative; 
+  left: 42%;
   width: 100px;
-  position: absolute; 
-  right: 55%;
 }
 .button-cancel {
-  position: absolute; 
-  right: 45%;
+  position: relative; 
+  left: 42%;
 }
 .staff-error {
   border-bottom-color: #E22323;

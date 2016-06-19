@@ -102,22 +102,18 @@ textarea {
   font-style: italic;
   word-wrap: break-word;
 }
-.button-edit {
-  position: absolute; 
-  right: 30%;
-}
 .table-badgegroups {
-  margin-top: 20px;
+  margin-top: 10px;
   table-layout: fixed;
-  width: 70%;
+  width: 75%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
 }
-/*.table-badgelevels td {
-  white-space: nowrap;
+.table-badgelevels td {
+/*  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-}*/
+  text-overflow: ellipsis;*/
+}
 .th-badge {
   width: 20%;
 }
@@ -132,6 +128,10 @@ textarea {
 }
 .td-desc {
   font-style: italic;
+}
+.button-edit {
+  position: relative; 
+  left: 57%;
 }
 .badge{
   cursor: pointer;
