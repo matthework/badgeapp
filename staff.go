@@ -19,11 +19,6 @@ type Staff struct {
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
 }
 
-// type BadgeGroup struct {
-// 	Badge 	string	`json:"badge" bson:"badge"`	
-// 	Level	int	`json:"level" bson:"level"`
-// }
-
 var col_staff = "staff"
 
 func listStaffs() (staffs []Staff) {
@@ -32,6 +27,18 @@ func listStaffs() (staffs []Staff) {
 
 	collection := session.DB(DB).C(col_staff)
 	err := collection.Find(nil).All(&staffs)
+	if err != nil {
+		panic(err)
+	}
+	return staffs
+}
+
+func listStaffsSort() (staffs []Staff) {
+	session := connect()
+	defer session.Close()
+
+	collection := session.DB(DB).C(col_staff)
+	err := collection.Find(nil).Sort("fname").All(&staffs)
 	if err != nil {
 		panic(err)
 	}

@@ -60,7 +60,10 @@ $ heroku local
 $ heroku local web
 
 // mlab mongodb
-mongoimport -h ds017664-a0.mlab.com:17664 -d heroku_58200141 -c badge -u badge -p badgeps --file badge.json
+mongoimport -h ds017664-a0.mlab.com:17664 -d heroku_58200141 -c badgeset -u badge -p badgeps --file badgeset.json
+
+mongoexport -h ds017664-a0.mlab.com:17664 -d heroku_58200141 -c badgeset -u badge -p badgeps -o badgeset.json
+
 
 ******************* mongodb commands *******************
 
