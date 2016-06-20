@@ -4,9 +4,8 @@ Badge System!
 
 ******************* todo list *******************
 login system
-improve layout for mobile browser
-
-
+improve warning dialog for delete
+career path
 
 
 
