@@ -9,8 +9,13 @@ import (
 // var connectURL = "localhost"
 // var DB = "badgeDB"
 
+// paid service
 var connectURL = "mongodb://badge:badgeps@ds017664-a0.mlab.com:17664,ds017664-a1.mlab.com:17664/heroku_58200141?replicaSet=rs-ds017664" 
 var DB = "heroku_58200141"
+
+// // free mongodb
+// var connectURL = "mongodb://badge:badgeps@ds025772.mlab.com:25772/heroku_wqd51gtc" 
+// var DB = "heroku_wqd51gtc"
 
 func connect() (session *mgo.Session) {
 	session, err := mgo.Dial(connectURL)

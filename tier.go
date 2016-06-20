@@ -43,23 +43,6 @@ func findTierByID(id string) (tier Tier) {
 	return tier
 }
 
-// func findPay(t string, g string) (pay string) {
-// 	session := connect()
-// 	defer session.Close()
-
-// 	gmap := map[string]int{"A":0, "B":1, "C":2, "D":3, "E":4, "F":5}
-
-// 	collection := session.DB(DB).C(col_tier)
-// 	result := Tier{}
-// 	fQuery := bson.M{"tier": t}
-// 	err := collection.Find(fQuery).Select(bson.M{"grades": 1}).One(&result)
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// 	pay = result.Grades[gmap[g]]
-// 	return pay
-// }
-
 func insertTier(tier Tier) (err error) {
 	session := connect()
 	defer session.Close()
@@ -118,11 +101,6 @@ func removeAllTiers() (err error) {
 	}
 	return err
 }
-
-
-
-
-
 
 
 

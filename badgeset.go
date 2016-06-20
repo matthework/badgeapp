@@ -130,5 +130,3 @@ func removeAllBadgeSets() (err error) {
 }
 
 
-
-
