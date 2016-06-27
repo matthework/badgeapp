@@ -80,14 +80,17 @@ th , td  {
   width: 20%;
 }
 .th-overview {
-  width: 38%;
+  width: 33%;
+}
+.th-tags {
+  width: 12%;
 }
 .th-approved {
-  width: 10%;
+  width: 8%;
   text-align: center;
 }
 .th-inused {
-  width: 10%;
+  width: 7%;
   text-align: center;
 }
 .th-last {
@@ -106,22 +109,46 @@ th , td  {
 }
 .button-add {
   position: relative; 
-  left: 70%;
+  left: 56.5%;
   color: #039be5;
 }
 .button-add:hover {
   color: white;
   background-color: limegreen;
 }
-.button-more {
+.button-add2 {
   position: relative; 
   left: 70%;
   color: #039be5;
 }
+.button-add2:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-showBCat {
+  position: relative; 
+  left: 56.5%;
+  color: #039be5;
+  width: 150px;
+  margin-left: 0;
+}
+.button-more {
+  position: relative; 
+  left: 56.5%;
+  color: #039be5;
+  /*margin-left: 0px;*/
+}
 .button-less {
   position: relative; 
-  left: 73%;
+  left: 59.5%;
   color: #039be5;
+}
+.button-back {
+  position: relative; 
+  left: 56.5%;
+  color: #039be5;
+  width: 150px;
+  /*margin-right: 0px;*/
 }
 .selected {
   background-color: #CFD8DC !important;
@@ -166,6 +193,17 @@ th , td  {
   color: red;
 }
 .badge:visited{
+  color: #607D8B;
+}
+.t-tag{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.t-tag:hover{
+  color: red;
+}
+.t-tag:visited{
   color: #607D8B;
 }
 .badge-container {

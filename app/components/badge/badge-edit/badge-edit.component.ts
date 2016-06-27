@@ -105,6 +105,15 @@ export class BadgeEditComponent implements OnInit {
     }
   }
 
+  addTag(tag:string) {
+    this.badge.tags.push(tag.toUpperCase());
+  }
+
+  deleteTag(tag:string) {
+    let index = this.badge.tags.indexOf(tag);
+    this.badge.tags.splice(index,1);
+  }
+
   goBack() {
     window.history.back();
   }

@@ -30,7 +30,7 @@ System.register(['angular2/core', 'angular2/router', '../badge.service'], functi
                     this._badgeService = _badgeService;
                     this._router = _router;
                     this._routeParams = _routeParams;
-                    // title: string = "Add New Badge";
+                    this.newTag = "";
                     this.newbls = [
                         { level: 1, desc: "" },
                         { level: 2, desc: "" },
@@ -41,7 +41,7 @@ System.register(['angular2/core', 'angular2/router', '../badge.service'], functi
                         { level: 7, desc: "" },
                         { level: 8, desc: "" },
                         { level: 9, desc: "" }];
-                    this.newBadge = { index: 0, name: "", overview: "", badgelevels: this.newbls, approved: false, inused: false };
+                    this.newBadge = { index: 0, name: "", overview: "", badgelevels: this.newbls, tags: [], approved: false, inused: false };
                 }
                 BadgeNewComponent.prototype.addBadge = function () {
                     // this.newBadge.badgelevels = this.newBadge.badgelevels.filter(this.checkEmpty);
@@ -58,6 +58,13 @@ System.register(['angular2/core', 'angular2/router', '../badge.service'], functi
                 BadgeNewComponent.prototype.toBadges = function () {
                     this._router.navigate(['Badges']);
                     // location.reload();
+                };
+                BadgeNewComponent.prototype.addTag = function (tag) {
+                    this.newBadge.tags.push(tag.toUpperCase());
+                };
+                BadgeNewComponent.prototype.deleteTag = function (tag) {
+                    var index = this.newBadge.tags.indexOf(tag);
+                    this.newBadge.tags.splice(index, 1);
                 };
                 BadgeNewComponent.prototype.goBack = function () {
                     window.history.back();

@@ -11,6 +11,9 @@
 <label>Overview: </label>
 <textarea class="ta-big" [(ngModel)]="newBadge.overview" placeholder="Overview"></textarea><br>
 
+<label>Category: </label>
+<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder="Category"><button class="button-s-add" (click)="addTag(newTag)">+</button><text *ngFor="#tag of newBadge.tags">{{tag}} <button class="button-s-delete" (click)="deleteTag(tag)">-</button></text><br>
+
 <label>Approved: </label>
 <input type="checkbox" [(ngModel)]="newBadge.approved" placeholder="Approved" /><br>
 

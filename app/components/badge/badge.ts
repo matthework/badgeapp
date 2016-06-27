@@ -4,6 +4,7 @@ export class Badge {
   name: string;
   overview: string;
   badgelevels: BadgeLevel[];
+  tags: string[];
   approved: boolean;
   inused: boolean;
   timestamp: string;
