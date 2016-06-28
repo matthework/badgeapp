@@ -26,7 +26,7 @@ export class BadgeNewComponent {
             {level: 8, desc:""},
             {level: 9, desc:""}];
 
-  newBadge = {index: 0, name: "", overview: "", badgelevels: this.newbls, tags: [], approved: false, inused: false};
+  newBadge = {index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, tags: [], approved: false, inused: false};
 
   constructor(
     private _badgeService: BadgeService, 
@@ -35,7 +35,8 @@ export class BadgeNewComponent {
 
   addBadge() {
     // this.newBadge.badgelevels = this.newBadge.badgelevels.filter(this.checkEmpty);
-    let value = JSON.stringify(this.newBadge)
+    this.newBadge.code = this.newBadge.code.toUpperCase();
+    let value = JSON.stringify(this.newBadge);
     this._badgeService.addBadge(value).subscribe();
     console.log('you submitted value: ', value); 
     this.toBadges();
@@ -66,4 +67,6 @@ export class BadgeNewComponent {
   }
   
 }
+
+
 

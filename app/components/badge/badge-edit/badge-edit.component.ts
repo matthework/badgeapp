@@ -42,6 +42,7 @@ export class BadgeEditComponent implements OnInit {
   }
 
   updateBadge() {
+    this.badge.code = this.badge.code.toUpperCase();
     let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badge)
     this._badgeService.updateBadge(id,value).subscribe();

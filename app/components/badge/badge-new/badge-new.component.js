@@ -41,10 +41,11 @@ System.register(['angular2/core', 'angular2/router', '../badge.service'], functi
                         { level: 7, desc: "" },
                         { level: 8, desc: "" },
                         { level: 9, desc: "" }];
-                    this.newBadge = { index: 0, name: "", overview: "", badgelevels: this.newbls, tags: [], approved: false, inused: false };
+                    this.newBadge = { index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, tags: [], approved: false, inused: false };
                 }
                 BadgeNewComponent.prototype.addBadge = function () {
                     // this.newBadge.badgelevels = this.newBadge.badgelevels.filter(this.checkEmpty);
+                    this.newBadge.code = this.newBadge.code.toUpperCase();
                     var value = JSON.stringify(this.newBadge);
                     this._badgeService.addBadge(value).subscribe();
                     console.log('you submitted value: ', value);

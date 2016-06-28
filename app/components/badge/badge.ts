@@ -2,6 +2,7 @@ export class Badge {
   _id: string;
   index: number;
   name: string;
+  code: string;
   overview: string;
   badgelevels: BadgeLevel[];
   tags: string[];

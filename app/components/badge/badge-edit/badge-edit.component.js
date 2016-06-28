@@ -50,6 +50,7 @@ System.register(['angular2/core', 'angular2/router', '../badge.service'], functi
                     // location.reload();
                 };
                 BadgeEditComponent.prototype.updateBadge = function () {
+                    this.badge.code = this.badge.code.toUpperCase();
                     var id = this._routeParams.get('id');
                     var value = JSON.stringify(this.badge);
                     this._badgeService.updateBadge(id, value).subscribe();

@@ -93,6 +93,10 @@ textarea {
 .input-name{
   width: 350px;
 }
+.input-code{
+  width: 350px;
+  text-transform: uppercase;
+}
 .input-level{
   width: 350px;
 }

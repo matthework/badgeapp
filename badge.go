@@ -9,6 +9,7 @@ type Badge struct {
 	ID      bson.ObjectId	`json:"_id,omitempty" bson:"_id,omitempty"`
 	Index	int	`json:"index" bson:"index"`
 	Name	string	`json:"name" bson:"name"`
+	Code	string	`json:"code" bson:"code"`
 	Overview	string	`json:"overview" bson:"overview"`
 	BadgeLevels	[]BadgeLevel	`json:"badgelevels" bson:"badgelevels"`
 	Tags 	[]string	`json:"tags" bson:"tags"`
