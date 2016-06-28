@@ -9,7 +9,7 @@ import (
 // var connectURL = "localhost"
 // var DB = "badgeTest"
 
-// paid mlab mongodb - heroku
+// mlab mongodb - heroku
 var connectURL = os.Getenv("MONGODB_URI") 
 var DB = os.Getenv("MONGODB_DB")
 
