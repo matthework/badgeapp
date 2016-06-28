@@ -28,7 +28,9 @@
       <td (click)="onSelect(badge);toDetail()" class="badge">{{badge.name}}</td>
       <td class="td-overview" (click)="onSelect(badge)">{{badge.overview}}</td>
       <td class="td-tags">
-         <text *ngFor="#tag of badge.tags"><text class="t-tag" (click)="groupByTag(tag)"> {{tag}}, </text></text>
+         <div *ngFor="#tag of badge.tags">
+            <uli class="t-tag" (click)="groupByTag(tag)">{{tag}}</uli>
+         </div>
       </td>
       <td (click)="onSelect(badge)" class="td-approved">{{badge.approved | yes_no}}</td>
       <td (click)="onSelect(badge)" class="td-inused">{{badge.inused | yes_no}}</td>

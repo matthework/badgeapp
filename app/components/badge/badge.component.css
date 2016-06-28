@@ -87,11 +87,9 @@ th , td  {
 }
 .th-approved {
   width: 8%;
-  text-align: center;
 }
 .th-inused {
   width: 7%;
-  text-align: center;
 }
 .th-last {
   background-color: #ffffff;
@@ -100,6 +98,9 @@ th , td  {
 }
 .td-overview {
   font-style: italic;
+}
+.td-tags {
+  text-align: center;
 }
 .td-approved {
   text-align: center;
@@ -147,8 +148,8 @@ th , td  {
   position: relative; 
   left: 56.5%;
   color: #039be5;
-  width: 150px;
-  /*margin-right: 0px;*/
+  width: 130px;
+  margin-left: 10px;
 }
 .selected {
   background-color: #CFD8DC !important;
