@@ -46,7 +46,7 @@ mongoexport --db badgeDB --collection badge --out badge.json
 $ go get github.com/tools/godep
 
 // go to project root folder
-$GOPATH/src/github.com/matthework/badge/
+$GOPATH/src/github.com/propellerheadnz/badge/
 
 // create Godeps.json for Dependencies (or godep save for current folder only)
 $ godep save
@@ -58,11 +58,6 @@ $ echo 'web: badge' > Procfile
 // run locally
 $ heroku local
 $ heroku local web
-
-// mlab mongodb
-mongoimport -h ds017664-a0.mlab.com:17664 -d heroku_58200141 -c badgeset -u badge -p badgeps --file badgeset.json
-
-mongoexport -h ds017664-a0.mlab.com:17664 -d heroku_58200141 -c badgeset -u badge -p badgeps -o badgeset.json
 
 
 ******************* mongodb commands *******************

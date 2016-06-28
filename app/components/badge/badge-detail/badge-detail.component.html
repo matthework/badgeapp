@@ -2,8 +2,15 @@
 <div *ngIf="badge">
 	<h2>{{title}} - {{badge.name}}</h2>
 	<br>
+
+	<label>Code: </label>
+	<text>{{badge.code}}</text><br>
+
 	<label>Overview: </label>
 	<textarea readonly class="ta-overview" placeholder="Overview">{{badge.overview}}</textarea><br>
+
+	<label>Category: </label>
+	<text>{{badge.tags}}</text><br>
 	
 	<label>Approved: </label>
 	<text>{{badge.approved | yes_no}}</text><br>

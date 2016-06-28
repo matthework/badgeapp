@@ -7,11 +7,11 @@ import (
 )
 
 // var connectURL = "localhost"
-// var DB = "badgeDB"
+// var DB = "badgeTest"
 
-// paid service - heroku mlab mongodb
+// paid mlab mongodb - heroku
 var connectURL = os.Getenv("MONGODB_URI") 
-var DB = "heroku_58200141"
+var DB = os.Getenv("MONGODB_DB")
 
 func connect() (session *mgo.Session) {
 	session, err := mgo.Dial(connectURL)
