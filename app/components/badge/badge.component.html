@@ -29,7 +29,7 @@
       <td class="td-overview" (click)="onSelect(badge)">{{badge.overview}}</td>
       <td class="td-tags">
          <div *ngFor="#tag of badge.tags">
-            <uli class="t-tag" (click)="groupByTag(tag)">{{tag}}</uli>
+            <uli class="t-tag" (click)="groupByTag(tag)">{{tag}}, </uli>
          </div>
       </td>
       <td (click)="onSelect(badge)" class="td-approved">{{badge.approved | yes_no}}</td>
