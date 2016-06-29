@@ -2,65 +2,64 @@
 
 Badge System!
 
-******************* todo list *******************
-login system
-improve warning dialog for delete
-career path
+******************* todo list *******************  
+login system  
+improve warning dialog for delete  
+badge category  
 
 
-
-******************* run locally *******************
+******************* run locally *******************  
 // project root folder  
-$GOPATH/src/github.com/propellerheadnz/badge/
+$GOPATH/src/github.com/propellerheadnz/badge/  
 
 // run mongoDB server  
-mongod
+mongod  
 
 // run mongoDB client  
-mongo
+mongo  
 
 // install dependency from package.json  
-npm install
+npm install  
 
 // compile *.ts to *.js  
-npm run tsc
+npm run tsc  
 
 // compile *.ts to *.js and stay in watch mode for changes made  
-npm run tsc:w
+npm run tsc:w  
 
 // get required libraries  
-go get 
+go get  
 
 // compile changes   
-go install
+go install  
 
 // run server  
-go run *.go
+go run *.go  
 
-// export local mongodb into json file
-mongoexport --db badgeDB --collection badge --out badge.json
+// export local mongodb into json file  
+mongoexport --db badgeDB --collection badge --out badge.json  
 
-******************* deploy on heroku *******************
+******************* deploy on heroku *******************  
 
-// install godep
-$ go get github.com/tools/godep
+// install godep  
+$ go get github.com/tools/godep  
 
-// go to project root folder
-$GOPATH/src/github.com/propellerheadnz/badge/
+// go to project root folder  
+$GOPATH/src/github.com/propellerheadnz/badge/  
 
-// create Godeps.json for Dependencies (or godep save for current folder only)
-$ godep save
-$ godep save ./...
+// create Godeps.json for Dependencies (or godep save for current folder only)  
+$ godep save  
+$ godep save ./...  
 
-// create Procfile of commands to run on Heroku
-$ echo 'web: badge' > Procfile
+// create Procfile of commands to run on Heroku  
+$ echo 'web: badge' > Procfile  
 
-// run locally
-$ heroku local
-$ heroku local web
+// run locally  
+$ heroku local  
+$ heroku local web  
 
 
-******************* mongodb commands *******************
+******************* mongodb commands *******************  
 
 // mongoDB commands  
 show dbs  
@@ -79,8 +78,8 @@ db.badge.drop()
 db.dropDatabase()  
 
 
-******************* others *******************
+******************* others *******************  
 
-matt.wang@propellerhead.co.nz
+matt.wang@propellerhead.co.nz  
 
 
