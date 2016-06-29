@@ -1,9 +1,0 @@
-MONGODB_URI='mongodb://heroku_wqd51gtc:ss7ehvraudl46se0ehdp164rds@ds025772.mlab.com:25772/heroku_wqd51gtc'
-
-MONGODB_DB='heroku_wqd51gtc'
-
-
-// mlab mongodb free
-mongoimport -h ds025772.mlab.com:25772 -d heroku_wqd51gtc -c badgeset -u badge -p badgeps --file badgeset.json
-
-mongoexport -h ds025772.mlab.com:25772 -d heroku_wqd51gtc -c badgeset -u badge -p badgeps -o badgeset.json

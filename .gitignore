@@ -1,4 +1,4 @@
 *.csv
 *.exe
 .env
-.env free
+.env-free
