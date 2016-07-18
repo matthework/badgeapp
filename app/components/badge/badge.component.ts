@@ -27,6 +27,7 @@ export class BadgeComponent implements OnInit {
   selectedBadge: Badge;
   active = false;
   showBadges = false;
+  showBCat = false;
 
   // private _ws: $WebSocket;
 
@@ -90,22 +91,8 @@ export class BadgeComponent implements OnInit {
     location.reload();
   }
 
-  groupByTag(tag) {
-    var b = [];
-    if (this.badges != null) {
-      for (var i = 0; i < this.badges.length; i++) { 
-        if (this.badges[i].tags.indexOf(tag) != -1) {
-          this.badges[i].tags = [tag];
-          b.push(this.badges[i]);
-        }
-      }
-    }
-    this.badges = b;
-    this.showBadges = true;
-  }
-
-  getBadgeCat() {
-    this._router.navigate(['BadgeSet']);
+  showBadgeCat() {
+    this.showBCat = true;
   }
 
 }

@@ -2,7 +2,7 @@
 <div *ngIf="badges">
 <h1>Badges</h1>
 <input [(ngModel)]="query" placeholder="Search for">
-<button class="button-showBCat" *ngIf!="showBadges" (click)="showBCat=true;getBadgeCat()">Badge Category</button>
+<button class="button-showBCat" *ngIf!="showBadges" (click)="showBadges=true;showBadgeCat()">Badge Category</button>
 <button class="button-back" *ngIf="showBadges" (click)="toBadges()">Back</button>
 <button class="button-more" *ngIf!="active" (click)="active=true">></button>
 <button class="button-add" *ngIf="active" (click)="addBadge()">+</button>
@@ -15,11 +15,11 @@
 <button class="button-add2" (click)="addBadge()">+</button><br>
 </div>
 
+<div *ngIf!="showBCat">
 <table class="table-badges">
    <tr>
       <th class="th-name">Badge</th>
       <th class="th-overview">Overview</th>
-      <th class="th-tags">Category</th>
       <th class="th-approved">Approved</th>
       <th class="th-inused">InUsed</th>
       <th class="th-last"></th>
@@ -27,17 +27,29 @@
    <tr *ngFor="#badge of badges | filter:query">
       <td (click)="onSelect(badge);toDetail()" class="badge">{{badge.name}}</td>
       <td class="td-overview" (click)="onSelect(badge)">{{badge.overview}}</td>
-      <td class="td-tags">
-         <div *ngFor="#tag of badge.tags">
-            <uli class="t-tag" (click)="groupByTag(tag)">{{tag}}, </uli>
-         </div>
-      </td>
       <td (click)="onSelect(badge)" class="td-approved">{{badge.approved | yes_no}}</td>
       <td (click)="onSelect(badge)" class="td-inused">{{badge.inused | yes_no}}</td>
       <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgePop(badge._id)">X</button><button class="button-s-e" (click)="toEdit(badge._id)">E</button></td>
    </tr>
 </table>
+</div>
 
+<div *ngIf="showBCat">
+<table class="table-bcat">
+   <tr>
+      <th class="th-bcat">Badge Category</th>
+      <th class="th-subcat">Sub Category</th>
+      <th class="th-badge">Badges</th>
+      <th class="th-last"></th>
+   </tr>
+   <tr *ngFor="#badge of badges | filter:query">
+      <td (click)="onSelect(badge)">Badge Cat</td>
+      <td (click)="onSelect(badge)">Sub Cat</td>
+      <td (click)="onSelect(badge);toDetail()" class="badge">{{badge.name}}</td>
+      <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgePop(badge._id)">X</button><button class="button-s-e" (click)="toEdit(badge._id)">E</button></td>
+   </tr>
+</table>
+</div>
 
 
 

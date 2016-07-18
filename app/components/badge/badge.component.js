@@ -45,6 +45,7 @@ System.register(['angular2/core', 'angular2/router', './badge-detail/badge-detai
                     this.badges = [];
                     this.active = false;
                     this.showBadges = false;
+                    this.showBCat = false;
                 }
                 //     this._ws = new $WebSocket("ws://localhost:8080/");
                 //     let cb = function(message: any) {
@@ -93,21 +94,8 @@ System.register(['angular2/core', 'angular2/router', './badge-detail/badge-detai
                     this._router.navigate(['Badges']);
                     location.reload();
                 };
-                BadgeComponent.prototype.groupByTag = function (tag) {
-                    var b = [];
-                    if (this.badges != null) {
-                        for (var i = 0; i < this.badges.length; i++) {
-                            if (this.badges[i].tags.indexOf(tag) != -1) {
-                                this.badges[i].tags = [tag];
-                                b.push(this.badges[i]);
-                            }
-                        }
-                    }
-                    this.badges = b;
-                    this.showBadges = true;
-                };
-                BadgeComponent.prototype.getBadgeCat = function () {
-                    this._router.navigate(['BadgeSet']);
+                BadgeComponent.prototype.showBadgeCat = function () {
+                    this.showBCat = true;
                 };
                 BadgeComponent = __decorate([
                     core_1.Component({
