@@ -36,7 +36,7 @@ func addNewBadgeCat(w http.ResponseWriter, r *http.Request) {
 	}
 	var bgs []BGroup
 	for i := range badgecat.BGroups {
-		if badgecat.BGroups[i].Badge != "" {
+		if badgecat.BGroups[i].Badge != "" && len(badgecat.BGroups[i].Levels) != 0 {
 			bgs = append(bgs, badgecat.BGroups[i])
 		}
 	}
@@ -56,6 +56,13 @@ func updateBadgeCat(w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
+	var bgs []BGroup
+	for i := range badgecat.BGroups {
+		if badgecat.BGroups[i].Badge != "" && len(badgecat.BGroups[i].Levels) != 0 {
+			bgs = append(bgs, badgecat.BGroups[i])
+		}
+	}
+	badgecat.BGroups = bgs
 	badgecat.TimeStamp = time.Now()
 	if id != "" {
 		if err := updateBadgeCatByID(id,badgecat); err != nil {

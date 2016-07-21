@@ -96,6 +96,7 @@ System.register(['angular2/core', 'angular2/router', './badge-detail/badge-detai
                 };
                 BadgeComponent.prototype.showBadgeCat = function () {
                     this.showBCat = true;
+                    this._router.navigate(['BadgeCat']);
                 };
                 BadgeComponent = __decorate([
                     core_1.Component({

@@ -93,6 +93,7 @@ export class BadgeComponent implements OnInit {
 
   showBadgeCat() {
     this.showBCat = true;
+    this._router.navigate(['BadgeCat']);
   }
 
 }

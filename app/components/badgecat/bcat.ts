@@ -1,21 +1,13 @@
-export class BadgeSet {
+export class BadgeCat {
 	_id: string;
-	index: number;
 	name: string;
-	badgegroups: BadgeGroup[];
-	tier: number;
-	grade: string;
-	pay: number;
-	tags: string[];
-	numbadges: number;
-	corebadges: BadgeGroup[];
-	approved: boolean;
-  	inused: boolean;
+	root: string;
+	bgroups: BGroup[];
 	others: string[];
 	timestamp: string;
 }
 
-export class BadgeGroup {
+export class BGroup {
 	badge: string;
-	level: number;
+	levels: number[];
 }

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './main/main.component', './badge/badge.component', './badge/badge.service', './badge/badge-detail/badge-detail.component', './badge/badge-edit/badge-edit.component', './badge/badge-new/badge-new.component', './staff/staff.component', './staff/staff.service', './staff/staff-edit/staff-edit.component', './staff/staff-detail/staff-detail.component', './staff/staff-new/staff-new.component', './tier/tier.component', './tier/tier.service', './tier/tier-edit/tier-edit.component', './tier/tier-detail/tier-detail.component', './tier/tier-new/tier-new.component', './badgeset/bs.component', './badgeset/bs.service', './badgeset/bs-edit/bs-edit.component', './badgeset/bs-detail/bs-detail.component', './badgeset/bs-new/bs-new.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './main/main.component', './badge/badge.component', './badge/badge.service', './badge/badge-detail/badge-detail.component', './badge/badge-edit/badge-edit.component', './badge/badge-new/badge-new.component', './staff/staff.component', './staff/staff.service', './staff/staff-edit/staff-edit.component', './staff/staff-detail/staff-detail.component', './staff/staff-new/staff-new.component', './tier/tier.component', './tier/tier.service', './tier/tier-edit/tier-edit.component', './tier/tier-detail/tier-detail.component', './tier/tier-new/tier-new.component', './badgeset/bs.component', './badgeset/bs.service', './badgeset/bs-edit/bs-edit.component', './badgeset/bs-detail/bs-detail.component', './badgeset/bs-new/bs-new.component', './badgecat/bcat.component', './badgecat/bcat.service', './badgecat/bcat-edit/bcat-edit.component', './badgecat/bcat-new/bcat-new.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './main/main.component', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, main_component_1, badge_component_1, badge_service_1, badge_detail_component_1, badge_edit_component_1, badge_new_component_1, staff_component_1, staff_service_1, staff_edit_component_1, staff_detail_component_1, staff_new_component_1, tier_component_1, tier_service_1, tier_edit_component_1, tier_detail_component_1, tier_new_component_1, bs_component_1, bs_service_1, bs_edit_component_1, bs_detail_component_1, bs_new_component_1;
+    var core_1, router_1, main_component_1, badge_component_1, badge_service_1, badge_detail_component_1, badge_edit_component_1, badge_new_component_1, staff_component_1, staff_service_1, staff_edit_component_1, staff_detail_component_1, staff_new_component_1, tier_component_1, tier_service_1, tier_edit_component_1, tier_detail_component_1, tier_new_component_1, bs_component_1, bs_service_1, bs_edit_component_1, bs_detail_component_1, bs_new_component_1, bcat_component_1, bcat_service_1, bcat_edit_component_1, bcat_new_component_1;
     var AppComponent;
     return {
         setters:[
@@ -82,6 +82,18 @@ System.register(['angular2/core', 'angular2/router', './main/main.component', '.
             },
             function (bs_new_component_1_1) {
                 bs_new_component_1 = bs_new_component_1_1;
+            },
+            function (bcat_component_1_1) {
+                bcat_component_1 = bcat_component_1_1;
+            },
+            function (bcat_service_1_1) {
+                bcat_service_1 = bcat_service_1_1;
+            },
+            function (bcat_edit_component_1_1) {
+                bcat_edit_component_1 = bcat_edit_component_1_1;
+            },
+            function (bcat_new_component_1_1) {
+                bcat_new_component_1 = bcat_new_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -99,7 +111,8 @@ System.register(['angular2/core', 'angular2/router', './main/main.component', '.
                             badge_service_1.BadgeService,
                             staff_service_1.StaffService,
                             tier_service_1.TierService,
-                            bs_service_1.BSService
+                            bs_service_1.BSService,
+                            bcat_service_1.BCatService
                         ]
                     }),
                     router_1.RouteConfig([
@@ -188,6 +201,21 @@ System.register(['angular2/core', 'angular2/router', './main/main.component', '.
                             path: '/bs/new',
                             name: 'BSNew',
                             component: bs_new_component_1.BSNewComponent,
+                        },
+                        {
+                            path: '/badgecat',
+                            name: 'BadgeCat',
+                            component: bcat_component_1.BCatComponent,
+                        },
+                        {
+                            path: '/bcat/edit/:id',
+                            name: 'BCatEdit',
+                            component: bcat_edit_component_1.BCatEditComponent,
+                        },
+                        {
+                            path: '/bcat/new',
+                            name: 'BCatNew',
+                            component: bcat_new_component_1.BCatNewComponent,
                         }
                     ]), 
                     __metadata('design:paramtypes', [])

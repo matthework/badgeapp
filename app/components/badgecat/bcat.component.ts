@@ -2,56 +2,42 @@ import {Component,OnInit,Inject} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 import {Router} from 'angular2/router';
-import {BadgeSet} from './bs';
+import {BadgeCat} from './bcat';
 import {Badge} from '../badge/badge';
-import {Tier} from '../tier/tier';
-import {BSEditComponent} from './bs-edit/bs-edit.component';
-import {BSDetailComponent} from './bs-detail/bs-detail.component';
-import {BSService} from './bs.service';
+import {BCatEditComponent} from './bcat-edit/bcat-edit.component';
+import {BCatService} from './bcat.service';
 import {BadgeService} from '../badge/badge.service';
-import {TierService} from '../tier/tier.service';
 import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 import {YesNoPipe} from '../pipe/yes-no-pipe';
 
 @Component({
-	selector: 'my-badgeset',
-	templateUrl: 'app/components/badgeset/bs.component.html',
-	styleUrls: ['app/components/badgeset/bs.component.css'],
-	directives: [BSEditComponent],
+	selector: 'my-badgecat',
+	templateUrl: 'app/components/badgecat/bcat.component.html',
+	styleUrls: ['app/components/badgecat/bcat.component.css'],
+	directives: [BCatEditComponent],
 	pipes: [FilterArrayPipe,YesNoPipe]
 })
 
-export class BSComponent implements OnInit {
+export class BCatComponent implements OnInit {
 
-	badgesets: BadgeSet[] = [];
+	badgecats: BadgeCat[] = [];
 	badges: Badge[] = [];
-	tiers: Tier[] = [];
-	selectedBadgeSet: BadgeSet;
+	selectedBadgeCat: BadgeCat;
 	active = false;
-	gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
-	desc = "";
-	level = 0;
-	showBS = false;
-	showCompare = false;
-	bsname1 = "";
-	bsname2 = "";
-	bsname3 = "";
 
 	constructor (
 		private _router: Router,
-		private _bsService: BSService,
-		private _badgeService: BadgeService,
-		private _tierService: TierService) {}
+		private _bcatService: BCatService,
+		private _badgeService: BadgeService) {}
 
 	ngOnInit() {
-		this.getBadgeSets();
+		this.getBadgeCats();
 		this.getBadges();
-		this.getTiers();
 	}
 
-	getBadgeSets() {
-		this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
-		if (this.badgesets == null) {
+	getBadgeCats() {
+		this._bcatService.getBadgeCats().subscribe(badgecats => { this.badgecats = badgecats});
+		if (this.badgecats == null) {
 			this.active = true;
 		}
 		// this.badgesets.sort(this.toCompare);
@@ -70,82 +56,36 @@ export class BSComponent implements OnInit {
 		this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
 	}
 
-	getTiers() {
-		this._tierService.getTiers().subscribe(tiers => { this.tiers = tiers});
+	toBadges() {
+		this._router.navigate(['Badges']);
 	}
 
-	onSelect(badgeset: BadgeSet) { 
-		this.selectedBadgeSet = badgeset;
+	onSelect(badgecat: BadgeCat) { 
+		this.selectedBadgeCat = badgecat;
 	}
 
-	toBSEdit(bsid:string) {
-		this._router.navigate(['BSEdit', { id: bsid}]);
+	toBCatEdit(bcatid:string) {
+		this._router.navigate(['BCatEdit', { id: bcatid}]);
 	}
 
-	toBSDetail(bsid:string) {
-		this._router.navigate(['BSDetail', { id: bsid}]);
+	addBadgeCat() {
+		this._router.navigate(['BCatNew']);
 	}
 
-	addBadgeSet() {
-		this._router.navigate(['BSNew']);
-	}
-
-	removeBadgeSet(id:string) {
-		this._bsService.deleteBadgeSet(id).subscribe();
+	removeBadgeCat(id:string) {
+		this._bcatService.deleteBadgeCat(id).subscribe();
 		location.reload();
 	}
 
-	deleteBadgeSetPop(id:string) {
-		var r = confirm("Are you sure you want to delete this BadgeSet ?");
+	deleteBadgeCatPop(id:string) {
+		var r = confirm("Are you sure you want to delete this Badge Category ?");
 		if (r == true) {
-			this.removeBadgeSet(id);
+			this.removeBadgeCat(id);
 		}
 	}
 
-	getPay(t:number, g:string) {
-		var pay = 0;
-		if (this.tiers != null && t != 0 && g != "") {
-			for (var i = 0; i < this.tiers.length; i++) { 
-				if (this.tiers[i].tier == t) {
-					pay = this.tiers[i].grades[this.gmap[g]];
-				}
-			}
-		}
-		return pay;
-	}
-
-	getDesc(b:string, l:number) {
-		this.desc = "";
-		if (this.badges != null && l > 0 && b != "") {
-			for (var i = 0; i < this.badges.length; i++) { 
-				if (this.badges[i].name == b) {
-					for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-						if (this.badges[i].badgelevels[j].level == l) {
-							this.desc = this.badges[i].badgelevels[j].desc;
-						}
-					}
-				}
-			}
-		}
-		return this.desc;
-	}
-
-	groupByTag(tag) {
-		var bsets = [];
-		if (this.badgesets != null) {
-			for (var i = 0; i < this.badgesets.length; i++) { 
-				if (this.badgesets[i].tags.indexOf(tag) != -1) {
-					this.badgesets[i].tags = [tag];
-					bsets.push(this.badgesets[i]);
-				}
-			}
-		}
-		this.badgesets = bsets;
-		this.showBS = true;
-	}
-
-	toBadgeSets() {
-		this._router.navigate(['BadgeSet']);
+	toBadgeCats() {
+		this._router.navigate(['BadgeCat']);
 		location.reload();
 	}
 
@@ -159,42 +99,6 @@ export class BSComponent implements OnInit {
 			}
 		}
 		this._router.navigate(['BadgeDetail', {id:bid}]);
-	}
-
-	getComBS() {
-		if (this.badgesets != null) {
-			this.bsname1 = this.badgesets[0].name;
-			this.bsname2 = this.badgesets[0].name;
-			this.bsname3 = this.badgesets[0].name;
-		}else {
-			this.bsname1 = "";
-			this.bsname2 = "";
-			this.bsname3 = "";
-		}
-	}
-
-	getBS(bsname:string) {
-		var result: BadgeSet;
-		if (this.badgesets != null) {
-			for (var i = 0; i < this.badgesets.length; i++) { 
-				if (this.badgesets[i].name == bsname) {
-					return this.badgesets[i];
-				}
-			}
-		}
-		return result;
-	}
-
-	checkCore(bs:BadgeSet,b:string) {
-		var result = "";
-		if (bs != null) {
-			for (var i = 0; i < bs.corebadges.length; i++) { 
-				if (bs.corebadges[i].badge == b) {
-					result = " ** ";
-				}
-			}
-		}
-		return result;
 	}
 
 }

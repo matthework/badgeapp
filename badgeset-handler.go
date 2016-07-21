@@ -56,6 +56,13 @@ func updateBadgeSet(w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
+	var bgs []BadgeGroup
+	for i := range badgeset.BadgeGroups {
+		if badgeset.BadgeGroups[i].Badge != "" && badgeset.BadgeGroups[i].Level != 0 {
+			bgs = append(bgs, badgeset.BadgeGroups[i])
+		}
+	}
+	badgeset.BadgeGroups = bgs
 	badgeset.TimeStamp = time.Now()
 	if id != "" {
 		if err := updateBadgeSetByID(id,badgeset); err != nil {

@@ -8,7 +8,7 @@ import (
 type BadgeCat struct {
 	ID      bson.ObjectId	`json:"_id,omitempty" bson:"_id,omitempty"`
 	Name	string	`json:"name,omitempty" bson:"name"`
-	Root	string	`json:"root,omitempty" bson:"root"`
+	Root	string	`json:"root" bson:"root"`
 	BGroups	[]BGroup	`json:"bgroups" bson:"bgroups"`
 	Others []string 	`json:"others" bson:"others"`	
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
@@ -80,9 +80,9 @@ func updateBadgeCatByID(id string, newBadgeCat BadgeCat) (err error) {
 	fQuery := bson.M{"_id": idoi}
 	result := BadgeCat{}
     err = collection.Find(fQuery).One(&result)
-    if len(newBadgeCat.BGroups) == 0 {
-    	newBadgeCat.BGroups = result.BGroups
-    }
+    // if len(newBadgeCat.BGroups) == 0 {
+    // 	newBadgeCat.BGroups = result.BGroups
+    // }
     if err == nil {
 		change := bson.M{"$set": newBadgeCat}
 		err = collection.Update(fQuery, change)

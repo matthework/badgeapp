@@ -34,22 +34,5 @@
 </table>
 </div>
 
-<div *ngIf="showBCat">
-<table class="table-bcat">
-   <tr>
-      <th class="th-bcat">Badge Category</th>
-      <th class="th-subcat">Sub Category</th>
-      <th class="th-badge">Badges</th>
-      <th class="th-last"></th>
-   </tr>
-   <tr *ngFor="#badge of badges | filter:query">
-      <td (click)="onSelect(badge)">Badge Cat</td>
-      <td (click)="onSelect(badge)">Sub Cat</td>
-      <td (click)="onSelect(badge);toDetail()" class="badge">{{badge.name}}</td>
-      <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgePop(badge._id)">X</button><button class="button-s-e" (click)="toEdit(badge._id)">E</button></td>
-   </tr>
-</table>
-</div>
-
 
 

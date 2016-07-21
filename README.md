@@ -54,6 +54,9 @@ $ godep save ./...
 // create Procfile of commands to run on Heroku  
 $ echo 'web: badge' > Procfile  
 
+// heroku login  
+$ heroku login  
+
 // run locally  
 $ heroku local  
 $ heroku local web  

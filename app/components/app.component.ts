@@ -26,6 +26,11 @@ import {BSEditComponent} from './badgeset/bs-edit/bs-edit.component';
 import {BSDetailComponent} from './badgeset/bs-detail/bs-detail.component';
 import {BSNewComponent} from './badgeset/bs-new/bs-new.component';
 
+import {BCatComponent} from './badgecat/bcat.component';
+import {BCatService} from './badgecat/bcat.service';
+import {BCatEditComponent} from './badgecat/bcat-edit/bcat-edit.component';
+import {BCatNewComponent} from './badgecat/bcat-new/bcat-new.component';
+
 @Component({
     selector: 'my-app',
     templateUrl: 'app/components/app.component.html',
@@ -36,7 +41,8 @@ import {BSNewComponent} from './badgeset/bs-new/bs-new.component';
         BadgeService,
         StaffService,
         TierService,
-        BSService
+        BSService,
+        BCatService
     ]
 })
 @RouteConfig([
@@ -125,6 +131,21 @@ import {BSNewComponent} from './badgeset/bs-new/bs-new.component';
         path: '/bs/new',
         name: 'BSNew',
         component: BSNewComponent,
+    },
+    {
+        path: '/badgecat',
+        name: 'BadgeCat',
+        component: BCatComponent,
+    },
+    {
+        path: '/bcat/edit/:id',
+        name: 'BCatEdit',
+        component: BCatEditComponent,
+    },
+    {
+        path: '/bcat/new',
+        name: 'BCatNew',
+        component: BCatNewComponent,
     }
 ])
 export class AppComponent{
