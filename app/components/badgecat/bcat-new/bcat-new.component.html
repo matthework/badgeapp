@@ -1,0 +1,31 @@
+
+
+<h2>Add New Badge Category</h2><br>
+
+<label>*Subcategory: </label>
+<input class="input-name" type="text" [(ngModel)]="newBCat.name" placeholder="Categroy"><br>
+
+<br>
+<label>Category: </label>
+<input class="input-root" type="text" [(ngModel)]="newBCat.root" placeholder="Main Categroy">
+
+<br>
+<div *ngFor="#i of nums">
+<br>
+<label>Badge: </label>
+<select class="select-badge" [(ngModel)]="newBCat.bgroups[i].badge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+<label class="label-level">Level: </label>
+<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="#lo of getLevelsOptions(newBCat.bgroups[i].badge)" [value]="lo">{{lo}}</option></select><button class="button-s-add" (click)="addLevel(i,newLevel)">+</button><br>
+<label></label>
+<text *ngFor="#level of newBCat.bgroups[i].levels">Level: {{level}} <button class="button-s-delete" (click)="deleteLevel(i,level)">-</button></text><br>
+<br>
+</div>
+
+<button class="button-add" [disabled]="!newBCat.name" (click)="addBadgeCat()">Save</button>
+<button class="button-cancel" (click)="goBack()">Cancel</button>
+<br>
+<br>
+<br>
+
+
+

@@ -12,8 +12,6 @@ import {Validators,FormBuilder,ControlGroup,AbstractControl,Control} from 'angul
 })
 
 export class BadgeNewComponent {
-  
-  newTag = "";
 
   newbls = [
             {level: 1, desc:""},
@@ -26,7 +24,7 @@ export class BadgeNewComponent {
             {level: 8, desc:""},
             {level: 9, desc:""}];
 
-  newBadge = {index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, tags: [], approved: false, inused: false};
+  newBadge = {index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, approved: false, inused: false};
 
   constructor(
     private _badgeService: BadgeService, 
@@ -51,15 +49,6 @@ export class BadgeNewComponent {
   toBadges() {
     this._router.navigate(['Badges']);
     // location.reload();
-  }
-
-  addTag(tag:string) {
-    this.newBadge.tags.push(tag.toUpperCase());
-  }
-
-  deleteTag(tag:string) {
-    let index = this.newBadge.tags.indexOf(tag);
-    this.newBadge.tags.splice(index,1);
   }
   
   goBack() {

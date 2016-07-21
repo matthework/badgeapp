@@ -66,6 +66,12 @@ func addRoutes() {
 	router.HandleFunc("/api/bs/update/{id}", updateBadgeSet).Methods("POST")
 	router.HandleFunc("/api/bs/remove/{id}", removeBadgeSet).Methods("POST")
 
+	router.HandleFunc("/api/bcats", viewBadgeCats).Methods("GET")
+	router.HandleFunc("/api/bcat/edit/{id}", viewFindBadgeCatByID).Methods("GET")
+	router.HandleFunc("/api/bcat/new", addNewBadgeCat).Methods("POST")
+	router.HandleFunc("/api/bcat/update/{id}", updateBadgeCat).Methods("POST")
+	router.HandleFunc("/api/bcat/remove/{id}", removeBadgeCat).Methods("POST")
+
 	http.Handle("/api/", router)
 
 }

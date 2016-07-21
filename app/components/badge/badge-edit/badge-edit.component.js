@@ -106,13 +106,6 @@ System.register(['angular2/core', 'angular2/router', '../badge.service'], functi
                         this.removeBadgeLevel(selectedLevel);
                     }
                 };
-                BadgeEditComponent.prototype.addTag = function (tag) {
-                    this.badge.tags.push(tag.toUpperCase());
-                };
-                BadgeEditComponent.prototype.deleteTag = function (tag) {
-                    var index = this.badge.tags.indexOf(tag);
-                    this.badge.tags.splice(index, 1);
-                };
                 BadgeEditComponent.prototype.goBack = function () {
                     window.history.back();
                 };

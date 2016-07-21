@@ -88,9 +88,9 @@ func updateBadgeSetByID(id string, newBadgeSet BadgeSet) (err error) {
 	fQuery := bson.M{"_id": idoi}
 	result := BadgeSet{}
     err = collection.Find(fQuery).One(&result)
-    if len(newBadgeSet.BadgeGroups) == 0 {
-    	newBadgeSet.BadgeGroups = result.BadgeGroups
-    }
+    // if len(newBadgeSet.BadgeGroups) == 0 {
+    // 	newBadgeSet.BadgeGroups = result.BadgeGroups
+    // }
     if err == nil {
 		change := bson.M{"$set": newBadgeSet}
 		err = collection.Update(fQuery, change)
