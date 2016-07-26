@@ -7,6 +7,13 @@ declare var Auth0Lock: any;
 
 @Injectable()
 export class AuthService {
+
+  adminList = [
+    "matt.wang@propellerhead.co.nz",
+    "andrew.weston@propellerhead.co.nz",
+    "jonathan.cupples@propellerhead.co.nz"
+    ]
+    
   // Configure Auth0
   lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
     theme: {
@@ -58,7 +65,7 @@ export class AuthService {
 
   public isAdmin() {
     // Check if there's an admin account
-    if (tokenNotExpired() && this.userProfile.email=="matt.wang@propellerhead.co.nz") {
+    if (tokenNotExpired() && this.adminList.indexOf(this.userProfile.email)!=-1) {
       return true;
     }else {
       return false;
