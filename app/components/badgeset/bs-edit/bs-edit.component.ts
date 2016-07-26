@@ -1,9 +1,7 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
 import {BadgeSet,BadgeGroup} from '../bs';
 import {BSService} from '../bs.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {Tier} from '../../tier/tier';
 import {BadgeService} from '../../badge/badge.service';
@@ -28,24 +26,32 @@ export class BSEditComponent implements OnInit {
   prerequisite = false;
   coreBadge: BadgeGroup;
   total =0;
+  sub: any;
+  id: string;
 
   constructor(
     private _bsService: BSService,
     private _badgeService: BadgeService,
     private _tierService: TierService,
     private _router: Router,
-    private _routeParams: RouteParams) {}
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
     this.getBadgeSet();
     this.getBadges();
     this.getTiers();
   }
 
+  ngOnDestroy() {
+      this.sub.unsubscribe();
+  }
+
   getBadgeSet() {
-    let id = this._routeParams.get('id');
-    console.log('id from _routeParams: ', id); 
-    this._bsService.getBadgeSet(id).subscribe(badgeset => {this.badgeset = badgeset});
+    console.log('id from _routeParams: ', this.id); 
+    this._bsService.getBadgeSet(this.id).subscribe(badgeset => {this.badgeset = badgeset});
   }
 
   getBadges() {
@@ -57,7 +63,7 @@ export class BSEditComponent implements OnInit {
   }
 
   toBadgeSets() {
-    this._router.navigate(['BadgeSet']);
+    this._router.navigate(['/badgeset']);
     // location.reload();
   }
 
@@ -76,9 +82,8 @@ export class BSEditComponent implements OnInit {
     console.log('you submitted total: ', this.total); 
     this.badgeset.badgegroups.sort(this.toCompare);
     this.badgeset.corebadges.sort(this.toCompare);
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badgeset)
-    this._bsService.updateBadgeSet(id,value).subscribe();
+    this._bsService.updateBadgeSet(this.id,value).subscribe();
     console.log('you submitted value: ', value); 
     this.toBadgeSets();
   }
@@ -93,7 +98,7 @@ export class BSEditComponent implements OnInit {
   }
   
   addBadgeSet() {
-    this._router.navigate(['BSNew']);
+    this._router.navigate(['/bs/new']);
   }
 
   addBadgeGroup() {
@@ -106,7 +111,6 @@ export class BSEditComponent implements OnInit {
     this.badgeset.badgegroups.push({badge: this.newBadge, level: this.newLevel});
     // this.badgeset.badgegroups.sort(this.toCompare);
     // this.badgeset.corebadges.sort(this.toCompare);
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badgeset)
     // this._bsService.updateBadgeSet(id,value).subscribe();
     console.log('you submitted value: ', value);
@@ -115,8 +119,7 @@ export class BSEditComponent implements OnInit {
   }
 
   removeBadgeSet() {
-    let id = this._routeParams.get('id');
-    this._bsService.deleteBadgeSet(id).subscribe();
+    this._bsService.deleteBadgeSet(this.id).subscribe();
     this.toBadgeSets();
   }
 
@@ -150,7 +153,6 @@ export class BSEditComponent implements OnInit {
   removeBadgeGroup(selectedGroup: BadgeGroup) {
     let index = this.badgeset.badgegroups.indexOf(selectedGroup);
     this.badgeset.badgegroups.splice(index,1);
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badgeset)
     // this._bsService.updateBadgeSet(id,value).subscribe();
     console.log('you submitted value: ', value);
@@ -250,10 +252,6 @@ export class BSEditComponent implements OnInit {
   removeCoreBadge(selectedCoreBadge:BadgeGroup) {
     let index = this.badgeset.corebadges.indexOf(selectedCoreBadge);
     this.badgeset.corebadges.splice(index,1);
-    // let id = this._routeParams.get('id');
-    // let value = JSON.stringify(this.badgeset)
-    // this._bsService.updateBadgeSet(id,value).subscribe();
-    // console.log('you submitted value: ', value);
   }
 
   addCoreBadge(cb:BadgeGroup) {

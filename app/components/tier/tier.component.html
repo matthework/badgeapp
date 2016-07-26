@@ -29,7 +29,7 @@
 	<th class="th-expert">Expertise</th>
 	<th class="th-last"></th>
 	</tr>
-	<tr *ngFor="#tier of tiers | filter:query">
+	<tr *ngFor="let tier of tiers | filter:query">
 	<td class="tiers" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</td>
 	<td class="td-ga" (click)="onSelect(tier)">${{tier.grades[0]}}K</td>
 	<td class="td-gb" (click)="onSelect(tier)">${{tier.grades[1]}}K</td>
@@ -56,35 +56,35 @@
 	<th class="th-bs">F</th>
 	<th class="th-last"></th>
 	</tr>
-	<tr *ngFor="#tier of tiers | filter:query">
+	<tr *ngFor="let tier of tiers | filter:query">
 	<td class="tiers" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</td>
 	<td class="td-bs" (click)="onSelect(tier)">
-	<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[0])">
+	<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[0])">
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>
 	<td class="td-bs" (click)="onSelect(tier)">		
-	<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[1])">
+	<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[1])">
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>
 	<td class="td-bs" (click)="onSelect(tier)">		
-	<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[2])">
+	<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[2])">
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>
 	<td class="td-bs" (click)="onSelect(tier)">
-	<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[3])">
+	<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[3])">
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>
 	<td class="td-bs" (click)="onSelect(tier)">		
-	<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[4])">
+	<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[4])">
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>
 	<td class="td-bs" (click)="onSelect(tier)">		
-	<div *ngFor="#bs of getTierGradeBS(tier.tier,gmap[5])">
+	<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[5])">
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>

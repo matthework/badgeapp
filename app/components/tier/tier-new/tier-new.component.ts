@@ -1,9 +1,7 @@
-import {Component} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {Tier} from '../tier';
 import {TierService} from '../tier.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl,Control} from 'angular2/common';
 
 @Component({
   selector: 'my-tier-new',
@@ -19,8 +17,7 @@ export class TierNewComponent {
 
   constructor(
       private _tierService: TierService, 
-      private _router: Router,
-      private _routeParams: RouteParams) {}
+      private _router: Router) {}
 
   addTier() {
     // this.newTier.grades = this.newTier.grades.filter(this.checkEmpty);
@@ -31,7 +28,7 @@ export class TierNewComponent {
   }
 
   toTiers() {
-    this._router.navigate(['Tiers']);
+    this._router.navigate(['/tiers']);
     // location.reload();
   }
 

@@ -20,7 +20,7 @@
 	<label>InUsed: </label>
 	<input type="checkbox" [(ngModel)]="badge.inused" placeholder="InUsed" /><br>
 
-	<div class="badgelevel-block" *ngFor="#badgelevel of badge.badgelevels">
+	<div class="badgelevel-block" *ngFor="let badgelevel of badge.badgelevels">
 	  	<label>Level {{badgelevel.level}}:</label>
 		<textarea class="ta-small" [(ngModel)]="badgelevel.desc" placeholder="Description"></textarea>
 		<button class="button-s-delete" (click)="deleteBadgeLevelPop(badgelevel)">-</button><br>

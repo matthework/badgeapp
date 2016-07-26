@@ -4,7 +4,7 @@
 	
 	<br>
 	<label>Badge Sets: </label>
-	<text *ngFor="#bs of getTierBS(tier.tier)">
+	<text *ngFor="let bs of getTierBS(tier.tier)">
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}, </uli>
 	</text><br>
 
@@ -20,11 +20,11 @@
 		  <th class="th-pay">$$</th>
 		  <th class="th-bs">Badge Set</th>
 		</tr>
-		<tr *ngFor="#i of gradesIndex">
+		<tr *ngFor="let i of gradesIndex">
 			<td class="td-grade">{{gmap[i]}}</td>
 			<td class="td-pay">${{tier.grades[i]}}K</td>
 			<td class="td-bs">
-				<div *ngFor="#bs of getTierGradeBS(tier.tier, gmap[i])">
+				<div *ngFor="let bs of getTierGradeBS(tier.tier, gmap[i])">
 					<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 				</div>
       	</td>

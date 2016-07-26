@@ -1,6 +1,8 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {AppComponent} from './components/app.component';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {HTTP_PROVIDERS} from '@angular/http';
 
-bootstrap(AppComponent, [ROUTER_PROVIDERS, HTTP_PROVIDERS]);
+import {AppComponent} from './components/app.component';
+import {appRouterProviders}   from './components/app.routes';
+
+
+bootstrap(AppComponent, [appRouterProviders, HTTP_PROVIDERS]);

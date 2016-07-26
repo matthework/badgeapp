@@ -1,5 +1,4 @@
-import {Component} from 'angular2/core';
-// import {$WebSocket} from 'angular2-websocket/angular2-websocket';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'my-main',
@@ -8,5 +7,5 @@ import {Component} from 'angular2/core';
 })
 
 export class  MainComponent {
-
+	
 }

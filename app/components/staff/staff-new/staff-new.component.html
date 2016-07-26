@@ -29,12 +29,12 @@
 <input class="input-others" type="text" [(ngModel)]="newStaff.others" placeholder="Others" /><br> -->
 
 <br>
-<div *ngFor="#i of nums">
+<div *ngFor="let i of nums">
 <br>
 <label>Badge: </label>
-<select class="select-badge" [(ngModel)]="newStaff.badgegroups[i].badge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+<select class="select-badge" [(ngModel)]="newStaff.badgegroups[i].badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 <label class="label-level">Level: </label>
-<select class="select-level" [(ngModel)]="newStaff.badgegroups[i].level"><option *ngFor="#lo of getLevelsOptions(newStaff.badgegroups[i].badge)" [value]="lo">{{lo}}</option></select><br>
+<select class="select-level" [(ngModel)]="newStaff.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newStaff.badgegroups[i].badge)" [value]="lo">{{lo}}</option></select><br>
 <label>Description: </label>
 <textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newStaff.badgegroups[i].badge,newStaff.badgegroups[i].level)}}</textarea><br>
 </div>
@@ -44,3 +44,6 @@
 <br>
 <br>
 <br>
+
+
+

@@ -18,7 +18,7 @@
 	<text>Need at least {{badgeset.numbadges}} out of {{badgeset.badgegroups.length}} Badges to achieve this Badge Set. (Core Badges are required if any.)</text><br>
 
 	<label>Core Badges: </label>
-	<text *ngFor="#coreb of badgeset.corebadges">{{coreb.badge}} - {{coreb.level}}, </text><br>
+	<text *ngFor="let coreb of badgeset.corebadges">{{coreb.badge}} - {{coreb.level}}, </text><br>
 
 	<label>InUsed: </label>
 	<text>{{badgeset.inused | yes_no}}</text><br>
@@ -32,7 +32,7 @@
 		  <th class="th-desc">Description</th>
 		  <th class="th-core">Core Badge</th>
 		</tr>
-		<tr *ngFor="#badgegroup of badgeset.badgegroups">
+		<tr *ngFor="let badgegroup of badgeset.badgegroups">
 			<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
 			<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
 			<td class="td-core">{{checkCore(badgegroup.badge)}}</td>

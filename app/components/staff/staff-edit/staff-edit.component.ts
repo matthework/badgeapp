@@ -1,9 +1,8 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+
 import {Staff,BadgeGroup} from '../staff';
 import {StaffService} from '../staff.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 
@@ -15,30 +14,36 @@ import {BadgeService} from '../../badge/badge.service';
 
 export class StaffEditComponent implements OnInit {
 
-    // title: string = "Staff Details";
     staff: Staff;
     badges: Badge[] = [];
     active = false;
     newBadge = "";
     newLevel = 0;
     brief = 0;
+    sub: any;
+    id: string;
 
     constructor(
         private _staffService: StaffService, 
         private _badgeService: BadgeService,
         private _router: Router,
-        private _routeParams: RouteParams) {}
+        private route: ActivatedRoute) {}
 
     ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.id = params['id'];
+        });
         this.getStaff();
         this.getBadges();
     }
 
+    ngOnDestroy() {
+      this.sub.unsubscribe();
+    }
 
     getStaff() {
-        let id = this._routeParams.get('id');
-        console.log('id from _routeParams: ', id); 
-        this._staffService.getStaff(id).subscribe((staff) => {this.staff = staff;});
+        console.log('id from _routeParams: ', this.id); 
+        this._staffService.getStaff(this.id).subscribe((staff) => {this.staff = staff;});
     }
 
     getBadges() {
@@ -46,7 +51,7 @@ export class StaffEditComponent implements OnInit {
     }
 
     toStaffs() {
-        this._router.navigate(['Staffs']);
+        this._router.navigate(['/staffs']);
         // location.reload();
     }
 
@@ -58,21 +63,19 @@ export class StaffEditComponent implements OnInit {
         if (this.staff.salary == "") {
             this.staff.salary = "$";
         }
-        let id = this._routeParams.get('id');
         let value = JSON.stringify(this.staff)
-        this._staffService.updateStaff(id,value).subscribe();
+        this._staffService.updateStaff(this.id,value).subscribe();
         console.log('you submitted value: ', value); 
         this.toStaffs();
     }
 
     addStaff() {
-        this._router.navigate(['StaffNew']);
+        this._router.navigate(['/staff/new']);
     }
 
     addBadgeGroup() {
         this.newLevel = +this.newLevel;
         this.staff.badgegroups.push({badge: this.newBadge, level: this.newLevel});
-        let id = this._routeParams.get('id');
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
@@ -81,8 +84,7 @@ export class StaffEditComponent implements OnInit {
     }
 
     removeStaff() {
-        let id = this._routeParams.get('id');
-        this._staffService.deleteStaff(id).subscribe();
+        this._staffService.deleteStaff(this.id).subscribe();
         this.toStaffs();
     }
 
@@ -109,7 +111,6 @@ export class StaffEditComponent implements OnInit {
     removeBadgeGroup(selectedGroup: BadgeGroup) {
         let index = this.staff.badgegroups.indexOf(selectedGroup);
         this.staff.badgegroups.splice(index,1);
-        let id = this._routeParams.get('id');
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);

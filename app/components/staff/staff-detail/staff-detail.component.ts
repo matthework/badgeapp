@@ -1,9 +1,8 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+
 import {Staff,BadgeGroup} from '../staff';
 import {StaffService} from '../staff.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 import {BadgeSet} from '../../badgeset/bs';
@@ -26,6 +25,8 @@ export class StaffDetailComponent implements OnInit {
   brief = 0;
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   sortStaffBS = [];
+  sub: any;
+  id: string;
 
   constructor(
     private _staffService: StaffService, 
@@ -33,19 +34,25 @@ export class StaffDetailComponent implements OnInit {
     private _bsService: BSService,  
     private _tierService: TierService,
     private _router: Router,
-    private _routeParams: RouteParams) {}
+    private route: ActivatedRoute) {}
   
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
     this.getStaff();
     this.getBadges();
     this.getBadgeSets();
     this.getTiers();
   }
 
+  ngOnDestroy() {
+      this.sub.unsubscribe();
+  }
+
   getStaff() {
-    let id = this._routeParams.get('id');
-    console.log('id from _routeParams: ', id); 
-    this._staffService.getStaff(id).subscribe((staff) => {this.staff = staff;});
+    console.log('id from _routeParams: ', this.id); 
+    this._staffService.getStaff(this.id).subscribe((staff) => {this.staff = staff;});
   }
 
   getBadges() {
@@ -61,12 +68,12 @@ export class StaffDetailComponent implements OnInit {
   }
 
   toStaffs() {
-    this._router.navigate(['Staffs']);
+    this._router.navigate(['/staffs']);
     // location.reload();
   }
 
   toStaffEdit(sid:string) {
-    this._router.navigate(['StaffEdit', { id: sid}]);
+    this._router.navigate(['/staff/edit',sid]);
   }
 
   getDesc(b:string, l:number) {
@@ -94,7 +101,7 @@ export class StaffDetailComponent implements OnInit {
         }
       }
     }
-    this._router.navigate(['BadgeDetail', {id:bid}]);
+    this._router.navigate(['/badge/detail',bid]);
   }
 
   getStaffBS(sbgs:BadgeGroup[]) {
@@ -194,7 +201,7 @@ export class StaffDetailComponent implements OnInit {
   }
 
   toBSDetail(bsid:string){
-    this._router.navigate(['BSDetail', { id: bsid}]);
+    this._router.navigate(['/bs/detail',bsid]);
   }
 
   goBack() {

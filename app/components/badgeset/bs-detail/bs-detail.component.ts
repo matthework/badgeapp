@@ -1,9 +1,7 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
 import {BadgeSet,BadgeGroup} from '../bs';
 import {BSService} from '../bs.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 import {Tier} from '../../tier/tier';
@@ -27,24 +25,32 @@ export class BSDetailComponent implements OnInit {
   newLevel = 0;
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   gradesOptions =["A", "B", "C", "D", "E", "F"]; 
+  sub: any;
+  id: string;
 
   constructor(
     private _bsService: BSService,
     private _badgeService: BadgeService,
     private _tierService: TierService,
     private _router: Router,
-    private _routeParams: RouteParams) {}
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
     this.getBadgeSet();
     this.getBadges();
     this.getTiers();
   }
 
+  ngOnDestroy() {
+      this.sub.unsubscribe();
+  }
+
   getBadgeSet() {
-    let id = this._routeParams.get('id');
-    console.log('id from _routeParams: ', id); 
-    this._bsService.getBadgeSet(id).subscribe(badgeset => {this.badgeset = badgeset});
+    console.log('id from _routeParams: ', this.id); 
+    this._bsService.getBadgeSet(this.id).subscribe(badgeset => {this.badgeset = badgeset});
   }
 
   getBadges() {
@@ -56,12 +62,12 @@ export class BSDetailComponent implements OnInit {
   }
 
   toBadgeSets() {
-    this._router.navigate(['BadgeSet']);
+    this._router.navigate(['/badgeset']);
     // location.reload();
   }
 
   toBSEdit(bsid:string) {
-    this._router.navigate(['BSEdit', { id: bsid}]);
+    this._router.navigate(['/bs/edit',bsid]);
   }
 
   getPay(t:number, g:string) {
@@ -150,7 +156,7 @@ export class BSDetailComponent implements OnInit {
             }
         }
     }
-    this._router.navigate(['BadgeDetail', {id:bid}]);
+    this._router.navigate(['/badge/detail',bid]);
   }
 
   goBack() {

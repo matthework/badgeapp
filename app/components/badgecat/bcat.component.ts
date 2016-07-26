@@ -1,7 +1,6 @@
-import {Component,OnInit,Inject} from 'angular2/core';
-import {Http, Response} from 'angular2/http';
-import {Observable} from 'rxjs/Rx';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Http} from '@angular/http';
+import {Router} from '@angular/router';
 import {BadgeCat} from './bcat';
 import {Badge} from '../badge/badge';
 import {BCatEditComponent} from './bcat-edit/bcat-edit.component';
@@ -57,7 +56,7 @@ export class BCatComponent implements OnInit {
 	}
 
 	toBadges() {
-		this._router.navigate(['Badges']);
+		this._router.navigate(['/badges']);
 	}
 
 	onSelect(badgecat: BadgeCat) { 
@@ -65,11 +64,11 @@ export class BCatComponent implements OnInit {
 	}
 
 	toBCatEdit(bcatid:string) {
-		this._router.navigate(['BCatEdit', { id: bcatid}]);
+		this._router.navigate(['/bcat/edit',bcatid]);
 	}
 
 	addBadgeCat() {
-		this._router.navigate(['BCatNew']);
+		this._router.navigate(['/bcat/new']);
 	}
 
 	removeBadgeCat(id:string) {
@@ -85,7 +84,7 @@ export class BCatComponent implements OnInit {
 	}
 
 	toBadgeCats() {
-		this._router.navigate(['BadgeCat']);
+		this._router.navigate(['/badgecat']);
 		location.reload();
 	}
 
@@ -98,7 +97,7 @@ export class BCatComponent implements OnInit {
 				}
 			}
 		}
-		this._router.navigate(['BadgeDetail', {id:bid}]);
+		this._router.navigate(['/badge/detail',bid]);
 	}
 
 }

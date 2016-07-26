@@ -1,9 +1,7 @@
-import {Component} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {BadgeSet,BadgeGroup} from '../bs';
 import {BSService} from '../bs.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl,Control} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {Tier} from '../../tier/tier';
 import {BadgeService} from '../../badge/badge.service';
@@ -47,8 +45,7 @@ export class BSNewComponent{
     private _bsService: BSService, 
     private _badgeService: BadgeService,
     private _tierService: TierService,
-    private _router: Router,
-    private _routeParams: RouteParams) {}
+    private _router: Router) {}
 
   ngOnInit() {
     this.getBadges();
@@ -97,7 +94,7 @@ export class BSNewComponent{
   }
 
   toBadgeSets() {
-    this._router.navigate(['BadgeSet']);
+    this._router.navigate(['/badgeset']);
     // location.reload();
   }
 

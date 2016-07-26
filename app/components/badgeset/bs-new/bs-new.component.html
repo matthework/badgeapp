@@ -9,13 +9,13 @@
 <input class="input-name" type="text" [(ngModel)]="newBS.name" placeholder="Name"><br>
 
 <label>Tags: </label>
-<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder="Tags"><button class="button-s-add" (click)="addTag(newTag)">+</button><text *ngFor="#tag of newBS.tags">{{tag}} <button class="button-s-delete" (click)="deleteTag(tag)">-</button></text><br>
+<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder="Tags"><button class="button-s-add" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="button-s-delete" (click)="deleteTag(tag)">-</button></text><br>
 
 <label>Tier: </label>
-<select class="select-tier" [(ngModel)]="newBS.tier"><option *ngFor="#to of getTiersOptions()" [value]="to">{{to}}</option></select>
+<select class="select-tier" [(ngModel)]="newBS.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 
 <label class="label-grade">Grade: </label>
-<select class="select-grade" [(ngModel)]="newBS.grade"><option *ngFor="#go of gradesOptions" [value]="go">{{go}}</option></select><br>
+<select class="select-grade" [(ngModel)]="newBS.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select><br>
 
 <label>$$: </label>
 <text>${{getPay(newBS.tier,newBS.grade)}}K</text><br>
@@ -28,12 +28,12 @@
 <input type="checkbox" [(ngModel)]="newBS.approved" placeholder="Approved" /><br> -->
 
 <br>
-<div *ngFor="#i of nums">
+<div *ngFor="let i of nums">
 <br>
 <label>Badge: </label>
-<select class="select-badge" [(ngModel)]="newBS.badgegroups[i].badge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+<select class="select-badge" [(ngModel)]="newBS.badgegroups[i].badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 <label class="label-level">Level: </label>
-<select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="#lo of getLevelsOptions(newBS.badgegroups[i].badge)" [value]="lo">{{lo}}</option></select><br>
+<select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].badge)" [value]="lo">{{lo}}</option></select><br>
 <label>Description: </label>
 <textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBS.badgegroups[i].badge,newBS.badgegroups[i].level)}}</textarea><br>
 </div>
@@ -46,13 +46,13 @@
 	<label>Numbers: </label>
 	<input class="input-numBadges" type="number" [(ngModel)]="numBadges" placeholder="Number of Badges"> Require {{numBadges}} out of {{total}} Badges<br>
 
-	<div *ngFor="#corebadge of newBS.corebadges">
+	<div *ngFor="let corebadge of newBS.corebadges">
 	<label>CoreBadge: </label>
 	<input readonly class="input-corebadge" type="text" placeholder="{{corebadge.badge}} - {{corebadge.level}}"><button class="button-c-delete" (click)="deleteCoreBadgePop(corebadge)">-</button><br>
 	</div>
 
 	<label>Add New: </label>
-	<select class="select-badge" [(ngModel)]="coreBadge"><option *ngFor="#cbo of getCoreBadgesOptions(newBS.badgegroups)" [value]="cbo">{{cbo}}</option></select><button class="button-s-add" (click)="addCoreBadge(coreBadge)">+</button><br>
+	<select class="select-badge" [(ngModel)]="coreBadge"><option *ngFor="let cbo of getCoreBadgesOptions(newBS.badgegroups)" [value]="cbo">{{cbo}}</option></select><button class="button-s-add" (click)="addCoreBadge(coreBadge)">+</button><br>
 
 	<button (click)="addNumBadges();prerequisite=false">Done</button>
 	<!-- <button class="button-l-cancel" (click)="prerequisite=false">Cancel</button><br> -->

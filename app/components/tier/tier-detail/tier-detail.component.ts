@@ -1,9 +1,8 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+
 import {Tier} from '../tier';
 import {TierService} from '../tier.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 import {BadgeSet} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
 
@@ -19,22 +18,30 @@ export class TierDetailComponent implements OnInit {
   badgesets: BadgeSet[] = [];
   gradesIndex =[0, 1, 2, 3, 4, 5]; 
   gmap = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F"};
+  sub: any;
+  id: string;
 
   constructor(
-      private _tierService: TierService, 
-      private _bsService: BSService,
-      private _router: Router,
-      private _routeParams: RouteParams) {}
+    private _tierService: TierService, 
+    private _bsService: BSService,
+    private _router: Router,
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
     this.getTier();
-    this.getBadgeSets()
+    this.getBadgeSets();
+  }
+
+  ngOnDestroy() {
+      this.sub.unsubscribe();
   }
 
   getTier() {
-    let id = this._routeParams.get('id');
-    console.log('id from _routeParams: ', id); 
-    this._tierService.getTier(id).subscribe((tier) => {this.tier = tier;});
+    console.log('id from _routeParams: ', this.id); 
+    this._tierService.getTier(this.id).subscribe((tier) => {this.tier = tier;});
   }
 
   getBadgeSets() {
@@ -42,12 +49,12 @@ export class TierDetailComponent implements OnInit {
   }
 
   toTiers() {
-    this._router.navigate(['Tiers']);
+    this._router.navigate(['/tiers']);
     // location.reload();
   }
 
   toTierEdit(tid:string) {
-    this._router.navigate(['TierEdit', { id: tid}]);
+    this._router.navigate(['/tier/edit',tid]);
   }
 
   getTierBS(t:number) {
@@ -71,7 +78,7 @@ export class TierDetailComponent implements OnInit {
   }
 
   toBSDetail(bsid:string){
-    this._router.navigate(['BSDetail', { id: bsid}]);
+    this._router.navigate(['/bs/detail',bsid]);
   }
 
   goBack() {

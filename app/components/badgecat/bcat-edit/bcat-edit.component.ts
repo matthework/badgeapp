@@ -1,9 +1,7 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
 import {BadgeCat,BGroup} from '../bcat';
 import {BCatService} from '../bcat.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 
@@ -20,23 +18,31 @@ export class BCatEditComponent implements OnInit {
   active = false;
   newBadge = "";
   newLevels = [];
-  newBG = {badge: "", levels: []}
+  newBG = {badge: "", levels: []};
+  sub: any;
+  id: string;
 
   constructor(
     private _bcatService: BCatService,
     private _badgeService: BadgeService,
     private _router: Router,
-    private _routeParams: RouteParams) {}
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
     this.getBadgeCat();
     this.getBadges();
   }
 
+  ngOnDestroy() {
+      this.sub.unsubscribe();
+  }
+
   getBadgeCat() {
-    let id = this._routeParams.get('id');
-    console.log('id from _routeParams: ', id); 
-    this._bcatService.getBadgeCat(id).subscribe(badgecat => {this.badgecat = badgecat});
+    console.log('id from _routeParams: ', this.id); 
+    this._bcatService.getBadgeCat(this.id).subscribe(badgecat => {this.badgecat = badgecat});
   }
 
   getBadges() {
@@ -44,7 +50,7 @@ export class BCatEditComponent implements OnInit {
   }
 
   toBadgeCats() {
-    this._router.navigate(['BadgeCat']);
+    this._router.navigate(['/badgecat']);
   }
 
   updateBadgeCat() {
@@ -52,9 +58,8 @@ export class BCatEditComponent implements OnInit {
     for (var i = 0; i < this.badgecat.bgroups.length; i++) { 
       this.badgecat.bgroups[i].levels.sort();
     }
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badgecat)
-    this._bcatService.updateBadgeCat(id,value).subscribe();
+    this._bcatService.updateBadgeCat(this.id,value).subscribe();
     console.log('you submitted value: ', value); 
     this.toBadgeCats();
   }
@@ -69,12 +74,11 @@ export class BCatEditComponent implements OnInit {
   }
   
   addBadgeCat() {
-    this._router.navigate(['BCatNew']);
+    this._router.navigate(['/bcat/new']);
   }
 
   removeBadgeCat() {
-    let id = this._routeParams.get('id');
-    this._bcatService.deleteBadgeCat(id).subscribe();
+    this._bcatService.deleteBadgeCat(this.id).subscribe();
     this.toBadgeCats();
   }
 
@@ -98,9 +102,7 @@ export class BCatEditComponent implements OnInit {
   removeBGroup(bg: BGroup) {
     let index = this.badgecat.bgroups.indexOf(bg);
     this.badgecat.bgroups.splice(index,1);
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badgecat)
-    // this._bsService.updateBadgeSet(id,value).subscribe();
     console.log('you submitted value: ', value);
   }
 
