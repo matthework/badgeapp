@@ -9,10 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var angular2_jwt_1 = require('angular2-jwt');
 var AuthService = (function () {
-    function AuthService() {
+    function AuthService(_router) {
         var _this = this;
+        this._router = _router;
         // Configure Auth0
         this.lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
             theme: {
@@ -67,11 +69,16 @@ var AuthService = (function () {
         localStorage.removeItem('id_token');
         localStorage.removeItem('profile');
         this.userProfile = undefined;
+        this.toMain();
     };
     ;
+    AuthService.prototype.toMain = function () {
+        this._router.navigate(['/main']);
+        location.reload();
+    };
     AuthService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], AuthService);
     return AuthService;
 }());

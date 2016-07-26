@@ -1,4 +1,5 @@
 import {Injectable}      from '@angular/core';
+import {Router} from '@angular/router';
 import {tokenNotExpired} from 'angular2-jwt';
 
 // Avoid name not found warnings
@@ -20,7 +21,7 @@ export class AuthService {
   //Store profile object in auth class
   userProfile: any;
 
-  constructor() {
+  constructor(private _router: Router) {
     // Set userProfile attribute if already saved profile
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
@@ -69,5 +70,12 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     this.userProfile = undefined;
+    this.toMain();
   };
+
+  toMain() {
+    this._router.navigate(['/main']);
+    location.reload();
+  }
+
 }
