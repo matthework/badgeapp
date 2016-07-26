@@ -5,6 +5,7 @@ import {Tier} from '../tier';
 import {TierService} from '../tier.service';
 import {BadgeSet} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-tier-detail',
@@ -25,7 +26,8 @@ export class TierDetailComponent implements OnInit {
     private _tierService: TierService, 
     private _bsService: BSService,
     private _router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private auth: AuthService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

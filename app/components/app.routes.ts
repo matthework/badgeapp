@@ -1,6 +1,7 @@
 import { provideRouter, RouterConfig }  from '@angular/router';
 
 import {MainComponent} from './main/main.component';
+import {AboutComponent} from './about/about.component';
 
 import {BadgeComponent} from './badge/badge.component';
 import {BadgeDetailComponent} from './badge/badge-detail/badge-detail.component';
@@ -27,33 +28,24 @@ import {BCatEditComponent} from './badgecat/bcat-edit/bcat-edit.component';
 import {BCatNewComponent} from './badgecat/bcat-new/bcat-new.component';
 
 const routes: RouterConfig = [
-  // {
-  //   path: '',
-  //   redirectTo: '/dashboard',
-  //   pathMatch: 'full'
-  // },
-  // {
-  //   path: 'dashboard',
-  //   component: DashboardComponent
-  // },
-  // {
-  //   path: 'detail/:id',
-  //   component: HeroDetailComponent
-  // },
-  // {
-  //   path: 'heroes',
-  //   component: HeroesComponent
-  // }
   {
       path: '',
-      redirectTo: '/main',
+      redirectTo: 'main',
       pathMatch: 'full'
+  },
+  {
+      path: '#',
+      redirectTo: 'main',
   },
   {
       path: 'main',
       // name: 'Main',
       component: MainComponent,
       // useAsDefault: true
+  },
+  {
+      path: 'about',
+      component: AboutComponent,
   },
   {
       path: 'badges',
@@ -152,7 +144,7 @@ const routes: RouterConfig = [
   }
 ];
 
-export const appRouterProviders = [
+export const AppRouterProviders = [
   provideRouter(routes)
 ];
 

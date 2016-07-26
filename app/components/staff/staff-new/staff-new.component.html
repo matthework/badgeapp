@@ -1,4 +1,6 @@
 
+<div *ngIf="auth.authenticated()">
+
 <h2>{{title}}</h2><br>
 
 <!-- <label>Index: </label>
@@ -45,5 +47,8 @@
 <br>
 <br>
 
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 

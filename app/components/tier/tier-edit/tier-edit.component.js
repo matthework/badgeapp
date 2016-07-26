@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var tier_service_1 = require('../tier.service');
+var auth_service_1 = require('../../auth/auth.service');
 var TierEditComponent = (function () {
-    function TierEditComponent(_tierService, _router, route) {
+    function TierEditComponent(_tierService, _router, route, auth) {
         this._tierService = _tierService;
         this._router = _router;
         this.route = route;
+        this.auth = auth;
     }
     TierEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -62,7 +64,7 @@ var TierEditComponent = (function () {
             templateUrl: 'app/components/tier/tier-edit/tier-edit.component.html',
             styleUrls: ['app/components/tier/tier-edit/tier-edit.component.css']
         }), 
-        __metadata('design:paramtypes', [tier_service_1.TierService, router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [tier_service_1.TierService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], TierEditComponent);
     return TierEditComponent;
 }());

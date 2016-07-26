@@ -1,4 +1,6 @@
 
+<div *ngIf="auth.authenticated()">
+
 <div *ngIf="staff">
 	<h2>Person - {{staff.fname}} {{staff.lname}}</h2>
 	
@@ -44,10 +46,13 @@
 	</table>
 
 	<button (click)="goBack()">Back</button>
-	<button class="button-edit" (click)="toStaffEdit(staff._id)">Edit</button>
+	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toStaffEdit(staff._id)">Edit</button>
 	<br>
 	<br>
 	<br>
 </div>
 
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 

@@ -1,6 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
+
 import {BadgeSet} from './bs';
 import {Badge} from '../badge/badge';
 import {Tier} from '../tier/tier';
@@ -9,6 +10,8 @@ import {BSDetailComponent} from './bs-detail/bs-detail.component';
 import {BSService} from './bs.service';
 import {BadgeService} from '../badge/badge.service';
 import {TierService} from '../tier/tier.service';
+import {AuthService} from '../auth/auth.service';
+
 import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 import {YesNoPipe} from '../pipe/yes-no-pipe';
 
@@ -40,7 +43,8 @@ export class BSComponent implements OnInit {
 		private _router: Router,
 		private _bsService: BSService,
 		private _badgeService: BadgeService,
-		private _tierService: TierService) {}
+		private _tierService: TierService,
+		private auth: AuthService) {}
 
 	ngOnInit() {
 		this.getBadgeSets();

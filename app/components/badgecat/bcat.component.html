@@ -1,10 +1,11 @@
 
+<div *ngIf="auth.authenticated()">
 
 <div *ngIf="badgecats">
 	<h1>Badge Category</h1>
 	<input [(ngModel)]="query" placeholder="Search for">
 	<button class="button-back" (click)="toBadges()">Show Badges</button>
-	<button class="button-more" *ngIf!="active" (click)="active=true">></button>
+	<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button>
 	<button class="button-add" *ngIf="active" (click)="addBadgeCat()">+</button>
 	<button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
 </div>
@@ -35,6 +36,10 @@
 		<td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgeCatPop(badgecat._id)">X</button><button class="button-s-e" (click)="toBCatEdit(badgecat._id)">E</button></td>
 	</tr>
 </table>
+
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 
 

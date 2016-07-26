@@ -12,13 +12,15 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var tier_edit_component_1 = require('./tier-edit/tier-edit.component');
 var tier_service_1 = require('./tier.service');
-var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var bs_service_1 = require('../badgeset/bs.service');
+var auth_service_1 = require('../auth/auth.service');
+var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var TierComponent = (function () {
-    function TierComponent(_tierService, _bsService, _router) {
+    function TierComponent(_tierService, _bsService, _router, auth) {
         this._tierService = _tierService;
         this._bsService = _bsService;
         this._router = _router;
+        this.auth = auth;
         this.tiers = [];
         this.active = false;
         this.badgesets = [];
@@ -86,7 +88,7 @@ var TierComponent = (function () {
             directives: [tier_edit_component_1.TierEditComponent],
             pipes: [filter_array_pipe_1.FilterArrayPipe]
         }), 
-        __metadata('design:paramtypes', [tier_service_1.TierService, bs_service_1.BSService, router_1.Router])
+        __metadata('design:paramtypes', [tier_service_1.TierService, bs_service_1.BSService, router_1.Router, auth_service_1.AuthService])
     ], TierComponent);
     return TierComponent;
 }());

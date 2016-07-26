@@ -1,3 +1,23 @@
 
-<h1>Introduction</h1>
-<h2><i>There should be a brief about how this badge system works.</i></h2>
+<h1>Welcome to Badge System !</h1>
+<br>
+
+<div *ngIf="auth.authenticated() && auth.userProfile">
+  <h3><i>{{auth.userProfile.name}}, you are just logged in.</i></h3>
+  <div class="row">
+    <div class="col-md-6">
+      <img [src]="auth.userProfile.picture" alt="" class="profile-img">
+      <p><strong>Name: </strong> {{auth.userProfile.name}}</p>
+      <p><strong>Email: </strong> {{auth.userProfile.email}}</p>
+      <p><strong>Nickname: </strong> {{auth.userProfile.nickname}}</p>
+      <p><strong>Created At: </strong> {{auth.userProfile.created_at}}</p>
+      <p><strong>Updated At: </strong> {{auth.userProfile.updated_at}}</p>
+      <p><strong>Address: </strong> {{auth.userProfile.user_metadata.address}}</p>
+    </div>
+  </div>
+</div>
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+
+<br>
+<br>
+<br>

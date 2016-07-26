@@ -1,16 +1,18 @@
 
+<div *ngIf="auth.authenticated()">
+
 <div *ngIf="tiers">
-<h1>Tiers</h1>
+<h2>Tiers</h2>
 <input class="input-query" [(ngModel)]="query" placeholder="Search for">
 <button class="button-showbs" *ngIf!="toPay" (click)="toPay=true">Show BadgeSet</button>
 <button class="button-back" *ngIf="toPay" (click)="toPay=false">Show $$</button>
-<button class="button-more" *ngIf!="active" (click)="active=true">></button>
+<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button>
 <button class="button-add" *ngIf="active" (click)="addTier()">+</button>
 <button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
 </div>
 
 <div *ngIf!="tiers">
-<h1>Add New Tier</h1>
+<h2>Add New Tier</h2>
 <input class="input-query" [(ngModel)]="query" placeholder="Search for">
 <button class="button-add2" (click)="addTier()">+</button><br>
 </div>
@@ -92,6 +94,10 @@
 	</tr>
 </table>
 </div>
+
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 
 

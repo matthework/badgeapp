@@ -12,11 +12,13 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var staff_service_1 = require('../staff.service');
 var badge_service_1 = require('../../badge/badge.service');
+var auth_service_1 = require('../../auth/auth.service');
 var StaffNewComponent = (function () {
-    function StaffNewComponent(_staffService, _badgeService, _router) {
+    function StaffNewComponent(_staffService, _badgeService, _router, auth) {
         this._staffService = _staffService;
         this._badgeService = _badgeService;
         this._router = _router;
+        this.auth = auth;
         // title: string = "Add New Staff";
         this.badges = [];
         this.active = false;
@@ -105,7 +107,7 @@ var StaffNewComponent = (function () {
             templateUrl: 'app/components/staff/staff-new/staff-new.component.html',
             styleUrls: ['app/components/staff/staff-new/staff-new.component.css']
         }), 
-        __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, router_1.Router])
+        __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, router_1.Router, auth_service_1.AuthService])
     ], StaffNewComponent);
     return StaffNewComponent;
 }());

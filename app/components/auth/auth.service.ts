@@ -17,10 +17,30 @@ export class AuthService {
     }
   });
 
+  //Store profile object in auth class
+  userProfile: any;
+
   constructor() {
+    // Set userProfile attribute if already saved profile
+    this.userProfile = JSON.parse(localStorage.getItem('profile'));
+
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
+      
+      // Fetch profile information
+      this.lock.getProfile(authResult.idToken, (error, profile) => {
+        if (error) {
+          // Handle error
+          alert(error);
+          return;
+        }
+
+        profile.user_metadata = profile.user_metadata || {};
+        localStorage.setItem('profile', JSON.stringify(profile));
+        this.userProfile = profile;
+      });
+
     });
   }
 
@@ -35,8 +55,19 @@ export class AuthService {
     return tokenNotExpired();
   };
 
+  public isAdmin() {
+    // Check if there's an admin account
+    if (tokenNotExpired() && this.userProfile.email=="matt.wang@propellerhead.co.nz") {
+      return true;
+    }else {
+      return false;
+    }
+  };
+
   public logout() {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
+    localStorage.removeItem('profile');
+    this.userProfile = undefined;
   };
 }

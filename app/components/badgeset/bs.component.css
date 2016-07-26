@@ -4,7 +4,7 @@ h1 {
   margin-bottom: 20px;
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: #999;
   margin-top: 0;
   padding-top: 20px;
@@ -128,19 +128,19 @@ th , td  {
 }
 .button-showCom {
   position: relative; 
-  left: 58%;
+  left: 63%;
   color: #039be5;
   width: 130px;
   margin-left: 0;
 }
 .button-more {
   position: relative; 
-  left: 58%;
+  left: 63%;
   color: #039be5;
 }
 .button-add {
   position: relative; 
-  left: 58%;
+  left: 63%;
   color: #039be5;
 }
 .button-add:hover {
@@ -158,18 +158,18 @@ th , td  {
 }
 .button-less {
   position: relative; 
-  left: 61%;
+  left: 63%;
   color: #039be5;
 }
 .button-backbs {
   position: relative; 
-  left: 73%;
+  left: 74%;
   color: #039be5;
   width: 130px;
 }
 .button-back {
   position: relative; 
-  left: 58%;
+  left: 63%;
   color: #039be5;
   width: 130px;
 }
@@ -184,7 +184,7 @@ th , td  {
   /*padding: 10px 10px;*/
   text-align: center;
   margin-top: 0;
-  margin-left: 0;
+  margin-left: 10px;
   margin-right: 7px;
   margin-bottom: 0;
 }
@@ -198,7 +198,7 @@ th , td  {
   width: 40px;
   text-align: center;
   margin-top: 0;
-  margin-left: 0;
+  margin-left: 8px;
   margin-right: 5px;
   margin-bottom: 0;
 }

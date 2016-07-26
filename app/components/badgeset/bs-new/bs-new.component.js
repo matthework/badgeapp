@@ -13,12 +13,14 @@ var router_1 = require('@angular/router');
 var bs_service_1 = require('../bs.service');
 var badge_service_1 = require('../../badge/badge.service');
 var tier_service_1 = require('../../tier/tier.service');
+var auth_service_1 = require('../../auth/auth.service');
 var BSNewComponent = (function () {
-    function BSNewComponent(_bsService, _badgeService, _tierService, _router) {
+    function BSNewComponent(_bsService, _badgeService, _tierService, _router, auth) {
         this._bsService = _bsService;
         this._badgeService = _badgeService;
         this._tierService = _tierService;
         this._router = _router;
+        this.auth = auth;
         this.badges = [];
         this.tiers = [];
         this.active = false;
@@ -211,7 +213,7 @@ var BSNewComponent = (function () {
             templateUrl: 'app/components/badgeset/bs-new/bs-new.component.html',
             styleUrls: ['app/components/badgeset/bs-new/bs-new.component.css']
         }), 
-        __metadata('design:paramtypes', [bs_service_1.BSService, badge_service_1.BadgeService, tier_service_1.TierService, router_1.Router])
+        __metadata('design:paramtypes', [bs_service_1.BSService, badge_service_1.BadgeService, tier_service_1.TierService, router_1.Router, auth_service_1.AuthService])
     ], BSNewComponent);
     return BSNewComponent;
 }());

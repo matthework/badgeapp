@@ -13,13 +13,15 @@ var router_1 = require('@angular/router');
 var bs_service_1 = require('../bs.service');
 var badge_service_1 = require('../../badge/badge.service');
 var tier_service_1 = require('../../tier/tier.service');
+var auth_service_1 = require('../../auth/auth.service');
 var BSEditComponent = (function () {
-    function BSEditComponent(_bsService, _badgeService, _tierService, _router, route) {
+    function BSEditComponent(_bsService, _badgeService, _tierService, _router, route, auth) {
         this._bsService = _bsService;
         this._badgeService = _badgeService;
         this._tierService = _tierService;
         this._router = _router;
         this.route = route;
+        this.auth = auth;
         this.badges = [];
         this.tiers = [];
         this.active = false;
@@ -253,7 +255,7 @@ var BSEditComponent = (function () {
             templateUrl: 'app/components/badgeset/bs-edit/bs-edit.component.html',
             styleUrls: ['app/components/badgeset/bs-edit/bs-edit.component.css']
         }), 
-        __metadata('design:paramtypes', [bs_service_1.BSService, badge_service_1.BadgeService, tier_service_1.TierService, router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [bs_service_1.BSService, badge_service_1.BadgeService, tier_service_1.TierService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], BSEditComponent);
     return BSEditComponent;
 }());

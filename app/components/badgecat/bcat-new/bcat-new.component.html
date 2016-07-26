@@ -1,4 +1,4 @@
-
+<div *ngIf="auth.authenticated()">
 
 <h2>Add New Badge Category</h2><br>
 
@@ -27,5 +27,7 @@
 <br>
 <br>
 
+</div>
 
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 

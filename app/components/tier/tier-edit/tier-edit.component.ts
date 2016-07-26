@@ -3,6 +3,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 import {Tier} from '../tier';
 import {TierService} from '../tier.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-tier-edit',
@@ -19,7 +20,8 @@ export class TierEditComponent implements OnInit {
   constructor(
       private _tierService: TierService, 
       private _router: Router,
-      private route: ActivatedRoute) {}
+      private route: ActivatedRoute,
+      private auth: AuthService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

@@ -1,9 +1,13 @@
-<h1>{{title}}</h1>
-<nav>
-	<a [routerLink]="['/main']" routerLinkActive="active">Main</a>
-    <a [routerLink]="['/badges']" routerLinkActive="active">Badges</a>
-    <a [routerLink]="['/badgeset']" routerLinkActive="active">Badge Set</a>
-    <a [routerLink]="['/staffs']" routerLinkActive="active">Person</a>
-    <a [routerLink]="['/tiers']" routerLinkActive="active">Tiers</a>
-</nav>
+<ul>
+	<li><a [routerLink]="['/main']" routerLinkActive="active">Home</a></li>
+	<li><a [routerLink]="['/badges']" routerLinkActive="active">Badges</a></li>
+	<li><a [routerLink]="['/badgeset']" routerLinkActive="active">Badge Set</a></li>
+	<li><a [routerLink]="['/staffs']" routerLinkActive="active">Person</a></li>
+	<li><a [routerLink]="['/tiers']" routerLinkActive="active">Tiers</a></li>
+	<li><a [routerLink]="['/about']" routerLinkActive="active">About</a></li>
+	<li style="float:right"><a class="active" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</a></li>
+	<li style="float:right"><a class="active" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</a></li>
+</ul>
+<br>
+
 <router-outlet></router-outlet>

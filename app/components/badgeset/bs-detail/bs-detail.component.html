@@ -1,4 +1,6 @@
 
+<div *ngIf="auth.authenticated()">
+
 <div *ngIf="badgeset">
 	<h2>Badge Set - {{badgeset.name}}</h2><br>
 	
@@ -40,11 +42,15 @@
 	</table>
 
 	<button (click)="goBack()">Back</button>
-	<button class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button>
+	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button>
 	<br>
 	<br>
 	<br>
 
 </div>
+
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 

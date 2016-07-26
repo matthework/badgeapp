@@ -1,11 +1,14 @@
 import {Component,OnInit} from '@angular/core';
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
+
 import {BadgeCat} from './bcat';
 import {Badge} from '../badge/badge';
 import {BCatEditComponent} from './bcat-edit/bcat-edit.component';
 import {BCatService} from './bcat.service';
 import {BadgeService} from '../badge/badge.service';
+import {AuthService} from '../auth/auth.service';
+
 import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 import {YesNoPipe} from '../pipe/yes-no-pipe';
 
@@ -27,7 +30,8 @@ export class BCatComponent implements OnInit {
 	constructor (
 		private _router: Router,
 		private _bcatService: BCatService,
-		private _badgeService: BadgeService) {}
+		private _badgeService: BadgeService,
+		private auth: AuthService) {}
 
 	ngOnInit() {
 		this.getBadgeCats();

@@ -1,11 +1,14 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {Tier} from './tier';
 import {TierEditComponent} from './tier-edit/tier-edit.component';
 import {TierService} from './tier.service';
-import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 import {BadgeSet} from '../badgeset/bs';
 import {BSService} from '../badgeset/bs.service';
+import {AuthService} from '../auth/auth.service';
+
+import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 
 @Component({
     selector: 'my-tier',
@@ -26,7 +29,8 @@ export class TierComponent {
   constructor(
     private _tierService: TierService,
     private _bsService: BSService,
-    private _router: Router) {}
+    private _router: Router,
+    private auth: AuthService) {}
 
   ngOnInit() {
     this.getTiers();

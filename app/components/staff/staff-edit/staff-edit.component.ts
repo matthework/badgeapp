@@ -5,6 +5,7 @@ import {Staff,BadgeGroup} from '../staff';
 import {StaffService} from '../staff.service';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
     selector: 'my-staff-edit',
@@ -27,7 +28,8 @@ export class StaffEditComponent implements OnInit {
         private _staffService: StaffService, 
         private _badgeService: BadgeService,
         private _router: Router,
-        private route: ActivatedRoute) {}
+        private route: ActivatedRoute,
+        private auth: AuthService) {}
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {

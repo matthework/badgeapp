@@ -14,14 +14,16 @@ var bs_edit_component_1 = require('./bs-edit/bs-edit.component');
 var bs_service_1 = require('./bs.service');
 var badge_service_1 = require('../badge/badge.service');
 var tier_service_1 = require('../tier/tier.service');
+var auth_service_1 = require('../auth/auth.service');
 var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var yes_no_pipe_1 = require('../pipe/yes-no-pipe');
 var BSComponent = (function () {
-    function BSComponent(_router, _bsService, _badgeService, _tierService) {
+    function BSComponent(_router, _bsService, _badgeService, _tierService, auth) {
         this._router = _router;
         this._bsService = _bsService;
         this._badgeService = _badgeService;
         this._tierService = _tierService;
+        this.auth = auth;
         this.badgesets = [];
         this.badges = [];
         this.tiers = [];
@@ -182,7 +184,7 @@ var BSComponent = (function () {
             directives: [bs_edit_component_1.BSEditComponent],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, bs_service_1.BSService, badge_service_1.BadgeService, tier_service_1.TierService])
+        __metadata('design:paramtypes', [router_1.Router, bs_service_1.BSService, badge_service_1.BadgeService, tier_service_1.TierService, auth_service_1.AuthService])
     ], BSComponent);
     return BSComponent;
 }());

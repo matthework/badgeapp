@@ -10,19 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var auth_service_1 = require('../auth/auth.service');
-var MainComponent = (function () {
-    function MainComponent(auth) {
+var AboutComponent = (function () {
+    function AboutComponent(auth) {
         this.auth = auth;
     }
-    MainComponent = __decorate([
+    AboutComponent = __decorate([
         core_1.Component({
             selector: 'my-main',
-            templateUrl: 'app/components/main/main.component.html',
-            styleUrls: ['app/components/main/main.component.css'],
+            templateUrl: 'app/components/about/about.component.html',
+            styleUrls: ['app/components/about/about.component.css'],
         }), 
         __metadata('design:paramtypes', [auth_service_1.AuthService])
-    ], MainComponent);
-    return MainComponent;
+    ], AboutComponent);
+    return AboutComponent;
 }());
-exports.MainComponent = MainComponent;
-//# sourceMappingURL=main.component.js.map
+exports.AboutComponent = AboutComponent;
+//# sourceMappingURL=about.component.js.map
