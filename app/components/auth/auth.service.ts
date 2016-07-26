@@ -10,8 +10,8 @@ export class AuthService {
   // Configure Auth0
   lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
     theme: {
-      logo: "test-icon.png",
-      primaryColor: "#b81b1c"
+      logo: "plogo.png",
+      primaryColor: "#4CAF50"
     },
     languageDictionary: {
       title: "My Badge"
