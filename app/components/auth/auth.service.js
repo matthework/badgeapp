@@ -15,6 +15,11 @@ var AuthService = (function () {
     function AuthService(_router) {
         var _this = this;
         this._router = _router;
+        this.adminList = [
+            "matt.wang@propellerhead.co.nz",
+            "andrew.weston@propellerhead.co.nz",
+            "jonathan.cupples@propellerhead.co.nz"
+        ];
         // Configure Auth0
         this.lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
             theme: {
@@ -56,7 +61,7 @@ var AuthService = (function () {
     ;
     AuthService.prototype.isAdmin = function () {
         // Check if there's an admin account
-        if (angular2_jwt_1.tokenNotExpired() && this.userProfile.email == "matt.wang@propellerhead.co.nz") {
+        if (angular2_jwt_1.tokenNotExpired() && this.adminList.indexOf(this.userProfile.email) != -1) {
             return true;
         }
         else {
