@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {BadgeSet,BadgeGroup} from '../bs';
 import {BSService} from '../bs.service';
 import {Badge} from '../../badge/badge';
 import {Tier} from '../../tier/tier';
 import {BadgeService} from '../../badge/badge.service';
 import {TierService} from '../../tier/tier.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-badgeset-new',
@@ -45,7 +47,8 @@ export class BSNewComponent{
     private _bsService: BSService, 
     private _badgeService: BadgeService,
     private _tierService: TierService,
-    private _router: Router) {}
+    private _router: Router,
+    private auth: AuthService) {}
 
   ngOnInit() {
     this.getBadges();

@@ -1,11 +1,14 @@
 import {Component,OnInit} from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
+
 import {BadgeSet,BadgeGroup} from '../bs';
 import {BSService} from '../bs.service';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 import {Tier} from '../../tier/tier';
 import {TierService} from '../../tier/tier.service';
+import {AuthService} from '../../auth/auth.service';
+
 import {YesNoPipe} from '../../pipe/yes-no-pipe';
 
 @Component({
@@ -33,7 +36,8 @@ export class BSDetailComponent implements OnInit {
     private _badgeService: BadgeService,
     private _tierService: TierService,
     private _router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private auth: AuthService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

@@ -11,14 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var badge_service_1 = require('../badge.service');
-var yes_no_pipe_1 = require('../../pipe/yes-no-pipe');
 var bs_service_1 = require('../../badgeset/bs.service');
+var auth_service_1 = require('../../auth/auth.service');
+var yes_no_pipe_1 = require('../../pipe/yes-no-pipe');
 var BadgeDetailComponent = (function () {
-    function BadgeDetailComponent(_badgeService, _bsService, _router, route) {
+    function BadgeDetailComponent(_badgeService, _bsService, _router, route, auth) {
         this._badgeService = _badgeService;
         this._bsService = _bsService;
         this._router = _router;
         this.route = route;
+        this.auth = auth;
         this.title = "Badge";
         this.badgesets = [];
     }
@@ -86,7 +88,7 @@ var BadgeDetailComponent = (function () {
             styleUrls: ['app/components/badge/badge-detail/badge-detail.component.css'],
             pipes: [yes_no_pipe_1.YesNoPipe]
         }), 
-        __metadata('design:paramtypes', [badge_service_1.BadgeService, bs_service_1.BSService, router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [badge_service_1.BadgeService, bs_service_1.BSService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], BadgeDetailComponent);
     return BadgeDetailComponent;
 }());

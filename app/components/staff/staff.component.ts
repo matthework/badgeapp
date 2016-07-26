@@ -1,15 +1,20 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {Staff,BadgeGroup} from './staff';
 import {StaffEditComponent} from './staff-edit/staff-edit.component';
 import {StaffService} from './staff.service';
 import {Badge} from '../badge/badge';
 import {BadgeService} from '../badge/badge.service';
-import {FilterArrayPipe} from '../pipe/filter-array-pipe';
+
 import {BadgeSet} from '../badgeset/bs';
 import {BSService} from '../badgeset/bs.service';
 import {Tier} from '../tier/tier';
 import {TierService} from '../tier/tier.service';
+import {AuthService} from '../auth/auth.service';
+
+import {FilterArrayPipe} from '../pipe/filter-array-pipe';
+
 
 @Component({
 	selector: 'my-staff',
@@ -38,7 +43,8 @@ export class StaffComponent {
 		private _badgeService: BadgeService,
 		private _bsService: BSService,
 		private _tierService: TierService,
-		private _router: Router) {}
+		private _router: Router,
+		private auth: AuthService) {}
 
 	ngOnInit() {
 		this.getStaffs();

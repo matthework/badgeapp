@@ -1,17 +1,19 @@
 
+<div *ngIf="auth.authenticated()">
+
 <div *ngIf!="showCompare">
 	<div *ngIf="badgesets">
-		<h1>Badge Set</h1>
+		<h2>Badge Set</h2>
 		<input [(ngModel)]="query" placeholder="Search for">
 		<button class="button-showCom" *ngIf!="showBS" (click)="showCompare=true;getComBS()">Compare</button>
 		<button class="button-back" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
-		<button class="button-more" *ngIf!="active" (click)="active=true">></button>
+		<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button>
 		<button class="button-add" *ngIf="active" (click)="addBadgeSet()">+</button>
 		<button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
 	</div>
 
 	<div *ngIf!="badgesets">
-		<h1>Add New BadgeSet</h1>
+		<h2>Add New BadgeSet</h2>
 		<input [(ngModel)]="query" placeholder="Search for">
 		<button class="button-add2" (click)="addBadgeSet()">+</button><br>
 	</div>		
@@ -49,7 +51,7 @@
 </div>
 
 <div *ngIf="showCompare">
-	<h1>Compare Badge Sets</h1>
+	<h2>Compare Badge Sets</h2>
 	<button class="button-backbs" (click)="showCompare=false">Back</button><br>
 	<br>
 	<table class="table-big">
@@ -121,4 +123,6 @@
 	</table>
 </div>
 
+</div>
 
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>

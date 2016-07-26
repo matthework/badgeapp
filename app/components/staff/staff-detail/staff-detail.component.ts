@@ -9,6 +9,7 @@ import {BadgeSet} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
 import {Tier} from '../../tier/tier';
 import {TierService} from '../../tier/tier.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-staff-detail',
@@ -34,7 +35,8 @@ export class StaffDetailComponent implements OnInit {
     private _bsService: BSService,  
     private _tierService: TierService,
     private _router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private auth: AuthService) {}
   
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

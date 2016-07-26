@@ -1,9 +1,11 @@
 import {Component,OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {Badge} from './badge';
 import {BadgeDetailComponent} from './badge-detail/badge-detail.component';
 import {BadgeEditComponent} from './badge-edit/badge-edit.component';
 import {BadgeService} from './badge.service';
+import {AuthService} from '../auth/auth.service';
 
 import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 import {YesNoPipe} from '../pipe/yes-no-pipe';
@@ -26,7 +28,8 @@ export class BadgeComponent implements OnInit {
 
   constructor (
       private _router: Router,
-      private _badgeService: BadgeService) {}
+      private _badgeService: BadgeService,
+      private auth: AuthService) {}
 
   ngOnInit() {
     this.getBadges();

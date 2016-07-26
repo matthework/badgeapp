@@ -1,4 +1,6 @@
 
+<div *ngIf="auth.authenticated()">
+
 <div *ngIf="staff">
 	<h2>Edit Person - {{staff.fname}} {{staff.lname}}</h2><br>
 	
@@ -78,4 +80,7 @@
 
 </div>
 
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 

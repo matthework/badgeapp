@@ -4,6 +4,7 @@ import {Staff} from '../staff';
 import {StaffService} from '../staff.service';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-staff-new',
@@ -35,7 +36,8 @@ export class StaffNewComponent {
   constructor(
       private _staffService: StaffService, 
       private _badgeService: BadgeService,
-      private _router: Router) {}
+      private _router: Router,
+      private auth: AuthService) {}
 
   ngOnInit() {
     this.getBadges();

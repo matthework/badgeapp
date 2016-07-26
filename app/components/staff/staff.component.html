@@ -1,16 +1,18 @@
 
+<div *ngIf="auth.authenticated()">
+
 <div *ngIf="staffs">
-<h1>Person</h1>
+<h2>Person</h2>
 <input [(ngModel)]="query" placeholder="Search for">
 <button class="button-showbs" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
 <button class="button-back" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
-<button class="button-more" *ngIf!="active" (click)="active=true">></button>
+<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button>
 <button class="button-add" *ngIf="active" (click)="addStaff()">+</button>
 <button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
 </div>
 
 <div *ngIf!="staffs">
-<h1>Add New Person</h1>
+<h2>Add New Person</h2>
 <input [(ngModel)]="query" placeholder="Search for">
 <button class="button-add2" (click)="addStaff()">+</button><br>
 </div>
@@ -77,5 +79,8 @@
 </table>
 </div>
 
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 

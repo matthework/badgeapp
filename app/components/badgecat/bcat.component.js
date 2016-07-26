@@ -13,13 +13,15 @@ var router_1 = require('@angular/router');
 var bcat_edit_component_1 = require('./bcat-edit/bcat-edit.component');
 var bcat_service_1 = require('./bcat.service');
 var badge_service_1 = require('../badge/badge.service');
+var auth_service_1 = require('../auth/auth.service');
 var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var yes_no_pipe_1 = require('../pipe/yes-no-pipe');
 var BCatComponent = (function () {
-    function BCatComponent(_router, _bcatService, _badgeService) {
+    function BCatComponent(_router, _bcatService, _badgeService, auth) {
         this._router = _router;
         this._bcatService = _bcatService;
         this._badgeService = _badgeService;
+        this.auth = auth;
         this.badgecats = [];
         this.badges = [];
         this.active = false;
@@ -93,7 +95,7 @@ var BCatComponent = (function () {
             directives: [bcat_edit_component_1.BCatEditComponent],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, bcat_service_1.BCatService, badge_service_1.BadgeService])
+        __metadata('design:paramtypes', [router_1.Router, bcat_service_1.BCatService, badge_service_1.BadgeService, auth_service_1.AuthService])
     ], BCatComponent);
     return BCatComponent;
 }());

@@ -13,12 +13,14 @@ var router_1 = require('@angular/router');
 var badge_detail_component_1 = require('./badge-detail/badge-detail.component');
 var badge_edit_component_1 = require('./badge-edit/badge-edit.component');
 var badge_service_1 = require('./badge.service');
+var auth_service_1 = require('../auth/auth.service');
 var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var yes_no_pipe_1 = require('../pipe/yes-no-pipe');
 var BadgeComponent = (function () {
-    function BadgeComponent(_router, _badgeService) {
+    function BadgeComponent(_router, _badgeService, auth) {
         this._router = _router;
         this._badgeService = _badgeService;
+        this.auth = auth;
         this.badges = [];
         this.active = false;
         this.showBadges = false;
@@ -70,7 +72,7 @@ var BadgeComponent = (function () {
             directives: [badge_detail_component_1.BadgeDetailComponent, badge_edit_component_1.BadgeEditComponent],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, badge_service_1.BadgeService])
+        __metadata('design:paramtypes', [router_1.Router, badge_service_1.BadgeService, auth_service_1.AuthService])
     ], BadgeComponent);
     return BadgeComponent;
 }());

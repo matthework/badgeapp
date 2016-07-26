@@ -12,12 +12,14 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var tier_service_1 = require('../tier.service');
 var bs_service_1 = require('../../badgeset/bs.service');
+var auth_service_1 = require('../../auth/auth.service');
 var TierDetailComponent = (function () {
-    function TierDetailComponent(_tierService, _bsService, _router, route) {
+    function TierDetailComponent(_tierService, _bsService, _router, route, auth) {
         this._tierService = _tierService;
         this._bsService = _bsService;
         this._router = _router;
         this.route = route;
+        this.auth = auth;
         this.badgesets = [];
         this.gradesIndex = [0, 1, 2, 3, 4, 5];
         this.gmap = { 0: "A", 1: "B", 2: "C", 3: "D", 4: "E", 5: "F" };
@@ -79,7 +81,7 @@ var TierDetailComponent = (function () {
             templateUrl: 'app/components/tier/tier-detail/tier-detail.component.html',
             styleUrls: ['app/components/tier/tier-detail/tier-detail.component.css']
         }), 
-        __metadata('design:paramtypes', [tier_service_1.TierService, bs_service_1.BSService, router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [tier_service_1.TierService, bs_service_1.BSService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], TierDetailComponent);
     return TierDetailComponent;
 }());

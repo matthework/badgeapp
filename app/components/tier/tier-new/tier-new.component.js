@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var tier_service_1 = require('../tier.service');
+var auth_service_1 = require('../../auth/auth.service');
 var TierNewComponent = (function () {
-    function TierNewComponent(_tierService, _router) {
+    function TierNewComponent(_tierService, _router, auth) {
         this._tierService = _tierService;
         this._router = _router;
+        this.auth = auth;
         this.newGrades = [0, 0, 0, 0, 0, 0];
         this.newTier = { index: 0, tier: 0, grades: this.newGrades, judgement: "", expertise: "" };
     }
@@ -38,7 +40,7 @@ var TierNewComponent = (function () {
             templateUrl: 'app/components/tier/tier-new/tier-new.component.html',
             styleUrls: ['app/components/tier/tier-new/tier-new.component.css']
         }), 
-        __metadata('design:paramtypes', [tier_service_1.TierService, router_1.Router])
+        __metadata('design:paramtypes', [tier_service_1.TierService, router_1.Router, auth_service_1.AuthService])
     ], TierNewComponent);
     return TierNewComponent;
 }());

@@ -12,12 +12,14 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var staff_service_1 = require('../staff.service');
 var badge_service_1 = require('../../badge/badge.service');
+var auth_service_1 = require('../../auth/auth.service');
 var StaffEditComponent = (function () {
-    function StaffEditComponent(_staffService, _badgeService, _router, route) {
+    function StaffEditComponent(_staffService, _badgeService, _router, route, auth) {
         this._staffService = _staffService;
         this._badgeService = _badgeService;
         this._router = _router;
         this.route = route;
+        this.auth = auth;
         this.badges = [];
         this.active = false;
         this.newBadge = "";
@@ -148,7 +150,7 @@ var StaffEditComponent = (function () {
             templateUrl: 'app/components/staff/staff-edit/staff-edit.component.html',
             styleUrls: ['app/components/staff/staff-edit/staff-edit.component.css']
         }), 
-        __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], StaffEditComponent);
     return StaffEditComponent;
 }());

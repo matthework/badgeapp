@@ -1,6 +1,7 @@
 "use strict";
 var router_1 = require('@angular/router');
 var main_component_1 = require('./main/main.component');
+var about_component_1 = require('./about/about.component');
 var badge_component_1 = require('./badge/badge.component');
 var badge_detail_component_1 = require('./badge/badge-detail/badge-detail.component');
 var badge_edit_component_1 = require('./badge/badge-edit/badge-edit.component');
@@ -21,32 +22,23 @@ var bcat_component_1 = require('./badgecat/bcat.component');
 var bcat_edit_component_1 = require('./badgecat/bcat-edit/bcat-edit.component');
 var bcat_new_component_1 = require('./badgecat/bcat-new/bcat-new.component');
 var routes = [
-    // {
-    //   path: '',
-    //   redirectTo: '/dashboard',
-    //   pathMatch: 'full'
-    // },
-    // {
-    //   path: 'dashboard',
-    //   component: DashboardComponent
-    // },
-    // {
-    //   path: 'detail/:id',
-    //   component: HeroDetailComponent
-    // },
-    // {
-    //   path: 'heroes',
-    //   component: HeroesComponent
-    // }
     {
         path: '',
-        redirectTo: '/main',
+        redirectTo: 'main',
         pathMatch: 'full'
+    },
+    {
+        path: '#',
+        redirectTo: 'main',
     },
     {
         path: 'main',
         // name: 'Main',
         component: main_component_1.MainComponent,
+    },
+    {
+        path: 'about',
+        component: about_component_1.AboutComponent,
     },
     {
         path: 'badges',
@@ -144,7 +136,7 @@ var routes = [
         component: bcat_new_component_1.BCatNewComponent,
     }
 ];
-exports.appRouterProviders = [
+exports.AppRouterProviders = [
     router_1.provideRouter(routes)
 ];
 //# sourceMappingURL=app.routes.js.map

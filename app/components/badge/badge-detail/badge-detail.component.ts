@@ -3,9 +3,11 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 import {Badge} from '../badge';
 import {BadgeService} from '../badge.service';
-import {YesNoPipe} from '../../pipe/yes-no-pipe';
 import {BadgeSet} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
+import {AuthService} from '../../auth/auth.service';
+
+import {YesNoPipe} from '../../pipe/yes-no-pipe';
 
 @Component({
     selector: 'my-badge-detail',
@@ -26,7 +28,8 @@ export class BadgeDetailComponent implements OnInit {
         private _badgeService: BadgeService, 
         private _bsService: BSService,
         private _router: Router,
-        private route: ActivatedRoute) {}
+        private route: ActivatedRoute,
+        private auth: AuthService) {}
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Tier} from '../tier';
 import {TierService} from '../tier.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-tier-new',
@@ -17,7 +18,8 @@ export class TierNewComponent {
 
   constructor(
       private _tierService: TierService, 
-      private _router: Router) {}
+      private _router: Router,
+      private auth: AuthService) {}
 
   addTier() {
     // this.newTier.grades = this.newTier.grades.filter(this.checkEmpty);

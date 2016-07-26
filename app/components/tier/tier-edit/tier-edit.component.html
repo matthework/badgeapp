@@ -1,4 +1,6 @@
 
+<div *ngIf="auth.authenticated()">
+
 <div *ngIf="tier">
 	<h2>Edit Tier - {{tier.tier}}</h2><br>
 
@@ -42,5 +44,7 @@
 
 </div>
 
+</div>
 
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 

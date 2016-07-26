@@ -4,7 +4,7 @@ h1 {
   margin-bottom: 20px;
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: #999;
   margin-top: 0;
   padding-top: 20px;
@@ -148,19 +148,19 @@ table tr:nth-child(even) {
 }
 .button-showbs {
   position: relative; 
-  left: 56%;
+  left: 61%;
   color: #039be5;
   width: 150px;
 }
 .button-back {
   position: relative; 
-  left: 56%;
+  left: 61%;
   color: #039be5;
   width: 150px;
 }
 .button-add {
   position: relative; 
-  left: 56%;
+  left: 61%;
   color: #039be5;
 }
 .button-add:hover {
@@ -169,12 +169,12 @@ table tr:nth-child(even) {
 }
 .button-more {
   position: relative; 
-  left: 56%;
+  left: 61%;
   color: #039be5;
 }
 .button-less {
   position: relative; 
-  left: 59%;
+  left: 61%;
   color: #039be5;
 }
 .button-add2 {
@@ -193,7 +193,7 @@ table tr:nth-child(even) {
   /*padding: 10px 10px;*/
   text-align: center;
   margin-top: 0;
-  margin-left: 0;
+  margin-left: 10px;
   margin-right: 7px;
   margin-bottom: 0;
 }
@@ -207,7 +207,7 @@ table tr:nth-child(even) {
   width: 40px;
   text-align: center;
   margin-top: 0;
-  margin-left: 0;
+  margin-left: 8px;
   margin-right: 5px;
   margin-bottom: 0;
 }

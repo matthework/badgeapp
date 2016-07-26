@@ -7,6 +7,8 @@ import {TierService} from './tier/tier.service';
 import {BSService} from './badgeset/bs.service';
 import {BCatService} from './badgecat/bcat.service';
 
+import {AuthService} from './auth/auth.service';
+
 @Component({
     selector: 'my-app',
     templateUrl: 'app/components/app.component.html',
@@ -17,12 +19,14 @@ import {BCatService} from './badgecat/bcat.service';
         StaffService,
         TierService,
         BSService,
-        BCatService
+        BCatService,
+        AuthService
     ]
 })
 
 export class AppComponent{
     title = 'My Badge App!';
+    constructor(private auth: AuthService) {}
 }
 
 
