@@ -1,9 +1,11 @@
 import {Component,OnInit} from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
+
 import {BadgeCat,BGroup} from '../bcat';
 import {BCatService} from '../bcat.service';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-badgecat-edit',
@@ -26,7 +28,8 @@ export class BCatEditComponent implements OnInit {
     private _bcatService: BCatService,
     private _badgeService: BadgeService,
     private _router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private auth: AuthService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

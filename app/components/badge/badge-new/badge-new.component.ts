@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Badge} from '../badge';
 import {BadgeService} from '../badge.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-badge-new',
@@ -26,7 +27,8 @@ export class BadgeNewComponent {
 
   constructor(
     private _badgeService: BadgeService, 
-    private _router: Router) {}
+    private _router: Router,
+    private auth: AuthService) {}
 
   addBadge() {
     this.newBadge.code = this.newBadge.code.toUpperCase();

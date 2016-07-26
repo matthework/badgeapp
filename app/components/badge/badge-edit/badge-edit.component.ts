@@ -3,6 +3,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 import {Badge,BadgeLevel} from '../badge';
 import {BadgeService} from '../badge.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-badge-edit',
@@ -22,7 +23,8 @@ export class BadgeEditComponent implements OnInit {
   constructor(
     private _badgeService: BadgeService, 
     private _router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private auth: AuthService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {

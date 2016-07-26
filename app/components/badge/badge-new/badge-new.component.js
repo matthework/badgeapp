@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var badge_service_1 = require('../badge.service');
+var auth_service_1 = require('../../auth/auth.service');
 var BadgeNewComponent = (function () {
-    function BadgeNewComponent(_badgeService, _router) {
+    function BadgeNewComponent(_badgeService, _router, auth) {
         this._badgeService = _badgeService;
         this._router = _router;
+        this.auth = auth;
         this.newbls = [
             { level: 1, desc: "" },
             { level: 2, desc: "" },
@@ -47,7 +49,7 @@ var BadgeNewComponent = (function () {
             templateUrl: 'app/components/badge/badge-new/badge-new.component.html',
             styleUrls: ['app/components/badge/badge-new/badge-new.component.css']
         }), 
-        __metadata('design:paramtypes', [badge_service_1.BadgeService, router_1.Router])
+        __metadata('design:paramtypes', [badge_service_1.BadgeService, router_1.Router, auth_service_1.AuthService])
     ], BadgeNewComponent);
     return BadgeNewComponent;
 }());

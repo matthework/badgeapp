@@ -12,11 +12,13 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var bcat_service_1 = require('../bcat.service');
 var badge_service_1 = require('../../badge/badge.service');
+var auth_service_1 = require('../../auth/auth.service');
 var BCatNewComponent = (function () {
-    function BCatNewComponent(_bcatService, _badgeService, _router) {
+    function BCatNewComponent(_bcatService, _badgeService, _router, auth) {
         this._bcatService = _bcatService;
         this._badgeService = _badgeService;
         this._router = _router;
+        this.auth = auth;
         this.badges = [];
         this.active = false;
         this.nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -101,7 +103,7 @@ var BCatNewComponent = (function () {
             templateUrl: 'app/components/badgecat/bcat-new/bcat-new.component.html',
             styleUrls: ['app/components/badgecat/bcat-new/bcat-new.component.css']
         }), 
-        __metadata('design:paramtypes', [bcat_service_1.BCatService, badge_service_1.BadgeService, router_1.Router])
+        __metadata('design:paramtypes', [bcat_service_1.BCatService, badge_service_1.BadgeService, router_1.Router, auth_service_1.AuthService])
     ], BCatNewComponent);
     return BCatNewComponent;
 }());

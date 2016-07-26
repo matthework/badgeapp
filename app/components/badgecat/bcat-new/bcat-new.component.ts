@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {BadgeCat,BGroup} from '../bcat';
 import {BCatService} from '../bcat.service';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'my-badgecat-new',
@@ -34,7 +36,8 @@ export class BCatNewComponent{
   constructor(
     private _bcatService: BCatService, 
     private _badgeService: BadgeService,
-    private _router: Router) {}
+    private _router: Router,
+    private auth: AuthService) {}
 
   ngOnInit() {
     this.getBadges();

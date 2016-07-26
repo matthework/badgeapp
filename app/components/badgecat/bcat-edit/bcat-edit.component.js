@@ -12,12 +12,14 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var bcat_service_1 = require('../bcat.service');
 var badge_service_1 = require('../../badge/badge.service');
+var auth_service_1 = require('../../auth/auth.service');
 var BCatEditComponent = (function () {
-    function BCatEditComponent(_bcatService, _badgeService, _router, route) {
+    function BCatEditComponent(_bcatService, _badgeService, _router, route, auth) {
         this._bcatService = _bcatService;
         this._badgeService = _badgeService;
         this._router = _router;
         this.route = route;
+        this.auth = auth;
         this.badges = [];
         this.active = false;
         this.newBadge = "";
@@ -156,7 +158,7 @@ var BCatEditComponent = (function () {
             templateUrl: 'app/components/badgecat/bcat-edit/bcat-edit.component.html',
             styleUrls: ['app/components/badgecat/bcat-edit/bcat-edit.component.css']
         }), 
-        __metadata('design:paramtypes', [bcat_service_1.BCatService, badge_service_1.BadgeService, router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [bcat_service_1.BCatService, badge_service_1.BadgeService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], BCatEditComponent);
     return BCatEditComponent;
 }());
