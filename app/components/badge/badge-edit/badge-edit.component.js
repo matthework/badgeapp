@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var badge_service_1 = require('../badge.service');
+var auth_service_1 = require('../../auth/auth.service');
 var BadgeEditComponent = (function () {
-    function BadgeEditComponent(_badgeService, _router, route) {
+    function BadgeEditComponent(_badgeService, _router, route, auth) {
         this._badgeService = _badgeService;
         this._router = _router;
         this.route = route;
+        this.auth = auth;
         this.active = false;
         this.newLevel = 0;
         this.newDesc = "";
@@ -103,7 +105,7 @@ var BadgeEditComponent = (function () {
             templateUrl: 'app/components/badge/badge-edit/badge-edit.component.html',
             styleUrls: ['app/components/badge/badge-edit/badge-edit.component.css']
         }), 
-        __metadata('design:paramtypes', [badge_service_1.BadgeService, router_1.Router, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [badge_service_1.BadgeService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], BadgeEditComponent);
     return BadgeEditComponent;
 }());
