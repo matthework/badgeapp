@@ -1,9 +1,7 @@
-import {Component} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {BadgeCat,BGroup} from '../bcat';
 import {BCatService} from '../bcat.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl,Control} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 
@@ -36,8 +34,7 @@ export class BCatNewComponent{
   constructor(
     private _bcatService: BCatService, 
     private _badgeService: BadgeService,
-    private _router: Router,
-    private _routeParams: RouteParams) {}
+    private _router: Router) {}
 
   ngOnInit() {
     this.getBadges();
@@ -68,7 +65,7 @@ export class BCatNewComponent{
   }
 
   toBadgeCats() {
-    this._router.navigate(['BadgeCat']);
+    this._router.navigate(['/badgecat']);
     // location.reload();
   }
 

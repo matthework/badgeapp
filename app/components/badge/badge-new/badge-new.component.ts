@@ -1,9 +1,7 @@
-import {Component} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {Badge} from '../badge';
 import {BadgeService} from '../badge.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl,Control} from 'angular2/common';
 
 @Component({
   selector: 'my-badge-new',
@@ -28,11 +26,9 @@ export class BadgeNewComponent {
 
   constructor(
     private _badgeService: BadgeService, 
-    private _router: Router,
-    private _routeParams: RouteParams) {}
+    private _router: Router) {}
 
   addBadge() {
-    // this.newBadge.badgelevels = this.newBadge.badgelevels.filter(this.checkEmpty);
     this.newBadge.code = this.newBadge.code.toUpperCase();
     let value = JSON.stringify(this.newBadge);
     this._badgeService.addBadge(value).subscribe();
@@ -40,14 +36,8 @@ export class BadgeNewComponent {
     this.toBadges();
   }
 
-  // checkEmpty(item) {
-  //   if (item.desc != "") {
-  //     return item;
-  //   }
-  // }
-
   toBadges() {
-    this._router.navigate(['Badges']);
+    this._router.navigate(['/badges']);
     // location.reload();
   }
   

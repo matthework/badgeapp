@@ -1,6 +1,5 @@
-import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {Observable} from 'rxjs/Rx';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {Staff,BadgeGroup} from './staff';
 import {StaffEditComponent} from './staff-edit/staff-edit.component';
 import {StaffService} from './staff.service';
@@ -69,20 +68,20 @@ export class StaffComponent {
 	}
 
 	toStaffs() {
-		this._router.navigate(['Staffs']);
+		this._router.navigate(['/staffs']);
 		// location.reload();
 	}
 
 	toStaffEdit(sid:string) {
-		this._router.navigate(['StaffEdit', { id: sid}]);
+		this._router.navigate(['/staff/edit',sid]);
 	}
 	
 	toStaffDetail(sid:string) {
-		this._router.navigate(['StaffDetail', { id: sid}]);
+		this._router.navigate(['/staff/detail',sid]);
 	}
 
 	addStaff() {
-		this._router.navigate(['StaffNew']);
+		this._router.navigate(['/staff/new']);
 	}
 
 	removeStaff(id:string) {
@@ -122,7 +121,7 @@ export class StaffComponent {
    			}
    		}
       }
-		this._router.navigate(['BadgeDetail', {id:bid}]);
+		this._router.navigate(['/badge/detail',bid]);
 	}
 
 	getStaffBS(sbgs:BadgeGroup[]) {
@@ -210,7 +209,7 @@ export class StaffComponent {
 	}
 
 	toBSDetail(bsid:string){
-		this._router.navigate(['BSDetail', { id: bsid}]);
+		this._router.navigate(['/bs/detail',bsid]);
 	}
 
 }

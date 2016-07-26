@@ -16,7 +16,7 @@
 	<text>${{staff.salary}}K</text><br>
 
 	<label>Badge Sets: </label>
-	<text *ngFor="#bs of getSortStaffBS(staff.badgegroups)">
+	<text *ngFor="let bs of getSortStaffBS(staff.badgegroups)">
 		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
 	</text><br>
 
@@ -32,11 +32,11 @@
 		  <th class="th-desc">Description</th>
 		  <th class="th-bs">Badge Set</th>
 		</tr>
-		<tr *ngFor="#badgegroup of staff.badgegroups">
+		<tr *ngFor="let badgegroup of staff.badgegroups">
 			<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
 			<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
 			<td class="td-bs">
-			<div *ngFor="#bs of findBadgeSet(badgegroup.badge,badgegroup.level)">
+			<div *ngFor="let bs of findBadgeSet(badgegroup.badge,badgegroup.level)">
 				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 			</div>
       		</td>

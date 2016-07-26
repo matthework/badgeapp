@@ -1,7 +1,6 @@
-import {Component,OnInit,Inject} from 'angular2/core';
-import {Http, Response} from 'angular2/http';
-import {Observable} from 'rxjs/Rx';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Http} from '@angular/http';
+import {Router} from '@angular/router';
 import {BadgeSet} from './bs';
 import {Badge} from '../badge/badge';
 import {Tier} from '../tier/tier';
@@ -79,15 +78,15 @@ export class BSComponent implements OnInit {
 	}
 
 	toBSEdit(bsid:string) {
-		this._router.navigate(['BSEdit', { id: bsid}]);
+		this._router.navigate(['/bs/edit',bsid]);
 	}
 
 	toBSDetail(bsid:string) {
-		this._router.navigate(['BSDetail', { id: bsid}]);
+		this._router.navigate(['/bs/detail',bsid]);
 	}
 
 	addBadgeSet() {
-		this._router.navigate(['BSNew']);
+		this._router.navigate(['/bs/new']);
 	}
 
 	removeBadgeSet(id:string) {
@@ -145,7 +144,7 @@ export class BSComponent implements OnInit {
 	}
 
 	toBadgeSets() {
-		this._router.navigate(['BadgeSet']);
+		this._router.navigate(['/badgeset']);
 		location.reload();
 	}
 
@@ -158,7 +157,7 @@ export class BSComponent implements OnInit {
 				}
 			}
 		}
-		this._router.navigate(['BadgeDetail', {id:bid}]);
+		this._router.navigate(['/badge/detail',bid]);
 	}
 
 	getComBS() {

@@ -21,11 +21,11 @@
 		  <th class="th-desc">Description</th>
 		  <th class="th-badgeset">BadgeSet</th>
 		</tr>
-		<tr *ngFor="#badgelevel of badge.badgelevels">
+		<tr *ngFor="let badgelevel of badge.badgelevels">
 			<td *ngIf="badgelevel.level" class="td-level">{{badgelevel.level}}</td>
 			<td class="td-desc" *ngIf="badgelevel.level">{{badgelevel.desc}}</td>
 			<td *ngIf="badgelevel.level">
-			<div *ngFor="#bs of findBadgeSet(badge.name,badgelevel.level)">
+			<div *ngFor="let bs of findBadgeSet(badge.name,badgelevel.level)">
 				<uli (click)="toBSDetail(bs._id)" class="uli-bset">{{bs.name}}</uli><text class="check-core">{{checkCore(bs,badge.name)}}</text>
 			</div>
       		</td>

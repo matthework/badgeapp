@@ -1,9 +1,7 @@
-import {Component} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {Staff} from '../staff';
 import {StaffService} from '../staff.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl,Control} from 'angular2/common';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 
@@ -37,8 +35,7 @@ export class StaffNewComponent {
   constructor(
       private _staffService: StaffService, 
       private _badgeService: BadgeService,
-      private _router: Router,
-      private _routeParams: RouteParams) {}
+      private _router: Router) {}
 
   ngOnInit() {
     this.getBadges();
@@ -64,7 +61,7 @@ export class StaffNewComponent {
   }
 
   toStaffs() {
-    this._router.navigate(['Staffs']);
+    this._router.navigate(['/staffs']);
     // location.reload();
   }
 

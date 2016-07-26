@@ -1,9 +1,8 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+
 import {Badge} from '../badge';
 import {BadgeService} from '../badge.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 import {YesNoPipe} from '../../pipe/yes-no-pipe';
 import {BadgeSet} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
@@ -20,22 +19,30 @@ export class BadgeDetailComponent implements OnInit {
     title: string = "Badge";
     badge: Badge;
     badgesets: BadgeSet[] = [];
+    sub: any;
+    id: string;
 
     constructor(
         private _badgeService: BadgeService, 
         private _bsService: BSService,
         private _router: Router,
-        private _routeParams: RouteParams) {}
+        private route: ActivatedRoute) {}
 
     ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.id = params['id'];
+        });
         this.getBadge();
         this.getBadgeSets();
     }
 
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
     getBadge() {
-        let id = this._routeParams.get('id');
-        console.log('id from _routeParams: ', id); 
-        this._badgeService.getBadge(id).subscribe((badge) => {this.badge = badge;});
+        console.log('id from _routeParams: ', this.id); 
+        this._badgeService.getBadge(this.id).subscribe((badge) => {this.badge = badge;});
     }
 
     getBadgeSets() {
@@ -43,12 +50,12 @@ export class BadgeDetailComponent implements OnInit {
     }
 
     toBadges() {
-        this._router.navigate(['Badges']);
+        this._router.navigate(['/badges']);
         // location.reload();
     }
 
     editBadge() {
-        this._router.navigate(['BadgeEdit', { id: this._routeParams.get('id') }]);
+        this._router.navigate(['/badge/edit', this.id]);
     }
 
     findBadgeSet(bname:string, l:number) {
@@ -66,7 +73,7 @@ export class BadgeDetailComponent implements OnInit {
     }
 
     toBSDetail(bsid:string){
-        this._router.navigate(['BSDetail', { id: bsid}]);
+        this._router.navigate(['bs/detail',bsid]);
     }
 
     checkCore(bs:BadgeSet,b:string) {

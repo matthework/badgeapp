@@ -1,6 +1,5 @@
-import {Component} from 'angular2/core';
-import {Router} from 'angular2/router';
-import {Observable} from 'rxjs/Rx';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {Tier} from './tier';
 import {TierEditComponent} from './tier-edit/tier-edit.component';
 import {TierService} from './tier.service';
@@ -47,15 +46,15 @@ export class TierComponent {
   }
 
   toTierDetail(tid:string) {
-    this._router.navigate(['TierDetail', { id: tid }]);
+    this._router.navigate(['/tier/detail',tid]);
   }
 
   toTierEdit(tid:string) {
-    this._router.navigate(['TierEdit', { id: tid }]);
+    this._router.navigate(['/tier/edit',tid]);
   }
   
   addTier() {
-    this._router.navigate(['TierNew']);
+    this._router.navigate(['/tier/new']);
   }
 
   removeTier(id:string) {
@@ -85,11 +84,11 @@ export class TierComponent {
   }
 
   toBSDetail(bsid:string){
-    this._router.navigate(['BSDetail', { id: bsid}]);
+    this._router.navigate(['/bs/detail',bsid]);
   }
 
   toTiers() {
-    this._router.navigate(['Tiers']);
+    this._router.navigate(['/tiers']);
     location.reload();
   }
 

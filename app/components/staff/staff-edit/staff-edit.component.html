@@ -29,12 +29,12 @@
 <!-- 	<label>Others: </label>
 	<input class="input-others" type="text" [(ngModel)]="staff.others" placeholder="Others" /><br> -->
 
-	<div class="badgegroup-block" *ngFor="#badgegroup of staff.badgegroups">
+	<div class="badgegroup-block" *ngFor="let badgegroup of staff.badgegroups">
 		<label>Badge: </label>
-		<select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+		<select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 
 		<label class="label-level">Level: </label>
-		<select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="#lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br>
+		<select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Description: </label>
 		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(badgegroup.badge,badgegroup.level)}}</textarea>
@@ -50,10 +50,10 @@
 	<div *ngIf="active">
 		<h3>Add New Badge</h3><br>
 		<label>Badge: </label>
-		<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="#bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+		<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 
 		<label class="label-level">Level: </label>
-		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="#lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Description: </label>
 		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>

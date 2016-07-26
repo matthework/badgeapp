@@ -1,9 +1,8 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+
 import {Badge,BadgeLevel} from '../badge';
 import {BadgeService} from '../badge.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 
 @Component({
   selector: 'my-badge-edit',
@@ -13,50 +12,58 @@ import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/comm
 
 export class BadgeEditComponent implements OnInit {
 
-  // title: string = "Edit Badge";
   badge: Badge;
   active = false;
   newLevel = 0;
   newDesc = "";
+  sub: any;
+  id: string;
 
   constructor(
     private _badgeService: BadgeService, 
     private _router: Router,
-    private _routeParams: RouteParams) {}
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
-    let id = this._routeParams.get('id');
-    console.log('id from _routeParams: ', id); 
-    this._badgeService.getBadge(id).subscribe((badge) => {this.badge = badge;});
+    this.sub = this.route.params.subscribe(params => {
+        this.id = params['id'];
+    });
+    this.getBadge();
+  }
+
+  ngOnDestroy() {
+      this.sub.unsubscribe();
+  }
+
+  getBadge() {
+    console.log('id from _routeParams: ', this.id); 
+    this._badgeService.getBadge(this.id).subscribe((badge) => {this.badge = badge;});
   }
 
   toBadges() {
-    this._router.navigate(['Badges']);
+    this._router.navigate(['/badges']);
     // location.reload();
   }
 
   toBadgeDetail() {
-    let id = this._routeParams.get('id');
-    this._router.navigate(['BadgeDetail', { id: id }]);
+    this._router.navigate(['/badge/detail',this.id]);
     // location.reload();
   }
 
   updateBadge() {
     this.badge.code = this.badge.code.toUpperCase();
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badge)
-    this._badgeService.updateBadge(id,value).subscribe();
+    this._badgeService.updateBadge(this.id,value).subscribe();
     console.log('you submitted value: ', value); 
     this.toBadgeDetail();
   }
 
   addBadge() {
-    this._router.navigate(['BadgeNew']);
+    this._router.navigate(['/badge/new']);
   }
 
   removeBadge() {
-    let id = this._routeParams.get('id');
-    this._badgeService.deleteBadge(id).subscribe();
+    this._badgeService.deleteBadge(this.id).subscribe();
     this.toBadges();
   }
 
@@ -71,9 +78,7 @@ export class BadgeEditComponent implements OnInit {
   addBadgeLevel() {
     this.badge.badgelevels.push({level: this.newLevel, desc: this.newDesc});
     this.badge.badgelevels.sort(this.toCompare);
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badge)
-    // this._badgeService.updateBadge(id,value).subscribe();
     console.log('you submitted value: ', value);
     this.newLevel = 0;
     this.newDesc = "";
@@ -91,9 +96,7 @@ export class BadgeEditComponent implements OnInit {
   removeBadgeLevel(selectedLevel: BadgeLevel) {
     let index = this.badge.badgelevels.indexOf(selectedLevel);
     this.badge.badgelevels.splice(index,1);
-    let id = this._routeParams.get('id');
     let value = JSON.stringify(this.badge)
-    // this._badgeService.updateBadge(id,value).subscribe();
     console.log('you submitted value: ', value);
   }
 

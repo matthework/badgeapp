@@ -1,9 +1,5 @@
-
-import {Component,OnInit,Inject} from 'angular2/core';
-// import {$WebSocket} from 'angular2-websocket/angular2-websocket';
-import {Http, Response} from 'angular2/http';
-import {Observable} from 'rxjs/Rx';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Badge} from './badge';
 import {BadgeDetailComponent} from './badge-detail/badge-detail.component';
 import {BadgeEditComponent} from './badge-edit/badge-edit.component';
@@ -22,32 +18,15 @@ import {YesNoPipe} from '../pipe/yes-no-pipe';
 
 export class BadgeComponent implements OnInit {
 
-  // title: string = "Badges";
   badges: Badge[] = [];
   selectedBadge: Badge;
   active = false;
   showBadges = false;
   showBCat = false;
 
-  // private _ws: $WebSocket;
-
   constructor (
       private _router: Router,
       private _badgeService: BadgeService) {}
-  //     this._ws = new $WebSocket("ws://localhost:8080/");
-  //     let cb = function(message: any) {
-  //         if (message.data.length > 0) {
-  //             alert(message.data);
-  //         }
-  //     }
-  //     this._ws.onMessage(cb, null);
-  // }
-
-  // sendMessage(message: string) {
-  //     if (message.length > 0) {
-  //         this._ws.send(message);
-  //     }
-  // }
 
   ngOnInit() {
     this.getBadges();
@@ -62,15 +41,15 @@ export class BadgeComponent implements OnInit {
   }
 
   toDetail() {
-    this._router.navigate(['BadgeDetail', { id: this.selectedBadge._id }]);
+    this._router.navigate(['/badge/detail', this.selectedBadge._id]);
   }
 
   toEdit(bid:string) {
-    this._router.navigate(['BadgeEdit', { id: bid}]);
+    this._router.navigate(['/badge/edit', bid]);
   }
 
   addBadge() {
-    this._router.navigate(['BadgeNew']);
+    this._router.navigate(['/badge/new']);
   }
 
   removeBadge(id:string) {
@@ -87,13 +66,13 @@ export class BadgeComponent implements OnInit {
   }
 
   toBadges() {
-    this._router.navigate(['Badges']);
+    this._router.navigate(['/badges']);
     location.reload();
   }
 
   showBadgeCat() {
     this.showBCat = true;
-    this._router.navigate(['BadgeCat']);
+    this._router.navigate(['/badgecat']);
   }
 
 }

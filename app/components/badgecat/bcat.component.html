@@ -22,10 +22,10 @@
 		<th class="th-root">Category</th>
 		<th class="th-last"></th>
 	</tr>
-	<tr *ngFor="#badgecat of badgecats | filter:query">
+	<tr *ngFor="let badgecat of badgecats | filter:query">
 		<td class="badgecat">{{badgecat.name}}</td>
 		<td class="td-badges">
-			<div *ngFor="#bgroup of badgecat.bgroups">
+			<div *ngFor="let bgroup of badgecat.bgroups">
 			<li>
 			<text class="badge">{{bgroup.badge}} {{bgroup.levels}}</text>
 			</li>

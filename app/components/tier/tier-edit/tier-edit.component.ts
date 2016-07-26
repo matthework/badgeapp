@@ -1,9 +1,8 @@
-import {Component,OnInit} from 'angular2/core';
-import {RouteParams} from 'angular2/router';
-import {Router} from 'angular2/router';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+
 import {Tier} from '../tier';
 import {TierService} from '../tier.service';
-import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/common';
 
 @Component({
   selector: 'my-tier-edit',
@@ -14,38 +13,44 @@ import {Validators,FormBuilder,ControlGroup,AbstractControl} from 'angular2/comm
 export class TierEditComponent implements OnInit {
 
   tier: Tier;
+  sub: any;
+  id: string;
 
   constructor(
       private _tierService: TierService, 
       private _router: Router,
-      private _routeParams: RouteParams) {}
+      private route: ActivatedRoute) {}
 
   ngOnInit() {
-    let id = this._routeParams.get('id');
-    console.log('id from _routeParams: ', id); 
-    this._tierService.getTier(id).subscribe((tier) => {this.tier = tier;});
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.getTier();
+  }
+
+  getTier() {
+    console.log('id from _routeParams: ', this.id); 
+    this._tierService.getTier(this.id).subscribe((tier) => {this.tier = tier;});
   }
 
   toTiers() {
-    this._router.navigate(['Tiers']);
+    this._router.navigate(['/tiers']);
     // location.reload();
   }
 
   updateTier() {
-      let id = this._routeParams.get('id');
       let value = JSON.stringify(this.tier)
-      this._tierService.updateTier(id,value).subscribe();
+      this._tierService.updateTier(this.id,value).subscribe();
       console.log('you submitted value: ', value); 
       this.toTiers();
   }
 
   addTier() {
-    this._router.navigate(['TierNew']);
+    this._router.navigate(['/tier/new']);
   }
 
   removeTier() {
-    let id = this._routeParams.get('id');
-    this._tierService.deleteTier(id).subscribe();
+    this._tierService.deleteTier(this.id).subscribe();
     this.toTiers();
   }
 
