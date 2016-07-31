@@ -13,9 +13,11 @@
       <p><strong>Created At: </strong> {{auth.userProfile.created_at}}</p>
       <p><strong>Updated At: </strong> {{auth.userProfile.updated_at}}</p>
       <p><strong>Address: </strong> {{auth.userProfile.user_metadata.address}}</p>
+      <p><strong>Google Profile: </strong> {{auth.userProfile.groups}}</p>
     </div>
   </div>
 </div>
+
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 <br>
