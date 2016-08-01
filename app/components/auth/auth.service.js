@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var angular2_jwt_1 = require('angular2-jwt');
+var http_1 = require('@angular/http');
 var AuthService = (function () {
-    function AuthService(_router) {
+    function AuthService(_router, _http) {
         var _this = this;
         this._router = _router;
+        this._http = _http;
         this.adminList = [
             "matt.wang@propellerhead.co.nz",
             "andrew.weston@propellerhead.co.nz",
@@ -48,6 +50,14 @@ var AuthService = (function () {
             });
         });
     }
+    AuthService.prototype.ngOnInit = function () {
+        this.getEnv();
+        console.log('you submitted value: ', this.env);
+    };
+    AuthService.prototype.getEnv = function () {
+        var _this = this;
+        this._http.get('/api/login').map(function (r) { return r.json(); }).subscribe(function (env) { _this.env = env; });
+    };
     AuthService.prototype.login = function () {
         // Call the show method to display the widget.
         this.lock.show();
@@ -83,7 +93,7 @@ var AuthService = (function () {
     };
     AuthService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, http_1.Http])
     ], AuthService);
     return AuthService;
 }());
