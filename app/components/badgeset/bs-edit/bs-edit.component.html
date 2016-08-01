@@ -1,4 +1,6 @@
 
+<div *ngIf="auth.isAdmin()">
+
 <div *ngIf="badgeset">
 	<h2>Edit Badge Set - {{badgeset.name}}</h2><br>
 
@@ -93,4 +95,7 @@
 
 </div>
 
+</div>
+
+<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
 

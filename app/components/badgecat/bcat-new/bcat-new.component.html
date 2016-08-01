@@ -1,4 +1,4 @@
-<div *ngIf="auth.authenticated()">
+<div *ngIf="auth.isAdmin()">
 
 <h2>Add New Badge Category</h2><br>
 
@@ -29,5 +29,4 @@
 
 </div>
 
-<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
-
+<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
