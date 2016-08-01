@@ -79,7 +79,7 @@ var AuthService = (function () {
     ;
     AuthService.prototype.toMain = function () {
         this._router.navigate(['/main']);
-        location.reload();
+        // location.reload();
     };
     AuthService = __decorate([
         core_1.Injectable(), 
