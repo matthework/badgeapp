@@ -82,7 +82,7 @@ export class AuthService {
 
   toMain() {
     this._router.navigate(['/main']);
-    location.reload();
+    // location.reload();
   }
 
 }
