@@ -30,22 +30,22 @@
 			<th class="th-last"></th>
 		</tr>
 		<tr *ngFor="let badgeset of badgesets | filter:query">
-			<td (click)="onSelect(badgeset);toBSDetail(badgeset._id)" class="badgeset">{{badgeset.name}}</td>
-			<td class="td-badges">
+			<td *ngIf="badgeset.inused || auth.isAdmin()" (click)="onSelect(badgeset);toBSDetail(badgeset._id)" class="badgeset">{{badgeset.name}}</td>
+			<td *ngIf="badgeset.inused || auth.isAdmin()" class="td-badges">
 				<div *ngFor="let badgegroup of badgeset.badgegroups">
 				<li>
 				<text class="tooltip" (click)="toBadgeDetail(badgegroup.badge)"><text class="badge">{{badgegroup.badge}} {{badgegroup.level}}</text><text class="check-core">{{checkCore(badgeset,badgegroup.badge)}}</text><span class="tooltiptext"><li> <b>Level {{badgegroup.level-1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level-1)}}</li><br><li><b><u>Level {{badgegroup.level}}</u>: </b>{{getDesc(badgegroup.badge, badgegroup.level)}}</li><br><li><b>Level {{badgegroup.level+1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level+1)}}</li></span></text>
 				</li>
 				</div>
 			</td>
-			<td class="td-tier">{{badgeset.tier}}</td>
-			<td class="td-grade">{{badgeset.grade}}</td>
-			<td class="td-pay">${{getPay(badgeset.tier,badgeset.grade)}}K</td>
-			<td class="td-tags">
+			<td *ngIf="badgeset.inused || auth.isAdmin()" class="td-tier">{{badgeset.tier}}</td>
+			<td *ngIf="badgeset.inused || auth.isAdmin()" class="td-grade">{{badgeset.grade}}</td>
+			<td *ngIf="badgeset.inused || auth.isAdmin()" class="td-pay">${{getPay(badgeset.tier,badgeset.grade)}}K</td>
+			<td *ngIf="badgeset.inused || auth.isAdmin()" class="td-tags">
 				<text *ngFor="let tag of badgeset.tags"><text class="t-tag" (click)="groupByTag(tag)"> {{tag}}, </text></text>
 			</td>
-			<td class="td-inused">{{badgeset.inused | yes_no}}</td>
-			<td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgeSetPop(badgeset._id)">X</button><button class="button-s-e" (click)="toBSEdit(badgeset._id)">E</button></td>
+			<td *ngIf="badgeset.inused || auth.isAdmin()" class="td-inused">{{badgeset.inused | yes_no}}</td>
+			<td *ngIf="(badgeset.inused || auth.isAdmin()) && active" class="td-last"><button class="button-s-x" (click)="deleteBadgeSetPop(badgeset._id)">X</button><button class="button-s-e" (click)="toBSEdit(badgeset._id)">E</button></td>
 		</tr>
 	</table>
 </div>

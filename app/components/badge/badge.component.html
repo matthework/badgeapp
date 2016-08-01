@@ -26,11 +26,11 @@
       <th class="th-last"></th>
    </tr>
    <tr *ngFor="let badge of badges | filter:query">
-      <td (click)="onSelect(badge);toDetail()" class="badge">{{badge.name}}</td>
-      <td class="td-overview" (click)="onSelect(badge)">{{badge.overview}}</td>
-      <td (click)="onSelect(badge)" class="td-approved">{{badge.approved | yes_no}}</td>
-      <td (click)="onSelect(badge)" class="td-inused">{{badge.inused | yes_no}}</td>
-      <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgePop(badge._id)">X</button><button class="button-s-e" (click)="toEdit(badge._id)">E</button></td>
+      <td *ngIf="badge.inused || auth.isAdmin()" (click)="onSelect(badge);toDetail()" class="badge">{{badge.name}}</td>
+      <td *ngIf="badge.inused || auth.isAdmin()" class="td-overview" (click)="onSelect(badge)">{{badge.overview}}</td>
+      <td *ngIf="badge.inused || auth.isAdmin()" (click)="onSelect(badge)" class="td-approved">{{badge.approved | yes_no}}</td>
+      <td *ngIf="badge.inused || auth.isAdmin()" (click)="onSelect(badge)" class="td-inused">{{badge.inused | yes_no}}</td>
+      <td *ngIf="(badge.inused || auth.isAdmin()) && active" class="td-last"><button class="button-s-x" (click)="deleteBadgePop(badge._id)">X</button><button class="button-s-e" (click)="toEdit(badge._id)">E</button></td>
    </tr>
 </table>
 </div>

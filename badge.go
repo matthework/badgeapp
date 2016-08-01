@@ -41,7 +41,7 @@ func listBadgesSort() (badges []Badge) {
 	defer session.Close()
 
 	collection := session.DB(DB).C(col_badge)
-	err := collection.Find(nil).Sort("name").All(&badges)
+	err := collection.Find(nil).Sort("-inused","-approved","name").All(&badges)
 	if err != nil {
 		panic(err)
 	}
