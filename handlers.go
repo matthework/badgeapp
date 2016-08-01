@@ -6,8 +6,13 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"encoding/json"
 	"github.com/gorilla/mux"
 )
+
+var domain = os.Getenv("Domain")
+var cid = os.Getenv("Client_ID")
+var auth = map[string]string{"domain": domain, "cid": cid}
 
 func loadIndex(w http.ResponseWriter) {
 	pwd, _ := os.Getwd()
@@ -36,11 +41,22 @@ func handlerURL(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func viewLogin(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	if err := json.NewEncoder(w).Encode(auth); err != nil {
+		panic(err)
+	}
+}
+
 func addRoutes() {
 
 	http.HandleFunc("/", handlerURL)
 
 	router := mux.NewRouter()
+
+	router.HandleFunc("/api/login", viewLogin).Methods("GET")
 	router.HandleFunc("/api/badges", viewBadges).Methods("GET")
 	router.HandleFunc("/api/badge/detail/{id}", viewFindBadgeByID).Methods("GET")
 	router.HandleFunc("/api/badge/new", addNewBadge).Methods("POST")
