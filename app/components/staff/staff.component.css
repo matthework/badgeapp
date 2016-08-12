@@ -17,39 +17,13 @@ h3 {
   margin-top: 0;
   padding-top: 5px;
 }
-input {
-  height: 2em;
-  font-size: 1em;
-  padding-left: .4em;
-  margin-bottom: 20px;
+li {
+    width: 100%;
+    list-style-type: none;
+    /*padding: 6px 10px;*/
 }
-button {
-  margin-top: 10px;
-  margin-right: 10px;
-  font-size: 1em;
-  font-family: Arial;
-  background-color: #eee;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  cursor: hand;
-}
-button:hover {
-  background-color: #cfd8dc;
-}
-table, th , td  {
-  width: 60%;
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-  background-color: #ffffff;
+li:hover {
+    background: #cfd8dc;
 }
 .table-staffs {
   table-layout: fixed;
@@ -249,14 +223,6 @@ table tr:nth-child(even) {
   background-color: #CFD8DC !important;
   color: white;
 }
-li {
-    width: 100%;
-    list-style-type: none;
-    /*padding: 6px 10px;*/
-}
-li:hover {
-    background: #cfd8dc;
-}
 .li-bs {
   font-size: 1em;
   cursor: pointer;
@@ -317,8 +283,6 @@ li:hover {
 .tooltip:hover {
   color: #039be5;
 }
-
-
 
 
 

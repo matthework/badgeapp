@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 
 @Component({
-    selector: 'my-main',
+    selector: 'my-about',
     templateUrl: 'app/components/about/about.component.html',
     styleUrls: ['app/components/about/about.component.css'],
 })

@@ -33,6 +33,8 @@
 <label>Grade F: </label>
 <input class="input-gradef" type="number" [(ngModel)]="newTier.grades[5]" placeholder="$"> K<br>
 
+<br>
+
 <button class="button-add" [disabled]="!newTier.tier" (click)="addTier()">Save</button>
 <button class="button-cancel" (click)="goBack()">Cancel</button><br>
 <br>

@@ -17,45 +17,7 @@ h3 {
   margin-top: 0;
   padding-top: 5px;
 }
-input {
-  height: 2em;
-  font-size: 1em;
-  padding-left: .4em;
-  margin-bottom: 20px;
-}
-button {
-  margin-top: 10px;
-  margin-right: 10px;
-  font-size: 1em;
-  font-family: Arial;
-  background-color: #eee;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  cursor: hand;
-}
-button:hover {
-  background-color: #cfd8dc;
-}
-table {
-  table-layout: auto;
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-  background-color: #ffffff;
-}
-th , td  {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
-}
+
 .input-query {
   /*margin-bottom: 0px;*/
 }
