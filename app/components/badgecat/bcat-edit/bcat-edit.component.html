@@ -8,7 +8,7 @@
 	<input class="input-name" type="text" [(ngModel)]="badgecat.name" placeholder="Subcategory"><br>
 	<br>
 	<label>Category: </label>
-	<input class="input-name" type="text" [(ngModel)]="badgecat.root" placeholder="Category"><br>
+	<input class="input-name" type="text" [(ngModel)]="badgecat.root" placeholder="Category">
 
 	<div class="badgegroup-block" *ngFor="let bgroup of badgecat.bgroups">
 		<label>Badge: </label>
@@ -43,7 +43,8 @@
 		<button class="button-l-save" (click)="addBGroup();active=false">Save</button>
 		<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
 	</div>
-	
+	<br>
+
 	<div *ngIf!="active">
 		<button class="button-add" (click)="addBadgeCat()">New</button>
 		<button class="button-delete" (click)="deleteBadgeCatPop()">Delete</button>

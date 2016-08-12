@@ -40,7 +40,7 @@
 <label>Description: </label>
 <textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newStaff.badgegroups[i].badge,newStaff.badgegroups[i].level)}}</textarea><br>
 </div>
-
+<br>
 <button class="button-add" [disabled]="!newStaff.fname||!newStaff.lname" (click)="addStaff()">Save</button>
 <button class="button-cancel" (click)="goBack()">Cancel</button>
 <br>
