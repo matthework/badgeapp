@@ -19,7 +19,7 @@
 <input type="checkbox" [(ngModel)]="newBadge.approved" placeholder="Approved" /><br>
 
 <label>InUsed: </label>
-<input type="checkbox" [(ngModel)]="newBadge.inused" placeholder="InUsed" /><br>
+<input type="checkbox" [disabled]="!newBadge.approved" [(ngModel)]="newBadge.inused" placeholder="InUsed" /><br>
 
 <br>
 <label>Level 1:</label>
