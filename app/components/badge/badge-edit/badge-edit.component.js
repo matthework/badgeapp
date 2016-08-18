@@ -47,6 +47,9 @@ var BadgeEditComponent = (function () {
     };
     BadgeEditComponent.prototype.updateBadge = function () {
         this.badge.code = this.badge.code.toUpperCase();
+        if (!this.badge.approved) {
+            this.badge.inused = false;
+        }
         var value = JSON.stringify(this.badge);
         this._badgeService.updateBadge(this.id, value).subscribe();
         console.log('you submitted value: ', value);

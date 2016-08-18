@@ -123,7 +123,9 @@ var StaffEditComponent = (function () {
         var badgesOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                badgesOptions.push(this.badges[i].name);
+                if (this.badges[i].inused) {
+                    badgesOptions.push(this.badges[i].name);
+                }
             }
             // console.log('getBadgesOptions: ', badgesOptions);
             return badgesOptions.sort();

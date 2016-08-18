@@ -26,7 +26,7 @@
     <th class="th-pos">Position</th>
    	<!-- <th class="th-salary">Salary</th> -->
     <th class="th-email">Email</th>
-    <th class="th-phone">Phone</th>
+    <!-- <th class="th-phone">Phone</th> -->
     <th class="th-last"></th>
   </tr>
   <tr *ngFor="let staff of staffs | filter:query">
@@ -42,7 +42,7 @@
     <td (click)="onSelect(staff)">{{staff.position}}</td>
     <!-- <td class="td-salary" (click)="onSelect(staff)">${{staff.salary}}K</td> -->
     <td (click)="onSelect(staff)">{{staff.email}}</td>
-    <td (click)="onSelect(staff)">{{staff.phone}}</td>
+    <!-- <td (click)="onSelect(staff)">{{staff.phone}}</td> -->
     <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteStaffPop(staff._id)">X</button><button class="button-s-e" (click)="toStaffEdit(staff._id)">E</button></td>
   </tr>
 </table>

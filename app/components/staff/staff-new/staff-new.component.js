@@ -80,7 +80,9 @@ var StaffNewComponent = (function () {
         var badgesOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                badgesOptions.push(this.badges[i].name);
+                if (this.badges[i].inused) {
+                    badgesOptions.push(this.badges[i].name);
+                }
             }
         }
         return badgesOptions.sort();

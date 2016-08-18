@@ -40,26 +40,26 @@ li:hover {
   line-height: 25px; 
 }
 .th-name {
-  width: 20%;
-}
-.th-bg {
   width: 25%;
 }
+.th-bg {
+  width: 30%;
+}
 .th-topbs {
-  width: 20%;
+  width: 25%;
 }
 .th-pos {
   width: 15%;
 }
-.th-salary {
+/*.th-salary {
   width: 8%;
-}
+}*/
 .th-email {
   width: 20%;
 }
-.th-phone {
+/*.th-phone {
   width: 15%;
-}
+}*/
 .th-last {
   width: 15%;
   background-color: #ffffff;
@@ -72,14 +72,14 @@ li:hover {
 }
 .td-position {
 }
-.td-salary {
+/*.td-salary {
   text-align: center;
-}
+}*/
 .td-email {
   word-wrap: normal;
 }
-.td-phone {
-}
+/*.td-phone {
+}*/
 .td-last{
   background-color: #ffffff;
   border: 0 ;
@@ -96,7 +96,7 @@ li:hover {
   width: 30%;
 }
 .th-bs {
-  width: 50%;
+  width: 45%;
 }
 .th-tier {
   width: 20%;

@@ -10,7 +10,7 @@ badge category
 
 ******************* run locally *******************  
 // project root folder  
-$GOPATH/src/github.com/propellerheadnz/badge/  
+cd $GOPATH/src/github.com/propellerheadnz/badge  
 
 // run mongoDB server  
 mongod  

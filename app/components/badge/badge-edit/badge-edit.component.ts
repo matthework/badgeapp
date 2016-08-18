@@ -54,6 +54,9 @@ export class BadgeEditComponent implements OnInit {
 
   updateBadge() {
     this.badge.code = this.badge.code.toUpperCase();
+    if(!this.badge.approved) {
+      this.badge.inused = false;
+    }
     let value = JSON.stringify(this.badge)
     this._badgeService.updateBadge(this.id,value).subscribe();
     console.log('you submitted value: ', value); 
