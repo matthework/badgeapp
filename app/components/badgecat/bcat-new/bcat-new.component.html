@@ -18,7 +18,7 @@
 <select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBCat.bgroups[i].badge)" [value]="lo">{{lo}}</option></select><button class="button-s-add" (click)="addLevel(i,newLevel)">+</button><br>
 <label></label>
 <text *ngFor="let level of newBCat.bgroups[i].levels">Level: {{level}} <button class="button-s-delete" (click)="deleteLevel(i,level)">-</button></text><br>
-
+<br>
 </div>
 
 <button class="button-add" [disabled]="!newBCat.name" (click)="addBadgeCat()">Save</button>

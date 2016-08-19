@@ -22,10 +22,71 @@ h4 {
   padding-top: 0;
   font-weight: lighter;
 }
+label {
+  display: inline-block;
+  width: 8em;
+  color: #999;
+  font-weight: bold;
+}
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  margin-bottom: 20px;
+  color: #999;
+}
 button {
   width: 100px;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 1em;
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer; 
+  cursor: hand;
 }
-
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #ccc; 
+  cursor: auto;
+}
+li {
+margin-left: 0;
+}
+table {
+  table-layout: auto;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+textarea {
+  vertical-align: top;
+  font-size: 1em;
+  color: #999;
+  width: 350px;
+  height: 200px;
+  padding-left: .4em;
+  padding-top: .4em;
+  margin-bottom: 20px;
+}
 .input-index{
   width: 300px;
 }
@@ -40,7 +101,7 @@ button {
   padding: 5px;
   font-size: 16px;
   line-height: 1;
-  border-radius: 0;
+  border-radius: 3;
   border: 1px solid #cccccc;
   margin-right: 50px;
   margin-bottom: 30px;
@@ -56,7 +117,7 @@ button {
   padding: 5px;
   font-size: 16px;
   line-height: 1;
-  border-radius: 0;
+  border-radius: 3;
   border: 1px solid #cccccc;
 
   margin-bottom: 30px;
@@ -85,7 +146,7 @@ button {
   padding: 5px;
   font-size: 16px;
   line-height: 1;
-  border-radius: 0;
+  border-radius: 3;
   border: 1px solid #cccccc;
   margin-right: 30px;
   margin-bottom: 30px;
@@ -98,7 +159,7 @@ button {
   padding: 5px;
   font-size: 16px;
   line-height: 1;
-  border-radius: 0;
+  border-radius: 3;
   border: 1px solid #cccccc;
   margin-bottom: 30px;
   margin-right: 30px;
@@ -114,8 +175,7 @@ button {
   word-wrap: break-word;
 }
 .label-level {
-  width: 4em;
-  margin-left: 10px;
+  width: 5em;
 }
 .ta-big {
   border: 1px solid #cccccc;
@@ -197,11 +257,11 @@ button {
 }
 .button-save {
   position: relative; 
-  left: 35%;
+  left: 30%;
 }
 .button-cancel {
   position: relative; 
-  left: 35%;
+  left: 30%;
 }
 .input-corebadge{
   width: 300px;
