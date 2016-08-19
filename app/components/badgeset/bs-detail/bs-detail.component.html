@@ -40,7 +40,6 @@
 			<td class="td-core">{{checkCore(badgegroup.badge)}}</td>
 		</tr>
 	</table>
-	<br>
 
 	<button (click)="goBack()">Back</button>
 	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button>
