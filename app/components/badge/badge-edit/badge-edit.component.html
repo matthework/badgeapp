@@ -20,7 +20,7 @@
 	<input type="checkbox" [(ngModel)]="badge.approved" placeholder="Approved" /><br>
 
 	<label>InUsed: </label>
-	<input type="checkbox" [(ngModel)]="badge.inused" placeholder="InUsed" /><br>
+	<input type="checkbox" [disabled]="!badge.approved" [(ngModel)]="badge.inused" placeholder="InUsed" /><br>
 
 	<div class="badgelevel-block" *ngFor="let badgelevel of badge.badgelevels">
 	  	<label>Level {{badgelevel.level}}:</label>
