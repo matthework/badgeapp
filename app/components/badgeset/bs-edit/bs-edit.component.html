@@ -29,9 +29,9 @@
 <!-- 	<label>Approved: </label>
 	<input type="checkbox" [(ngModel)]="badgeset.approved" placeholder="Approved" /><br> -->
 
-	<br>
-	<button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true;updateNumBadges(badgeset.badgegroups.length)">Prerequisite+</button><br>
-	<br>
+<!-- 	<br>
+	<button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true">Prerequisite+</button><br>
+	<br> -->
 	<div *ngIf="prerequisite">
 		<h3>Prerequisite: </h3><br>
 		<label>Numbers: </label>
@@ -81,7 +81,6 @@
 			<button class="button-l-save" (click)="addBadgeGroup();active=false">Save</button>
 			<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
 		</div>
-		<br>
 		
 		<div *ngIf!="active">
 			<button class="button-add" (click)="addBadgeSet()">New</button>

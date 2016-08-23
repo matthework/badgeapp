@@ -81,7 +81,6 @@ export class BSEditComponent implements OnInit {
       }
     }
     this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade)
-    this.badgeset.numbadges = Math.round(this.total/2);
     console.log('you submitted total: ', this.total); 
     this.badgeset.badgegroups.sort(this.toCompare);
     this.badgeset.corebadges.sort(this.toCompare);
@@ -229,9 +228,9 @@ export class BSEditComponent implements OnInit {
     return tiersOptions.sort();
   }
 
-  updateNumBadges(num:number) {
-    this.badgeset.numbadges = Math.round(num/2);
-  }
+  // updateNumBadges(num:number) {
+  //   this.badgeset.numbadges = Math.round(num/2);
+  // }
 
   getCoreBadgesOptions(bgs:BadgeGroup[]) {
     var corebadgesOptions = [];

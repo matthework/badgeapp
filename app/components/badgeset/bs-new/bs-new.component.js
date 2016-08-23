@@ -28,7 +28,7 @@ var BSNewComponent = (function () {
         this.gradesOptions = ["A", "B", "C", "D", "E", "F"];
         this.nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         this.prerequisite = false;
-        this.numBadges = 0;
+        this.numBadges = -1;
         this.newcbs = [];
         this.total = 0;
         this.newTag = "";
@@ -69,7 +69,10 @@ var BSNewComponent = (function () {
                 this.total += 1;
             }
         }
-        this.newBS.numbadges = Math.round(this.total / 2);
+        if (this.numBadges == -1) {
+            this.numBadges = Math.round(this.total / 2);
+        }
+        this.newBS.numbadges = this.numBadges;
         console.log('you submitted total: ', this.total);
         this.newBS.badgegroups.sort(this.toCompare);
         this.newBS.corebadges.sort(this.toCompare);

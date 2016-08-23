@@ -34,8 +34,6 @@
 	<label>Grade F: $</label>
 	<input class="input-grade" type="number" [(ngModel)]="tier.grades[5]" placeholder="$"> K<br>
 
-	<br>
-	
 	<button class="button-add" (click)="addTier()">New</button>
 	<button class="button-delete" (click)="deleteTierPop()">Delete</button>
 	<button class="button-save" [disabled]="!tier.tier" (click)="updateTier()">Save</button>

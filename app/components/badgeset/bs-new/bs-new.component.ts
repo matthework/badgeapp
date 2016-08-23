@@ -24,7 +24,7 @@ export class BSNewComponent{
   gradesOptions =["A", "B", "C", "D", "E", "F"]; 
   nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   prerequisite = false;
-  numBadges = 0;
+  numBadges = -1;
   coreBadge: BadgeGroup;
   newcbs: BadgeGroup[] = [];
   total =0;
@@ -76,7 +76,10 @@ export class BSNewComponent{
         this.total += 1;
       }
     }
-    this.newBS.numbadges = Math.round(this.total/2);
+    if (this.numBadges==-1) {
+      this.numBadges = Math.round(this.total/2);
+    }
+    this.newBS.numbadges = this.numBadges;
     console.log('you submitted total: ', this.total); 
 
     this.newBS.badgegroups.sort(this.toCompare);
