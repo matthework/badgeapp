@@ -72,7 +72,6 @@ var BSEditComponent = (function () {
             }
         }
         this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade);
-        this.badgeset.numbadges = Math.round(this.total / 2);
         console.log('you submitted total: ', this.total);
         this.badgeset.badgegroups.sort(this.toCompare);
         this.badgeset.corebadges.sort(this.toCompare);
@@ -208,9 +207,9 @@ var BSEditComponent = (function () {
         // console.log('getTiersOptions: ', tiersOptions);
         return tiersOptions.sort();
     };
-    BSEditComponent.prototype.updateNumBadges = function (num) {
-        this.badgeset.numbadges = Math.round(num / 2);
-    };
+    // updateNumBadges(num:number) {
+    //   this.badgeset.numbadges = Math.round(num/2);
+    // }
     BSEditComponent.prototype.getCoreBadgesOptions = function (bgs) {
         var corebadgesOptions = [];
         if (bgs != null) {

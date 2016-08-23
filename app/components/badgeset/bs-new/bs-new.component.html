@@ -39,9 +39,9 @@
 <textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBS.badgegroups[i].badge,newBS.badgegroups[i].level)}}</textarea><br>
 </div>
 
-<br>
+<!-- <br>
 <button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true;getTotalBadges(newBS.badgegroups)">Prerequisite+</button><br>
-<br>
+<br> -->
 <div *ngIf="prerequisite">
 	<h3>Prerequisite: </h3><br>
 	<label>Numbers: </label>
