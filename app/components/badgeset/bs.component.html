@@ -70,7 +70,7 @@
 				  <td>
 				  <div *ngFor="let badgegroup of getBS(bsname1).badgegroups">
 				  <li>
-				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</text>
+				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} {{badgegroup.level}} </text><text class="money">(+${{0}})</text>
 				  </li>
 				  </div>
 				  </td>
@@ -91,7 +91,7 @@
 				  <td>
 				  <div *ngFor="let badgegroup of getBS(bsname2).badgegroups">
 				  <li>
-				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</text>
+				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname2).badgegroups,getBS(bsname2).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
 				  </li>
 				  </div>
 				  </td>
@@ -112,7 +112,7 @@
 					<td>
 						<div *ngFor="let badgegroup of getBS(bsname3).badgegroups">
 						<li>
-						<text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</text>
+						<text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname3).badgegroups,getBS(bsname3).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
 						</li>
 						</div>
 					</td>

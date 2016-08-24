@@ -55,13 +55,22 @@ var StaffEditComponent = (function () {
         for (var i = 0; i < this.staff.badgegroups.length; i++) {
             this.staff.badgegroups[i].level = +this.staff.badgegroups[i].level;
         }
-        if (this.staff.salary == "") {
-            this.staff.salary = "$";
-        }
+        // if (this.staff.salary == "") {
+        //     this.staff.salary = "$";
+        // }
+        this.staff.badgegroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.id, value).subscribe();
         console.log('you submitted value: ', value);
         this.toStaffs();
+    };
+    StaffEditComponent.prototype.toCompare = function (a, b) {
+        if (a.badge < b.badge)
+            return -1;
+        else if (a.badge > b.badge)
+            return 1;
+        else
+            return 0;
     };
     StaffEditComponent.prototype.addStaff = function () {
         this._router.navigate(['/staff/new']);

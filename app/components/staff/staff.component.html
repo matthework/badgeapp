@@ -25,8 +25,9 @@
     <th class="th-topbs">Top BadgeSet</th>
     <th class="th-pos">Position</th>
    	<!-- <th class="th-salary">Salary</th> -->
-    <th class="th-email">Email</th>
+    <!-- <th class="th-email">Email</th> -->
     <!-- <th class="th-phone">Phone</th> -->
+    <th class="th-active">Active</th>
     <th class="th-last"></th>
   </tr>
   <tr *ngFor="let staff of staffs | filter:query">
@@ -41,8 +42,9 @@
 	<td class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.badgegroups)[0])">{{getTopStaffBS(staff.badgegroups)[1]}}</td>
     <td (click)="onSelect(staff)">{{staff.position}}</td>
     <!-- <td class="td-salary" (click)="onSelect(staff)">${{staff.salary}}K</td> -->
-    <td (click)="onSelect(staff)">{{staff.email}}</td>
+    <!-- <td (click)="onSelect(staff)">{{staff.email}}</td> -->
     <!-- <td (click)="onSelect(staff)">{{staff.phone}}</td> -->
+    <td class="td-active" (click)="onSelect(staff)">{{staff.active | yes_no}}</td>
     <td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteStaffPop(staff._id)">X</button><button class="button-s-e" (click)="toStaffEdit(staff._id)">E</button></td>
   </tr>
 </table>

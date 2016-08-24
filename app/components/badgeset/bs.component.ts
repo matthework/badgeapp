@@ -3,6 +3,7 @@ import {Http} from '@angular/http';
 import {Router} from '@angular/router';
 
 import {BadgeSet} from './bs';
+import {BadgeGroup} from './bs';
 import {Badge} from '../badge/badge';
 import {Tier} from '../tier/tier';
 import {BSEditComponent} from './bs-edit/bs-edit.component';
@@ -38,6 +39,7 @@ export class BSComponent implements OnInit {
 	bsname1 = "";
 	bsname2 = "";
 	bsname3 = "";
+	money = 1000;
 
 	constructor (
 		private _router: Router,
@@ -197,6 +199,16 @@ export class BSComponent implements OnInit {
 				}
 			}
 		}
+		return result;
+	}
+
+	getMoney(bg:BadgeGroup[],m:number,l:number) {
+		var result = 0;
+		var totalLevels = 0;
+		for (var i = 0; i < bg.length; i++) { 
+			totalLevels += bg[i].level;
+		}
+		result = Math.round(m*1000*0.9/totalLevels*l);
 		return result;
 	}
 

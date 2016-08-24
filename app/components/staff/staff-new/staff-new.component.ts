@@ -31,7 +31,7 @@ export class StaffNewComponent {
           {badge: "", level: 0},
           {badge: "", level: 0}];
   
-  newStaff = {index: 0, fname: "", lname: "", position: "", salary: "", email: "", phone: "", badgegroups: this.newBGs, others: []}
+  newStaff = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", badgegroups: this.newBGs, others: []}
 
   constructor(
       private _staffService: StaffService, 
@@ -53,13 +53,23 @@ export class StaffNewComponent {
         this.newStaff.badgegroups[i].level = +this.newStaff.badgegroups[i].level;
       }
     }
-    if (this.newStaff.salary == "") {
-      this.newStaff.salary = "$";
-    }
+    // if (this.newStaff.salary == "") {
+    //   this.newStaff.salary = "$";
+    // }
+    this.newStaff.badgegroups.sort(this.toCompare);
     let value = JSON.stringify(this.newStaff)
     this._staffService.addStaff(value).subscribe();
     console.log('you submitted value: ', value); 
     this.toStaffs();
+  }
+
+  toCompare(a,b) {
+    if (a.badge < b.badge)
+      return -1;
+    else if (a.badge > b.badge)
+      return 1;
+    else 
+      return 0;
   }
 
   toStaffs() {

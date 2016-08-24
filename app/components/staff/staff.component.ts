@@ -14,6 +14,7 @@ import {TierService} from '../tier/tier.service';
 import {AuthService} from '../auth/auth.service';
 
 import {FilterArrayPipe} from '../pipe/filter-array-pipe';
+import {YesNoPipe} from '../pipe/yes-no-pipe';
 
 
 @Component({
@@ -21,7 +22,7 @@ import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 	templateUrl: 'app/components/staff/staff.component.html',
 	styleUrls: ['app/components/staff/staff.component.css'],
 	directives: [StaffEditComponent],
-	pipes: [FilterArrayPipe]
+	pipes: [FilterArrayPipe,YesNoPipe]
 })
 export class StaffComponent {
 
@@ -159,7 +160,10 @@ export class StaffComponent {
 					}
 				}
 				
-				if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges >0 && this.badgesets[i].inused) {
+				// if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges >0 && this.badgesets[i].inused) {
+				// 	allbset.push(this.badgesets[i]);
+				// }
+				if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].inused) {
 					allbset.push(this.badgesets[i]);
 				}
 				count = 0;

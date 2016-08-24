@@ -66,26 +66,29 @@ table tr:nth-child(even) {
   line-height: 25px; 
 }
 .th-name {
-  width: 25%;
+  width: 23%;
 }
 .th-bg {
-  width: 30%;
+  width: 35%;
 }
 .th-topbs {
-  width: 25%;
+  width: 23%;
 }
 .th-pos {
-  width: 15%;
+  width: 20%;
 }
 /*.th-salary {
   width: 8%;
 }*/
-.th-email {
+/*.th-email {
   width: 20%;
-}
+}*/
 /*.th-phone {
   width: 15%;
 }*/
+.th-active {
+  width: 10%;
+}
 .th-last {
   width: 15%;
   background-color: #ffffff;
@@ -101,11 +104,14 @@ table tr:nth-child(even) {
 /*.td-salary {
   text-align: center;
 }*/
-.td-email {
+/*.td-email {
   word-wrap: normal;
-}
+}*/
 /*.td-phone {
 }*/
+.td-active {
+  text-align: center;
+}
 .td-last{
   background-color: #ffffff;
   border: 0 ;

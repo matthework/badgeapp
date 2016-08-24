@@ -15,6 +15,7 @@ var badge_service_1 = require('../../badge/badge.service');
 var bs_service_1 = require('../../badgeset/bs.service');
 var tier_service_1 = require('../../tier/tier.service');
 var auth_service_1 = require('../../auth/auth.service');
+var yes_no_pipe_1 = require('../../pipe/yes-no-pipe');
 var StaffDetailComponent = (function () {
     function StaffDetailComponent(_staffService, _badgeService, _bsService, _tierService, _router, route, auth) {
         this._staffService = _staffService;
@@ -194,7 +195,8 @@ var StaffDetailComponent = (function () {
         core_1.Component({
             selector: 'my-staff-detail',
             templateUrl: 'app/components/staff/staff-detail/staff-detail.component.html',
-            styleUrls: ['app/components/staff/staff-detail/staff-detail.component.css']
+            styleUrls: ['app/components/staff/staff-detail/staff-detail.component.css'],
+            pipes: [yes_no_pipe_1.YesNoPipe]
         }), 
         __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService, tier_service_1.TierService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], StaffDetailComponent);

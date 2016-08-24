@@ -11,10 +11,11 @@ type Staff struct {
 	FName	string	`json:"fname,omitempty" bson:"fname"`
 	LName	string	`json:"lname,omitempty" bson:"lname"`
 	Position string	`json:"position" bson:"position"`
-	Salary string	`json:"salary" bson:"salary"`
+	Salary int	`json:"salary" bson:"salary"`
 	Email string	`json:"email" bson:"email"`	
 	Phone	string	`json:"phone" bson:"phone"`	
 	BadgeGroups	[]BadgeGroup	`json:"badgegroups" bson:"badgegroups"`
+	Active	bool	`json:"active" bson:"active"`
 	Others []string 	`json:"others" bson:"others"`	
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
 }
@@ -38,7 +39,7 @@ func listStaffsSort() (staffs []Staff) {
 	defer session.Close()
 
 	collection := session.DB(DB).C(col_staff)
-	err := collection.Find(nil).Sort("fname").All(&staffs)
+	err := collection.Find(nil).Sort("-active","fname","lname").All(&staffs)
 	if err != nil {
 		panic(err)
 	}
