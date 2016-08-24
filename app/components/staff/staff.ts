@@ -4,10 +4,11 @@ export class Staff {
   fname: string;
   lname: string;
   position: string;
-  salary: string;
+  salary: number;
   email: string;
   phone: string;
   badgegroups: BadgeGroup[];
+  active: boolean;
   others: string[];
   timestamp: string;
 }

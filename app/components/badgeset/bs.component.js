@@ -36,6 +36,7 @@ var BSComponent = (function () {
         this.bsname1 = "";
         this.bsname2 = "";
         this.bsname3 = "";
+        this.money = 1000;
     }
     BSComponent.prototype.ngOnInit = function () {
         this.getBadgeSets();
@@ -174,6 +175,15 @@ var BSComponent = (function () {
                 }
             }
         }
+        return result;
+    };
+    BSComponent.prototype.getMoney = function (bg, m, l) {
+        var result = 0;
+        var totalLevels = 0;
+        for (var i = 0; i < bg.length; i++) {
+            totalLevels += bg[i].level;
+        }
+        result = Math.round(m * 1000 * 0.9 / totalLevels * l);
         return result;
     };
     BSComponent = __decorate([

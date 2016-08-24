@@ -11,10 +11,13 @@ import {Tier} from '../../tier/tier';
 import {TierService} from '../../tier/tier.service';
 import {AuthService} from '../../auth/auth.service';
 
+import {YesNoPipe} from '../../pipe/yes-no-pipe';
+
 @Component({
   selector: 'my-staff-detail',
   templateUrl: 'app/components/staff/staff-detail/staff-detail.component.html',
-  styleUrls: ['app/components/staff/staff-detail/staff-detail.component.css']
+  styleUrls: ['app/components/staff/staff-detail/staff-detail.component.css'],
+  pipes: [YesNoPipe]
 })
 
 export class StaffDetailComponent implements OnInit {

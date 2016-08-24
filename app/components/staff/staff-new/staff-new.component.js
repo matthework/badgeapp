@@ -34,7 +34,7 @@ var StaffNewComponent = (function () {
             { badge: "", level: 0 },
             { badge: "", level: 0 },
             { badge: "", level: 0 }];
-        this.newStaff = { index: 0, fname: "", lname: "", position: "", salary: "", email: "", phone: "", badgegroups: this.newBGs, others: [] };
+        this.newStaff = { index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", badgegroups: this.newBGs, others: [] };
     }
     StaffNewComponent.prototype.ngOnInit = function () {
         this.getBadges();
@@ -49,13 +49,22 @@ var StaffNewComponent = (function () {
                 this.newStaff.badgegroups[i].level = +this.newStaff.badgegroups[i].level;
             }
         }
-        if (this.newStaff.salary == "") {
-            this.newStaff.salary = "$";
-        }
+        // if (this.newStaff.salary == "") {
+        //   this.newStaff.salary = "$";
+        // }
+        this.newStaff.badgegroups.sort(this.toCompare);
         var value = JSON.stringify(this.newStaff);
         this._staffService.addStaff(value).subscribe();
         console.log('you submitted value: ', value);
         this.toStaffs();
+    };
+    StaffNewComponent.prototype.toCompare = function (a, b) {
+        if (a.badge < b.badge)
+            return -1;
+        else if (a.badge > b.badge)
+            return 1;
+        else
+            return 0;
     };
     StaffNewComponent.prototype.toStaffs = function () {
         this._router.navigate(['/staffs']);

@@ -215,6 +215,9 @@ th , td  {
 .badgeset:visited{
   color: #607D8B;
 }
+.money{
+  color: #039be5;
+}
 .badge{
   cursor: pointer;
   cursor: hand;
