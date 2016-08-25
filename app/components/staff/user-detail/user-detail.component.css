@@ -43,7 +43,7 @@ input {
   color: #999;
 }
 button {
-  width: 100px !important;
+  width: 100px;
   margin-top: 20px;
   margin-right: 10px;
   font-size: 1em;
@@ -136,8 +136,7 @@ textarea {
   text-align: center;
 }
 .button-edit {
-  position: relative; 
-  left: 57%;
+  width: 120px;
 }
 .badge{
   cursor: pointer;
@@ -164,6 +163,57 @@ textarea {
 .selected {
   background-color: #CFD8DC !important;
   color: white;
+}
+.button-apply {
+  width: 125px;
+  color: #039be5;
+}
+.button-apply:hover {
+  color: white;
+  background-color: limegreen;
+}
+.select-badge {
+  background: transparent;
+  width: 300px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.label-level {
+  width: 5em;
+}
+.select-level {
+  background: transparent;
+  width: 50px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-bottom: 30px;
+}
+.ta-desc {
+  width: 470px;
+  height: 100px;
+  border: 1px solid #cccccc;
+  font-style: italic;
+  word-wrap: break-word;
+}
+.button-l-save {
+  position: relative; 
+  left: 33%;
+}
+.button-l-cancel {
+  position: relative; 
+  left: 33%;
 }
 
 

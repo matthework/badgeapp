@@ -12,12 +12,13 @@ import {TierService} from '../../tier/tier.service';
 import {AuthService} from '../../auth/auth.service';
 
 import {YesNoPipe} from '../../pipe/yes-no-pipe';
+import {ApprovedPipe} from '../../pipe/approved-pipe';
 
 @Component({
   selector: 'my-user-detail',
   templateUrl: 'app/components/staff/user-detail/user-detail.component.html',
   styleUrls: ['app/components/staff/user-detail/user-detail.component.css'],
-  pipes: [YesNoPipe]
+  pipes: [YesNoPipe,ApprovedPipe]
 })
 
 export class UserDetailComponent implements OnInit {
@@ -30,6 +31,10 @@ export class UserDetailComponent implements OnInit {
   sortStaffBS = [];
   sub: any;
   email: string;
+  active = false;
+  newBadge = "";
+  newLevel = 0;
+  newStatus = false;
 
   constructor(
     private _staffService: StaffService, 
@@ -108,7 +113,7 @@ export class UserDetailComponent implements OnInit {
     this._router.navigate(['/badge/detail',bid]);
   }
 
-  getStaffBS(sbgs:BadgeGroup[]) {
+  getStaffBS(sbgs:UserBGroup[]) {
     var allbset = [];
     var count = 0;
     var coreCount = 0;
@@ -148,7 +153,7 @@ export class UserDetailComponent implements OnInit {
     return allbset;
   }
 
-  getSortStaffBS(sbgs:BadgeGroup[]) {
+  getSortStaffBS(sbgs:UserBGroup[]) {
     var pay = "";
     this.sortStaffBS = [];
     var allbset = this.getStaffBS(sbgs);
@@ -208,6 +213,59 @@ export class UserDetailComponent implements OnInit {
     this._router.navigate(['/bs/detail',bsid]);
   }
 
+  getNewBadgesOptions() {
+      var badgesOptions = [];
+      var userbgs = [];
+      if (this.staff.userbgroups != null) {
+          for (var j = 0; j < this.staff.userbgroups.length; j++) { 
+              userbgs.push(this.staff.userbgroups[j].badge);
+          }
+      }
+      if (this.badges != null) {
+          for (var i = 0; i < this.badges.length; i++) { 
+              let index = userbgs.indexOf(this.badges[i].name);
+              if (this.badges[i].inused && index == -1) {
+                  badgesOptions.push(this.badges[i].name);
+              }
+          }
+      }
+      return badgesOptions.sort();
+  }
+
+  getLevelsOptions(bname: string) {
+      var levelsOptions = [];
+      for (var i = 0; i < this.badges.length; i++) { 
+          if (this.badges[i].name == bname) {
+              for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+                  levelsOptions.push(this.badges[i].badgelevels[j].level);
+              }
+          }
+      }
+      // console.log('getBadgesOptions: ', badgesOptions);
+      return levelsOptions.sort();
+  }
+
+  addBadgeGroup() {
+      this.newLevel = +this.newLevel;
+      this.staff.userbgroups.push({badge: this.newBadge, level: this.newLevel, status: this.newStatus});
+      this.staff.userbgroups.sort(this.toCompare);
+      let value = JSON.stringify(this.staff)
+      this._staffService.updateStaff(this.staff._id,value).subscribe();
+      console.log('you submitted value: ', value);
+      this.newBadge = "";
+      this.newLevel = 0;
+      this.newStatus = false;
+  }
+
+  toCompare(a,b) {
+    if (a.badge < b.badge)
+      return -1;
+    else if (a.badge > b.badge)
+      return 1;
+    else 
+      return 0;
+  }
+  
   goBack() {
     window.history.back();
   }
