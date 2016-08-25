@@ -16,6 +16,7 @@ var bs_service_1 = require('../../badgeset/bs.service');
 var tier_service_1 = require('../../tier/tier.service');
 var auth_service_1 = require('../../auth/auth.service');
 var yes_no_pipe_1 = require('../../pipe/yes-no-pipe');
+var approved_pipe_1 = require('../../pipe/approved-pipe');
 var StaffDetailComponent = (function () {
     function StaffDetailComponent(_staffService, _badgeService, _bsService, _tierService, _router, route, auth) {
         this._staffService = _staffService;
@@ -28,7 +29,6 @@ var StaffDetailComponent = (function () {
         this.badges = [];
         this.badgesets = [];
         this.tiers = [];
-        this.brief = 0;
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
     }
@@ -64,7 +64,7 @@ var StaffDetailComponent = (function () {
     };
     StaffDetailComponent.prototype.toStaffs = function () {
         this._router.navigate(['/staffs']);
-        // location.reload();
+        location.reload();
     };
     StaffDetailComponent.prototype.toStaffEdit = function (sid) {
         this._router.navigate(['/staff/edit', sid]);
@@ -100,7 +100,7 @@ var StaffDetailComponent = (function () {
         var count = 0;
         var coreCount = 0;
         var core = false;
-        if (this.badgesets != null) {
+        if (this.badgesets != null && sbgs != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
@@ -196,7 +196,7 @@ var StaffDetailComponent = (function () {
             selector: 'my-staff-detail',
             templateUrl: 'app/components/staff/staff-detail/staff-detail.component.html',
             styleUrls: ['app/components/staff/staff-detail/staff-detail.component.css'],
-            pipes: [yes_no_pipe_1.YesNoPipe]
+            pipes: [yes_no_pipe_1.YesNoPipe, approved_pipe_1.ApprovedPipe]
         }), 
         __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService, tier_service_1.TierService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], StaffDetailComponent);

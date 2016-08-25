@@ -14,10 +14,17 @@ type Staff struct {
 	Salary int	`json:"salary" bson:"salary"`
 	Email string	`json:"email" bson:"email"`	
 	Phone	string	`json:"phone" bson:"phone"`	
-	BadgeGroups	[]BadgeGroup	`json:"badgegroups" bson:"badgegroups"`
+	UserBGroups	[]UserBGroup	`json:"userbgroups" bson:"userbgroups"`
 	Active	bool	`json:"active" bson:"active"`
+	Brief	string	`json:"brief" bson:"brief"`	
 	Others []string 	`json:"others" bson:"others"`	
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
+}
+
+type UserBGroup struct {
+	Badge 	string	`json:"badge" bson:"badge"`	
+	Level	int	`json:"level" bson:"level"`
+	Status	bool	`json:"status" bson:"status"`
 }
 
 var col_staff = "staff"
@@ -53,6 +60,19 @@ func findStaffByID(id string) (staff Staff) {
 	collection := session.DB(DB).C(col_staff)
 	idoi := bson.ObjectIdHex(id)
 	fQuery := bson.M{"_id": idoi}
+	err := collection.Find(fQuery).One(&staff)
+	if err != nil {
+		panic(err)
+	}
+	return staff
+}
+
+func findStaffByEmail(email string) (staff Staff) {
+	session := connect()
+	defer session.Close()
+
+	collection := session.DB(DB).C(col_staff)
+	fQuery := bson.M{"email": email}
 	err := collection.Find(fQuery).One(&staff)
 	if err != nil {
 		panic(err)

@@ -27,24 +27,28 @@
 
 	<label>Active: </label>
 	<input type="checkbox" [(ngModel)]="staff.active" placeholder="Active" /><br>
+	<br>
 
 	<label>Brief: </label>
-	<textarea class="ta-brief" type="text" [(ngModel)]="staff.others[brief]" placeholder="Brief">{{staff.others[brief]}}</textarea><br>
+	<textarea class="ta-brief" type="text" [(ngModel)]="staff.brief" placeholder="Brief">{{staff.brief}}</textarea><br>
 
 <!-- 	<label>Others: </label>
 	<input class="input-others" type="text" [(ngModel)]="staff.others" placeholder="Others" /><br> -->
 
-	<div class="badgegroup-block" *ngFor="let badgegroup of staff.badgegroups">
+	<div class="userbgroup-block" *ngFor="let userbgroup of staff.userbgroups">
 		<label>Badge: </label>
-		<select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+		<select class="select-badge" [(ngModel)]="userbgroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 
 		<label class="label-level">Level: </label>
-		<select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br>
+		<select class="select-level" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.badge)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Description: </label>
-		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(badgegroup.badge,badgegroup.level)}}</textarea>
+		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(userbgroup.badge,userbgroup.level)}}</textarea><br>
 
-		<button class="button-s-delete" (click)="deleteBadgeGroupPop(badgegroup)">-</button>
+		<label>Approved: </label>
+		<input type="checkbox" [(ngModel)]="userbgroup.status" placeholder="Status" />
+
+		<button class="button-s-delete" (click)="deleteBadgeGroupPop(userbgroup)">-</button>
 		
 	</div>
 
@@ -55,13 +59,16 @@
 	<div *ngIf="active">
 		<h3>Add New Badge</h3><br>
 		<label>Badge: </label>
-		<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+		<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getNewBadgesOptions()" [value]="bo">{{bo}}</option></select>
 
 		<label class="label-level">Level: </label>
 		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Description: </label>
 		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+
+		<label>Approved: </label>
+		<input type="checkbox" [(ngModel)]="newStatus" placeholder="Status" /><br>
 
 		<button class="button-l-save" (click)="addBadgeGroup();active=false">Save</button>
 		<button class="button-l-cancel" (click)="active=false">Cancel</button><br>

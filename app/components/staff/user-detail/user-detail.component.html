@@ -1,0 +1,58 @@
+
+<div *ngIf="auth.authenticated()">
+
+<div *ngIf="staff">
+	<h2>User - {{staff.fname}} {{staff.lname}}</h2>
+	
+	<br>
+	<label>Position: </label>
+	<text>{{staff.position}}</text><br>
+
+	<label>Email: </label>
+	<text>{{staff.email}}</text><br>
+
+	<label>Phone: </label>
+	<text>{{staff.phone}}</text><br>
+
+	<label>Salary: </label>
+	<text>${{staff.salary}}K</text><br>
+
+	<label>Badge Sets: </label>
+	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
+		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
+	</text><br>
+
+	<label>Brief: </label>
+	<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
+
+	<br>
+	<table class="table-userbgroups">
+		<tr>
+		  <th class="th-badge">Badge</th>
+		  <th class="th-desc">Description</th>
+		  <th class="th-bs">Badge Set</th>
+		  <th class="th-status">Status</th>
+		</tr>
+		<tr *ngFor="let userbgroup of staff.userbgroups">
+			<td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
+			<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
+			<td class="td-bs">
+			<div *ngFor="let bs of findBadgeSet(userbgroup.badge,userbgroup.level)">
+				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+			</div>
+      		</td>
+      		<td class="td-status">{{userbgroup.status | yes_no}}</td>
+		</tr>
+	</table>
+
+	<button (click)="goBack()">Back</button>
+	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toUserEdit(staff._id)">Edit</button>
+	<br>
+	<br>
+	<br>
+</div>
+
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+

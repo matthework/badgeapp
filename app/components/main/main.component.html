@@ -4,17 +4,22 @@
 
 <div *ngIf="auth.authenticated() && auth.userProfile">
   <h3><i>{{auth.userProfile.name}}, you are just logged in.</i></h3>
+  <br>
   <div class="row">
     <div class="col-md-6">
       <img [src]="auth.userProfile.picture" alt="" class="profile-img">
+      <br>
       <p><strong>Name: </strong> {{auth.userProfile.name}}</p>
       <p><strong>Email: </strong> {{auth.userProfile.email}}</p>
-      <p><strong>Nickname: </strong> {{auth.userProfile.nickname}}</p>
-      <p><strong>Created At: </strong> {{auth.userProfile.created_at}}</p>
+      <!-- <p><strong>Nickname: </strong> {{auth.userProfile.nickname}}</p> -->
+<!--       <p><strong>Created At: </strong> {{auth.userProfile.created_at}}</p>
       <p><strong>Updated At: </strong> {{auth.userProfile.updated_at}}</p>
       <p><strong>Address: </strong> {{auth.userProfile.user_metadata.address}}</p>
-      <p><strong>Google Profile: </strong> {{auth.userProfile.groups}}</p>
+      <p><strong>Google Profile: </strong> {{auth.userProfile.groups}}</p> -->
     </div>
+    <button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button>
+    <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button>
+    <br>
   </div>
 </div>
 

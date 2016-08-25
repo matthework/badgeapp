@@ -171,6 +171,13 @@ textarea {
   position: relative; 
   left: 42%;
 }
+/*.label-approved｛
+
+}
+.checkbox {
+  margin-top: 20px;
+  vertical-align: middle;
+}*/
 .staff-error {
   border-bottom-color: #E22323;
 }

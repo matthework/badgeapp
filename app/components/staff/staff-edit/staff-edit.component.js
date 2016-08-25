@@ -24,7 +24,7 @@ var StaffEditComponent = (function () {
         this.active = false;
         this.newBadge = "";
         this.newLevel = 0;
-        this.brief = 0;
+        this.newStatus = false;
     }
     StaffEditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -48,17 +48,14 @@ var StaffEditComponent = (function () {
     };
     StaffEditComponent.prototype.toStaffs = function () {
         this._router.navigate(['/staffs']);
-        // location.reload();
+        location.reload();
     };
     StaffEditComponent.prototype.updateStaff = function () {
         // pasrse string into number
-        for (var i = 0; i < this.staff.badgegroups.length; i++) {
-            this.staff.badgegroups[i].level = +this.staff.badgegroups[i].level;
+        for (var i = 0; i < this.staff.userbgroups.length; i++) {
+            this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
         }
-        // if (this.staff.salary == "") {
-        //     this.staff.salary = "$";
-        // }
-        this.staff.badgegroups.sort(this.toCompare);
+        this.staff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.id, value).subscribe();
         console.log('you submitted value: ', value);
@@ -77,12 +74,13 @@ var StaffEditComponent = (function () {
     };
     StaffEditComponent.prototype.addBadgeGroup = function () {
         this.newLevel = +this.newLevel;
-        this.staff.badgegroups.push({ badge: this.newBadge, level: this.newLevel });
+        this.staff.userbgroups.push({ badge: this.newBadge, level: this.newLevel, status: this.newStatus });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
         this.newBadge = "";
         this.newLevel = 0;
+        this.newStatus = false;
     };
     StaffEditComponent.prototype.removeStaff = function () {
         this._staffService.deleteStaff(this.id).subscribe();
@@ -107,8 +105,8 @@ var StaffEditComponent = (function () {
         }
     };
     StaffEditComponent.prototype.removeBadgeGroup = function (selectedGroup) {
-        var index = this.staff.badgegroups.indexOf(selectedGroup);
-        this.staff.badgegroups.splice(index, 1);
+        var index = this.staff.userbgroups.indexOf(selectedGroup);
+        this.staff.userbgroups.splice(index, 1);
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
@@ -139,6 +137,24 @@ var StaffEditComponent = (function () {
             // console.log('getBadgesOptions: ', badgesOptions);
             return badgesOptions.sort();
         }
+    };
+    StaffEditComponent.prototype.getNewBadgesOptions = function () {
+        var badgesOptions = [];
+        var userbgs = [];
+        if (this.staff.userbgroups != null) {
+            for (var j = 0; j < this.staff.userbgroups.length; j++) {
+                userbgs.push(this.staff.userbgroups[j].badge);
+            }
+        }
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                var index = userbgs.indexOf(this.badges[i].name);
+                if (this.badges[i].inused && index == -1) {
+                    badgesOptions.push(this.badges[i].name);
+                }
+            }
+        }
+        return badgesOptions.sort();
     };
     StaffEditComponent.prototype.getLevelsOptions = function (bname) {
         var levelsOptions = [];

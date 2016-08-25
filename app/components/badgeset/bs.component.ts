@@ -39,7 +39,6 @@ export class BSComponent implements OnInit {
 	bsname1 = "";
 	bsname2 = "";
 	bsname3 = "";
-	money = 1000;
 
 	constructor (
 		private _router: Router,

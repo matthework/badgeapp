@@ -54,7 +54,7 @@ export class BadgeDetailComponent implements OnInit {
 
     toBadges() {
         this._router.navigate(['/badges']);
-        // location.reload();
+        location.reload();
     }
 
     editBadge() {

@@ -59,7 +59,7 @@ var BSEditComponent = (function () {
     };
     BSEditComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);
-        // location.reload();
+        location.reload();
     };
     BSEditComponent.prototype.updateBadgeSet = function () {
         this.total = 0;
@@ -180,6 +180,24 @@ var BSEditComponent = (function () {
             }
         }
         // console.log('getBadgesOptions: ', badgesOptions);
+        return badgesOptions.sort();
+    };
+    BSEditComponent.prototype.getNewBadgesOptions = function () {
+        var badgesOptions = [];
+        var currentBGs = [];
+        if (this.badgeset.badgegroups != null) {
+            for (var j = 0; j < this.badgeset.badgegroups.length; j++) {
+                currentBGs.push(this.badgeset.badgegroups[j].badge);
+            }
+        }
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                var index = currentBGs.indexOf(this.badges[i].name);
+                if (this.badges[i].inused && index == -1) {
+                    badgesOptions.push(this.badges[i].name);
+                }
+            }
+        }
         return badgesOptions.sort();
     };
     BSEditComponent.prototype.getLevelsOptions = function (bname) {

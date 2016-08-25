@@ -44,12 +44,12 @@ export class BadgeEditComponent implements OnInit {
 
   toBadges() {
     this._router.navigate(['/badges']);
-    // location.reload();
+    location.reload();
   }
 
   toBadgeDetail() {
     this._router.navigate(['/badge/detail',this.id]);
-    // location.reload();
+    location.reload();
   }
 
   updateBadge() {

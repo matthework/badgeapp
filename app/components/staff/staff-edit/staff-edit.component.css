@@ -107,7 +107,7 @@ textarea {
   font-style: italic;
   word-wrap: break-word;
 }
-.badgegroup-block {
+.userbgroup-block {
   margin-top: 30px;
 }
 .select-badge {
@@ -164,6 +164,8 @@ textarea {
   background-color: limegreen;
 }
 .button-s-delete {
+  position: relative; 
+  left: 38%;
   width: 40px;
   background-color: pink;
   color: white;

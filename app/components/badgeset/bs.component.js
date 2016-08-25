@@ -36,7 +36,6 @@ var BSComponent = (function () {
         this.bsname1 = "";
         this.bsname2 = "";
         this.bsname3 = "";
-        this.money = 1000;
     }
     BSComponent.prototype.ngOnInit = function () {
         this.getBadgeSets();

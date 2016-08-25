@@ -7,13 +7,15 @@ export class Staff {
   salary: number;
   email: string;
   phone: string;
-  badgegroups: BadgeGroup[];
+  userbgroups: UserBGroup[];
   active: boolean;
+  brief:string;
   others: string[];
   timestamp: string;
 }
 
-export class BadgeGroup {
+export class UserBGroup {
 	badge: string;
 	level: number;
+  status: boolean;
 }

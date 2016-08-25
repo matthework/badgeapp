@@ -67,7 +67,7 @@ export class BSEditComponent implements OnInit {
 
   toBadgeSets() {
     this._router.navigate(['/badgeset']);
-    // location.reload();
+    location.reload();
   }
 
   updateBadgeSet() {
@@ -199,6 +199,25 @@ export class BSEditComponent implements OnInit {
     }
     // console.log('getBadgesOptions: ', badgesOptions);
     return badgesOptions.sort();
+  }
+
+  getNewBadgesOptions() {
+      var badgesOptions = [];
+      var currentBGs = [];
+      if (this.badgeset.badgegroups != null) {
+          for (var j = 0; j < this.badgeset.badgegroups.length; j++) { 
+              currentBGs.push(this.badgeset.badgegroups[j].badge);
+          }
+      }
+      if (this.badges != null) {
+          for (var i = 0; i < this.badges.length; i++) { 
+              let index = currentBGs.indexOf(this.badges[i].name);
+              if (this.badges[i].inused && index == -1) {
+                  badgesOptions.push(this.badges[i].name);
+              }
+          }
+      }
+      return badgesOptions.sort();
   }
 
   getLevelsOptions(bname: string) {

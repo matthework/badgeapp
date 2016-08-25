@@ -14,24 +14,22 @@ import {AuthService} from '../../auth/auth.service';
 
 export class StaffNewComponent {
   
-  // title: string = "Add New Staff";
   badges: Badge[] = [];
   active = false;
   nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  brief = 0;
 
-  newBGs = [{badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0},
-          {badge: "", level: 0}];
+  newBGs = [{badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false},
+            {badge: "", level: 0, status: false}];
   
-  newStaff = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", badgegroups: this.newBGs, others: []}
+  newStaff = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief:"", others: []}
 
   constructor(
       private _staffService: StaffService, 
@@ -48,15 +46,12 @@ export class StaffNewComponent {
   }
 
   addStaff() {
-    for (var i = 0; i < this.newStaff.badgegroups.length; i++) { 
-      if (this.newStaff.badgegroups[i].level != 0) {
-        this.newStaff.badgegroups[i].level = +this.newStaff.badgegroups[i].level;
+    for (var i = 0; i < this.newStaff.userbgroups.length; i++) { 
+      if (this.newStaff.userbgroups[i].level != 0) {
+        this.newStaff.userbgroups[i].level = +this.newStaff.userbgroups[i].level;
       }
     }
-    // if (this.newStaff.salary == "") {
-    //   this.newStaff.salary = "$";
-    // }
-    this.newStaff.badgegroups.sort(this.toCompare);
+    this.newStaff.userbgroups.sort(this.toCompare);
     let value = JSON.stringify(this.newStaff)
     this._staffService.addStaff(value).subscribe();
     console.log('you submitted value: ', value); 
@@ -74,7 +69,7 @@ export class StaffNewComponent {
 
   toStaffs() {
     this._router.navigate(['/staffs']);
-    // location.reload();
+    location.reload();
   }
 
   getDesc(b:string, l:number) {

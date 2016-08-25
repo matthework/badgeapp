@@ -73,6 +73,7 @@ var BSNewComponent = (function () {
             this.numBadges = Math.round(this.total / 2);
         }
         this.newBS.numbadges = this.numBadges;
+        this.newBS.pay = +this.getPay(this.newBS.tier, this.newBS.grade);
         console.log('you submitted total: ', this.total);
         this.newBS.badgegroups.sort(this.toCompare);
         this.newBS.corebadges.sort(this.toCompare);
@@ -91,7 +92,7 @@ var BSNewComponent = (function () {
     };
     BSNewComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);
-        // location.reload();
+        location.reload();
     };
     BSNewComponent.prototype.goBack = function () {
         window.history.back();

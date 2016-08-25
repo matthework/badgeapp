@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 
-import {Staff,BadgeGroup} from '../staff';
+import {Staff,UserBGroup} from '../staff';
 import {StaffService} from '../staff.service';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
@@ -20,7 +20,7 @@ export class StaffEditComponent implements OnInit {
     active = false;
     newBadge = "";
     newLevel = 0;
-    brief = 0;
+    newStatus = false;
     sub: any;
     id: string;
 
@@ -54,18 +54,15 @@ export class StaffEditComponent implements OnInit {
 
     toStaffs() {
         this._router.navigate(['/staffs']);
-        // location.reload();
+        location.reload();
     }
 
     updateStaff() {
         // pasrse string into number
-        for (var i = 0; i < this.staff.badgegroups.length; i++) { 
-            this.staff.badgegroups[i].level = +this.staff.badgegroups[i].level;
+        for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+            this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
         }
-        // if (this.staff.salary == "") {
-        //     this.staff.salary = "$";
-        // }
-        this.staff.badgegroups.sort(this.toCompare);
+        this.staff.userbgroups.sort(this.toCompare);
         let value = JSON.stringify(this.staff)
         this._staffService.updateStaff(this.id,value).subscribe();
         console.log('you submitted value: ', value); 
@@ -87,12 +84,13 @@ export class StaffEditComponent implements OnInit {
 
     addBadgeGroup() {
         this.newLevel = +this.newLevel;
-        this.staff.badgegroups.push({badge: this.newBadge, level: this.newLevel});
+        this.staff.userbgroups.push({badge: this.newBadge, level: this.newLevel, status: this.newStatus});
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
         this.newBadge = "";
         this.newLevel = 0;
+        this.newStatus = false;
     }
 
     removeStaff() {
@@ -110,7 +108,7 @@ export class StaffEditComponent implements OnInit {
         }
     }
 
-    deleteBadgeGroupPop(selectedGroup: BadgeGroup) {
+    deleteBadgeGroupPop(selectedGroup: UserBGroup) {
         var name = this.staff.fname.toUpperCase() + " " + this.staff.lname.toUpperCase();
         var badge = selectedGroup.badge.toUpperCase();
         var level = selectedGroup.level;
@@ -120,9 +118,9 @@ export class StaffEditComponent implements OnInit {
         }
     }
 
-    removeBadgeGroup(selectedGroup: BadgeGroup) {
-        let index = this.staff.badgegroups.indexOf(selectedGroup);
-        this.staff.badgegroups.splice(index,1);
+    removeBadgeGroup(selectedGroup: UserBGroup) {
+        let index = this.staff.userbgroups.indexOf(selectedGroup);
+        this.staff.userbgroups.splice(index,1);
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
@@ -155,6 +153,25 @@ export class StaffEditComponent implements OnInit {
             // console.log('getBadgesOptions: ', badgesOptions);
             return badgesOptions.sort();
         }
+    }
+
+    getNewBadgesOptions() {
+        var badgesOptions = [];
+        var userbgs = [];
+        if (this.staff.userbgroups != null) {
+            for (var j = 0; j < this.staff.userbgroups.length; j++) { 
+                userbgs.push(this.staff.userbgroups[j].badge);
+            }
+        }
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) { 
+                let index = userbgs.indexOf(this.badges[i].name);
+                if (this.badges[i].inused && index == -1) {
+                    badgesOptions.push(this.badges[i].name);
+                }
+            }
+        }
+        return badgesOptions.sort();
     }
 
     getLevelsOptions(bname: string) {

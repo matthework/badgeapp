@@ -46,7 +46,7 @@ var BadgeDetailComponent = (function () {
     };
     BadgeDetailComponent.prototype.toBadges = function () {
         this._router.navigate(['/badges']);
-        // location.reload();
+        location.reload();
     };
     BadgeDetailComponent.prototype.editBadge = function () {
         this._router.navigate(['/badge/edit', this.id]);
