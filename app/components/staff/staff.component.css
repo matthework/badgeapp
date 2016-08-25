@@ -323,7 +323,9 @@ li:hover {
 .tooltip:hover {
   color: #039be5;
 }
-
+.check-approved {
+  color: limegreen;
+}
 
 
 

@@ -18,6 +18,7 @@ var tier_service_1 = require('../tier/tier.service');
 var auth_service_1 = require('../auth/auth.service');
 var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var yes_no_pipe_1 = require('../pipe/yes-no-pipe');
+var approved_pipe_1 = require('../pipe/approved-pipe');
 var StaffComponent = (function () {
     function StaffComponent(_staffService, _badgeService, _bsService, _tierService, _router, auth) {
         this._staffService = _staffService;
@@ -26,7 +27,6 @@ var StaffComponent = (function () {
         this._tierService = _tierService;
         this._router = _router;
         this.auth = auth;
-        // title: string = "Staff";
         this.staffs = [];
         this.badges = [];
         this.badgesets = [];
@@ -117,11 +117,11 @@ var StaffComponent = (function () {
         var count = 0;
         var coreCount = 0;
         var core = false;
-        if (this.badgesets != null) {
+        if (this.badgesets != null && sbgs != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
-                        if (this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             count += 1;
                         }
                     }
@@ -196,13 +196,20 @@ var StaffComponent = (function () {
     StaffComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
     };
+    StaffComponent.prototype.checkApproved = function (a) {
+        var result = "";
+        if (a) {
+            result = " ** ";
+        }
+        return result;
+    };
     StaffComponent = __decorate([
         core_1.Component({
             selector: 'my-staff',
             templateUrl: 'app/components/staff/staff.component.html',
             styleUrls: ['app/components/staff/staff.component.css'],
             directives: [staff_edit_component_1.StaffEditComponent],
-            pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
+            pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe, approved_pipe_1.ApprovedPipe]
         }), 
         __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService, tier_service_1.TierService, router_1.Router, auth_service_1.AuthService])
     ], StaffComponent);

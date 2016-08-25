@@ -80,6 +80,7 @@ export class BSNewComponent{
       this.numBadges = Math.round(this.total/2);
     }
     this.newBS.numbadges = this.numBadges;
+    this.newBS.pay = +this.getPay(this.newBS.tier, this.newBS.grade)
     console.log('you submitted total: ', this.total); 
 
     this.newBS.badgegroups.sort(this.toCompare);
@@ -101,7 +102,7 @@ export class BSNewComponent{
 
   toBadgeSets() {
     this._router.navigate(['/badgeset']);
-    // location.reload();
+    location.reload();
   }
 
   goBack() {

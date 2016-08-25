@@ -19,22 +19,20 @@ var StaffNewComponent = (function () {
         this._badgeService = _badgeService;
         this._router = _router;
         this.auth = auth;
-        // title: string = "Add New Staff";
         this.badges = [];
         this.active = false;
         this.nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        this.brief = 0;
-        this.newBGs = [{ badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 }];
-        this.newStaff = { index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", badgegroups: this.newBGs, others: [] };
+        this.newBGs = [{ badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false },
+            { badge: "", level: 0, status: false }];
+        this.newStaff = { index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief: "", others: [] };
     }
     StaffNewComponent.prototype.ngOnInit = function () {
         this.getBadges();
@@ -44,15 +42,12 @@ var StaffNewComponent = (function () {
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
     };
     StaffNewComponent.prototype.addStaff = function () {
-        for (var i = 0; i < this.newStaff.badgegroups.length; i++) {
-            if (this.newStaff.badgegroups[i].level != 0) {
-                this.newStaff.badgegroups[i].level = +this.newStaff.badgegroups[i].level;
+        for (var i = 0; i < this.newStaff.userbgroups.length; i++) {
+            if (this.newStaff.userbgroups[i].level != 0) {
+                this.newStaff.userbgroups[i].level = +this.newStaff.userbgroups[i].level;
             }
         }
-        // if (this.newStaff.salary == "") {
-        //   this.newStaff.salary = "$";
-        // }
-        this.newStaff.badgegroups.sort(this.toCompare);
+        this.newStaff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.newStaff);
         this._staffService.addStaff(value).subscribe();
         console.log('you submitted value: ', value);
@@ -68,7 +63,7 @@ var StaffNewComponent = (function () {
     };
     StaffNewComponent.prototype.toStaffs = function () {
         this._router.navigate(['/staffs']);
-        // location.reload();
+        location.reload();
     };
     StaffNewComponent.prototype.getDesc = function (b, l) {
         var desc = "";

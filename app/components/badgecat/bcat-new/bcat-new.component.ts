@@ -69,7 +69,7 @@ export class BCatNewComponent{
 
   toBadgeCats() {
     this._router.navigate(['/badgecat']);
-    // location.reload();
+    location.reload();
   }
 
   goBack() {

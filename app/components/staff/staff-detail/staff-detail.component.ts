@@ -1,23 +1,24 @@
 import {Component,OnInit} from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 
-import {Staff,BadgeGroup} from '../staff';
+import {Staff,UserBGroup} from '../staff';
 import {StaffService} from '../staff.service';
 import {Badge} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
-import {BadgeSet} from '../../badgeset/bs';
+import {BadgeSet,BadgeGroup} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
 import {Tier} from '../../tier/tier';
 import {TierService} from '../../tier/tier.service';
 import {AuthService} from '../../auth/auth.service';
 
 import {YesNoPipe} from '../../pipe/yes-no-pipe';
+import {ApprovedPipe} from '../../pipe/approved-pipe';
 
 @Component({
   selector: 'my-staff-detail',
   templateUrl: 'app/components/staff/staff-detail/staff-detail.component.html',
   styleUrls: ['app/components/staff/staff-detail/staff-detail.component.css'],
-  pipes: [YesNoPipe]
+  pipes: [YesNoPipe,ApprovedPipe]
 })
 
 export class StaffDetailComponent implements OnInit {
@@ -26,7 +27,6 @@ export class StaffDetailComponent implements OnInit {
   badges: Badge[] = [];
   badgesets: BadgeSet[] = [];
   tiers: Tier[] = [];
-  brief = 0;
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   sortStaffBS = [];
   sub: any;
@@ -74,7 +74,7 @@ export class StaffDetailComponent implements OnInit {
 
   toStaffs() {
     this._router.navigate(['/staffs']);
-    // location.reload();
+    location.reload();
   }
 
   toStaffEdit(sid:string) {
@@ -109,12 +109,12 @@ export class StaffDetailComponent implements OnInit {
     this._router.navigate(['/badge/detail',bid]);
   }
 
-  getStaffBS(sbgs:BadgeGroup[]) {
+  getStaffBS(sbgs:UserBGroup[]) {
     var allbset = [];
     var count = 0;
     var coreCount = 0;
     var core = false;
-    if (this.badgesets != null) {
+    if (this.badgesets != null && sbgs != null) {
       for (var i = 0; i < this.badgesets.length; i++) { 
         for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
           for (var k = 0; k < sbgs.length; k++) {      
@@ -149,7 +149,7 @@ export class StaffDetailComponent implements OnInit {
     return allbset;
   }
 
-  getSortStaffBS(sbgs:BadgeGroup[]) {
+  getSortStaffBS(sbgs:UserBGroup[]) {
     var pay = "";
     this.sortStaffBS = [];
     var allbset = this.getStaffBS(sbgs);

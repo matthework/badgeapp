@@ -77,16 +77,16 @@ th , td  {
   /*line-height: 30px; */
 }
 .th-name {
-  width: 22%;
+  width: 25%;
 }
 .th-overview {
-  width: 40%;
+  width: 42%;
 }
 .th-approved {
   width: 8%;
 }
 .th-inused {
-  width: 8%;
+  width: 10%;
 }
 .th-last {
   background-color: #ffffff;

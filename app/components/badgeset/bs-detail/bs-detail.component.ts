@@ -67,7 +67,7 @@ export class BSDetailComponent implements OnInit {
 
   toBadgeSets() {
     this._router.navigate(['/badgeset']);
-    // location.reload();
+    location.reload();
   }
 
   toBSEdit(bsid:string) {

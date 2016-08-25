@@ -22,6 +22,9 @@ var StaffService = (function () {
     StaffService.prototype.getStaff = function (id) {
         return this._http.get('/api/staff/edit/' + id).map(function (r) { return r.json(); });
     };
+    StaffService.prototype.getStaffByEmail = function (email) {
+        return this._http.get('/api/staff/edit/email/' + email).map(function (r) { return r.json(); });
+    };
     StaffService.prototype.addStaff = function (value) {
         var _messageStringified = value; //JSON.stringify(value);
         var headers = new http_1.Headers();

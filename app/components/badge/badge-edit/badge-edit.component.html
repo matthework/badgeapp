@@ -16,8 +16,8 @@
 	<label>Overview: </label>
 	<textarea class="ta-big" [(ngModel)]="badge.overview" placeholder="Overview"></textarea><br>
 
-	<label>Approved: </label>
-	<input type="checkbox" [(ngModel)]="badge.approved" placeholder="Approved" /><br>
+<!-- 	<label>Approved: </label>
+	<input type="checkbox" [(ngModel)]="badge.approved" placeholder="Approved" /><br> -->
 
 	<label>InUsed: </label>
 	<input type="checkbox" [disabled]="!badge.approved" [(ngModel)]="badge.inused" placeholder="InUsed" /><br>

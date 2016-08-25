@@ -33,13 +33,13 @@
   <tr *ngFor="let staff of staffs | filter:query">
     <td (click)="onSelect(staff);toStaffDetail(staff._id)" class="staff">{{staff.fname}} {{staff.lname}}</td>
     <td class="td-badges">
-	<div *ngFor="let badgegroup of staff.badgegroups">
-	<li>
-	<text class="tooltip" (click)="toBadgeDetail(badgegroup.badge)"><text class="badge">{{badgegroup.badge}} {{badgegroup.level}}</text><span class="tooltiptext"><li> <b>Level {{badgegroup.level-1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level-1)}}</li><br><li><b><u>Level {{badgegroup.level}}</u>: </b>{{getDesc(badgegroup.badge, badgegroup.level)}}</li><br><li><b>Level {{badgegroup.level+1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level+1)}}</li></span></text>
-	</li>
-	</div>
-	</td>
-	<td class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.badgegroups)[0])">{{getTopStaffBS(staff.badgegroups)[1]}}</td>
+  	<div *ngFor="let userbgroup of staff.userbgroups">
+  	<li>
+  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.badge)"><text class="badge">{{userbgroup.badge}} {{userbgroup.level}}</text><text class="check-approved">{{checkApproved(userbgroup.status)}}</text><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b>{{getDesc(userbgroup.badge, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level+1)}}</li></span></text>
+  	</li>
+  	</div>
+  	</td>
+  	<td class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</td>
     <td (click)="onSelect(staff)">{{staff.position}}</td>
     <!-- <td class="td-salary" (click)="onSelect(staff)">${{staff.salary}}K</td> -->
     <!-- <td (click)="onSelect(staff)">{{staff.email}}</td> -->
@@ -62,17 +62,17 @@
   <tr *ngFor="let staff of staffs | filter:query">
     <td (click)="onSelect(staff);toStaffDetail(staff._id)" class="staff">{{staff.fname}} {{staff.lname}}</td>
     <td class="td-bs">
-    <div *ngFor="let bs of getSortStaffBS(staff.badgegroups)">
+    <div *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 		<li class="li-bs" (click)="toBSDetail(bs._id)">{{bs.name}}</li>
 	</div>
 	</td>
     <td class="td-tier" (click)="onSelect(staff)">
-   	<div *ngFor="let bs of getSortStaffBS(staff.badgegroups)">
+   	<div *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 		<li>{{bs.tier}} - {{bs.grade}}</li>
 	</div>
 	</td>
     <td class="td-pay" (click)="onSelect(staff)">
-   	<div *ngFor="let bs of getSortStaffBS(staff.badgegroups)">
+   	<div *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 		<li>${{bs.pay}}K</li>
 	</div>
     </td>

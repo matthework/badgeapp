@@ -70,7 +70,7 @@
 		<div *ngIf="active">
 			<h3>Add New Badge</h3><br>
 			<label>Badge: </label>
-			<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+			<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getNewBadgesOptions()" [value]="bo">{{bo}}</option></select>
 
 			<label class="label-level">Level: </label>
 			<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>

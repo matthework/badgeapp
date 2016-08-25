@@ -27,7 +27,7 @@ var BadgeNewComponent = (function () {
             { level: 7, desc: "" },
             { level: 8, desc: "" },
             { level: 9, desc: "" }];
-        this.newBadge = { index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, approved: false, inused: false };
+        this.newBadge = { index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, approved: true, inused: false };
     }
     BadgeNewComponent.prototype.addBadge = function () {
         this.newBadge.code = this.newBadge.code.toUpperCase();
@@ -38,7 +38,7 @@ var BadgeNewComponent = (function () {
     };
     BadgeNewComponent.prototype.toBadges = function () {
         this._router.navigate(['/badges']);
-        // location.reload();
+        location.reload();
     };
     BadgeNewComponent.prototype.goBack = function () {
         window.history.back();

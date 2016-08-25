@@ -39,11 +39,11 @@ var BadgeEditComponent = (function () {
     };
     BadgeEditComponent.prototype.toBadges = function () {
         this._router.navigate(['/badges']);
-        // location.reload();
+        location.reload();
     };
     BadgeEditComponent.prototype.toBadgeDetail = function () {
         this._router.navigate(['/badge/detail', this.id]);
-        // location.reload();
+        location.reload();
     };
     BadgeEditComponent.prototype.updateBadge = function () {
         this.badge.code = this.badge.code.toUpperCase();

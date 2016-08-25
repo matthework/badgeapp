@@ -5,10 +5,10 @@ var Staff = (function () {
     return Staff;
 }());
 exports.Staff = Staff;
-var BadgeGroup = (function () {
-    function BadgeGroup() {
+var UserBGroup = (function () {
+    function UserBGroup() {
     }
-    return BadgeGroup;
+    return UserBGroup;
 }());
-exports.BadgeGroup = BadgeGroup;
+exports.UserBGroup = UserBGroup;
 //# sourceMappingURL=staff.js.map

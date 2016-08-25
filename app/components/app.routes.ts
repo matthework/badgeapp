@@ -1,4 +1,4 @@
-import { provideRouter, RouterConfig }  from '@angular/router';
+import {provideRouter,RouterConfig}  from '@angular/router';
 
 import {MainComponent} from './main/main.component';
 import {AboutComponent} from './about/about.component';
@@ -12,6 +12,9 @@ import {StaffComponent} from './staff/staff.component';
 import {StaffEditComponent} from './staff/staff-edit/staff-edit.component';
 import {StaffDetailComponent} from './staff/staff-detail/staff-detail.component';
 import {StaffNewComponent} from './staff/staff-new/staff-new.component';
+import {UserDetailComponent} from './staff/user-detail/user-detail.component';
+import {UserNewComponent} from './staff/user-new/user-new.component';
+import {UserEditComponent} from './staff/user-edit/user-edit.component';
 
 import {TierComponent} from './tier/tier.component';
 import {TierEditComponent} from './tier/tier-edit/tier-edit.component';
@@ -86,6 +89,18 @@ const routes: RouterConfig = [
       path: 'staff/new',
       // name: 'StaffNew',
       component: StaffNewComponent,
+  },
+  {
+      path: 'user/new/:email',
+      component: UserNewComponent,
+  },
+  {
+      path: 'user/detail/:email',
+      component: UserDetailComponent,
+  },
+  {
+      path: 'user/edit/:id',
+      component: UserEditComponent,
   },
   {
       path: 'tiers',

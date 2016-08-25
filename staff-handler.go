@@ -29,18 +29,31 @@ func viewFindStaffByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func viewFindStaffByEmail(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	vars := mux.Vars(r)
+	email := vars["email"]
+	if email != "" {
+		if err := json.NewEncoder(w).Encode(findStaffByEmail(email)); err != nil {
+			panic(err)
+		}
+	}
+}
+
 func addNewStaff(w http.ResponseWriter, r *http.Request) {
 	var staff Staff
 	if err := json.NewDecoder(r.Body).Decode(&staff); err != nil {
 		panic(err)
 	}
-	var bgs []BadgeGroup
-	for i := range staff.BadgeGroups {
-		if staff.BadgeGroups[i].Badge != "" && staff.BadgeGroups[i].Level != 0 {
-			bgs = append(bgs, staff.BadgeGroups[i])
+	var bgs []UserBGroup
+	for i := range staff.UserBGroups {
+		if staff.UserBGroups[i].Badge != "" && staff.UserBGroups[i].Level != 0 {
+			bgs = append(bgs, staff.UserBGroups[i])
 		}
 	}
-	staff.BadgeGroups = bgs
+	staff.UserBGroups = bgs
 	staff.TimeStamp = time.Now()
 	if staff.FName != "" {
 		if err := insertStaff(staff); err != nil {

@@ -58,7 +58,7 @@ var BSDetailComponent = (function () {
     };
     BSDetailComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);
-        // location.reload();
+        location.reload();
     };
     BSDetailComponent.prototype.toBSEdit = function (bsid) {
         this._router.navigate(['/bs/edit', bsid]);

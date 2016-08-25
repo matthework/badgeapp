@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Staff,BadgeGroup} from './staff';
+import {Staff,UserBGroup} from './staff';
 import {StaffEditComponent} from './staff-edit/staff-edit.component';
 import {StaffService} from './staff.service';
 import {Badge} from '../badge/badge';
 import {BadgeService} from '../badge/badge.service';
 
-import {BadgeSet} from '../badgeset/bs';
+import {BadgeSet,BadgeGroup} from '../badgeset/bs';
 import {BSService} from '../badgeset/bs.service';
 import {Tier} from '../tier/tier';
 import {TierService} from '../tier/tier.service';
@@ -15,6 +15,7 @@ import {AuthService} from '../auth/auth.service';
 
 import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 import {YesNoPipe} from '../pipe/yes-no-pipe';
+import {ApprovedPipe} from '../pipe/approved-pipe';
 
 
 @Component({
@@ -22,11 +23,10 @@ import {YesNoPipe} from '../pipe/yes-no-pipe';
 	templateUrl: 'app/components/staff/staff.component.html',
 	styleUrls: ['app/components/staff/staff.component.css'],
 	directives: [StaffEditComponent],
-	pipes: [FilterArrayPipe,YesNoPipe]
+	pipes: [FilterArrayPipe,YesNoPipe,ApprovedPipe]
 })
 export class StaffComponent {
 
-	// title: string = "Staff";
 	staffs: Staff[] = [];
 	badges: Badge[] = [];
 	badgesets: BadgeSet[] = [];
@@ -131,16 +131,16 @@ export class StaffComponent {
 		this._router.navigate(['/badge/detail',bid]);
 	}
 
-	getStaffBS(sbgs:BadgeGroup[]) {
+	getStaffBS(sbgs:UserBGroup[]) {
 		var allbset = [];
 		var count = 0;
 		var coreCount = 0;
 		var core = false;
-		if (this.badgesets != null) {
+		if (this.badgesets != null && sbgs != null) {
 			for (var i = 0; i < this.badgesets.length; i++) { 
 				for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
 					for (var k = 0; k < sbgs.length; k++) {      
-						if (this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+						if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
 							count += 1;
 						}
 					}
@@ -174,16 +174,16 @@ export class StaffComponent {
 		return allbset;
 	}
 
-	getSortStaffBS(sbgs:BadgeGroup[]) {
+	getSortStaffBS(sbgs:UserBGroup[]) {
 		var pay = "";
 		this.sortStaffBS = [];
 		var allbset = this.getStaffBS(sbgs);
-      if (allbset != null) {
-         for (var i = 0; i < allbset.length; i++) { 
-            allbset[i].pay = this.getPay(allbset[i].tier, allbset[i].grade);
-            this.sortStaffBS.push(allbset[i]);
-         }
-      }
+		if (allbset != null) {
+			for (var i = 0; i < allbset.length; i++) { 
+				allbset[i].pay = this.getPay(allbset[i].tier, allbset[i].grade);
+				this.sortStaffBS.push(allbset[i]);
+			}
+		}
 
 		return this.sortStaffBS.sort(this.toCompareDes);
 	}
@@ -197,7 +197,7 @@ export class StaffComponent {
 			return 0;
 	}
 
-	getTopStaffBS(sbgs:BadgeGroup[]) {
+	getTopStaffBS(sbgs:UserBGroup[]) {
 		var topBS = [];
 		if (this.getSortStaffBS(sbgs) !=null && this.getSortStaffBS(sbgs).length > 0) {
 			topBS.push(this.getSortStaffBS(sbgs)[0]._id);
@@ -209,17 +209,25 @@ export class StaffComponent {
 	getPay(t:number, g:string) {
 		var pay = 0;
 		if (this.tiers != null && t != 0 && g != "") {
-      for (var i = 0; i < this.tiers.length; i++) { 
-        if (this.tiers[i].tier == t) {
-          pay = this.tiers[i].grades[this.gmap[g]];
-        }
-      }
-    }
+			for (var i = 0; i < this.tiers.length; i++) { 
+				if (this.tiers[i].tier == t) {
+					pay = this.tiers[i].grades[this.gmap[g]];
+				}
+			}
+		}
 		return pay;
 	}
 
 	toBSDetail(bsid:string){
 		this._router.navigate(['/bs/detail',bsid]);
+	}
+
+	checkApproved(a:boolean) {
+		var result = "";
+		if (a) {
+			result = " ** ";
+		}
+		return result;
 	}
 
 }

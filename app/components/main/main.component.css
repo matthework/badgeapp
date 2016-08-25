@@ -15,6 +15,27 @@ h3 {
   margin-top: 0;
   padding-top: 0;
 }
+button {
+  width: 100px;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 1em;
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer; 
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #ccc; 
+  cursor: auto;
+}
 input {
   height: 2em;
   font-size: 1em;
@@ -44,3 +65,14 @@ nav a:hover {
 nav a.router-link-active {
   color: #039be5;
 }
+.profile-img {
+  width: 150px;
+}
+.button-add {
+  width: 130px;
+}
+.button-user {
+  width: 130px;
+}
+
+

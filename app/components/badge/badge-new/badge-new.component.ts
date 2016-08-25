@@ -23,7 +23,7 @@ export class BadgeNewComponent {
             {level: 8, desc:""},
             {level: 9, desc:""}];
 
-  newBadge = {index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, approved: false, inused: false};
+  newBadge = {index: 0, name: "", code: "", overview: "", badgelevels: this.newbls, approved: true, inused: false};
 
   constructor(
     private _badgeService: BadgeService, 
@@ -40,7 +40,7 @@ export class BadgeNewComponent {
 
   toBadges() {
     this._router.navigate(['/badges']);
-    // location.reload();
+    location.reload();
   }
   
   goBack() {

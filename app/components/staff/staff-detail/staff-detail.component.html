@@ -18,33 +18,33 @@
 	<text>${{staff.salary}}K</text><br>
 
 	<label>Badge Sets: </label>
-	<text *ngFor="let bs of getSortStaffBS(staff.badgegroups)">
+	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
 	</text><br>
-
-<!-- 	<label>Top Badege Set: </label>
-	<text class="uli-bs" (click)="toBSDetail(getTopBS()._id)">{{getTopBS().name}}</text><br> -->
 
 	<label>Active: </label>
 	<text>{{staff.active | yes_no}}</text><br>
 
 	<label>Brief: </label>
-	<textarea readonly class="ta-brief">{{staff.others[brief]}}</textarea><br>
-
-	<table class="table-badgegroups">
+	<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
+	<br>
+	
+	<table class="table-userbgroups">
 		<tr>
 		  <th class="th-badge">Badge</th>
 		  <th class="th-desc">Description</th>
 		  <th class="th-bs">Badge Set</th>
+		  <th class="th-status">Status</th>
 		</tr>
-		<tr *ngFor="let badgegroup of staff.badgegroups">
-			<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
-			<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
+		<tr *ngFor="let userbgroup of staff.userbgroups">
+			<td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
+			<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
 			<td class="td-bs">
-			<div *ngFor="let bs of findBadgeSet(badgegroup.badge,badgegroup.level)">
+			<div *ngFor="let bs of findBadgeSet(userbgroup.badge,userbgroup.level)">
 				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 			</div>
       		</td>
+      		<td class="td-status">{{userbgroup.status | approved_pending}}</td>
 		</tr>
 	</table>
 

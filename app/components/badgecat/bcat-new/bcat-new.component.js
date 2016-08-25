@@ -62,7 +62,7 @@ var BCatNewComponent = (function () {
     };
     BCatNewComponent.prototype.toBadgeCats = function () {
         this._router.navigate(['/badgecat']);
-        // location.reload();
+        location.reload();
     };
     BCatNewComponent.prototype.goBack = function () {
         window.history.back();

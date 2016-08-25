@@ -1,0 +1,42 @@
+
+<div *ngIf="auth.authenticated()">
+
+<div *ngIf="staff">
+	<h2>Edit User - {{staff.fname}} {{staff.lname}}</h2><br>
+
+	<label>FName: </label>
+	<input class="input-fname" type="text" [(ngModel)]="staff.fname" placeholder="First Name"><br>
+
+	<label>LName: </label>
+	<input class="input-lname" type="text" [(ngModel)]="staff.lname" placeholder="Last Name"><br>
+
+	<label>Position: </label>
+	<input class="input-pos" type="text" [(ngModel)]="staff.position" placeholder="Position"><br>
+
+	<label>Salary: </label>
+	<input class="input-salary" type="number" [(ngModel)]="staff.salary" placeholder="0"> K<br>
+
+<!-- 	<label>Email: </label>
+	<input class="input-email" type="text" [(ngModel)]="staff.email" placeholder="Email"><br> -->
+
+	<label>Phone: </label>
+	<input class="input-phone" type="text" [(ngModel)]="staff.phone" placeholder="Phone"><br>
+
+	<label>Brief: </label>
+	<textarea class="ta-brief" type="text" [(ngModel)]="staff.brief" placeholder="Brief">{{staff.brief}}</textarea><br>
+
+	<button class="button-save" [disabled]="!staff.fname||!staff.email" (click)="updateStaff()">Save</button>
+	<button class="button-cancel" (click)="goBack()">Cancel</button>
+
+	<br>
+	<br>
+	<br>
+
+</div>
+
+</div>
+
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+
+
+
