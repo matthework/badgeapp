@@ -25,7 +25,11 @@
 	<label>Brief: </label>
 	<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
 
+	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toUserEdit(staff._id)">Edit Profile</button><br>
+
 	<br>
+	<br>
+	<h3>User's Badges:</h3>
 	<table class="table-userbgroups">
 		<tr>
 		  <th class="th-badge">Badge</th>
@@ -41,12 +45,29 @@
 				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 			</div>
       		</td>
-      		<td class="td-status">{{userbgroup.status | yes_no}}</td>
+      		<td class="td-status">{{userbgroup.status | approved_pending}}</td>
 		</tr>
 	</table>
 
-	<button (click)="goBack()">Back</button>
-	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toUserEdit(staff._id)">Edit</button>
+	<button class="button-apply" *ngIf!="active" (click)="active=true">+ Apply New</button>
+	<br>
+	<div *ngIf="active">
+		<h3>Apply New Badge</h3><br>
+		<label>Badge: </label>
+		<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getNewBadgesOptions()" [value]="bo">{{bo}}</option></select>
+
+		<label class="label-level">Level: </label>
+		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+
+		<label>Description: </label>
+		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+
+		<button class="button-l-save" (click)="addBadgeGroup();active=false">Apply</button>
+		<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
+	</div>
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
 	<br>

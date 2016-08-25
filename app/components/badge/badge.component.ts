@@ -78,6 +78,14 @@ export class BadgeComponent implements OnInit {
     this._router.navigate(['/badgecat']);
   }
 
+  // removeBadgeFromBS(bname: BadgeGroup) {
+  //   let index = this.badgeset.badgegroups.indexOf(selectedGroup);
+  //   this.badgeset.badgegroups.splice(index,1);
+  //   let value = JSON.stringify(this.badgeset)
+  //   // this._bsService.updateBadgeSet(id,value).subscribe();
+  //   console.log('you submitted value: ', value);
+  // }
+
 }
 
 

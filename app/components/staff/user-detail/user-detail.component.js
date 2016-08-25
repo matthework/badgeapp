@@ -16,6 +16,7 @@ var bs_service_1 = require('../../badgeset/bs.service');
 var tier_service_1 = require('../../tier/tier.service');
 var auth_service_1 = require('../../auth/auth.service');
 var yes_no_pipe_1 = require('../../pipe/yes-no-pipe');
+var approved_pipe_1 = require('../../pipe/approved-pipe');
 var UserDetailComponent = (function () {
     function UserDetailComponent(_staffService, _badgeService, _bsService, _tierService, _router, route, auth) {
         this._staffService = _staffService;
@@ -30,6 +31,10 @@ var UserDetailComponent = (function () {
         this.tiers = [];
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
+        this.active = false;
+        this.newBadge = "";
+        this.newLevel = 0;
+        this.newStatus = false;
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -187,6 +192,55 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
     };
+    UserDetailComponent.prototype.getNewBadgesOptions = function () {
+        var badgesOptions = [];
+        var userbgs = [];
+        if (this.staff.userbgroups != null) {
+            for (var j = 0; j < this.staff.userbgroups.length; j++) {
+                userbgs.push(this.staff.userbgroups[j].badge);
+            }
+        }
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                var index = userbgs.indexOf(this.badges[i].name);
+                if (this.badges[i].inused && index == -1) {
+                    badgesOptions.push(this.badges[i].name);
+                }
+            }
+        }
+        return badgesOptions.sort();
+    };
+    UserDetailComponent.prototype.getLevelsOptions = function (bname) {
+        var levelsOptions = [];
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i].name == bname) {
+                for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
+                    levelsOptions.push(this.badges[i].badgelevels[j].level);
+                }
+            }
+        }
+        // console.log('getBadgesOptions: ', badgesOptions);
+        return levelsOptions.sort();
+    };
+    UserDetailComponent.prototype.addBadgeGroup = function () {
+        this.newLevel = +this.newLevel;
+        this.staff.userbgroups.push({ badge: this.newBadge, level: this.newLevel, status: this.newStatus });
+        this.staff.userbgroups.sort(this.toCompare);
+        var value = JSON.stringify(this.staff);
+        this._staffService.updateStaff(this.staff._id, value).subscribe();
+        console.log('you submitted value: ', value);
+        this.newBadge = "";
+        this.newLevel = 0;
+        this.newStatus = false;
+    };
+    UserDetailComponent.prototype.toCompare = function (a, b) {
+        if (a.badge < b.badge)
+            return -1;
+        else if (a.badge > b.badge)
+            return 1;
+        else
+            return 0;
+    };
     UserDetailComponent.prototype.goBack = function () {
         window.history.back();
     };
@@ -195,7 +249,7 @@ var UserDetailComponent = (function () {
             selector: 'my-user-detail',
             templateUrl: 'app/components/staff/user-detail/user-detail.component.html',
             styleUrls: ['app/components/staff/user-detail/user-detail.component.css'],
-            pipes: [yes_no_pipe_1.YesNoPipe]
+            pipes: [yes_no_pipe_1.YesNoPipe, approved_pipe_1.ApprovedPipe]
         }), 
         __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService, tier_service_1.TierService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], UserDetailComponent);
