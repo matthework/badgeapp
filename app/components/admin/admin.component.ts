@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Staff,UserBGroup} from './staff';
-import {StaffEditComponent} from './staff-edit/staff-edit.component';
-import {StaffService} from './staff.service';
+import {Staff,UserBGroup} from '../staff/staff';
+import {StaffService} from '../staff/staff.service';
 import {Badge} from '../badge/badge';
 import {BadgeService} from '../badge/badge.service';
 
@@ -19,13 +18,12 @@ import {ApprovedPipe} from '../pipe/approved-pipe';
 
 
 @Component({
-	selector: 'my-staff',
-	templateUrl: 'app/components/staff/staff.component.html',
-	styleUrls: ['app/components/staff/staff.component.css'],
-	directives: [StaffEditComponent],
+	selector: 'my-admin',
+	templateUrl: 'app/components/admin/admin.component.html',
+	styleUrls: ['app/components/admin/admin.component.css'],
 	pipes: [FilterArrayPipe,YesNoPipe,ApprovedPipe]
 })
-export class StaffComponent {
+export class AdminComponent {
 
 	staffs: Staff[] = [];
 	badges: Badge[] = [];
@@ -230,6 +228,13 @@ export class StaffComponent {
 	// 	return result;
 	// }
 
+    updateStaff(staff:Staff) {
+        let value = JSON.stringify(staff)
+        this._staffService.updateStaff(staff._id,value).subscribe();
+        console.log('you submitted value: ', value); 
+    }
+
 }
+
 
 

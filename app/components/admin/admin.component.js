@@ -10,8 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var staff_edit_component_1 = require('./staff-edit/staff-edit.component');
-var staff_service_1 = require('./staff.service');
+var staff_service_1 = require('../staff/staff.service');
 var badge_service_1 = require('../badge/badge.service');
 var bs_service_1 = require('../badgeset/bs.service');
 var tier_service_1 = require('../tier/tier.service');
@@ -19,8 +18,8 @@ var auth_service_1 = require('../auth/auth.service');
 var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var yes_no_pipe_1 = require('../pipe/yes-no-pipe');
 var approved_pipe_1 = require('../pipe/approved-pipe');
-var StaffComponent = (function () {
-    function StaffComponent(_staffService, _badgeService, _bsService, _tierService, _router, auth) {
+var AdminComponent = (function () {
+    function AdminComponent(_staffService, _badgeService, _bsService, _tierService, _router, auth) {
         this._staffService = _staffService;
         this._badgeService = _badgeService;
         this._bsService = _bsService;
@@ -38,55 +37,55 @@ var StaffComponent = (function () {
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
     }
-    StaffComponent.prototype.ngOnInit = function () {
+    AdminComponent.prototype.ngOnInit = function () {
         this.getStaffs();
         this.getBadges();
         this.getBadgeSets();
         this.getTiers();
     };
-    StaffComponent.prototype.getStaffs = function () {
+    AdminComponent.prototype.getStaffs = function () {
         var _this = this;
         this._staffService.getStaffs().subscribe(function (staffs) { _this.staffs = staffs; });
     };
-    StaffComponent.prototype.getBadges = function () {
+    AdminComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
     };
-    StaffComponent.prototype.getBadgeSets = function () {
+    AdminComponent.prototype.getBadgeSets = function () {
         var _this = this;
         this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
     };
-    StaffComponent.prototype.getTiers = function () {
+    AdminComponent.prototype.getTiers = function () {
         var _this = this;
         this._tierService.getTiers().subscribe(function (tiers) { _this.tiers = tiers; });
     };
-    StaffComponent.prototype.onSelect = function (staff) {
+    AdminComponent.prototype.onSelect = function (staff) {
         this.selectedStaff = staff;
     };
-    StaffComponent.prototype.toStaffs = function () {
+    AdminComponent.prototype.toStaffs = function () {
         this._router.navigate(['/staffs']);
         // location.reload();
     };
-    StaffComponent.prototype.toStaffEdit = function (sid) {
+    AdminComponent.prototype.toStaffEdit = function (sid) {
         this._router.navigate(['/staff/edit', sid]);
     };
-    StaffComponent.prototype.toStaffDetail = function (sid) {
+    AdminComponent.prototype.toStaffDetail = function (sid) {
         this._router.navigate(['/staff/detail', sid]);
     };
-    StaffComponent.prototype.addStaff = function () {
+    AdminComponent.prototype.addStaff = function () {
         this._router.navigate(['/staff/new']);
     };
-    StaffComponent.prototype.removeStaff = function (id) {
+    AdminComponent.prototype.removeStaff = function (id) {
         this._staffService.deleteStaff(id).subscribe();
         location.reload();
     };
-    StaffComponent.prototype.deleteStaffPop = function (id) {
+    AdminComponent.prototype.deleteStaffPop = function (id) {
         var r = confirm("Are you sure you want to delete this Staff ?");
         if (r == true) {
             this.removeStaff(id);
         }
     };
-    StaffComponent.prototype.getDesc = function (b, l) {
+    AdminComponent.prototype.getDesc = function (b, l) {
         this.desc = "";
         if (this.badges != null && l > 0 && b != "") {
             for (var i = 0; i < this.badges.length; i++) {
@@ -101,7 +100,7 @@ var StaffComponent = (function () {
         }
         return this.desc;
     };
-    StaffComponent.prototype.toBadgeDetail = function (bname) {
+    AdminComponent.prototype.toBadgeDetail = function (bname) {
         var bid = "";
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
@@ -112,7 +111,7 @@ var StaffComponent = (function () {
         }
         this._router.navigate(['/badge/detail', bid]);
     };
-    StaffComponent.prototype.getStaffBS = function (sbgs) {
+    AdminComponent.prototype.getStaffBS = function (sbgs) {
         var allbset = [];
         var count = 0;
         var coreCount = 0;
@@ -154,7 +153,7 @@ var StaffComponent = (function () {
         }
         return allbset;
     };
-    StaffComponent.prototype.getSortStaffBS = function (sbgs) {
+    AdminComponent.prototype.getSortStaffBS = function (sbgs) {
         var pay = "";
         this.sortStaffBS = [];
         var allbset = this.getStaffBS(sbgs);
@@ -166,7 +165,7 @@ var StaffComponent = (function () {
         }
         return this.sortStaffBS.sort(this.toCompareDes);
     };
-    StaffComponent.prototype.toCompareDes = function (a, b) {
+    AdminComponent.prototype.toCompareDes = function (a, b) {
         if (a.pay > b.pay)
             return -1;
         else if (a.pay < b.pay)
@@ -174,7 +173,7 @@ var StaffComponent = (function () {
         else
             return 0;
     };
-    StaffComponent.prototype.getTopStaffBS = function (sbgs) {
+    AdminComponent.prototype.getTopStaffBS = function (sbgs) {
         var topBS = [];
         if (this.getSortStaffBS(sbgs) != null && this.getSortStaffBS(sbgs).length > 0) {
             topBS.push(this.getSortStaffBS(sbgs)[0]._id);
@@ -182,7 +181,7 @@ var StaffComponent = (function () {
         }
         return topBS;
     };
-    StaffComponent.prototype.getPay = function (t, g) {
+    AdminComponent.prototype.getPay = function (t, g) {
         var pay = 0;
         if (this.tiers != null && t != 0 && g != "") {
             for (var i = 0; i < this.tiers.length; i++) {
@@ -193,20 +192,31 @@ var StaffComponent = (function () {
         }
         return pay;
     };
-    StaffComponent.prototype.toBSDetail = function (bsid) {
+    AdminComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
     };
-    StaffComponent = __decorate([
+    // checkApproved(a:boolean) {
+    // 	var result = "";
+    // 	if (a) {
+    // 		result = " ** ";
+    // 	}
+    // 	return result;
+    // }
+    AdminComponent.prototype.updateStaff = function (staff) {
+        var value = JSON.stringify(staff);
+        this._staffService.updateStaff(staff._id, value).subscribe();
+        console.log('you submitted value: ', value);
+    };
+    AdminComponent = __decorate([
         core_1.Component({
-            selector: 'my-staff',
-            templateUrl: 'app/components/staff/staff.component.html',
-            styleUrls: ['app/components/staff/staff.component.css'],
-            directives: [staff_edit_component_1.StaffEditComponent],
+            selector: 'my-admin',
+            templateUrl: 'app/components/admin/admin.component.html',
+            styleUrls: ['app/components/admin/admin.component.css'],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe, approved_pipe_1.ApprovedPipe]
         }), 
         __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService, tier_service_1.TierService, router_1.Router, auth_service_1.AuthService])
-    ], StaffComponent);
-    return StaffComponent;
+    ], AdminComponent);
+    return AdminComponent;
 }());
-exports.StaffComponent = StaffComponent;
-//# sourceMappingURL=staff.component.js.map
+exports.AdminComponent = AdminComponent;
+//# sourceMappingURL=admin.component.js.map

@@ -45,6 +45,9 @@ var MainComponent = (function () {
     MainComponent.prototype.toUserDetail = function (email) {
         this._router.navigate(['/user/detail', email]);
     };
+    MainComponent.prototype.toAdmin = function () {
+        this._router.navigate(['/admin']);
+    };
     MainComponent = __decorate([
         core_1.Component({
             selector: 'my-main',

@@ -213,6 +213,18 @@ export class UserDetailComponent implements OnInit {
     this._router.navigate(['/bs/detail',bsid]);
   }
 
+  getBadgesOptions() {
+    var badgesOptions = [];
+    if (this.badges != null) {
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i].inused) {
+                badgesOptions.push(this.badges[i].name);
+            }
+        }
+    }
+    return badgesOptions.sort();
+  }
+
   getNewBadgesOptions() {
       var badgesOptions = [];
       var userbgs = [];
@@ -245,6 +257,24 @@ export class UserDetailComponent implements OnInit {
       return levelsOptions.sort();
   }
 
+  getNewLevelsOptions(bname: string) {
+    var levelsOptions = [];
+    for (var i = 0; i < this.badges.length; i++) { 
+      if (this.badges[i].name == bname) {
+        for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+          if (this.staff.userbgroups != null) {
+            for (var k = 0; k < this.staff.userbgroups.length; k++) {
+              if (this.staff.userbgroups[k].badge == bname && this.staff.userbgroups[k].level<this.badges[i].badgelevels[j].level) {
+                levelsOptions.push(this.badges[i].badgelevels[j].level);
+              }
+            }
+          }
+        }
+      }
+    }
+    return levelsOptions.sort();
+  }
+
   addBadgeGroup() {
       this.newLevel = +this.newLevel;
       this.staff.userbgroups.push({badge: this.newBadge, level: this.newLevel, status: this.newStatus});
@@ -265,7 +295,7 @@ export class UserDetailComponent implements OnInit {
     else 
       return 0;
   }
-  
+
   goBack() {
     window.history.back();
   }
