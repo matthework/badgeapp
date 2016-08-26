@@ -74,5 +74,7 @@ nav a.router-link-active {
 .button-user {
   width: 130px;
 }
-
+.button-admin {
+  width: 130px;
+}
 

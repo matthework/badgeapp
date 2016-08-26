@@ -18,10 +18,15 @@
       <p><strong>Google Profile: </strong> {{auth.userProfile.groups}}</p> -->
     </div>
     <button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button>
-    <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button>
+    <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><br>
     <br>
   </div>
 </div>
+
+<div *ngIf="auth.isAdmin()">
+  <button class="button-admin" (click)="toAdmin()">Admin Page</button><br>
+</div>
+
 
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 

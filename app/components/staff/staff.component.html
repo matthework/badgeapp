@@ -1,5 +1,5 @@
 
-<div *ngIf="auth.authenticated()">
+<div *ngIf="auth.isAdmin()">
 
 <div *ngIf="staffs">
 <h2>Person</h2>
@@ -35,7 +35,7 @@
     <td class="td-badges">
   	<div *ngFor="let userbgroup of staff.userbgroups">
   	<li>
-  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.badge)"><text class="badge">{{userbgroup.badge}} {{userbgroup.level}}</text><text class="check-approved">{{checkApproved(userbgroup.status)}}</text><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b>{{getDesc(userbgroup.badge, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level+1)}}</li></span></text>
+  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.badge)"><text class="badge">{{userbgroup.badge}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.status" class="check-pending"> ?</text><text *ngIf="userbgroup.status" class="check-approved"> **</text><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b>{{getDesc(userbgroup.badge, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level+1)}}</li></span></text>
   	</li>
   	</div>
   	</td>
@@ -83,6 +83,6 @@
 
 </div>
 
-<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
 
 

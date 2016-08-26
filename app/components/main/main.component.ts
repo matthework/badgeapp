@@ -50,4 +50,7 @@ export class MainComponent {
 		this._router.navigate(['/user/detail',email]);
 	}
 
+	toAdmin() {
+		this._router.navigate(['/admin']);
+	}
 }

@@ -13,6 +13,7 @@ var staff_new_component_1 = require('./staff/staff-new/staff-new.component');
 var user_detail_component_1 = require('./staff/user-detail/user-detail.component');
 var user_new_component_1 = require('./staff/user-new/user-new.component');
 var user_edit_component_1 = require('./staff/user-edit/user-edit.component');
+var admin_component_1 = require('./admin/admin.component');
 var tier_component_1 = require('./tier/tier.component');
 var tier_edit_component_1 = require('./tier/tier-edit/tier-edit.component');
 var tier_detail_component_1 = require('./tier/tier-detail/tier-detail.component');
@@ -94,6 +95,10 @@ var routes = [
     {
         path: 'user/edit/:id',
         component: user_edit_component_1.UserEditComponent,
+    },
+    {
+        path: 'admin',
+        component: admin_component_1.AdminComponent
     },
     {
         path: 'tiers',

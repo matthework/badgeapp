@@ -192,6 +192,17 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
     };
+    UserDetailComponent.prototype.getBadgesOptions = function () {
+        var badgesOptions = [];
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                if (this.badges[i].inused) {
+                    badgesOptions.push(this.badges[i].name);
+                }
+            }
+        }
+        return badgesOptions.sort();
+    };
     UserDetailComponent.prototype.getNewBadgesOptions = function () {
         var badgesOptions = [];
         var userbgs = [];
@@ -220,6 +231,23 @@ var UserDetailComponent = (function () {
             }
         }
         // console.log('getBadgesOptions: ', badgesOptions);
+        return levelsOptions.sort();
+    };
+    UserDetailComponent.prototype.getNewLevelsOptions = function (bname) {
+        var levelsOptions = [];
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i].name == bname) {
+                for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
+                    if (this.staff.userbgroups != null) {
+                        for (var k = 0; k < this.staff.userbgroups.length; k++) {
+                            if (this.staff.userbgroups[k].badge == bname && this.staff.userbgroups[k].level < this.badges[i].badgelevels[j].level) {
+                                levelsOptions.push(this.badges[i].badgelevels[j].level);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return levelsOptions.sort();
     };
     UserDetailComponent.prototype.addBadgeGroup = function () {

@@ -16,6 +16,8 @@ import {UserDetailComponent} from './staff/user-detail/user-detail.component';
 import {UserNewComponent} from './staff/user-new/user-new.component';
 import {UserEditComponent} from './staff/user-edit/user-edit.component';
 
+import {AdminComponent} from './admin/admin.component';
+
 import {TierComponent} from './tier/tier.component';
 import {TierEditComponent} from './tier/tier-edit/tier-edit.component';
 import {TierDetailComponent} from './tier/tier-detail/tier-detail.component';
@@ -101,6 +103,10 @@ const routes: RouterConfig = [
   {
       path: 'user/edit/:id',
       component: UserEditComponent,
+  },
+  {
+      path: 'admin',
+      component: AdminComponent
   },
   {
       path: 'tiers',
