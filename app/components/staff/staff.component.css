@@ -255,6 +255,17 @@ table tr:nth-child(even) {
 .badge:visited{
   color: #607D8B;
 }
+.badge-pending{
+  cursor: pointer;
+  cursor: hand;
+  color: lightgrey;
+}
+.badge-pending:hover{
+  color: #666;
+}
+.badge-pending:visited{
+  color: #607D8B;
+}
 .badgeset{
   cursor: pointer;
   cursor: hand;
