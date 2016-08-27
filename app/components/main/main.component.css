@@ -77,4 +77,11 @@ nav a.router-link-active {
 .button-admin {
   width: 130px;
 }
-
+.text-pending {
+  color: red;
+  font-size: 1.2em;
+}
+.text-pendingStaff {
+  color: #039be5;
+  font-size: 1.2em;
+}

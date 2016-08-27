@@ -48,6 +48,42 @@ var MainComponent = (function () {
     MainComponent.prototype.toAdmin = function () {
         this._router.navigate(['/admin']);
     };
+    MainComponent.prototype.checkNumPending = function () {
+        var numOfPending = 0;
+        if (this.staffs.length != 0) {
+            for (var i = 0; i < this.staffs.length; i++) {
+                for (var j = 0; j < this.staffs[i].userbgroups.length; j++) {
+                    if (!this.staffs[i].userbgroups[j].status) {
+                        numOfPending += 1;
+                    }
+                }
+            }
+        }
+        else {
+            numOfPending = 0;
+        }
+        return numOfPending;
+    };
+    MainComponent.prototype.checkPendingStaff = function () {
+        var numOfStaff = 0;
+        if (this.staffs.length != 0) {
+            for (var i = 0; i < this.staffs.length; i++) {
+                var b = false;
+                for (var j = 0; j < this.staffs[i].userbgroups.length; j++) {
+                    if (!this.staffs[i].userbgroups[j].status) {
+                        b = true;
+                    }
+                }
+                if (b) {
+                    numOfStaff += 1;
+                }
+            }
+        }
+        else {
+            numOfStaff = 0;
+        }
+        return numOfStaff;
+    };
     MainComponent = __decorate([
         core_1.Component({
             selector: 'my-main',

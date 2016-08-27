@@ -37,18 +37,18 @@ var UserDetailComponent = (function () {
         this.newStatus = false;
     }
     UserDetailComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.sub = this.route.params.subscribe(function (params) {
-            _this.email = params['email'];
-        });
+        // this.sub = this.route.params.subscribe(params => {
+        //   this.email = params['email'];
+        // });
+        this.email = this.auth.userProfile.email;
         this.getStaffByEmail();
         this.getBadges();
         this.getBadgeSets();
         this.getTiers();
     };
-    UserDetailComponent.prototype.ngOnDestroy = function () {
-        this.sub.unsubscribe();
-    };
+    // ngOnDestroy() {
+    //     this.sub.unsubscribe();
+    // }
     UserDetailComponent.prototype.getStaffByEmail = function () {
         var _this = this;
         console.log('email from _routeParams: ', this.email);

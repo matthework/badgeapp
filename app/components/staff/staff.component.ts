@@ -222,13 +222,11 @@ export class StaffComponent {
 		this._router.navigate(['/bs/detail',bsid]);
 	}
 
-	// checkApproved(a:boolean) {
-	// 	var result = "";
-	// 	if (a) {
-	// 		result = " ** ";
-	// 	}
-	// 	return result;
-	// }
+    updateStaff(staff:Staff) {
+        let value = JSON.stringify(staff)
+        this._staffService.updateStaff(staff._id,value).subscribe();
+        console.log('you submitted value: ', value); 
+    }
 
 }
 

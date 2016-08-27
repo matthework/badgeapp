@@ -66,8 +66,7 @@ export class StaffEditComponent implements OnInit {
         let value = JSON.stringify(this.staff)
         this._staffService.updateStaff(this.id,value).subscribe();
         console.log('you submitted value: ', value); 
-        this.goBack();
-        // this.toStaffs();
+        this.toStaffs();
     }
 
     toCompare(a,b) {

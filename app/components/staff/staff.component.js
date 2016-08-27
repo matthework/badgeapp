@@ -196,6 +196,11 @@ var StaffComponent = (function () {
     StaffComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
     };
+    StaffComponent.prototype.updateStaff = function (staff) {
+        var value = JSON.stringify(staff);
+        this._staffService.updateStaff(staff._id, value).subscribe();
+        console.log('you submitted value: ', value);
+    };
     StaffComponent = __decorate([
         core_1.Component({
             selector: 'my-staff',

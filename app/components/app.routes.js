@@ -85,6 +85,10 @@ var routes = [
         component: staff_new_component_1.StaffNewComponent,
     },
     {
+        path: 'user',
+        component: user_detail_component_1.UserDetailComponent,
+    },
+    {
         path: 'user/new/:email',
         component: user_new_component_1.UserNewComponent,
     },

@@ -17,14 +17,15 @@
       <p><strong>Address: </strong> {{auth.userProfile.user_metadata.address}}</p>
       <p><strong>Google Profile: </strong> {{auth.userProfile.groups}}</p> -->
     </div>
-    <button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button>
-    <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><br>
     <br>
+    <button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text *ngIf="!checkProfile()"> Please complete your profile.</text>
+    <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text><br>
   </div>
 </div>
 
 <div *ngIf="auth.isAdmin()">
-  <button class="button-admin" (click)="toAdmin()">Admin Page</button><br>
+  <br>
+  <button class="button-admin" (click)="toAdmin()">Admin Page</button><text> You have <text class="text-pending">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-pendingStaff">{{checkPendingStaff()}}</text> staff(s).</text><br>
 </div>
 
 
