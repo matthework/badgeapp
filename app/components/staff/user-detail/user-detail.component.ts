@@ -225,49 +225,58 @@ export class UserDetailComponent implements OnInit {
     return badgesOptions.sort();
   }
 
-  getNewBadgesOptions() {
-      var badgesOptions = [];
-      var userbgs = [];
-      if (this.staff.userbgroups != null) {
-          for (var j = 0; j < this.staff.userbgroups.length; j++) { 
-              userbgs.push(this.staff.userbgroups[j].badge);
-          }
-      }
-      if (this.badges != null) {
-          for (var i = 0; i < this.badges.length; i++) { 
-              let index = userbgs.indexOf(this.badges[i].name);
-              if (this.badges[i].inused && index == -1) {
-                  badgesOptions.push(this.badges[i].name);
-              }
-          }
-      }
-      return badgesOptions.sort();
-  }
+  // getNewBadgesOptions() {
+  //     var badgesOptions = [];
+  //     var userbgs = [];
+  //     if (this.staff.userbgroups != null) {
+  //         for (var j = 0; j < this.staff.userbgroups.length; j++) { 
+  //             userbgs.push(this.staff.userbgroups[j].badge);
+  //         }
+  //     }
+  //     if (this.badges != null) {
+  //         for (var i = 0; i < this.badges.length; i++) { 
+  //             let index = userbgs.indexOf(this.badges[i].name);
+  //             if (this.badges[i].inused && index == -1) {
+  //                 badgesOptions.push(this.badges[i].name);
+  //             }
+  //         }
+  //     }
+  //     return badgesOptions.sort();
+  // }
 
-  getLevelsOptions(bname: string) {
-      var levelsOptions = [];
-      for (var i = 0; i < this.badges.length; i++) { 
-          if (this.badges[i].name == bname) {
-              for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-                  levelsOptions.push(this.badges[i].badgelevels[j].level);
-              }
-          }
-      }
-      // console.log('getBadgesOptions: ', badgesOptions);
-      return levelsOptions.sort();
-  }
+  // getLevelsOptions(bname: string) {
+  //     var levelsOptions = [];
+  //     for (var i = 0; i < this.badges.length; i++) { 
+  //         if (this.badges[i].name == bname) {
+  //             for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+  //                 levelsOptions.push(this.badges[i].badgelevels[j].level);
+  //             }
+  //         }
+  //     }
+  //     // console.log('getBadgesOptions: ', badgesOptions);
+  //     return levelsOptions.sort();
+  // }
 
   getNewLevelsOptions(bname: string) {
     var levelsOptions = [];
+    var userbgs = [];
+    if (this.staff.userbgroups.length != 0) {
+        for (var j = 0; j < this.staff.userbgroups.length; j++) { 
+            userbgs.push(this.staff.userbgroups[j].badge);
+        }
+    }
     for (var i = 0; i < this.badges.length; i++) { 
       if (this.badges[i].name == bname) {
         for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-          if (this.staff.userbgroups != null) {
+          let index = userbgs.indexOf(this.badges[i].name);
+          if (this.staff.userbgroups.length != 0 && index != -1) {
             for (var k = 0; k < this.staff.userbgroups.length; k++) {
               if (this.staff.userbgroups[k].badge == bname && this.staff.userbgroups[k].level<this.badges[i].badgelevels[j].level) {
                 levelsOptions.push(this.badges[i].badgelevels[j].level);
               }
             }
+          }else{
+            levelsOptions.push(this.badges[i].badgelevels[j].level);
           }
         }
       }
