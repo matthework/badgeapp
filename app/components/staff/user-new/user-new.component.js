@@ -18,7 +18,7 @@ var UserNewComponent = (function () {
         this._router = _router;
         this.route = route;
         this.auth = auth;
-        this.newUser = { index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: false, brief: "", others: [] };
+        this.newUser = { index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief: "", others: [] };
     }
     UserNewComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -38,7 +38,7 @@ var UserNewComponent = (function () {
     };
     UserNewComponent.prototype.toUserDetail = function (email) {
         this._router.navigate(['/user/detail', email]);
-        location.reload();
+        // location.reload();
     };
     UserNewComponent.prototype.goBack = function () {
         window.history.back();

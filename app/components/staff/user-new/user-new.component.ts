@@ -14,7 +14,7 @@ export class UserNewComponent {
   
   email: string;
   sub: any;
-  newUser = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: false, brief:"", others: []}
+  newUser = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief:"", others: []}
 
   constructor(
       private _staffService: StaffService, 
@@ -42,7 +42,7 @@ export class UserNewComponent {
 
   toUserDetail(email:string) {
     this._router.navigate(['/user/detail',email]);
-    location.reload();
+    // location.reload();
   }
 
   goBack() {

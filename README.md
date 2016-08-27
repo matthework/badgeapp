@@ -3,7 +3,7 @@
 Badge System!
 
 ******************* todo list *******************  
-login system  
+improve login system  
 improve warning dialog for delete  
 badge category  
 
