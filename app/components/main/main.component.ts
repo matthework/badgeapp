@@ -15,7 +15,7 @@ import {AuthService} from '../auth/auth.service';
 export class MainComponent {
 
 	staffs: Staff[] = [];
-	newUser = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", badgegroups: [], others: []}
+	newUser = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", badgegroups: [], others: []};
 
 	constructor(private auth: AuthService,
 				private _router: Router,
@@ -52,5 +52,41 @@ export class MainComponent {
 
 	toAdmin() {
 		this._router.navigate(['/admin']);
+	}
+
+	checkNumPending() {
+		var numOfPending = 0;
+		if (this.staffs.length != 0) {
+			for (var i = 0; i < this.staffs.length; i++) { 
+				for (var j = 0; j < this.staffs[i].userbgroups.length; j++) { 
+					if (!this.staffs[i].userbgroups[j].status) {
+						numOfPending += 1;
+					}
+				}
+			}
+		}else {
+			numOfPending = 0;
+		}
+		return numOfPending;
+	}
+
+	checkPendingStaff() {
+		var numOfStaff = 0;
+		if (this.staffs.length != 0) {
+			for (var i = 0; i < this.staffs.length; i++) { 
+				var b = false;
+				for (var j = 0; j < this.staffs[i].userbgroups.length; j++) { 
+					if (!this.staffs[i].userbgroups[j].status) {
+						b = true;
+					}
+				}
+				if (b) {
+					numOfStaff += 1;
+				}
+			}
+		}else {
+			numOfStaff = 0;
+		}
+		return numOfStaff;
 	}
 }

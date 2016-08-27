@@ -93,6 +93,10 @@ const routes: RouterConfig = [
       component: StaffNewComponent,
   },
   {
+      path: 'user',
+      component: UserDetailComponent,
+  },
+  {
       path: 'user/new/:email',
       component: UserNewComponent,
   },

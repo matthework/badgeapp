@@ -29,7 +29,7 @@ export class UserDetailComponent implements OnInit {
   tiers: Tier[] = [];
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   sortStaffBS = [];
-  sub: any;
+  // sub: any;
   email: string;
   active = false;
   newBadge = "";
@@ -46,18 +46,19 @@ export class UserDetailComponent implements OnInit {
     private auth: AuthService) {}
   
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.email = params['email'];
-    });
+    // this.sub = this.route.params.subscribe(params => {
+    //   this.email = params['email'];
+    // });
+    this.email = this.auth.userProfile.email;
     this.getStaffByEmail();
     this.getBadges();
     this.getBadgeSets();
     this.getTiers();
   }
 
-  ngOnDestroy() {
-      this.sub.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //     this.sub.unsubscribe();
+  // }
 
   getStaffByEmail() {
     console.log('email from _routeParams: ', this.email); 

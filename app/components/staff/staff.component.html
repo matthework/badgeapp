@@ -23,7 +23,7 @@
     <th class="th-name">Name</th>
     <th class="th-bg">Badges</th>
     <th class="th-topbs">Top BadgeSet</th>
-    <th class="th-pos">Position</th>
+    <!-- <th class="th-pos">Position</th> -->
    	<!-- <th class="th-salary">Salary</th> -->
     <!-- <th class="th-email">Email</th> -->
     <!-- <th class="th-phone">Phone</th> -->
@@ -35,12 +35,13 @@
     <td class="td-badges">
   	<div *ngFor="let userbgroup of staff.userbgroups">
   	<li>
-  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.badge)"><text class="badge">{{userbgroup.badge}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.status" class="check-pending"> ?</text><text *ngIf="userbgroup.status" class="check-approved"> **</text><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b>{{getDesc(userbgroup.badge, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level+1)}}</li></span></text>
+  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.badge)"><text class="badge">{{userbgroup.badge}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.status" class="check-pending"> ??</text><!-- <text *ngIf="userbgroup.status" class="check-approved"> **</text> --><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b>{{getDesc(userbgroup.badge, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level+1)}}</li></span></text>
+    <button *ngIf="!userbgroup.status" class="button-approve" (click)="userbgroup.status=true;updateStaff(staff)">Approve</button>
   	</li>
   	</div>
   	</td>
   	<td class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</td>
-    <td (click)="onSelect(staff)">{{staff.position}}</td>
+    <!-- <td (click)="onSelect(staff)">{{staff.position}}</td> -->
     <!-- <td class="td-salary" (click)="onSelect(staff)">${{staff.salary}}K</td> -->
     <!-- <td (click)="onSelect(staff)">{{staff.email}}</td> -->
     <!-- <td (click)="onSelect(staff)">{{staff.phone}}</td> -->

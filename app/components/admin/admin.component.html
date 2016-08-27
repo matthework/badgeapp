@@ -14,7 +14,7 @@
     <td class="td-badges">
   	<div *ngFor="let userbgroup of staff.userbgroups">
   	<li>
-  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.badge)"><text class="badge">{{userbgroup.badge}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.status" class="check-pending"> ?</text><text *ngIf="userbgroup.status" class="check-approved"> **</text><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b>{{getDesc(userbgroup.badge, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level+1)}}</li></span></text>
+  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.badge)"><text class="badge">{{userbgroup.badge}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.status" class="check-pending"> ??</text><!-- <text *ngIf="userbgroup.status" class="check-approved"> **</text> --><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b>{{getDesc(userbgroup.badge, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b>{{getDesc(userbgroup.badge, userbgroup.level+1)}}</li></span></text>
     <button *ngIf="!userbgroup.status" class="button-approve" (click)="userbgroup.status=true;updateStaff(staff)">Approve</button>
   	</li>
   	</div>

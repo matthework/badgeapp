@@ -66,17 +66,17 @@ table tr:nth-child(even) {
   line-height: 25px; 
 }
 .th-name {
-  width: 23%;
+  width: 26%;
 }
 .th-bg {
-  width: 35%;
+  width: 50%;
 }
 .th-topbs {
-  width: 23%;
+  width: 28%;
 }
-.th-pos {
+/*.th-pos {
   width: 20%;
-}
+}*/
 /*.th-salary {
   width: 8%;
 }*/
@@ -151,6 +151,21 @@ table tr:nth-child(even) {
 }
 .td-pay {
   text-align: center;
+}
+.button-approve {
+  margin-left: 30px;
+  margin-top: 0px;
+  margin-right: 0px;
+  background-color: white;
+  color: limegreen;
+  border: 1px solid limegreen;
+  padding: 2px 4px;
+  font-size: 0.9em;
+  border-radius: 2px !important;
+}
+.button-approve:hover {
+  color: white;
+  background-color: #039be5;
 }
 .button-showbs {
   position: relative; 
@@ -261,7 +276,7 @@ li {
     /*padding: 6px 10px;*/
 }
 li:hover {
-    background: #cfd8dc;
+    /*background: #cfd8dc;*/
 }
 .li-bs {
   font-size: 1em;
