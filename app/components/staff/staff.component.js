@@ -115,8 +115,8 @@ var StaffComponent = (function () {
     StaffComponent.prototype.getStaffBS = function (sbgs) {
         var allbset = [];
         var count = 0;
-        var coreCount = 0;
-        var core = false;
+        // var coreCount = 0;
+        // var core = false;
         if (this.badgesets != null && sbgs != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
@@ -126,30 +126,27 @@ var StaffComponent = (function () {
                         }
                     }
                 }
-                if (this.badgesets[i].corebadges == []) {
-                    core = true;
-                }
-                else {
-                    for (var m = 0; m < this.badgesets[i].corebadges.length; m++) {
-                        for (var k = 0; k < sbgs.length; k++) {
-                            if (this.badgesets[i].corebadges[m].badge == sbgs[k].badge && this.badgesets[i].corebadges[m].level <= sbgs[k].level) {
-                                coreCount += 1;
-                            }
-                        }
-                    }
-                    if (coreCount == this.badgesets[i].corebadges.length) {
-                        core = true;
-                    }
-                }
+                // if (this.badgesets[i].corebadges == []) {
+                // 	core = true;
+                // }else {
+                // 	for (var m = 0; m < this.badgesets[i].corebadges.length; m++) {
+                // 		for (var k = 0; k < sbgs.length; k++) {      
+                // 			if (this.badgesets[i].corebadges[m].badge == sbgs[k].badge && this.badgesets[i].corebadges[m].level <= sbgs[k].level) {
+                // 				coreCount += 1;
+                // 			}
+                // 		}
+                // 	}
+                // 	if (coreCount == this.badgesets[i].corebadges.length) {
+                // 		core = true;
+                // 	}
+                // }
                 // if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges >0 && this.badgesets[i].inused) {
                 // 	allbset.push(this.badgesets[i]);
                 // }
-                if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].inused) {
+                if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].status == 'Accepted') {
                     allbset.push(this.badgesets[i]);
                 }
                 count = 0;
-                coreCount = 0;
-                core = false;
             }
         }
         return allbset;

@@ -219,7 +219,17 @@ textarea {
   position: relative; 
   left: 33%;
 }
-
+.badgeset{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.badgeset:hover{
+  color: red;
+}
+.badgeset:visited{
+  color: #607D8B;
+}
 
 
 

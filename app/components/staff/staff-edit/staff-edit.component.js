@@ -131,7 +131,7 @@ var StaffEditComponent = (function () {
         var badgesOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].inused) {
+                if (this.badges[i].status == 'Accepted') {
                     badgesOptions.push(this.badges[i].name);
                 }
             }
@@ -150,7 +150,7 @@ var StaffEditComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 var index = userbgs.indexOf(this.badges[i].name);
-                if (this.badges[i].inused && index == -1) {
+                if (this.badges[i].status == 'Accepted' && index == -1) {
                     badgesOptions.push(this.badges[i].name);
                 }
             }

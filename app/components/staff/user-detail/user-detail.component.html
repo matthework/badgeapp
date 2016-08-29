@@ -18,7 +18,7 @@
 	<text>${{staff.salary}}K</text><br> -->
 
 	<label>Top BSet: </label>
-	<text></text><br>
+	<text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
 
 	<label>Badge Sets: </label>
 	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">

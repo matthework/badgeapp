@@ -26,24 +26,22 @@
 </div>
 
 <div *ngIf="staff">
-<text class="text-topbs">Top BadgeSet: </text><text class="text-topbs"><i></i></text>
+<text class="text-topbs">Top BadgeSet: </text><text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text>
 <br>
 <br>
   <table class="table-userbgroups">
   <tr>
     <th class="th-badge">Badge</th>
-    <!-- <th class="th-desc">Description</th> -->
-    <th class="th-bs">Badge Set</th>
+    <!-- <th class="th-bs">Badge Set</th> -->
     <th class="th-status">Status</th>
   </tr>
   <tr *ngFor="let userbgroup of staff.userbgroups">
     <td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
-    <!-- <td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td> -->
-    <td class="td-bs">
-    <div *ngFor="let bs of findBadgeSet(userbgroup.badge,userbgroup.level)">
-      <uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
-    </div>
-    </td>
+<!--     <td class="td-bs">
+      <div *ngFor="let bs of findBadgeSet(userbgroup.badge,userbgroup.level)">
+        <uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+      </div>
+    </td> -->
     <td class="td-status">{{userbgroup.status | approved_pending}}</td>
   </tr>
 </table>

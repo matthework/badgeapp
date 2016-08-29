@@ -130,7 +130,7 @@ var UserDetailComponent = (function () {
                         core = true;
                     }
                 }
-                if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges > 0 && this.badgesets[i].inused) {
+                if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges > 0 && this.badgesets[i].status == 'Accepted') {
                     allbset.push(this.badgesets[i]);
                 }
                 count = 0;
@@ -160,8 +160,14 @@ var UserDetailComponent = (function () {
         else
             return 0;
     };
-    UserDetailComponent.prototype.getTopBS = function () {
-        var topBS = this.sortStaffBS[0];
+    UserDetailComponent.prototype.getTopStaffBS = function (sbgs) {
+        var topBS = [];
+        if (this.getSortStaffBS(sbgs) != null && this.getSortStaffBS(sbgs).length > 0) {
+            topBS.push(this.getSortStaffBS(sbgs)[0]._id);
+            topBS.push(this.getSortStaffBS(sbgs)[0].name);
+            topBS.push(this.getSortStaffBS(sbgs)[0].tier);
+            topBS.push(this.getSortStaffBS(sbgs)[0].grade);
+        }
         return topBS;
     };
     UserDetailComponent.prototype.getPay = function (t, g) {
@@ -195,7 +201,7 @@ var UserDetailComponent = (function () {
         var badgesOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].inused) {
+                if (this.badges[i].status == 'Accepted') {
                     badgesOptions.push(this.badges[i].name);
                 }
             }
@@ -213,7 +219,7 @@ var UserDetailComponent = (function () {
     //     if (this.badges != null) {
     //         for (var i = 0; i < this.badges.length; i++) { 
     //             let index = userbgs.indexOf(this.badges[i].name);
-    //             if (this.badges[i].inused && index == -1) {
+    //             if (this.badges[i].status=='Accepted' && index == -1) {
     //                 badgesOptions.push(this.badges[i].name);
     //             }
     //         }

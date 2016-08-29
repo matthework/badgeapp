@@ -13,18 +13,22 @@ var router_1 = require('@angular/router');
 var badge_service_1 = require('../badge/badge.service');
 var bs_service_1 = require('../badgeset/bs.service');
 var staff_service_1 = require('../staff/staff.service');
+var tier_service_1 = require('../tier/tier.service');
 var auth_service_1 = require('../auth/auth.service');
 var approved_pipe_1 = require('../pipe/approved-pipe');
 var MainComponent = (function () {
-    function MainComponent(auth, _router, _staffService, _badgeService, _bsService) {
+    function MainComponent(auth, _router, _staffService, _badgeService, _bsService, _tierService) {
         this.auth = auth;
         this._router = _router;
         this._staffService = _staffService;
         this._badgeService = _badgeService;
         this._bsService = _bsService;
+        this._tierService = _tierService;
         this.badges = [];
         this.badgesets = [];
         this.staffs = [];
+        this.tiers = [];
+        this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
     }
     MainComponent.prototype.ngOnInit = function () {
@@ -32,11 +36,26 @@ var MainComponent = (function () {
             this.email = this.auth.userProfile.email;
             this.getStaffByEmail();
         }
+        this.getBadges();
+        this.getBadgeSets();
         this.getStaffs();
+        this.getTiers();
     };
     MainComponent.prototype.getStaffs = function () {
         var _this = this;
         this._staffService.getStaffs().subscribe(function (staffs) { _this.staffs = staffs; });
+    };
+    MainComponent.prototype.getBadges = function () {
+        var _this = this;
+        this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
+    };
+    MainComponent.prototype.getBadgeSets = function () {
+        var _this = this;
+        this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
+    };
+    MainComponent.prototype.getTiers = function () {
+        var _this = this;
+        this._tierService.getTiers().subscribe(function (tiers) { _this.tiers = tiers; });
     };
     MainComponent.prototype.getStaffByEmail = function () {
         var _this = this;
@@ -92,6 +111,86 @@ var MainComponent = (function () {
         }
         this._router.navigate(['/badge/detail', bid]);
     };
+    MainComponent.prototype.getStaffBS = function (sbgs) {
+        var allbset = [];
+        var count = 0;
+        var coreCount = 0;
+        var core = false;
+        if (this.badgesets != null && sbgs != null) {
+            for (var i = 0; i < this.badgesets.length; i++) {
+                for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
+                    for (var k = 0; k < sbgs.length; k++) {
+                        if (this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                            count += 1;
+                        }
+                    }
+                }
+                if (this.badgesets[i].corebadges == []) {
+                    core = true;
+                }
+                else {
+                    for (var m = 0; m < this.badgesets[i].corebadges.length; m++) {
+                        for (var k = 0; k < sbgs.length; k++) {
+                            if (this.badgesets[i].corebadges[m].badge == sbgs[k].badge && this.badgesets[i].corebadges[m].level <= sbgs[k].level) {
+                                coreCount += 1;
+                            }
+                        }
+                    }
+                    if (coreCount == this.badgesets[i].corebadges.length) {
+                        core = true;
+                    }
+                }
+                if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges > 0 && this.badgesets[i].status == 'Accepted') {
+                    allbset.push(this.badgesets[i]);
+                }
+                count = 0;
+                coreCount = 0;
+                core = false;
+            }
+        }
+        return allbset;
+    };
+    MainComponent.prototype.getSortStaffBS = function (sbgs) {
+        var pay = "";
+        this.sortStaffBS = [];
+        var allbset = this.getStaffBS(sbgs);
+        if (allbset != null && sbgs != null) {
+            for (var i = 0; i < allbset.length; i++) {
+                allbset[i].pay = this.getPay(allbset[i].tier, allbset[i].grade);
+                this.sortStaffBS.push(allbset[i]);
+            }
+        }
+        return this.sortStaffBS.sort(this.toCompareDes);
+    };
+    MainComponent.prototype.toCompareDes = function (a, b) {
+        if (a.pay > b.pay)
+            return -1;
+        else if (a.pay < b.pay)
+            return 1;
+        else
+            return 0;
+    };
+    MainComponent.prototype.getTopStaffBS = function (sbgs) {
+        var topBS = [];
+        if (this.getSortStaffBS(sbgs) != null && this.getSortStaffBS(sbgs).length > 0) {
+            topBS.push(this.getSortStaffBS(sbgs)[0]._id);
+            topBS.push(this.getSortStaffBS(sbgs)[0].name);
+            topBS.push(this.getSortStaffBS(sbgs)[0].tier);
+            topBS.push(this.getSortStaffBS(sbgs)[0].grade);
+        }
+        return topBS;
+    };
+    MainComponent.prototype.getPay = function (t, g) {
+        var pay = 0;
+        if (this.tiers != null && t != 0 && g != "") {
+            for (var i = 0; i < this.tiers.length; i++) {
+                if (this.tiers[i].tier == t) {
+                    pay = this.tiers[i].grades[this.gmap[g]];
+                }
+            }
+        }
+        return pay;
+    };
     MainComponent.prototype.findBadgeSet = function (bname, l) {
         var bset = [];
         if (this.sortStaffBS != null) {
@@ -104,6 +203,9 @@ var MainComponent = (function () {
             }
         }
         return bset;
+    };
+    MainComponent.prototype.toBSDetail = function (bsid) {
+        this._router.navigate(['/bs/detail', bsid]);
     };
     MainComponent.prototype.checkNumPending = function () {
         var numOfPending = 0;
@@ -148,7 +250,7 @@ var MainComponent = (function () {
             styleUrls: ['app/components/main/main.component.css'],
             pipes: [approved_pipe_1.ApprovedPipe]
         }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router, staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService])
+        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router, staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService, tier_service_1.TierService])
     ], MainComponent);
     return MainComponent;
 }());

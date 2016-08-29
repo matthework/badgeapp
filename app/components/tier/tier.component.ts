@@ -77,7 +77,7 @@ export class TierComponent {
     var bset = [];
     if (this.badgesets != null) {
       for (var i = 0; i < this.badgesets.length; i++) { 
-        if (this.badgesets[i].tier == t && this.badgesets[i].grade == g && this.badgesets[i].inused) {
+        if (this.badgesets[i].tier == t && this.badgesets[i].grade == g && this.badgesets[i].status=='Accepted') {
           bset.push(this.badgesets[i]);
         }
       }
