@@ -42,7 +42,8 @@ var BSNewComponent = (function () {
             { badge: "", level: 0 },
             { badge: "", level: 0 },
             { badge: "", level: 0 }];
-        this.newBS = { index: 0, name: "", badgegroups: this.newBGs, tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: false, inused: false, others: [] };
+        this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
+        this.newBS = { index: 0, name: "", status: "Accepted", badgegroups: this.newBGs, tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: false, inused: false, others: [] };
     }
     BSNewComponent.prototype.ngOnInit = function () {
         this.getBadges();

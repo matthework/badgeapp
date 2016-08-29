@@ -41,7 +41,9 @@ export class BSNewComponent{
             {badge: "", level: 0},
             {badge: "", level: 0}];
 
-  newBS = {index: 0, name: "", badgegroups: this.newBGs, tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: false, inused:false, others:[]}
+  statusOptions = ['Accepted','Draft','NotUsed'];
+
+  newBS = {index: 0, name: "", status: "Accepted", badgegroups: this.newBGs, tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: false, inused:false, others:[]}
 
   constructor(
     private _bsService: BSService, 

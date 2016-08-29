@@ -1,5 +1,7 @@
 
-<h1>Welcome to Badge System !</h1>
+<div *ngIf="auth.authenticated()">
+
+<!-- <h1>Welcome to Badge System !</h1>
 <br>
 
 <div *ngIf="auth.authenticated() && auth.userProfile">
@@ -11,23 +13,50 @@
       <br>
       <p><strong>Name: </strong> {{auth.userProfile.name}}</p>
       <p><strong>Email: </strong> {{auth.userProfile.email}}</p>
-      <!-- <p><strong>Nickname: </strong> {{auth.userProfile.nickname}}</p> -->
-<!--       <p><strong>Created At: </strong> {{auth.userProfile.created_at}}</p>
-      <p><strong>Updated At: </strong> {{auth.userProfile.updated_at}}</p>
-      <p><strong>Address: </strong> {{auth.userProfile.user_metadata.address}}</p>
-      <p><strong>Google Profile: </strong> {{auth.userProfile.groups}}</p> -->
     </div>
     <br>
-    <button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text *ngIf="!checkProfile()"> Please complete your profile.</text>
-    <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text><br>
   </div>
+</div> -->
+
+<div *ngIf="auth.userProfile">
+  <br>
+  <br>
+  <h2><i>{{auth.userProfile.name}}, you are just logged in.</i></h2>
 </div>
+
+<div *ngIf="staff">
+<br>
+<h3>User's Badges:</h3>
+  <table class="table-userbgroups">
+  <tr>
+    <th class="th-badge">Badge</th>
+    <!-- <th class="th-desc">Description</th> -->
+    <th class="th-bs">Badge Set</th>
+    <th class="th-status">Status</th>
+  </tr>
+  <tr *ngFor="let userbgroup of staff.userbgroups">
+    <td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
+    <!-- <td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td> -->
+    <td class="td-bs">
+    <div *ngFor="let bs of findBadgeSet(userbgroup.badge,userbgroup.level)">
+      <uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+    </div>
+    </td>
+    <td class="td-status">{{userbgroup.status | approved_pending}}</td>
+  </tr>
+</table>
+<br>
+</div>
+
+<button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text *ngIf="!checkProfile()"> Please complete your profile.</text>
+<button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text><br>
 
 <div *ngIf="auth.isAdmin()">
   <br>
   <button class="button-admin" (click)="toPerson()">Admin Page</button><text> You have <text class="text-pending">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-pendingStaff">{{checkPendingStaff()}}</text> staff(s).</text><br>
 </div>
 
+</div>
 
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 

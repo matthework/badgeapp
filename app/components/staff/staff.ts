@@ -10,6 +10,7 @@ export class Staff {
   userbgroups: UserBGroup[];
   active: boolean;
   brief:string;
+  status: string;
   others: string[];
   timestamp: string;
 }

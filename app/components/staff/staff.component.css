@@ -89,6 +89,9 @@ table tr:nth-child(even) {
 .th-active {
   width: 10%;
 }
+.th-status {
+  width: 10%;
+}
 .th-last {
   width: 15%;
   background-color: #ffffff;
@@ -110,6 +113,9 @@ table tr:nth-child(even) {
 /*.td-phone {
 }*/
 .td-active {
+  text-align: center;
+}
+.td-status {
   text-align: center;
 }
 .td-last{
@@ -182,7 +188,8 @@ table tr:nth-child(even) {
 .button-add {
   position: relative; 
   left: 61%;
-  color: #039be5;
+  color: white;
+  background-color: #039be5;
 }
 .button-add:hover {
   color: white;
@@ -201,7 +208,8 @@ table tr:nth-child(even) {
 .button-add2 {
   position: relative; 
   left: 70%;
-  color: #039be5;
+  color: white;
+  background-color: #039be5;
 }
 .button-add2:hover {
   color: white;
@@ -231,6 +239,10 @@ table tr:nth-child(even) {
   margin-left: 8px;
   margin-right: 5px;
   margin-bottom: 0;
+}
+.button-s-e:hover {
+  color: white;
+  background-color: #039be5;
 }
 .staff{
   font-size: 1.1em;

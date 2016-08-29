@@ -22,7 +22,7 @@ export class BadgeComponent implements OnInit {
 
   badges: Badge[] = [];
   selectedBadge: Badge;
-  active = false;
+  active = true;
   showBadges = false;
   showBCat = false;
 

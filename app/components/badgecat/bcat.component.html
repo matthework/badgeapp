@@ -5,16 +5,22 @@
 	<h1>Badge Category</h1>
 	<input [(ngModel)]="query" placeholder="Search for">
 	<button class="button-back" (click)="toBadges()">Show Badges</button>
-	<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button>
-	<button class="button-add" *ngIf="active" (click)="addBadgeCat()">+</button>
-	<button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
+<!-- 	<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button> -->
+	<button class="button-add" *ngIf="auth.isAdmin()" (click)="addBadgeCat()">Add New</button>
+	<!-- <button class="button-less" *ngIf="active" (click)="active=false"><</button> -->
+	<br>
 </div>
 
-<div *ngIf!="badgecats">
+<div *ngIf="!badgecats && auth.isAdmin()" >
 	<h1>Add New Badge Category</h1>
 	<input [(ngModel)]="query" placeholder="Search for">
 	<button class="button-add2" (click)="addBadgeCat()">+</button><br>
-</div>		
+</div>
+
+<div *ngIf="!badgecats && !auth.isAdmin()" >
+	<h1>There is NO Badge Category!</h1>
+	<br>
+</div>			
 
 <table class="table-badgecats">
 	<tr>
@@ -33,7 +39,7 @@
 			</div>
 		</td>
 		<td class="td-root">{{badgecat.root}}</td>
-		<td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteBadgeCatPop(badgecat._id)">X</button><button class="button-s-e" (click)="toBCatEdit(badgecat._id)">E</button></td>
+		<td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteBadgeCatPop(badgecat._id)">X</button><button class="button-s-e" (click)="toBCatEdit(badgecat._id)">E</button></td>
 	</tr>
 </table>
 

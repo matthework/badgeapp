@@ -25,6 +25,7 @@ var StaffEditComponent = (function () {
         this.newBadge = "";
         this.newLevel = 0;
         this.newStatus = false;
+        this.statusOptions = ['Active', 'Inactive'];
     }
     StaffEditComponent.prototype.ngOnInit = function () {
         var _this = this;

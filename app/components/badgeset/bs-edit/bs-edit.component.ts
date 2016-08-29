@@ -30,6 +30,7 @@ export class BSEditComponent implements OnInit {
   total =0;
   sub: any;
   id: string;
+  statusOptions = ['Accepted','Draft','NotUsed'];
 
   constructor(
     private _bsService: BSService,

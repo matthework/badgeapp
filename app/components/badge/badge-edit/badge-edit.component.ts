@@ -19,6 +19,7 @@ export class BadgeEditComponent implements OnInit {
   newDesc = "";
   sub: any;
   id: string;
+  statusOptions = ['Accepted','Draft','NotUsed'];
 
   constructor(
     private _badgeService: BadgeService, 

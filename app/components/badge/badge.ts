@@ -7,6 +7,7 @@ export class Badge {
   badgelevels: BadgeLevel[];
   approved: boolean;
   inused: boolean;
+  status: string;
   timestamp: string;
 }
 

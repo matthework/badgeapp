@@ -16,7 +16,8 @@ type Staff struct {
 	Phone	string	`json:"phone" bson:"phone"`	
 	UserBGroups	[]UserBGroup	`json:"userbgroups" bson:"userbgroups"`
 	Active	bool	`json:"active" bson:"active"`
-	Brief	string	`json:"brief" bson:"brief"`	
+	Brief	string	`json:"brief" bson:"brief"`
+	Status	string	`json:"status" bson:"status"`	
 	Others []string 	`json:"others" bson:"others"`	
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
 }

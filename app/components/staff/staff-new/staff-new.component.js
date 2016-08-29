@@ -32,7 +32,8 @@ var StaffNewComponent = (function () {
             { badge: "", level: 0, status: false },
             { badge: "", level: 0, status: false },
             { badge: "", level: 0, status: false }];
-        this.newStaff = { index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief: "", others: [] };
+        this.statusOptions = ['Active', 'Inactive'];
+        this.newStaff = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief: "", others: [] };
     }
     StaffNewComponent.prototype.ngOnInit = function () {
         this.getBadges();

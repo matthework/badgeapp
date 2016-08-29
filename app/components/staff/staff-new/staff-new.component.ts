@@ -28,8 +28,10 @@ export class StaffNewComponent {
             {badge: "", level: 0, status: false},
             {badge: "", level: 0, status: false},
             {badge: "", level: 0, status: false}];
+
+  statusOptions = ['Active','Inactive'];
   
-  newStaff = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief:"", others: []}
+  newStaff = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief:"", others: []}
 
   constructor(
       private _staffService: StaffService, 

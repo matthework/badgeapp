@@ -18,6 +18,7 @@ type BadgeSet struct {
 	CoreBadges	[]BadgeGroup	`json:"corebadges" bson:"corebadges"`
 	Approved	bool	`json:"approved" bson:"approved"`
 	InUsed	bool	`json:"inused" bson:"inused"`
+	Status	string	`json:"status" bson:"status"`
 	Others []string 	`json:"others" bson:"others"`	
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
 }

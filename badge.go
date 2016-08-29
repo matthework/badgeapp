@@ -14,6 +14,7 @@ type Badge struct {
 	BadgeLevels	[]BadgeLevel	`json:"badgelevels" bson:"badgelevels"`
 	Approved	bool	`json:"approved" bson:"approved"`
 	InUsed	bool	`json:"inused" bson:"inused"`
+	Status	string	`json:"status" bson:"status"`
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
 }
 

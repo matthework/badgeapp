@@ -23,6 +23,7 @@ export class StaffEditComponent implements OnInit {
     newStatus = false;
     sub: any;
     id: string;
+    statusOptions = ['Active','Inactive'];
 
     constructor(
         private _staffService: StaffService, 

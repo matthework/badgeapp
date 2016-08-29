@@ -10,8 +10,8 @@
 	<label>Name: </label>
 	<input class="input-name" type="text" [(ngModel)]="badge.name" placeholder="Name" /><br>
 
-	<label>Code: </label>
-	<input class="input-code" type="text" [(ngModel)]="badge.code" placeholder="Code" /><br>
+<!-- 	<label>Code: </label>
+	<input class="input-code" type="text" [(ngModel)]="badge.code" placeholder="Code" /><br> -->
 
 	<label>Overview: </label>
 	<textarea class="ta-big" [(ngModel)]="badge.overview" placeholder="Overview"></textarea><br>
@@ -19,8 +19,11 @@
 <!-- 	<label>Approved: </label>
 	<input type="checkbox" [(ngModel)]="badge.approved" placeholder="Approved" /><br> -->
 
-	<label>InUsed: </label>
-	<input type="checkbox" [disabled]="!badge.approved" [(ngModel)]="badge.inused" placeholder="InUsed" /><br>
+<!-- 	<label>InUsed: </label>
+	<input type="checkbox" [disabled]="!badge.approved" [(ngModel)]="badge.inused" placeholder="InUsed" /><br> -->
+
+	<label>Status: </label>
+	<select class="select-status" [(ngModel)]="badge.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 
 	<div class="badgelevel-block" *ngFor="let badgelevel of badge.badgelevels">
 	  	<label>Level {{badgelevel.level}}:</label>

@@ -196,7 +196,13 @@ var StaffComponent = (function () {
     StaffComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
     };
-    StaffComponent.prototype.updateStaff = function (staff) {
+    StaffComponent.prototype.approveBadge = function (staff, userbgroup) {
+        for (var i = 0; i < staff.userbgroups.length; i++) {
+            if (staff.userbgroups[i].badge == userbgroup.badge && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].status) {
+                var index = staff.userbgroups.indexOf(staff.userbgroups[i]);
+                staff.userbgroups.splice(index, 1);
+            }
+        }
         var value = JSON.stringify(staff);
         this._staffService.updateStaff(staff._id, value).subscribe();
         console.log('you submitted value: ', value);

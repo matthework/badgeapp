@@ -21,12 +21,16 @@
 <label>$$: </label>
 <text>${{getPay(newBS.tier,newBS.grade)}}K</text><br>
 
-<br>
+<!-- <br>
 <label>InUsed: </label>
-<input type="checkbox" [(ngModel)]="newBS.inused" placeholder="InUsed" /><br>
+<input type="checkbox" [(ngModel)]="newBS.inused" placeholder="InUsed" /><br> -->
 
 <!-- <label>Approved: </label>
 <input type="checkbox" [(ngModel)]="newBS.approved" placeholder="Approved" /><br> -->
+
+<br>
+<label>Status: </label>
+<select class="select-status" [(ngModel)]="newBS.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 
 <br>
 <div *ngFor="let i of nums">

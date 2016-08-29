@@ -9,8 +9,8 @@
 <label>*Name: </label>
 <input class="input-name" type="text" [(ngModel)]="newBadge.name" placeholder="Name" /><br>
 
-<label>Code: </label>
-<input class="input-code" type="text" [(ngModel)]="newBadge.code" placeholder="Code" /><br>
+<!-- <label>Code: </label>
+<input class="input-code" type="text" [(ngModel)]="newBadge.code" placeholder="Code" /><br> -->
 
 <label>Overview: </label>
 <textarea class="ta-big" [(ngModel)]="newBadge.overview" placeholder="Overview"></textarea><br>
@@ -18,8 +18,11 @@
 <!-- <label>Approved: </label>
 <input type="checkbox" [(ngModel)]="newBadge.approved" placeholder="Approved" /><br> -->
 
-<label>InUsed: </label>
-<input type="checkbox" [disabled]="!newBadge.approved" [(ngModel)]="newBadge.inused" placeholder="InUsed" /><br>
+<!-- <label>InUsed: </label>
+<input type="checkbox" [disabled]="!newBadge.approved" [(ngModel)]="newBadge.inused" placeholder="InUsed" /><br> -->
+
+<label>Status: </label>
+<select class="select-status" [(ngModel)]="newBadge.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 
 <br>
 <label>Level 1:</label>
