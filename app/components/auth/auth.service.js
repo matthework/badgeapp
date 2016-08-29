@@ -30,7 +30,7 @@ var AuthService = (function () {
             },
             languageDictionary: {
                 title: "My Badge"
-            }
+            },
         });
         // Set userProfile attribute if already saved profile
         this.userProfile = JSON.parse(localStorage.getItem('profile'));

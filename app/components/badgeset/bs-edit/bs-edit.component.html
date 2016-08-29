@@ -17,9 +17,9 @@
 	<select class="select-tier" [(ngModel)]="badgeset.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 
 	<label class="label-grade">Grade: </label>
-	<select class="select-grade" [(ngModel)]="badgeset.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select><br>
+	<select class="select-grade" [(ngModel)]="badgeset.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select>
 
-	<label>$$: </label>
+	<label class="label-pay">Pay: </label>
 	<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br>
 
 <!-- 	<br>
@@ -28,7 +28,7 @@
 
 <!-- 	<label>Approved: </label>
 	<input type="checkbox" [(ngModel)]="badgeset.approved" placeholder="Approved" /><br> -->
-	<br>
+	
 	<label>Status: </label>
 	<select class="select-status" [(ngModel)]="badgeset.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 

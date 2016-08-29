@@ -4,14 +4,14 @@
 <div *ngIf="badgeset">
 	<h2>Badge Set - {{badgeset.name}}</h2><br>
 	
-	<label>Tier: </label>
-	<text>{{badgeset.tier}}</text><br>
+	<label>Tier/Grade: </label>
+	<text>{{badgeset.tier}} - {{badgeset.grade}}  ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text><br>
 	
-	<label>Grade: </label>
+<!-- 	<label>Grade: </label>
 	<text>{{badgeset.grade}}</text><br>
 
 	<label>Pay: </label>
-	<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br>
+	<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br> -->
 
 	<label>Tags: </label>
 	<text>{{badgeset.tags}}</text><br>
@@ -25,7 +25,7 @@
 <!-- 	<label>InUsed: </label>
 	<text>{{badgeset.inused | yes_no}}</text><br>
  -->
- 
+
  	<label>Status: </label>
 	<text>{{badgeset.status}}</text><br>
 

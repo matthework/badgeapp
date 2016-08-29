@@ -109,6 +109,10 @@ textarea {
 .label-grade {
   width: 5em;
 }
+.label-pay {
+  width: 4em;
+  margin-left: 50px;
+}
 .select-grade {
   background: transparent;
   width: 80px;

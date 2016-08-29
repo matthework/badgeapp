@@ -27,7 +27,9 @@ export class AuthService implements OnInit{
     },
     languageDictionary: {
       title: "My Badge"
-    }
+    },
+    // rememberLastLogin: true,
+    // redirect: false
   });
 
   //Store profile object in auth class
