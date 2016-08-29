@@ -22,9 +22,12 @@
 		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
 	</text><br>
 
-	<label>Active: </label>
-	<text>{{staff.active | yes_no}}</text><br>
+<!-- 	<label>Active: </label>
+	<text>{{staff.active | yes_no}}</text><br> -->
 
+	<label>Status: </label>
+	<text>{{staff.status}}</text><br>
+	
 	<label>Brief: </label>
 	<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
 	<br>

@@ -36,6 +36,24 @@ button:disabled {
   color: #ccc; 
   cursor: auto;
 }
+table {
+  table-layout: auto;
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
 input {
   height: 2em;
   font-size: 1em;
@@ -84,4 +102,61 @@ nav a.router-link-active {
 .text-pendingStaff {
   color: #039be5;
   font-size: 1.2em;
+}
+.table-userbgroups {
+  margin-top: 10px;
+  table-layout: fixed;
+  width: 75%;
+  /*white-space: nowrap;*/
+  word-wrap: break-word;
+}
+.table-badgelevels td {
+
+}
+.th-badge {
+  width: 30%;
+}
+.th-desc {
+  width: 50%;
+}
+.th-bs {
+  width: 25%;
+}
+.th-status {
+  width: 15%;
+}
+.td-badge {
+  text-align: center;
+}
+.td-desc {
+  font-style: italic;
+}
+.td-status {
+  text-align: center;
+}
+.badge{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.badge:hover{
+  color: red;
+}
+.badge:visited{
+  color: #607D8B;
+}
+.uli-bs{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.uli-bs:hover{
+  color: red;
+}
+.uli-bs:visited{
+  color: #607D8B;
+}
+.selected {
+  background-color: #CFD8DC !important;
+  color: white;
 }

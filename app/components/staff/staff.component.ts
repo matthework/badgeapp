@@ -222,8 +222,14 @@ export class StaffComponent {
 		this._router.navigate(['/bs/detail',bsid]);
 	}
 
-    updateStaff(staff:Staff) {
-        let value = JSON.stringify(staff)
+    approveBadge(staff:Staff, userbgroup:UserBGroup) {
+		for (var i = 0; i < staff.userbgroups.length; i++) { 
+			if (staff.userbgroups[i].badge == userbgroup.badge && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].status) {
+				let index = staff.userbgroups.indexOf(staff.userbgroups[i]);
+    			staff.userbgroups.splice(index,1);
+			}
+		}	        
+		let value = JSON.stringify(staff)
         this._staffService.updateStaff(staff._id,value).subscribe();
         console.log('you submitted value: ', value); 
     }

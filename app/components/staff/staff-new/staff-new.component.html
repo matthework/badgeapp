@@ -24,9 +24,8 @@
 <label>Phone: </label>
 <input class="input-phone" type="text" [(ngModel)]="newStaff.phone" placeholder="Phone" /><br>
 
-<label>Active: </label>
-<input type="checkbox" [(ngModel)]="newStaff.active" placeholder="Active Status" /><br>
-<br>
+<label>Status: </label>
+<select class="select-status" [(ngModel)]="newStaff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 
 <label>Brief: </label>
 <textarea class="ta-brief" type="text" [(ngModel)]="newStaff.brief" placeholder="Brief"></textarea><br>

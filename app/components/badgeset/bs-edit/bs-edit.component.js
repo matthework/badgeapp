@@ -31,6 +31,7 @@ var BSEditComponent = (function () {
         this.gradesOptions = ["A", "B", "C", "D", "E", "F"];
         this.prerequisite = false;
         this.total = 0;
+        this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
     }
     BSEditComponent.prototype.ngOnInit = function () {
         var _this = this;

@@ -148,9 +148,6 @@ var UserDetailComponent = (function () {
                 this.sortStaffBS.push(allbset[i]);
             }
         }
-        // sortStaffBS = sortStaffBS.sort(this.toCompareDes);
-        // this.topBS = sortStaffBS[0];
-        // console.log('you submitted topBS: ', sortStaffBS); 
         return this.sortStaffBS.sort(this.toCompareDes);
     };
     UserDetailComponent.prototype.toCompareDes = function (a, b) {

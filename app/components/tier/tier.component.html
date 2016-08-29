@@ -6,16 +6,22 @@
 <input class="input-query" [(ngModel)]="query" placeholder="Search for">
 <button class="button-showbs" *ngIf!="toPay" (click)="toPay=true">Show BadgeSet</button>
 <button class="button-back" *ngIf="toPay" (click)="toPay=false">Show $$</button>
-<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button>
-<button class="button-add" *ngIf="active" (click)="addTier()">+</button>
-<button class="button-less" *ngIf="active" (click)="active=false"><</button><br>
+<!-- <button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button> -->
+<button class="button-add" *ngIf="auth.isAdmin()" (click)="addTier()">Add New</button>
+<!-- <button class="button-less" *ngIf="active" (click)="active=false"><</button> -->
+<br>
 </div>
 
-<div *ngIf!="tiers">
+<div *ngIf="!tiers && auth.isAdmin()">
 <h2>Add New Tier</h2>
 <input class="input-query" [(ngModel)]="query" placeholder="Search for">
 <button class="button-add2" (click)="addTier()">+</button><br>
 </div>
+
+<div *ngIf="!tiers && !auth.isAdmin()" >
+    <h1>There is NO Tier!</h1>
+    <br>
+</div>  
 
 <div *ngIf!="toPay">
 <table class="table-tiers">
@@ -41,7 +47,7 @@
 	<td class="td-gf" (click)="onSelect(tier)">${{tier.grades[5]}}K</td>
 	<td class="td-judge" (click)="onSelect(tier)">{{tier.judgement}}</td>
 	<td class="td-expert" (click)="onSelect(tier)">{{tier.expertise}}</td>
-	<td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
+	<td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
 	</tr>
 </table>
 </div>
@@ -90,7 +96,7 @@
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>
-	<td *ngIf="active" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
+	<td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
 	</tr>
 </table>
 </div>

@@ -22,7 +22,7 @@ var BadgeComponent = (function () {
         this._badgeService = _badgeService;
         this.auth = auth;
         this.badges = [];
-        this.active = false;
+        this.active = true;
         this.showBadges = false;
         this.showBCat = false;
     }

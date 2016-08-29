@@ -22,12 +22,15 @@
 	<label>$$: </label>
 	<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br>
 
-	<br>
+<!-- 	<br>
 	<label>InUsed: </label>
-	<input type="checkbox" [(ngModel)]="badgeset.inused" placeholder="InUsed" /><br>
+	<input type="checkbox" [(ngModel)]="badgeset.inused" placeholder="InUsed" /><br> -->
 
 <!-- 	<label>Approved: </label>
 	<input type="checkbox" [(ngModel)]="badgeset.approved" placeholder="Approved" /><br> -->
+	<br>
+	<label>Status: </label>
+	<select class="select-status" [(ngModel)]="badgeset.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 
 <!-- 	<br>
 	<button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true">Prerequisite+</button><br>

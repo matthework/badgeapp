@@ -11,6 +11,7 @@ export class BadgeSet {
 	corebadges: BadgeGroup[];
 	approved: boolean;
   	inused: boolean;
+  	status: string;
 	others: string[];
 	timestamp: string;
 }

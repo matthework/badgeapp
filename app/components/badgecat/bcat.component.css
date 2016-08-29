@@ -108,7 +108,8 @@ th , td  {
 .button-add {
   position: relative; 
   left: 61%;
-  color: #039be5;
+  color: white;
+  background-color: #039be5;
 }
 .button-add:hover {
   color: white;
@@ -117,7 +118,8 @@ th , td  {
 .button-add2 {
   position: relative; 
   left: 70%;
-  color: #039be5;
+  color: white;
+  background-color: #039be5;
 }
 .button-add2:hover {
   color: white;
@@ -162,6 +164,10 @@ th , td  {
   margin-left: 8px;
   margin-right: 5px;
   margin-bottom: 0;
+}
+.button-s-e:hover {
+  color: white;
+  background-color: #039be5;
 }
 .badgecat{
   font-size: 1.1em;

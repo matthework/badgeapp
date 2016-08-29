@@ -99,6 +99,9 @@ th , td  {
 .th-inused {
   width: 6%;
 }
+.th-status {
+  width: 6%;
+}
 .th-last {
   background-color: #ffffff;
   width: 10%;
@@ -126,6 +129,9 @@ th , td  {
 .td-inused {
   text-align: center;
 }
+.td-status {
+  text-align: center;
+}
 .button-showCom {
   position: relative; 
   left: 63%;
@@ -141,7 +147,8 @@ th , td  {
 .button-add {
   position: relative; 
   left: 63%;
-  color: #039be5;
+  color: white;
+  background-color: #039be5;
 }
 .button-add:hover {
   color: white;
@@ -150,7 +157,8 @@ th , td  {
 .button-add2 {
   position: relative; 
   left: 70%;
-  color: #039be5;
+  color: white;
+  background-color: #039be5;
 }
 .button-add2:hover {
   color: white;
@@ -163,7 +171,7 @@ th , td  {
 }
 .button-backbs {
   position: relative; 
-  left: 74%;
+  left: 78%;
   color: #039be5;
   width: 130px;
 }
@@ -201,6 +209,10 @@ th , td  {
   margin-left: 8px;
   margin-right: 5px;
   margin-bottom: 0;
+}
+.button-s-e:hover {
+  color: white;
+  background-color: #039be5;
 }
 .badgeset{
   font-size: 1.1em;
@@ -295,7 +307,7 @@ li:hover {
 
 .table-big {
   /*table-layout: fixed;*/
-  width: 85%;
+  width: 89%;
   border: 0;
   margin-top: 0px;
   margin-bottom: 20px;

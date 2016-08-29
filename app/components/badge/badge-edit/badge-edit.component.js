@@ -21,6 +21,7 @@ var BadgeEditComponent = (function () {
         this.active = false;
         this.newLevel = 0;
         this.newDesc = "";
+        this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
     }
     BadgeEditComponent.prototype.ngOnInit = function () {
         var _this = this;
