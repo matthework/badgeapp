@@ -25,7 +25,7 @@
 	<label>Brief: </label>
 	<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
 
-	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toUserEdit(staff._id)">Edit Profile</button><br>
+	<button *ngIf="auth.authenticated()" class="button-edit" (click)="toUserEdit(staff._id)">Edit Profile</button><br>
 
 	<br>
 	<br>
@@ -71,6 +71,11 @@
 	<br>
 	<br>
 	<br>
+</div>
+
+<div *ngIf="!staff">
+	<br>
+	<button class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text> Please complete your profile.</text>
 </div>
 
 </div>

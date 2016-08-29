@@ -31,11 +31,13 @@ export class MainComponent {
 
 	checkProfile() {
 		var hasProfile = false;
-		for (var i = 0; i < this.staffs.length; i++) { 
-			var name = this.staffs[i].fname + " " + this.staffs[i].lname;
-			if(this.staffs[i].email==this.auth.userProfile.email){
-				hasProfile = true;
-				break;
+		if (this.staffs != null) {
+			for (var i = 0; i < this.staffs.length; i++) { 
+				var name = this.staffs[i].fname + " " + this.staffs[i].lname;
+				if(this.staffs[i].email==this.auth.userProfile.email){
+					hasProfile = true;
+					break;
+				}
 			}
 		}
 		// console.log('you submitted value: ', hasProfile); 
@@ -50,8 +52,8 @@ export class MainComponent {
 		this._router.navigate(['/user/detail',email]);
 	}
 
-	toAdmin() {
-		this._router.navigate(['/admin']);
+	toPerson() {
+		this._router.navigate(['/staffs']);
 	}
 
 	checkNumPending() {

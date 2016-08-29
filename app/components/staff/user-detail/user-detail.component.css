@@ -135,6 +135,9 @@ textarea {
 .td-status {
   text-align: center;
 }
+.button-add {
+  width: 130px;
+}
 .button-edit {
   width: 120px;
 }

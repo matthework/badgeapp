@@ -104,7 +104,7 @@ var UserDetailComponent = (function () {
         var count = 0;
         var coreCount = 0;
         var core = false;
-        if (this.badgesets != null) {
+        if (this.badgesets != null && sbgs != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
@@ -142,7 +142,7 @@ var UserDetailComponent = (function () {
         var pay = "";
         this.sortStaffBS = [];
         var allbset = this.getStaffBS(sbgs);
-        if (allbset != null) {
+        if (allbset != null && sbgs != null) {
             for (var i = 0; i < allbset.length; i++) {
                 allbset[i].pay = this.getPay(allbset[i].tier, allbset[i].grade);
                 this.sortStaffBS.push(allbset[i]);
@@ -278,6 +278,9 @@ var UserDetailComponent = (function () {
             return 1;
         else
             return 0;
+    };
+    UserDetailComponent.prototype.addNewUser = function (email) {
+        this._router.navigate(['/user/new', email]);
     };
     UserDetailComponent.prototype.goBack = function () {
         window.history.back();

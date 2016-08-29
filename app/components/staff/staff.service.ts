@@ -19,7 +19,7 @@ export class StaffService {
 	}
 
 	getStaffByEmail(email:string):Observable<any> {
-		return this._http.get('/api/staff/edit/email/'+email).map(r => r.json());
+		return this._http.get('/api/staff/detail/email/'+email).map(r => r.json());
 	}
 
 	addStaff(value:string):Observable<any> {
