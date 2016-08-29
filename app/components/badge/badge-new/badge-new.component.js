@@ -28,7 +28,7 @@ var BadgeNewComponent = (function () {
             { level: 8, desc: "" },
             { level: 9, desc: "" }];
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
-        this.newBadge = { index: 0, name: "", code: "", overview: "", status: "Accepted", badgelevels: this.newbls, approved: true, inused: true };
+        this.newBadge = { index: 0, name: "", code: "", overview: "", status: "Accepted", badgelevels: this.newbls, approved: false, inused: false };
     }
     BadgeNewComponent.prototype.addBadge = function () {
         this.newBadge.code = this.newBadge.code.toUpperCase();

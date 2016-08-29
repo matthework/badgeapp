@@ -25,7 +25,7 @@ export class BadgeNewComponent {
 
   statusOptions = ['Accepted','Draft','NotUsed'];
 
-  newBadge = {index: 0, name: "", code: "", overview: "", status: "Accepted", badgelevels: this.newbls, approved: true, inused: true};
+  newBadge = {index: 0, name: "", code: "", overview: "", status: "Accepted", badgelevels: this.newbls, approved: false, inused: false};
 
   constructor(
     private _badgeService: BadgeService, 

@@ -158,10 +158,10 @@ export class AdminComponent {
 					}
 				}
 				
-				// if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges >0 && this.badgesets[i].inused) {
+				// if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges >0 && this.badgesets[i].status=='Accepted') {
 				// 	allbset.push(this.badgesets[i]);
 				// }
-				if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].inused) {
+				if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].status=='Accepted') {
 					allbset.push(this.badgesets[i]);
 				}
 				count = 0;

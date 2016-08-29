@@ -109,7 +109,7 @@ export class UserEditComponent implements OnInit {
         var badgesOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) { 
-                if (this.badges[i].inused) {
+                if (this.badges[i].status=='Accepted') {
                     badgesOptions.push(this.badges[i].name);
                 }
             }

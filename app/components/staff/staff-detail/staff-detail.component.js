@@ -124,7 +124,7 @@ var StaffDetailComponent = (function () {
                         core = true;
                     }
                 }
-                if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges > 0 && this.badgesets[i].inused) {
+                if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges > 0 && this.badgesets[i].status == 'Accepted') {
                     allbset.push(this.badgesets[i]);
                 }
                 count = 0;

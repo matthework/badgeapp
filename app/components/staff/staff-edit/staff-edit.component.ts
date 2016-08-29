@@ -147,7 +147,7 @@ export class StaffEditComponent implements OnInit {
         var badgesOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) { 
-                if (this.badges[i].inused) {
+                if (this.badges[i].status=='Accepted') {
                     badgesOptions.push(this.badges[i].name);
                 }
             }
@@ -167,7 +167,7 @@ export class StaffEditComponent implements OnInit {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) { 
                 let index = userbgs.indexOf(this.badges[i].name);
-                if (this.badges[i].inused && index == -1) {
+                if (this.badges[i].status=='Accepted' && index == -1) {
                     badgesOptions.push(this.badges[i].name);
                 }
             }
