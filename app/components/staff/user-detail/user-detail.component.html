@@ -19,7 +19,7 @@
 
 	<label>Top BSet: </label>
 	<text></text><br>
-	
+
 	<label>Badge Sets: </label>
 	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
@@ -30,6 +30,7 @@
 
 	<button *ngIf="auth.authenticated()" class="button-edit" (click)="toUserEdit(staff._id)">Edit Profile</button><br>
 
+	<br>
 	<br>
 	<br>
 	<h3>User's Badges:</h3>
@@ -84,5 +85,11 @@
 </div>
 
 <br>
+<div *ngIf="!auth.authenticated()">
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+{{auth.login()}}
+</div>
+
+<!-- <br>
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3> -->
 

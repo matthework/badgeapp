@@ -22,6 +22,7 @@ var AuthService = (function () {
             "andrew.weston@propellerhead.co.nz",
             "jonathan.cupples@propellerhead.co.nz"
         ];
+        // env: Env;
         // Configure Auth0
         this.lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
             theme: {
@@ -50,14 +51,13 @@ var AuthService = (function () {
             });
         });
     }
-    AuthService.prototype.ngOnInit = function () {
-        this.getEnv();
-        console.log('you submitted value: ', this.env);
-    };
-    AuthService.prototype.getEnv = function () {
-        var _this = this;
-        this._http.get('/api/login').map(function (r) { return r.json(); }).subscribe(function (env) { _this.env = env; });
-    };
+    // ngOnInit() {
+    //   this.getEnv();
+    //   console.log('you submitted value: ', this.env);
+    // }
+    // getEnv() {
+    //   this._http.get('/api/login').map(r => r.json()).subscribe(env => { this.env = env});
+    // }
     AuthService.prototype.login = function () {
         // Call the show method to display the widget.
         this.lock.show();
@@ -71,12 +71,13 @@ var AuthService = (function () {
     ;
     AuthService.prototype.isAdmin = function () {
         // Check if there's an admin account
-        if (angular2_jwt_1.tokenNotExpired() && this.adminList.indexOf(this.userProfile.email) != -1) {
-            return true;
+        var result = false;
+        if (this.userProfile) {
+            if (this.adminList.indexOf(this.userProfile.email) != -1) {
+                result = true;
+            }
         }
-        else {
-            return false;
-        }
+        return result;
     };
     ;
     AuthService.prototype.logout = function () {
@@ -84,7 +85,8 @@ var AuthService = (function () {
         localStorage.removeItem('id_token');
         localStorage.removeItem('profile');
         this.userProfile = undefined;
-        this.toMain();
+        location.reload();
+        // this.toMain();
     };
     ;
     AuthService.prototype.toMain = function () {

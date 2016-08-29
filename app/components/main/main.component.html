@@ -53,14 +53,17 @@
 <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text><br>
 
 <div *ngIf="auth.isAdmin()">
-  <br>
   <button class="button-admin" (click)="toPerson()">Admin Page</button><text> You have <text class="text-pending">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-pendingStaff">{{checkPendingStaff()}}</text> staff(s).</text><br>
 </div>
 
 </div>
 
 <br>
-<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+<div *ngIf="!auth.authenticated()">
+<h1>Welcome to Badge System !</h1>
+<h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+</div>
+
 
 <br>
 <br>

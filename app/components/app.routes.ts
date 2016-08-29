@@ -35,13 +35,15 @@ import {BCatNewComponent} from './badgecat/bcat-new/bcat-new.component';
 const routes: RouterConfig = [
   {
       path: '',
-      redirectTo: 'main',
-      pathMatch: 'full'
+      component: MainComponent,
+      // redirectTo: 'main',
+      // pathMatch: 'full'
   },
-  {
-      path: '#',
-      redirectTo: 'main',
-  },
+  // {
+  //     path: '#',
+  //     component: MainComponent,
+  //     // redirectTo: 'main',
+  // },
   {
       path: 'main',
       // name: 'Main',

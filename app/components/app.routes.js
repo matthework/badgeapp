@@ -28,13 +28,13 @@ var bcat_new_component_1 = require('./badgecat/bcat-new/bcat-new.component');
 var routes = [
     {
         path: '',
-        redirectTo: 'main',
-        pathMatch: 'full'
+        component: main_component_1.MainComponent,
     },
-    {
-        path: '#',
-        redirectTo: 'main',
-    },
+    // {
+    //     path: '#',
+    //     component: MainComponent,
+    //     // redirectTo: 'main',
+    // },
     {
         path: 'main',
         // name: 'Main',

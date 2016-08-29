@@ -1,15 +1,15 @@
-import {Injectable,OnInit}      from '@angular/core';
+import {Injectable}      from '@angular/core';
 import {Router} from '@angular/router';
 import {tokenNotExpired} from 'angular2-jwt';
 import {Http} from '@angular/http';
 
-import {Env} from './env';
+// import {Env} from './env';
 
 // Avoid name not found warnings
 declare var Auth0Lock: any;
 
 @Injectable()
-export class AuthService implements OnInit{
+export class AuthService {
 
   adminList = [
     "matt.wang@propellerhead.co.nz",
@@ -17,7 +17,7 @@ export class AuthService implements OnInit{
     "jonathan.cupples@propellerhead.co.nz"
     ]
   
-  env: Env;
+  // env: Env;
 
   // Configure Auth0
   lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
@@ -59,14 +59,14 @@ export class AuthService implements OnInit{
     });
   }
 
-  ngOnInit() {
-    this.getEnv();
-    console.log('you submitted value: ', this.env);
-  }
+  // ngOnInit() {
+  //   this.getEnv();
+  //   console.log('you submitted value: ', this.env);
+  // }
 
-  getEnv() {
-    this._http.get('/api/login').map(r => r.json()).subscribe(env => { this.env = env});
-  }
+  // getEnv() {
+  //   this._http.get('/api/login').map(r => r.json()).subscribe(env => { this.env = env});
+  // }
 
   public login() {
     // Call the show method to display the widget.
@@ -81,11 +81,13 @@ export class AuthService implements OnInit{
 
   public isAdmin() {
     // Check if there's an admin account
-    if (tokenNotExpired() && this.adminList.indexOf(this.userProfile.email)!=-1) {
-      return true;
-    }else {
-      return false;
+    var result = false
+    if (this.userProfile) {
+      if (this.adminList.indexOf(this.userProfile.email)!=-1) {
+        result = true
+      }
     }
+    return result
   };
 
   public logout() {
@@ -93,7 +95,8 @@ export class AuthService implements OnInit{
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     this.userProfile = undefined;
-    this.toMain();
+    location.reload();
+    // this.toMain();
   };
 
   toMain() {
