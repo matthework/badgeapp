@@ -65,7 +65,7 @@ func addRoutes() {
 
 	router.HandleFunc("/api/staffs", viewStaffs).Methods("GET")
 	router.HandleFunc("/api/staff/edit/{id}", viewFindStaffByID).Methods("GET")
-	router.HandleFunc("/api/staff/edit/email/{email}", viewFindStaffByEmail).Methods("GET")
+	router.HandleFunc("/api/staff/detail/email/{email}", viewFindStaffByEmail).Methods("GET")
 	router.HandleFunc("/api/staff/new", addNewStaff).Methods("POST")
 	router.HandleFunc("/api/staff/update/{id}", updateStaff).Methods("POST")
 	router.HandleFunc("/api/staff/remove/{id}", removeStaff).Methods("POST")
