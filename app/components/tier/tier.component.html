@@ -7,7 +7,7 @@
 <button class="button-showbs" *ngIf!="toPay" (click)="toPay=true">Show BadgeSet</button>
 <button class="button-back" *ngIf="toPay" (click)="toPay=false">Show $$</button>
 <!-- <button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button> -->
-<button class="button-add" *ngIf="auth.isAdmin()" (click)="addTier()">Add New</button>
+<button class="button-add" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
 <!-- <button class="button-less" *ngIf="active" (click)="active=false"><</button> -->
 <br>
 </div>
@@ -103,6 +103,7 @@
 
 </div>
 
+<br>
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 

@@ -15,14 +15,14 @@
 <label>Position: </label>
 <input class="input-pos" type="text" [(ngModel)]="newStaff.position" placeholder="Position" /><br>
 
-<label>Salary: </label>
-<input class="input-salary" type="number" [(ngModel)]="newStaff.salary" placeholder="0"> K<br>
+<!-- <label>Salary: </label>
+<input class="input-salary" type="number" [(ngModel)]="newStaff.salary" placeholder="0"> K<br> -->
 
 <label>*Email: </label>
 <input class="input-email" type="text" [(ngModel)]="newStaff.email" placeholder="Email" /><br>
 
-<label>Phone: </label>
-<input class="input-phone" type="text" [(ngModel)]="newStaff.phone" placeholder="Phone" /><br>
+<!-- <label>Phone: </label>
+<input class="input-phone" type="text" [(ngModel)]="newStaff.phone" placeholder="Phone" /><br> -->
 
 <label>Status: </label>
 <select class="select-status" [(ngModel)]="newStaff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>

@@ -11,12 +11,15 @@
 	<label>Email: </label>
 	<text>{{staff.email}}</text><br>
 
-	<label>Phone: </label>
-	<text>{{staff.phone}}</text><br>
+<!-- 	<label>Phone: </label>
+	<text>{{staff.phone}}</text><br> -->
 
-	<label>Salary: </label>
-	<text>${{staff.salary}}K</text><br>
+<!-- 	<label>Salary: </label>
+	<text>${{staff.salary}}K</text><br> -->
 
+	<label>Top BSet: </label>
+	<text></text><br>
+	
 	<label>Badge Sets: </label>
 	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
@@ -80,5 +83,6 @@
 
 </div>
 
+<br>
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 

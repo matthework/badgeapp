@@ -40,8 +40,10 @@ var UserDetailComponent = (function () {
         // this.sub = this.route.params.subscribe(params => {
         //   this.email = params['email'];
         // });
-        this.email = this.auth.userProfile.email;
-        this.getStaffByEmail();
+        if (this.auth.authenticated()) {
+            this.email = this.auth.userProfile.email;
+            this.getStaffByEmail();
+        }
         this.getBadges();
         this.getBadgeSets();
         this.getTiers();

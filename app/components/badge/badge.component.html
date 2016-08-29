@@ -6,7 +6,7 @@
 <input [(ngModel)]="query" placeholder="Search for">
 <button class="button-showBCat" *ngIf!="showBadges" (click)="showBadges=true;showBadgeCat()">Badge Category</button>
 <!-- <button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button> -->
-<button class="button-add" *ngIf="auth.isAdmin()" (click)="addBadge()">Add New</button>
+<button class="button-add" *ngIf="auth.isAdmin()" (click)="addBadge()">+</button>
 <!-- <button class="button-less" *ngIf="active" (click)="active=false"><</button> -->
 <br>
 </div>
@@ -44,6 +44,7 @@
 
 </div>
 
+<br>
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 

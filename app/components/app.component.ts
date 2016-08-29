@@ -24,7 +24,7 @@ import {AuthService} from './auth/auth.service';
     ]
 })
 
-export class AppComponent{
+export class AppComponent {
     title = 'My Badge App!';
     constructor(private auth: AuthService) {}
 }

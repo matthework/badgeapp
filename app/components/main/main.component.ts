@@ -35,8 +35,10 @@ export class MainComponent implements OnInit{
     			private _bsService: BSService) {}
 
 	ngOnInit() {
-	    this.email = this.auth.userProfile.email;
-    	this.getStaffByEmail();
+		if (this.auth.authenticated()) {
+			this.email = this.auth.userProfile.email;
+			this.getStaffByEmail();
+		}
     	this.getStaffs();
 	}
 
@@ -45,6 +47,7 @@ export class MainComponent implements OnInit{
 	}
 
 	getStaffByEmail() {
+		
 		console.log('email from _routeParams: ', this.email); 
 		this._staffService.getStaffByEmail(this.email).subscribe((staff) => {this.staff = staff;});
 	}

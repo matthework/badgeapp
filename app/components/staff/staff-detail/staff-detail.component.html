@@ -11,11 +11,14 @@
 	<label>Email: </label>
 	<text>{{staff.email}}</text><br>
 
-	<label>Phone: </label>
-	<text>{{staff.phone}}</text><br>
+<!-- 	<label>Phone: </label>
+	<text>{{staff.phone}}</text><br> -->
 
-	<label>Salary: </label>
-	<text>${{staff.salary}}K</text><br>
+<!-- 	<label>Salary: </label>
+	<text>${{staff.salary}}K</text><br> -->
+
+	<label>Top BSet: </label>
+	<text></text><br>
 
 	<label>Badge Sets: </label>
 	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
@@ -27,7 +30,7 @@
 
 	<label>Status: </label>
 	<text>{{staff.status}}</text><br>
-	
+
 	<label>Brief: </label>
 	<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
 	<br>

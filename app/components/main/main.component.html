@@ -22,11 +22,13 @@
   <br>
   <br>
   <h2><i>{{auth.userProfile.name}}, you are just logged in.</i></h2>
+  <br>
 </div>
 
 <div *ngIf="staff">
+<text class="text-topbs">Top BadgeSet: </text><text class="text-topbs"><i></i></text>
 <br>
-<h3>User's Badges:</h3>
+<br>
   <table class="table-userbgroups">
   <tr>
     <th class="th-badge">Badge</th>
@@ -45,7 +47,6 @@
     <td class="td-status">{{userbgroup.status | approved_pending}}</td>
   </tr>
 </table>
-<br>
 </div>
 
 <button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text *ngIf="!checkProfile()"> Please complete your profile.</text>
@@ -58,6 +59,7 @@
 
 </div>
 
+<br>
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 
 <br>

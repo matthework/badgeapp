@@ -28,8 +28,10 @@ var MainComponent = (function () {
         this.sortStaffBS = [];
     }
     MainComponent.prototype.ngOnInit = function () {
-        this.email = this.auth.userProfile.email;
-        this.getStaffByEmail();
+        if (this.auth.authenticated()) {
+            this.email = this.auth.userProfile.email;
+            this.getStaffByEmail();
+        }
         this.getStaffs();
     };
     MainComponent.prototype.getStaffs = function () {
