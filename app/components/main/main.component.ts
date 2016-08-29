@@ -35,7 +35,7 @@ export class MainComponent implements OnInit{
     			private _bsService: BSService) {}
 
 	ngOnInit() {
-		if (this.auth.authenticated()) {
+		if (this.auth.userProfile) {
 			this.email = this.auth.userProfile.email;
 			this.getStaffByEmail();
 		}
@@ -54,7 +54,7 @@ export class MainComponent implements OnInit{
 
 	checkProfile() {
 		var hasProfile = false;
-		if (this.staffs != null) {
+		if (this.auth.userProfile != null && this.staffs != null) {
 			for (var i = 0; i < this.staffs.length; i++) { 
 				var name = this.staffs[i].fname + " " + this.staffs[i].lname;
 				if(this.staffs[i].email==this.auth.userProfile.email){

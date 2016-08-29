@@ -93,6 +93,12 @@
 
 </div>
 
-<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
+<br>
+<div *ngIf="!auth.authenticated()">
+<h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+{{auth.login()}}
+</div>
+
+<!-- <h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3> -->
 
 

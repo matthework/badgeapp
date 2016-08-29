@@ -88,12 +88,15 @@ nav a.router-link-active {
 }
 .button-add {
   width: 130px;
+  color: #039be5;
 }
 .button-user {
   width: 130px;
+  color: #039be5;
 }
 .button-admin {
   width: 130px;
+  color: #039be5;
 }
 .text-pending {
   color: red;
