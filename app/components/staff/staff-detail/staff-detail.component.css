@@ -135,6 +135,20 @@ textarea {
 .td-status {
   text-align: center;
 }
+.button-more {
+  color: #039be5;
+  margin-top: 0px;
+  position: relative; 
+  left: 66.5%;
+  margin-bottom: 5px;
+}
+.button-less {
+  color: #039be5;
+  margin-top: 0px;
+  position: relative; 
+  left: 66.5%;
+  margin-bottom: 5px;
+}
 .button-edit {
   position: relative; 
   left: 57%;
@@ -148,6 +162,17 @@ textarea {
   color: red;
 }
 .badge:visited{
+  color: #607D8B;
+}
+.badge-more{
+  cursor: pointer;
+  cursor: hand;
+  color: #999;
+}
+.badge-more:hover{
+  color: red;
+}
+.badge-more:visited{
   color: #607D8B;
 }
 .badgeset{

@@ -2,54 +2,68 @@
 <div *ngIf="auth.authenticated()">
 
 <div *ngIf="badgeset">
-	<h2>Badge Set - {{badgeset.name}}</h2><br>
-	
-	<label>Tier/Grade: </label>
-	<text>{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text><br>
-	
+<h2>Badge Set - {{badgeset.name}}</h2><br>
+
+<label>Tier/Grade: </label>
+<text>{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text><br>
+
 <!-- 	<label>Grade: </label>
-	<text>{{badgeset.grade}}</text><br>
+<text>{{badgeset.grade}}</text><br>
 
-	<label>Pay: </label>
-	<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br> -->
+<label>Pay: </label>
+<text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br> -->
 
-	<label>Tags: </label>
-	<text>{{badgeset.tags}}</text><br>
+<label>Tags: </label>
+<text>{{badgeset.tags}}</text><br>
 
 <!-- 	<label>Prerequisite: </label>
-	<text>Need at least {{badgeset.numbadges}} out of {{badgeset.badgegroups.length}} Badges to achieve this Badge Set. (Core Badges are required if any.)</text><br>
+<text>Need at least {{badgeset.numbadges}} out of {{badgeset.badgegroups.length}} Badges to achieve this Badge Set. (Core Badges are required if any.)</text><br>
 
-	<label>Core Badges: </label>
-	<text *ngFor="let coreb of badgeset.corebadges">{{coreb.badge}} - {{coreb.level}}, </text><br> -->
+<label>Core Badges: </label>
+<text *ngFor="let coreb of badgeset.corebadges">{{coreb.badge}} - {{coreb.level}}, </text><br> -->
 
 <!-- 	<label>InUsed: </label>
-	<text>{{badgeset.inused | yes_no}}</text><br>
- -->
+<text>{{badgeset.inused | yes_no}}</text><br>
+-->
 
- 	<label>Status: </label>
-	<text>{{badgeset.status}}</text><br>
+<label>Status: </label>
+<text>{{badgeset.status}}</text><br>
 
 <!-- 	<label>Approved: </label>
-	<text>{{badgeset.approved | yes_no}}</text><br> -->
+<text>{{badgeset.approved | yes_no}}</text><br> -->
 
-	<table class="table-badgegroups">
-		<tr>
-		  <th class="th-badge">Badge</th>
-		  <th class="th-desc">Description</th>
-		  <!-- <th class="th-core">Core Badge</th> -->
-		</tr>
-		<tr *ngFor="let badgegroup of badgeset.badgegroups">
-			<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
-			<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
-			<!-- <td class="td-core">{{checkCore(badgegroup.badge)}}</td> -->
-		</tr>
-	</table>
+<button *ngIf="!more" class="button-more" (click)="more=true">More</button>
+<button *ngIf="more" class="button-less" (click)="more=false">Less</button>
 
-	<button (click)="goBack()">Back</button>
-	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button>
-	<br>
-	<br>
-	<br>
+<table *ngIf="!more" class="table-badgegroups">
+	<tr>
+	  <th class="th-badge">Badge</th>
+	  <th class="th-desc">Description</th>
+	  <!-- <th class="th-core">Core Badge</th> -->
+	</tr>
+	<tr *ngFor="let badgegroup of badgeset.badgegroups">
+		<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
+		<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
+		<!-- <td class="td-core">{{checkCore(badgegroup.badge)}}</td> -->
+	</tr>
+</table>
+
+<table *ngIf="more" class="table-badgegroups">
+	<tr>
+	  <th class="th-badge">Badge</th>
+	  <th class="th-desc">Description</th>
+	</tr>
+	<tr *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
+		<td (click)="toBadgeDetail(moreb.badge)"><text *ngIf="moreb.current" class="badge">{{moreb.badge}} - {{moreb.level}}</text><text *ngIf="!moreb.current" class="badge-more">{{moreb.badge}} - {{moreb.level}}</text></td>
+		<td class="td-desc">{{getDesc(moreb.badge,moreb.level)}}</td>
+	</tr>
+</table>
+
+<button (click)="goBack()">Back</button>
+<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button>
+<br>
+<br>
+<br>
 
 </div>
 

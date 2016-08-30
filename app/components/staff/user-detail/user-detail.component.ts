@@ -36,6 +36,7 @@ export class UserDetailComponent implements OnInit {
   newBadge = "";
   newLevel = 0;
   newStatus = false;
+  more = false;
 
   constructor(
     private _staffService: StaffService, 
@@ -214,38 +215,6 @@ export class UserDetailComponent implements OnInit {
     return badgesOptions.sort();
   }
 
-  // getNewBadgesOptions() {
-  //     var badgesOptions = [];
-  //     var userbgs = [];
-  //     if (this.staff.userbgroups != null) {
-  //         for (var j = 0; j < this.staff.userbgroups.length; j++) { 
-  //             userbgs.push(this.staff.userbgroups[j].badge);
-  //         }
-  //     }
-  //     if (this.badges != null) {
-  //         for (var i = 0; i < this.badges.length; i++) { 
-  //             let index = userbgs.indexOf(this.badges[i].name);
-  //             if (this.badges[i].status=='Accepted' && index == -1) {
-  //                 badgesOptions.push(this.badges[i].name);
-  //             }
-  //         }
-  //     }
-  //     return badgesOptions.sort();
-  // }
-
-  // getLevelsOptions(bname: string) {
-  //     var levelsOptions = [];
-  //     for (var i = 0; i < this.badges.length; i++) { 
-  //         if (this.badges[i].name == bname) {
-  //             for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-  //                 levelsOptions.push(this.badges[i].badgelevels[j].level);
-  //             }
-  //         }
-  //     }
-  //     // console.log('getBadgesOptions: ', badgesOptions);
-  //     return levelsOptions.sort();
-  // }
-
   getNewLevelsOptions(bname: string) {
     var levelsOptions = [];
     var userbgs = [];
@@ -296,6 +265,26 @@ export class UserDetailComponent implements OnInit {
 
   addNewUser(email:string) {
     this._router.navigate(['/user/new',email]);
+  }
+
+  getMoreBadges(bgs:UserBGroup[]) {
+    var moreBadges = [];
+    if (bgs != null) {
+      for (var i = 0; i < bgs.length; i++) { 
+        for (var j = 0; j < this.badges.length; j++) { 
+          for (var k = 0; k < this.badges[j].badgelevels.length; k++) { 
+            if (bgs[i].badge == this.badges[j].name && bgs[i].level>this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"status":bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":false});
+            }
+            if (bgs[i].badge == this.badges[j].name && bgs[i].level==this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"status":bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":true});
+            }
+          }
+        }
+        
+      }
+    }
+    return moreBadges;
   }
 
   goBack() {

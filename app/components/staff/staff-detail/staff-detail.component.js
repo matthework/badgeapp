@@ -31,6 +31,7 @@ var StaffDetailComponent = (function () {
         this.tiers = [];
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
+        this.more = false;
     }
     StaffDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -175,6 +176,24 @@ var StaffDetailComponent = (function () {
     };
     StaffDetailComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
+    };
+    StaffDetailComponent.prototype.getMoreBadges = function (bgs) {
+        var moreBadges = [];
+        if (bgs != null) {
+            for (var i = 0; i < bgs.length; i++) {
+                for (var j = 0; j < this.badges.length; j++) {
+                    for (var k = 0; k < this.badges[j].badgelevels.length; k++) {
+                        if (bgs[i].badge == this.badges[j].name && bgs[i].level > this.badges[j].badgelevels[k].level) {
+                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": false });
+                        }
+                        if (bgs[i].badge == this.badges[j].name && bgs[i].level == this.badges[j].badgelevels[k].level) {
+                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": true });
+                        }
+                    }
+                }
+            }
+        }
+        return moreBadges;
     };
     StaffDetailComponent.prototype.goBack = function () {
         window.history.back();
