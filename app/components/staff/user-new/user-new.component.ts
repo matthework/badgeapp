@@ -14,7 +14,7 @@ export class UserNewComponent {
   
   email: string;
   sub: any;
-  newUser = {index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief:"", others: []}
+  newUser = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief:"", others: []}
 
   constructor(
       private _staffService: StaffService, 

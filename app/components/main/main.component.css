@@ -109,7 +109,7 @@ nav a.router-link-active {
 .table-userbgroups {
   margin-top: 10px;
   table-layout: fixed;
-  width: 75%;
+  width: 70%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
 }
@@ -183,4 +183,11 @@ nav a.router-link-active {
 .badgeset:visited{
   color: #607D8B;
 }
-
+.text-approve {
+  color: limegreen;
+  font-size: 1.0em
+}
+.text-pending2 {
+  color: red;
+  font-size: 1.0em
+}

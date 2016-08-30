@@ -230,6 +230,12 @@ textarea {
 .badgeset:visited{
   color: #607D8B;
 }
-
-
+.text-approve {
+  color: limegreen;
+  font-size: 1.0em
+}
+.text-pending2 {
+  color: red;
+  font-size: 1.0em
+}
 

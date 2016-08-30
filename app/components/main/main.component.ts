@@ -128,44 +128,25 @@ export class MainComponent implements OnInit{
 	}
 
 	getStaffBS(sbgs:UserBGroup[]) {
-	    var allbset = [];
-	    var count = 0;
-	    var coreCount = 0;
-	    var core = false;
-	    if (this.badgesets != null && sbgs != null) {
-	      for (var i = 0; i < this.badgesets.length; i++) { 
-	        for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
-	          for (var k = 0; k < sbgs.length; k++) {      
-	            if (this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
-	              count += 1;
-	            }
-	          }
-	        }
-	        if (this.badgesets[i].corebadges == []) {
-	          core = true;
-	        }else {
-	          for (var m = 0; m < this.badgesets[i].corebadges.length; m++) {
-	            for (var k = 0; k < sbgs.length; k++) {      
-	              if (this.badgesets[i].corebadges[m].badge == sbgs[k].badge && this.badgesets[i].corebadges[m].level <= sbgs[k].level) {
-	                coreCount += 1;
-	              }
-	            }
-	          }
-	          if (coreCount == this.badgesets[i].corebadges.length) {
-	            core = true;
-	          }
-	        }
-	        
-	        if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges >0 && this.badgesets[i].status=='Accepted') {
-	          allbset.push(this.badgesets[i]);
-	        }
-	        count = 0;
-	        coreCount = 0;
-	        core =false;
-	      }
-	    }
-	    return allbset;
-	  }
+		var allbset = [];
+		var count = 0;
+		if (this.badgesets != null && sbgs != null) {
+		  for (var i = 0; i < this.badgesets.length; i++) { 
+		    for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
+		      for (var k = 0; k < sbgs.length; k++) {      
+		        if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+		          count += 1;
+		        }
+		      }
+		    }
+		    if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].status=='Accepted') {
+		      allbset.push(this.badgesets[i]);
+		    }
+		    count = 0;
+		  }
+		}
+		return allbset;
+	}
 
 	  getSortStaffBS(sbgs:UserBGroup[]) {
 	    var pay = "";
@@ -212,23 +193,25 @@ export class MainComponent implements OnInit{
 	    return pay;
 	  }
 
-	  findBadgeSet(bname:string, l:number) {
-	    var bset = [];
-	    if (this.sortStaffBS != null) {
-	      for (var i = 0; i < this.sortStaffBS.length; i++) { 
-	        for (var j = 0; j < this.sortStaffBS[i].badgegroups.length; j++) {   
-	          if (this.sortStaffBS[i].badgegroups[j].badge == bname && this.sortStaffBS[i].badgegroups[j].level <= l) {
-	            bset.push(this.sortStaffBS[i]);
-	          }
-	        }
-	      }
-	    }
-	    return bset;
-	  }
 
-	  toBSDetail(bsid:string){
-	    this._router.navigate(['/bs/detail',bsid]);
-	  }
+	findBadgeSet(sbgs:UserBGroup[], bname:string, l:number) {
+		var bset = [];
+		var sortStaffBS = this.getSortStaffBS(sbgs);
+		if (sortStaffBS != null && sortStaffBS.length > 0) {
+		  for (var i = 0; i < sortStaffBS.length; i++) { 
+		    for (var j = 0; j < sortStaffBS[i].badgegroups.length; j++) {   
+		      if (sortStaffBS[i].badgegroups[j].badge == bname && sortStaffBS[i].badgegroups[j].level <= l) {
+		        bset.push(sortStaffBS[i]);
+		      }
+		    }
+		  }
+		}
+		return bset;
+	}
+
+	toBSDetail(bsid:string){
+		this._router.navigate(['/bs/detail',bsid]);
+	}
 
 	checkNumPending() {
 		var numOfPending = 0;
