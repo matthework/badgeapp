@@ -47,7 +47,7 @@ func listStaffsSort() (staffs []Staff) {
 	defer session.Close()
 
 	collection := session.DB(DB).C(col_staff)
-	err := collection.Find(nil).Sort("-active","fname","lname").All(&staffs)
+	err := collection.Find(nil).Sort("status","fname","lname").All(&staffs)
 	if err != nil {
 		panic(err)
 	}
