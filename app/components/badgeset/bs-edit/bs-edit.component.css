@@ -104,14 +104,14 @@ textarea {
   border-radius: 3;
   border: 1px solid #cccccc;
   margin-right: 50px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .label-grade {
   width: 5em;
 }
 .label-pay {
-  width: 4em;
-  margin-left: 60px;
+  width: 8em;
+  /*margin-left: 60px;*/
 }
 .select-grade {
   background: transparent;
@@ -124,7 +124,7 @@ textarea {
   border-radius: 3;
   border: 1px solid #cccccc;
 
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .input-tags{
   width: 300px;

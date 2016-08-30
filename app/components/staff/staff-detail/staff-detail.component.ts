@@ -112,45 +112,25 @@ export class StaffDetailComponent implements OnInit {
   getStaffBS(sbgs:UserBGroup[]) {
     var allbset = [];
     var count = 0;
-    var coreCount = 0;
-    var core = false;
     if (this.badgesets != null && sbgs != null) {
       for (var i = 0; i < this.badgesets.length; i++) { 
         for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
           for (var k = 0; k < sbgs.length; k++) {      
-            if (this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+            if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
               count += 1;
             }
           }
         }
-        if (this.badgesets[i].corebadges == []) {
-          core = true;
-        }else {
-          for (var m = 0; m < this.badgesets[i].corebadges.length; m++) {
-            for (var k = 0; k < sbgs.length; k++) {      
-              if (this.badgesets[i].corebadges[m].badge == sbgs[k].badge && this.badgesets[i].corebadges[m].level <= sbgs[k].level) {
-                coreCount += 1;
-              }
-            }
-          }
-          if (coreCount == this.badgesets[i].corebadges.length) {
-            core = true;
-          }
-        }
-        
-        if (count >= this.badgesets[i].numbadges && core && this.badgesets[i].numbadges >0 && this.badgesets[i].status=='Accepted') {
+        if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].status=='Accepted') {
           allbset.push(this.badgesets[i]);
         }
         count = 0;
-        coreCount = 0;
-        core =false;
       }
     }
     return allbset;
   }
 
   getSortStaffBS(sbgs:UserBGroup[]) {
-    var pay = "";
     this.sortStaffBS = [];
     var allbset = this.getStaffBS(sbgs);
     if (allbset != null) {
@@ -159,9 +139,6 @@ export class StaffDetailComponent implements OnInit {
         this.sortStaffBS.push(allbset[i]);
       }
     }
-    // sortStaffBS = sortStaffBS.sort(this.toCompareDes);
-    // this.topBS = sortStaffBS[0];
-    // console.log('you submitted topBS: ', sortStaffBS); 
     return this.sortStaffBS.sort(this.toCompareDes);
   }
 
@@ -174,10 +151,21 @@ export class StaffDetailComponent implements OnInit {
       return 0;
   }
 
-  getTopBS() {
-    var topBS = this.sortStaffBS[0];
+  getTopStaffBS(sbgs:UserBGroup[]) {
+    var topBS = [];
+    if (this.getSortStaffBS(sbgs) !=null && this.getSortStaffBS(sbgs).length > 0) {
+      topBS.push(this.getSortStaffBS(sbgs)[0]._id);
+      topBS.push(this.getSortStaffBS(sbgs)[0].name);
+      topBS.push(this.getSortStaffBS(sbgs)[0].tier);
+      topBS.push(this.getSortStaffBS(sbgs)[0].grade);
+    }
     return topBS;
   }
+  
+  // getTopBS() {
+  //   var topBS = this.sortStaffBS[0];
+  //   return topBS;
+  // }
 
   getPay(t:number, g:string) {
     var pay = 0;
@@ -191,13 +179,14 @@ export class StaffDetailComponent implements OnInit {
     return pay;
   }
 
-  findBadgeSet(bname:string, l:number) {
+  findBadgeSet(sbgs:UserBGroup[], bname:string, l:number) {
     var bset = [];
-    if (this.sortStaffBS != null) {
-      for (var i = 0; i < this.sortStaffBS.length; i++) { 
-        for (var j = 0; j < this.sortStaffBS[i].badgegroups.length; j++) {   
-          if (this.sortStaffBS[i].badgegroups[j].badge == bname && this.sortStaffBS[i].badgegroups[j].level <= l) {
-            bset.push(this.sortStaffBS[i]);
+    var sortStaffBS = this.getSortStaffBS(sbgs);
+    if (sortStaffBS != null && sortStaffBS.length > 0) {
+      for (var i = 0; i < sortStaffBS.length; i++) { 
+        for (var j = 0; j < sortStaffBS[i].badgegroups.length; j++) {   
+          if (sortStaffBS[i].badgegroups[j].badge == bname && sortStaffBS[i].badgegroups[j].level <= l) {
+            bset.push(sortStaffBS[i]);
           }
         }
       }

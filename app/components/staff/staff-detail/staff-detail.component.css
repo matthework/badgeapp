@@ -150,6 +150,17 @@ textarea {
 .badge:visited{
   color: #607D8B;
 }
+.badgeset{
+  cursor: pointer;
+  cursor: hand;
+  color: #039be5;
+}
+.badgeset:hover{
+  color: red;
+}
+.badgeset:visited{
+  color: #607D8B;
+}
 .uli-bs{
   cursor: pointer;
   cursor: hand;
@@ -165,7 +176,14 @@ textarea {
   background-color: #CFD8DC !important;
   color: white;
 }
-
+.text-approve {
+  color: limegreen;
+  font-size: 1.0em
+}
+.text-pending2 {
+  color: red;
+  font-size: 1.0em
+}
 
 
 

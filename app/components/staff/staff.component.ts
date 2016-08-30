@@ -175,7 +175,7 @@ export class StaffComponent {
 	}
 
 	getSortStaffBS(sbgs:UserBGroup[]) {
-		var pay = "";
+		// var pay = "";
 		this.sortStaffBS = [];
 		var allbset = this.getStaffBS(sbgs);
 		if (allbset != null) {

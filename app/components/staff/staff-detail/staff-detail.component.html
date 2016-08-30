@@ -18,7 +18,7 @@
 	<text>${{staff.salary}}K</text><br> -->
 
 	<label>Top BSet: </label>
-	<text></text><br>
+	<text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
 
 	<label>Badge Sets: </label>
 	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
@@ -46,11 +46,11 @@
 			<td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
 			<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
 			<td class="td-bs">
-			<div *ngFor="let bs of findBadgeSet(userbgroup.badge,userbgroup.level)">
+			<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
 				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 			</div>
       		</td>
-      		<td class="td-status">{{userbgroup.status | approved_pending}}</td>
+      		<td class="td-status"><i><text class="text-approve" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></td>
 		</tr>
 	</table>
 

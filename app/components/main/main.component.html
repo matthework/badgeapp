@@ -32,17 +32,17 @@
   <table class="table-userbgroups">
   <tr>
     <th class="th-badge">Badge</th>
-    <!-- <th class="th-bs">Badge Set</th> -->
+    <th class="th-bs">Badge Set</th>
     <th class="th-status">Status</th>
   </tr>
   <tr *ngFor="let userbgroup of staff.userbgroups">
     <td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
-<!--     <td class="td-bs">
-      <div *ngFor="let bs of findBadgeSet(userbgroup.badge,userbgroup.level)">
+    <td class="td-bs">
+      <div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
         <uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
       </div>
-    </td> -->
-    <td class="td-status">{{userbgroup.status | approved_pending}}</td>
+    </td>
+    <td class="td-status"><i><text class="text-approve" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></td>
   </tr>
 </table>
 </div>
@@ -51,6 +51,7 @@
 <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text><br>
 
 <div *ngIf="auth.isAdmin()">
+  <br>
   <button class="button-admin" (click)="toPerson()">Admin Page</button><text> You have <text class="text-pending">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-pendingStaff">{{checkPendingStaff()}}</text> staff(s).</text><br>
 </div>
 

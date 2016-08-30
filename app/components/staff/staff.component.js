@@ -152,7 +152,7 @@ var StaffComponent = (function () {
         return allbset;
     };
     StaffComponent.prototype.getSortStaffBS = function (sbgs) {
-        var pay = "";
+        // var pay = "";
         this.sortStaffBS = [];
         var allbset = this.getStaffBS(sbgs);
         if (allbset != null) {

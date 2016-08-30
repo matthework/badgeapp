@@ -18,7 +18,7 @@ var UserNewComponent = (function () {
         this._router = _router;
         this.route = route;
         this.auth = auth;
-        this.newUser = { index: 0, fname: "", lname: "", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief: "", others: [] };
+        this.newUser = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief: "", others: [] };
     }
     UserNewComponent.prototype.ngOnInit = function () {
         var _this = this;
