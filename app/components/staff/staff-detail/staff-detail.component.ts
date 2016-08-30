@@ -31,6 +31,7 @@ export class StaffDetailComponent implements OnInit {
   sortStaffBS = [];
   sub: any;
   id: string;
+  more = false;
 
   constructor(
     private _staffService: StaffService, 
@@ -196,6 +197,26 @@ export class StaffDetailComponent implements OnInit {
 
   toBSDetail(bsid:string){
     this._router.navigate(['/bs/detail',bsid]);
+  }
+
+  getMoreBadges(bgs:UserBGroup[]) {
+    var moreBadges = [];
+    if (bgs != null) {
+      for (var i = 0; i < bgs.length; i++) { 
+        for (var j = 0; j < this.badges.length; j++) { 
+          for (var k = 0; k < this.badges[j].badgelevels.length; k++) { 
+            if (bgs[i].badge == this.badges[j].name && bgs[i].level>this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"status":bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":false});
+            }
+            if (bgs[i].badge == this.badges[j].name && bgs[i].level==this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"status":bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":true});
+            }
+          }
+        }
+        
+      }
+    }
+    return moreBadges;
   }
 
   goBack() {

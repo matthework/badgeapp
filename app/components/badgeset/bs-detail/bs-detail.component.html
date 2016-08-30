@@ -31,8 +31,10 @@
 
 <!-- 	<label>Approved: </label>
 <text>{{badgeset.approved | yes_no}}</text><br> -->
+
 <button *ngIf="!more" class="button-more" (click)="more=true">More</button>
 <button *ngIf="more" class="button-less" (click)="more=false">Less</button>
+
 <table *ngIf="!more" class="table-badgegroups">
 	<tr>
 	  <th class="th-badge">Badge</th>
@@ -48,7 +50,7 @@
 
 <table *ngIf="more" class="table-badgegroups">
 	<tr>
-	  <th class="th-badge">Badge111</th>
+	  <th class="th-badge">Badge</th>
 	  <th class="th-desc">Description</th>
 	</tr>
 	<tr *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">

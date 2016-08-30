@@ -2,79 +2,102 @@
 <div *ngIf="auth.authenticated()">
 
 <div *ngIf="staff">
-	<h2>User - {{staff.fname}} {{staff.lname}}</h2>
-	
-	<br>
-	<label>Position: </label>
-	<text>{{staff.position}}</text><br>
+<h2>User - {{staff.fname}} {{staff.lname}}</h2>
 
-	<label>Email: </label>
-	<text>{{staff.email}}</text><br>
+<br>
+<label>Position: </label>
+<text>{{staff.position}}</text><br>
+
+<label>Email: </label>
+<text>{{staff.email}}</text><br>
 
 <!-- 	<label>Phone: </label>
-	<text>{{staff.phone}}</text><br> -->
+<text>{{staff.phone}}</text><br> -->
 
 <!-- 	<label>Salary: </label>
-	<text>${{staff.salary}}K</text><br> -->
+<text>${{staff.salary}}K</text><br> -->
 
-	<label>Top BSet: </label>
-	<text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
+<label>Top BSet: </label>
+<text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
 
-	<label>Badge Sets: </label>
-	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
-		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
-	</text><br>
+<label>Badge Sets: </label>
+<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
+	<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
+</text><br>
 
-	<label>Brief: </label>
-	<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
+<label>Brief: </label>
+<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
 
-	<button *ngIf="auth.authenticated()" class="button-edit" (click)="toUserEdit(staff._id)">Edit Profile</button><br>
+<button *ngIf="auth.authenticated()" class="button-edit" (click)="toUserEdit(staff._id)">Edit Profile</button><br>
 
-	<br>
-	<br>
-	<br>
-	<h3>User's Badges:</h3>
-	<table class="table-userbgroups">
-		<tr>
-		  <th class="th-badge">Badge</th>
-		  <th class="th-desc">Description</th>
-		  <th class="th-bs">Badge Set</th>
-		  <th class="th-status">Status</th>
-		</tr>
-		<tr *ngFor="let userbgroup of staff.userbgroups">
-			<td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
-			<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
-			<td class="td-bs">
-			<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
-				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
-			</div>
-      		</td>
-      		<td class="td-status"><i><text class="text-approve" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></td>
-		</tr>
-	</table>
+<br>
+<br>
+<br>
+<text class="text-userb">User's Badges:</text>
 
-	<button class="button-apply" *ngIf!="active" (click)="active=true">+ Apply New</button>
-	<br>
-	<div *ngIf="active">
-		<h3>Apply New Badge</h3><br>
-		<label>Badge: </label>
-		<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+<button *ngIf="!more" class="button-more" (click)="more=true">More</button>
+<button *ngIf="more" class="button-less" (click)="more=false">Less</button>
 
-		<label class="label-level">Level: </label>
-		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getNewLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+<table *ngIf="!more" class="table-userbgroups">
+	<tr>
+	  <th class="th-badge">Badge</th>
+	  <th class="th-desc">Description</th>
+	  <th class="th-bs">Badge Set</th>
+	  <th class="th-status">Status</th>
+	</tr>
+	<tr *ngFor="let userbgroup of staff.userbgroups">
+		<td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
+		<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
+		<td class="td-bs">
+		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+  		</td>
+  		<td class="td-status"><i><text class="text-approve" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></td>
+	</tr>
+</table>
 
-		<label>Description: </label>
-		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+<table *ngIf="more" class="table-userbgroups">
+	<tr>
+	  <th class="th-badge">Badge</th>
+	  <th class="th-desc">Description</th>
+	  <th class="th-bs">Badge Set</th>
+	  <th class="th-status">Status</th>
+	</tr>
+	<tr *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
+		<td (click)="toBadgeDetail(userbgroup.badge)"><text *ngIf="userbgroup.current" class="badge">{{userbgroup.badge}} - {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="badge-more">{{userbgroup.badge}} - {{userbgroup.level}}</text></td>
+		<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
+		<td class="td-bs">
+		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
+			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+		</div>
+  		</td>
+  		<td class="td-status"><i><text class="text-approve" *ngIf="userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text></i></td>
+	</tr>
+</table>
 
-		<button class="button-l-save" (click)="addBadgeGroup();active=false">Apply</button>
-		<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
-	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+<button class="button-apply" *ngIf!="active" (click)="active=true">+ Apply New</button>
+<br>
+<div *ngIf="active">
+	<h3>Apply New Badge</h3><br>
+	<label>Badge: </label>
+	<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+
+	<label class="label-level">Level: </label>
+	<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getNewLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+
+	<label>Description: </label>
+	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+
+	<button class="button-l-save" (click)="addBadgeGroup();active=false">Apply</button>
+	<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
 
 <div *ngIf="!staff">
