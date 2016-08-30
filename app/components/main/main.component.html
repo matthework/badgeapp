@@ -47,7 +47,11 @@
 </table>
 </div>
 
-<button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text *ngIf="!checkProfile()"> Please complete your profile.</text>
+<div *ngIf="!checkProfile()">
+<h3><i>You don't have any badge yet.</i></h3>
+</div>
+
+<button *ngIf="!checkProfile()" class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text *ngIf="!checkProfile()"> Please complete profile and apply your first bagdge.</text>
 <button *ngIf="checkProfile()" class="button-user" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text><br>
 
 <div *ngIf="auth.isAdmin()">
