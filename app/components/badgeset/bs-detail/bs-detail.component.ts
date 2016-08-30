@@ -30,6 +30,7 @@ export class BSDetailComponent implements OnInit {
   gradesOptions =["A", "B", "C", "D", "E", "F"]; 
   sub: any;
   id: string;
+  more = false;
 
   constructor(
     private _bsService: BSService,
@@ -161,6 +162,26 @@ export class BSDetailComponent implements OnInit {
         }
     }
     this._router.navigate(['/badge/detail',bid]);
+  }
+
+  getMoreBadges(bgs:BadgeGroup[]) {
+    var moreBadges = [];
+    if (bgs != null) {
+      for (var i = 0; i < bgs.length; i++) { 
+        for (var j = 0; j < this.badges.length; j++) { 
+          for (var k = 0; k < this.badges[j].badgelevels.length; k++) { 
+            if (bgs[i].badge == this.badges[j].name && bgs[i].level>this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":false});
+            }
+            if (bgs[i].badge == this.badges[j].name && bgs[i].level==this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":true});
+            }
+          }
+        }
+        
+      }
+    }
+    return moreBadges;
   }
 
   goBack() {
