@@ -2,7 +2,7 @@
 <div *ngIf="auth.authenticated()">
 
 <div *ngIf="badgecats">
-	<h1>Badge Category</h1>
+	<h2>Badge Category</h2>
 	<input [(ngModel)]="query" placeholder="Search for">
 	<button class="button-back" (click)="toBadges()">Show Badges</button>
 <!-- 	<button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button> -->
@@ -12,13 +12,13 @@
 </div>
 
 <div *ngIf="!badgecats && auth.isAdmin()" >
-	<h1>Add New Badge Category</h1>
+	<h2>Add New Badge Category</h2>
 	<input [(ngModel)]="query" placeholder="Search for">
 	<button class="button-add2" (click)="addBadgeCat()">+</button><br>
 </div>
 
 <div *ngIf="!badgecats && !auth.isAdmin()" >
-	<h1>There is NO Badge Category!</h1>
+	<h2>There is NO Badge Category!</h2>
 	<br>
 </div>			
 

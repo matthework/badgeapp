@@ -43,7 +43,7 @@ input {
   color: #999;
 }
 button {
-  width: 100px !important;
+  width: 100px;
   margin-top: 20px;
   margin-right: 10px;
   font-size: 1em;
@@ -136,17 +136,19 @@ textarea {
   text-align: center;
 }
 .button-more {
+  width: 115px;
   color: #039be5;
   margin-top: 0px;
   position: relative; 
-  left: 66.5%;
+  left: 65.5%;
   margin-bottom: 5px;
 }
 .button-less {
+  width: 115px;
   color: #039be5;
   margin-top: 0px;
   position: relative; 
-  left: 66.5%;
+  left: 65.5%;
   margin-bottom: 5px;
 }
 .button-edit {

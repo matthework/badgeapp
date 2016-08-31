@@ -32,8 +32,8 @@
 <!-- 	<label>Approved: </label>
 <text>{{badgeset.approved | yes_no}}</text><br> -->
 
-<button *ngIf="!more" class="button-more" (click)="more=true">More</button>
-<button *ngIf="more" class="button-less" (click)="more=false">Less</button>
+<button *ngIf="!more" class="button-more" (click)="more=true">Show More</button>
+<button *ngIf="more" class="button-less" (click)="more=false">Show Less</button>
 
 <table *ngIf="!more" class="table-badgegroups">
 	<tr>
