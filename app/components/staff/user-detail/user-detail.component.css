@@ -140,17 +140,19 @@ textarea {
   width: 130px;
 }
 .button-more {
+  width: 115px;
   color: #039be5;
   margin-top: 0px;
   position: relative; 
-  left: 55.5%;
+  left: 54%;
   margin-bottom: 5px;
 }
 .button-less {
+  width: 115px;
   color: #039be5;
   margin-top: 0px;
   position: relative; 
-  left: 55.5%;
+  left: 54%;
   margin-bottom: 5px;
 }
 .button-edit {
