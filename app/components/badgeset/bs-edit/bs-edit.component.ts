@@ -84,7 +84,8 @@ export class BSEditComponent implements OnInit {
     this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade)
     console.log('you submitted total: ', this.total); 
     this.badgeset.badgegroups.sort(this.toCompare);
-    this.badgeset.corebadges.sort(this.toCompare);
+    this.badgeset.tags = this.badgeset.tags.sort();
+    // this.badgeset.corebadges.sort(this.toCompare);
     let value = JSON.stringify(this.badgeset)
     this._bsService.updateBadgeSet(this.id,value).subscribe();
     console.log('you submitted value: ', value); 
