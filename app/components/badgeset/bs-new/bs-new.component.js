@@ -77,7 +77,8 @@ var BSNewComponent = (function () {
         this.newBS.pay = +this.getPay(this.newBS.tier, this.newBS.grade);
         console.log('you submitted total: ', this.total);
         this.newBS.badgegroups.sort(this.toCompare);
-        this.newBS.corebadges.sort(this.toCompare);
+        this.newBS.tags = this.newBS.tags.sort();
+        // this.newBS.corebadges.sort(this.toCompare);
         var value = JSON.stringify(this.newBS);
         this._bsService.addBadgeSet(value).subscribe();
         console.log('you submitted value: ', value);
