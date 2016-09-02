@@ -39,6 +39,8 @@
 <select class="select-badge" [(ngModel)]="newBS.badgegroups[i].badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 <label class="label-level">Level: </label>
 <select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].badge)" [value]="lo">{{lo}}</option></select><br>
+<label>Focus: </label>
+<input class="input-focus" type="text" [(ngModel)]="newBS.badgegroups[i].focus" placeholder=""><br>
 <label>Description: </label>
 <textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBS.badgegroups[i].badge,newBS.badgegroups[i].level)}}</textarea><br>
 </div>

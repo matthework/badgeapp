@@ -111,10 +111,10 @@ textarea {
   text-overflow: ellipsis;*/
 }
 .th-badge {
-  width: 30%;
+  width: 35%;
 }
 .th-desc {
-  width: 60%;
+  width: 50%;
 }
 .th-core {
   width: 15%;
@@ -171,4 +171,6 @@ textarea {
   background-color: #CFD8DC !important;
   color: white;
 }
-
+.focus {
+  color: #039be5;
+}

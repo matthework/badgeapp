@@ -23,6 +23,7 @@ export class BSEditComponent implements OnInit {
   active = false;
   newBadge = "";
   newLevel = 0;
+  newFocus = "";
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   gradesOptions =["A", "B", "C", "D", "E", "F"]; 
   prerequisite = false;
@@ -112,7 +113,7 @@ export class BSEditComponent implements OnInit {
     //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
     // }
     this.newLevel = +this.newLevel;
-    this.badgeset.badgegroups.push({badge: this.newBadge, level: this.newLevel});
+    this.badgeset.badgegroups.push({badge: this.newBadge, level: this.newLevel, focus: this.newFocus});
     // this.badgeset.badgegroups.sort(this.toCompare);
     // this.badgeset.corebadges.sort(this.toCompare);
     let value = JSON.stringify(this.badgeset)
@@ -284,7 +285,7 @@ export class BSEditComponent implements OnInit {
     console.log('you submitted cb value: ', array); 
     var b = array[0];
     var l = +array[1]; // parse into number
-    this.badgeset.corebadges.push({badge: b, level: l});
+    this.badgeset.corebadges.push({badge: b, level: l, focus:""});
   }
 
   addTag(tag:string) {

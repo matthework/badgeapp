@@ -19,4 +19,5 @@ export class BadgeSet {
 export class BadgeGroup {
 	badge: string;
 	level: number;
+	focus: string;
 }

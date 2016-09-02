@@ -27,6 +27,7 @@ var BSEditComponent = (function () {
         this.active = false;
         this.newBadge = "";
         this.newLevel = 0;
+        this.newFocus = "";
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.gradesOptions = ["A", "B", "C", "D", "E", "F"];
         this.prerequisite = false;
@@ -100,7 +101,7 @@ var BSEditComponent = (function () {
         //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
         // }
         this.newLevel = +this.newLevel;
-        this.badgeset.badgegroups.push({ badge: this.newBadge, level: this.newLevel });
+        this.badgeset.badgegroups.push({ badge: this.newBadge, level: this.newLevel, focus: this.newFocus });
         // this.badgeset.badgegroups.sort(this.toCompare);
         // this.badgeset.corebadges.sort(this.toCompare);
         var value = JSON.stringify(this.badgeset);
@@ -258,7 +259,7 @@ var BSEditComponent = (function () {
         console.log('you submitted cb value: ', array);
         var b = array[0];
         var l = +array[1]; // parse into number
-        this.badgeset.corebadges.push({ badge: b, level: l });
+        this.badgeset.corebadges.push({ badge: b, level: l, focus: "" });
     };
     BSEditComponent.prototype.addTag = function (tag) {
         this.badgeset.tags.push(tag.toUpperCase());

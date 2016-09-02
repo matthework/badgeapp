@@ -26,8 +26,9 @@ var BSDetailComponent = (function () {
         this.badges = [];
         this.tiers = [];
         this.active = false;
-        this.newBadge = "";
-        this.newLevel = 0;
+        // newBadge = "";
+        // newLevel = 0;
+        // newFocus = "";
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.gradesOptions = ["A", "B", "C", "D", "E", "F"];
         this.more = false;
@@ -153,10 +154,10 @@ var BSDetailComponent = (function () {
                 for (var j = 0; j < this.badges.length; j++) {
                     for (var k = 0; k < this.badges[j].badgelevels.length; k++) {
                         if (bgs[i].badge == this.badges[j].name && bgs[i].level > this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": false });
+                            moreBadges.push({ "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current": false });
                         }
                         if (bgs[i].badge == this.badges[j].name && bgs[i].level == this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": true });
+                            moreBadges.push({ "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current": true });
                         }
                     }
                 }
