@@ -24,14 +24,17 @@ export class BSDetailComponent implements OnInit {
   badges: Badge[] = [];
   tiers: Tier[] = [];
   active = false;
-  // newBadge = "";
-  // newLevel = 0;
-  // newFocus = "";
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   gradesOptions =["A", "B", "C", "D", "E", "F"]; 
+  statusOptions = ['Accepted','Draft','NotUsed'];
   sub: any;
   id: string;
+  newTag = "";
   more = false;
+  edit = false;
+  tg = false;
+  tag = false;
+  status =false;
 
   constructor(
     private _bsService: BSService,
@@ -183,6 +186,10 @@ export class BSDetailComponent implements OnInit {
       }
     }
     return moreBadges;
+  }
+
+  addTag(tag:string) {
+    this.badgeset.tags.push(tag.toUpperCase());
   }
 
   goBack() {

@@ -33,7 +33,7 @@ button {
   background-color: #eee;
   border: none;
   padding: 8px 16px;
-  border-radius: 0px !important;
+  border-radius: 0px;
   cursor: pointer;
   cursor: hand;
 }

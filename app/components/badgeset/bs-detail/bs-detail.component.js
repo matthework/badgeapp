@@ -26,12 +26,15 @@ var BSDetailComponent = (function () {
         this.badges = [];
         this.tiers = [];
         this.active = false;
-        // newBadge = "";
-        // newLevel = 0;
-        // newFocus = "";
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.gradesOptions = ["A", "B", "C", "D", "E", "F"];
+        this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
+        this.newTag = "";
         this.more = false;
+        this.edit = false;
+        this.tg = false;
+        this.tag = false;
+        this.status = false;
     }
     BSDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -164,6 +167,9 @@ var BSDetailComponent = (function () {
             }
         }
         return moreBadges;
+    };
+    BSDetailComponent.prototype.addTag = function (tag) {
+        this.badgeset.tags.push(tag.toUpperCase());
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();

@@ -4,8 +4,19 @@
 <div *ngIf="badgeset">
 <h2>Badge Set - {{badgeset.name}}</h2><br>
 
+<div *ngIf="!tg">
 <label>Tier/Grade: </label>
-<text>{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text><br>
+<text  class="click" (click)="tg=true">{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
+</div>
+
+<div *ngIf="tg">
+<label class="text-blue">Tier/Grade: </label>
+<select class="select-tier" [(ngModel)]="badgeset.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
+<select class="select-grade" [(ngModel)]="badgeset.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select>
+<text>( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
+<button class="button-s-y" (click)="tg=false">Y</button>
+<button class="button-s-n" (click)="tg=false">N</button>
+</div>
 
 <!-- 	<label>Grade: </label>
 <text>{{badgeset.grade}}</text><br>
@@ -13,8 +24,18 @@
 <label>Pay: </label>
 <text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br> -->
 
+<div *ngIf="!tag">
 <label>Tags: </label>
-<text>{{badgeset.tags}}</text><br>
+<text class="click" (click)="tag=true">{{badgeset.tags}}</text>
+</div>
+
+<div *ngIf="tag">
+<label class="text-blue">Tags: </label>
+<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder=""><button class="button-t-add" (click)="addTag(newTag)">+</button><text *ngFor="let tag of badgeset.tags">{{tag}} <button class="button-t-delete" (click)="deleteTag(tag)">-</button></text>
+
+<button class="button-s-y" (click)="tag=false">Y</button>
+<button class="button-s-n" (click)="tag=false">N</button>
+</div>
 
 <!-- 	<label>Prerequisite: </label>
 <text>Need at least {{badgeset.numbadges}} out of {{badgeset.badgegroups.length}} Badges to achieve this Badge Set. (Core Badges are required if any.)</text><br>
@@ -26,8 +47,18 @@
 <text>{{badgeset.inused | yes_no}}</text><br>
 -->
 
+<div *ngIf="!status">
 <label>Status: </label>
-<text>{{badgeset.status}}</text><br>
+<text (click)="status=true">{{badgeset.status}}</text><br>
+</div>
+
+<div *ngIf="status">
+<label class="text-blue">Status: </label>
+<select class="select-status" [(ngModel)]="badgeset.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
+
+<button class="button-s-y" (click)="status=false">Y</button>
+<button class="button-s-n" (click)="status=false">N</button>
+</div>
 
 <!-- 	<label>Approved: </label>
 <text>{{badgeset.approved | yes_no}}</text><br> -->
