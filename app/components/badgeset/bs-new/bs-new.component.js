@@ -32,16 +32,16 @@ var BSNewComponent = (function () {
         this.newcbs = [];
         this.total = 0;
         this.newTag = "";
-        this.newBGs = [{ badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 },
-            { badge: "", level: 0 }];
+        this.newBGs = [{ badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" },
+            { badge: "", level: 0, focus: "" }];
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
         this.newBS = { index: 0, name: "", status: "Accepted", badgegroups: this.newBGs, tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: true, inused: true, others: [] };
     }
@@ -190,7 +190,7 @@ var BSNewComponent = (function () {
         console.log('you submitted cb value: ', array);
         var b = array[0];
         var l = +array[1]; // parse into number
-        this.newBS.corebadges.push({ badge: b, level: l });
+        this.newBS.corebadges.push({ badge: b, level: l, focus: "" });
     };
     BSNewComponent.prototype.deleteCoreBadgePop = function (corebadge) {
         var name = this.newBS.name.toUpperCase();

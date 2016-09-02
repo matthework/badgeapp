@@ -42,7 +42,7 @@
 	  <!-- <th class="th-core">Core Badge</th> -->
 	</tr>
 	<tr *ngFor="let badgegroup of badgeset.badgegroups">
-		<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}}</td>
+		<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></td>
 		<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
 		<!-- <td class="td-core">{{checkCore(badgegroup.badge)}}</td> -->
 	</tr>
@@ -54,7 +54,7 @@
 	  <th class="th-desc">Description</th>
 	</tr>
 	<tr *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
-		<td (click)="toBadgeDetail(moreb.badge)"><text *ngIf="moreb.current" class="badge">{{moreb.badge}} - {{moreb.level}}</text><text *ngIf="!moreb.current" class="badge-more">{{moreb.badge}} - {{moreb.level}}</text></td>
+		<td (click)="toBadgeDetail(moreb.badge)"><text *ngIf="moreb.current" class="badge">{{moreb.badge}} - {{moreb.level}} <text *ngIf="moreb.focus" class="focus"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" class="badge-more">{{moreb.badge}} - {{moreb.level}}</text></td>
 		<td class="td-desc">{{getDesc(moreb.badge,moreb.level)}}</td>
 	</tr>
 </table>

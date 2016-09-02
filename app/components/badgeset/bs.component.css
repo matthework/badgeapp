@@ -79,10 +79,10 @@ th , td  {
   line-height: 25px; 
 }
 .th-name {
-  width: 20%;
+  width: 18%;
 }
 .th-bg {
-  width: 26%;
+  width: 30%;
 }
 .th-tier {
   width: 5%;
@@ -363,5 +363,8 @@ li:hover {
 }
 .check-core {
   color: red;
+}
+.focus {
+  color: #039be5;
 }
 

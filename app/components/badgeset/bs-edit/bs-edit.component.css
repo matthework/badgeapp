@@ -170,6 +170,9 @@ textarea {
 .input-level {
   width: 50px;
 }
+.input-focus {
+  width: 300px;
+}
 .ta-desc {
   width: 470px;
   height: 100px;

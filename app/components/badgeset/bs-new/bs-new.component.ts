@@ -30,16 +30,16 @@ export class BSNewComponent{
   total =0;
   newTag = "";
 
-  newBGs = [{badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0},
-            {badge: "", level: 0}];
+  newBGs = [{badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""},
+            {badge: "", level: 0, focus: ""}];
 
   statusOptions = ['Accepted','Draft','NotUsed'];
 
@@ -212,7 +212,7 @@ export class BSNewComponent{
     console.log('you submitted cb value: ', array); 
     var b = array[0];
     var l = +array[1]; // parse into number
-    this.newBS.corebadges.push({badge: b, level: l});
+    this.newBS.corebadges.push({badge: b, level: l, focus: ""});
   }
 
   deleteCoreBadgePop(corebadge:BadgeGroup) {

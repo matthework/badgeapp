@@ -59,6 +59,9 @@
 
 			<label class="label-level">Level: </label>
 			<select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br>
+			
+			<label>Focus: </label>
+			<input class="input-focus" type="text" [(ngModel)]="badgegroup.focus" placeholder=""><br>
 
 			<label>Description: </label>
 			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(badgegroup.badge,badgegroup.level)}}</textarea>
@@ -74,10 +77,13 @@
 		<div *ngIf="active">
 			<h3>Add New Badge</h3><br>
 			<label>Badge: </label>
-			<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getNewBadgesOptions()" [value]="bo">{{bo}}</option></select>
+			<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 
 			<label class="label-level">Level: </label>
 			<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+			
+			<label>Focus: </label>
+			<input class="input-focus" type="text" [(ngModel)]="newFocus" placeholder=""><br>
 
 			<label>Description: </label>
 			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
