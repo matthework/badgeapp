@@ -44,7 +44,7 @@ button {
   background-color: #eee;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 0px !important;
   cursor: pointer; 
   cursor: hand;
 }
@@ -123,7 +123,6 @@ textarea {
   line-height: 1;
   border-radius: 3;
   border: 1px solid #cccccc;
-
   margin-bottom: 20px;
 }
 .input-tags{

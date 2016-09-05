@@ -35,7 +35,7 @@ button {
   background-color: #eee;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 0px !important;
   cursor: pointer;
   cursor: hand;
 }
@@ -72,11 +72,11 @@ th , td  {
   border: 0;
   margin-bottom: 50px;
 }
-.table-badgesets td {
-
-}
 .table-badgesets tr {
   line-height: 25px; 
+}
+.table-badgesets td {
+
 }
 .th-name {
   width: 18%;
@@ -132,6 +132,10 @@ th , td  {
 .td-status {
   text-align: center;
 }
+.td-last{
+  background-color: #ffffff;
+  border: 0 ;
+}
 .button-showCom {
   position: relative; 
   left: 63%;
@@ -180,10 +184,6 @@ th , td  {
   left: 63%;
   color: #039be5;
   width: 130px;
-}
-.td-last{
-  background-color: #ffffff;
-  border: 0 ;
 }
 .button-s-x{
   background-color: pink;
