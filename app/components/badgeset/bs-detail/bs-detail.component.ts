@@ -35,6 +35,11 @@ export class BSDetailComponent implements OnInit {
   tg = false;
   tag = false;
   status =false;
+  bedit =false;
+  addNew = false;
+  newBadge = "";
+  newLevel = 0;
+  newFocus = "";
 
   constructor(
     private _bsService: BSService,
@@ -45,9 +50,7 @@ export class BSDetailComponent implements OnInit {
     private auth: AuthService) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.getParams();
     this.getBadgeSet();
     this.getBadges();
     this.getTiers();
@@ -55,6 +58,12 @@ export class BSDetailComponent implements OnInit {
 
   ngOnDestroy() {
       this.sub.unsubscribe();
+  }
+
+  getParams() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
   }
 
   getBadgeSet() {
@@ -77,6 +86,28 @@ export class BSDetailComponent implements OnInit {
 
   toBSEdit(bsid:string) {
     this._router.navigate(['/bs/edit',bsid]);
+  }
+
+  updateBadgeSet() {
+    for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
+      this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+    }
+    this.badgeset.tier = +this.badgeset.tier;
+    this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade)
+    this.badgeset.badgegroups.sort(this.toCompare);
+    this.badgeset.tags = this.badgeset.tags.sort();
+    let value = JSON.stringify(this.badgeset)
+    this._bsService.updateBadgeSet(this.id,value).subscribe();
+    console.log('you submitted value: ', value); 
+  }
+
+  toCompare(a,b) {
+    if (a.badge < b.badge)
+      return -1;
+    else if (a.badge > b.badge)
+      return 1;
+    else 
+      return 0;
   }
 
   getPay(t:number, g:string) {
@@ -192,6 +223,55 @@ export class BSDetailComponent implements OnInit {
     this.badgeset.tags.push(tag.toUpperCase());
   }
 
+  deleteTag(tag:string) {
+    let index = this.badgeset.tags.indexOf(tag);
+    this.badgeset.tags.splice(index,1);
+  }
+
+  addBadgeGroup() {
+    // pasrse string into number
+    // this.badgeset.tier = +this.badgeset.tier;
+    // for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
+    //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+    // }
+    this.newLevel = +this.newLevel;
+    this.badgeset.badgegroups.push({badge: this.newBadge, level: this.newLevel, focus: this.newFocus});
+    // this.badgeset.badgegroups.sort(this.toCompare);
+    // this.badgeset.corebadges.sort(this.toCompare);
+    let value = JSON.stringify(this.badgeset)
+    // this._bsService.updateBadgeSet(id,value).subscribe();
+    console.log('you submitted value: ', value);
+    this.newBadge = "";
+    this.newLevel = 0;
+  }
+
+  deleteBadgeGroupPop(selectedGroup: BadgeGroup) {
+    var isCore =false;
+    for (var i = 0; i < this.badgeset.corebadges.length; i++) { 
+      if (this.badgeset.corebadges[i].badge == selectedGroup.badge) {
+        isCore = true;
+      }
+    }
+    if (isCore) {
+      var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
+    }else{
+      var name = this.badgeset.name.toUpperCase()
+      var badge = selectedGroup.badge.toUpperCase()
+      var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
+      if (r == true) {
+          this.removeBadgeGroup(selectedGroup);
+      }
+    }
+  }
+
+  removeBadgeGroup(selectedGroup: BadgeGroup) {
+    let index = this.badgeset.badgegroups.indexOf(selectedGroup);
+    this.badgeset.badgegroups.splice(index,1);
+    let value = JSON.stringify(this.badgeset)
+    // this._bsService.updateBadgeSet(id,value).subscribe();
+    console.log('you submitted value: ', value);
+  }
+  
   goBack() {
     window.history.back();
   }

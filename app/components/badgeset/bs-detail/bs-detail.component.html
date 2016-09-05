@@ -13,9 +13,9 @@
 <label class="text-blue">Tier/Grade: </label>
 <select class="select-tier" [(ngModel)]="badgeset.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 <select class="select-grade" [(ngModel)]="badgeset.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select>
-<text>( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
-<button class="button-s-y" (click)="tg=false">Y</button>
-<button class="button-s-n" (click)="tg=false">N</button>
+<text class="right">( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
+<button class="button-s-y" (click)="tg=false;updateBadgeSet();getBadgeSet()">Y</button>
+<button class="button-s-n" (click)="tg=false;getBadgeSet()">N</button>
 </div>
 
 <!-- 	<label>Grade: </label>
@@ -31,10 +31,10 @@
 
 <div *ngIf="tag">
 <label class="text-blue">Tags: </label>
-<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder=""><button class="button-t-add" (click)="addTag(newTag)">+</button><text *ngFor="let tag of badgeset.tags">{{tag}} <button class="button-t-delete" (click)="deleteTag(tag)">-</button></text>
+<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder=""><button class="button-t-add" (click)="addTag(newTag)">+</button><text class="right" *ngFor="let tag of badgeset.tags">{{tag}} <button class="button-t-delete" (click)="deleteTag(tag)">-</button></text>
 
-<button class="button-s-y" (click)="tag=false">Y</button>
-<button class="button-s-n" (click)="tag=false">N</button>
+<button class="button-s-y" (click)="tag=false;updateBadgeSet();getBadgeSet()">Y</button>
+<button class="button-s-n" (click)="tag=false;getBadgeSet()">N</button>
 </div>
 
 <!-- 	<label>Prerequisite: </label>
@@ -56,42 +56,70 @@
 <label class="text-blue">Status: </label>
 <select class="select-status" [(ngModel)]="badgeset.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
 
-<button class="button-s-y" (click)="status=false">Y</button>
-<button class="button-s-n" (click)="status=false">N</button>
+<button class="button-s-y" (click)="status=false;updateBadgeSet();getBadgeSet()">Y</button>
+<button class="button-s-n" (click)="status=false;getBadgeSet()">N</button>
 </div>
 
 <!-- 	<label>Approved: </label>
 <text>{{badgeset.approved | yes_no}}</text><br> -->
 
-<button *ngIf="!more" class="button-more" (click)="more=true">Show More</button>
-<button *ngIf="more" class="button-less" (click)="more=false">Show Less</button>
+<button *ngIf="!more && !bedit" class="button-more" (click)="more=true">Show More</button>
+<button *ngIf="more && !bedit" class="button-less" (click)="more=false">Show Less</button>
 
 <table *ngIf="!more" class="table-badgegroups">
 	<tr>
 	  <th class="th-badge">Badge</th>
 	  <th class="th-desc">Description</th>
+	  <th class="th-last"></th>
 	  <!-- <th class="th-core">Core Badge</th> -->
 	</tr>
 	<tr *ngFor="let badgegroup of badgeset.badgegroups">
-		<td class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></td>
-		<td class="td-desc">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
-		<!-- <td class="td-core">{{checkCore(badgegroup.badge)}}</td> -->
+		<td *ngIf="!bedit" (click)="bedit=true"><text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></text></td>
+		<td *ngIf="!bedit" class="td-desc" (click)="bedit=true">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
+		<td *ngIf="bedit"><select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select><select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br><input class="input-focus" type="text" [(ngModel)]="badgegroup.focus" placeholder="Focus"></td>
+		<td *ngIf="bedit" class="td-desc">{{getDesc(badgegroup.badge, badgegroup.level)}}</td>
+		<td class="td-last"><button *ngIf="bedit && auth.isAdmin()" class="button-s-delete" (click)="deleteBadgeGroupPop(badgegroup)">X</button></td>
 	</tr>
 </table>
 
-<table *ngIf="more" class="table-badgegroups">
+<div *ngIf="addNew">
+	<br>
+	<h3>Add New Badge</h3><br>
+	<label>Badge: </label>
+	<select class="select-badge-new" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+
+	<label class="label-level">Level: </label>
+	<select class="select-level-new" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+	
+	<label>Focus: </label>
+	<input class="input-focus-new" type="text" [(ngModel)]="newFocus" placeholder=""><br>
+
+	<label>Description: </label>
+	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+
+	<button class="button-l-save" (click)="addBadgeGroup();addNew=false">Save</button>
+	<button class="button-l-cancel" (click)="addNew=false">Cancel</button><br>
+</div>
+
+<table *ngIf="more" class="table-badgegroups-more">
 	<tr>
 	  <th class="th-badge">Badge</th>
 	  <th class="th-desc">Description</th>
 	</tr>
 	<tr *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
-		<td (click)="toBadgeDetail(moreb.badge)"><text *ngIf="moreb.current" class="badge">{{moreb.badge}} - {{moreb.level}} <text *ngIf="moreb.focus" class="focus"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" class="badge-more">{{moreb.badge}} - {{moreb.level}}</text></td>
-		<td class="td-desc">{{getDesc(moreb.badge,moreb.level)}}</td>
+		<td (click)="bedit=true;more=false"><text *ngIf="moreb.current" class="badge" (click)="toBadgeDetail(moreb.badge)">{{moreb.badge}} - {{moreb.level}} <text *ngIf="moreb.focus" class="focus"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" class="badge-more" (click)="toBadgeDetail(moreb.badge)">{{moreb.badge}} - {{moreb.level}}</text></td>
+		<td class="td-desc" (click)="bedit=true;more=false">{{getDesc(moreb.badge,moreb.level)}}</td>
 	</tr>
 </table>
 
-<button (click)="goBack()">Back</button>
-<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button>
+<button *ngIf="!bedit" (click)="goBack()">Back</button>
+
+<button *ngIf="auth.isAdmin() && bedit && !addNew"  class="button-add" (click)="addNew=true">New Badge</button>
+
+<button *ngIf="auth.isAdmin() && bedit && !addNew" class="button-bl-y" (click)="bedit=false;updateBadgeSet()">Save</button><button *ngIf="auth.isAdmin() && bedit && !addNew" class="button-bl-n" (click)="bedit=false;getBadgeSet()">Cancel</button>
+
+<!-- <button (click)="goBack()">Back</button> -->
+<!-- <button *ngIf="auth.isAdmin()" class="button-edit" (click)="toBSEdit(badgeset._id)">Edit</button> -->
 <br>
 <br>
 <br>

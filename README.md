@@ -8,6 +8,29 @@ improve warning dialog for delete
 badge category  
 
 
+******************* deploy on heroku *******************  
+
+// install godep  
+$ go get github.com/tools/godep  
+
+// go to project root folder  
+$GOPATH/src/github.com/propellerheadnz/badge/  
+
+// create Godeps.json for Dependencies (or godep save for current folder only)  
+$ godep save  
+$ godep save ./...  
+
+// create Procfile of commands to run on Heroku  
+$ echo 'web: badge' > Procfile  
+
+// heroku login  
+$ heroku login  
+
+// run locally  
+$ heroku local  
+$ heroku local web  
+
+
 ******************* run locally *******************  
 // project root folder  
 cd $GOPATH/src/github.com/propellerheadnz/badge  
@@ -38,28 +61,6 @@ go run *.go
 
 // export local mongodb into json file  
 mongoexport --db badgeDB --collection badge --out badge.json  
-
-******************* deploy on heroku *******************  
-
-// install godep  
-$ go get github.com/tools/godep  
-
-// go to project root folder  
-$GOPATH/src/github.com/propellerheadnz/badge/  
-
-// create Godeps.json for Dependencies (or godep save for current folder only)  
-$ godep save  
-$ godep save ./...  
-
-// create Procfile of commands to run on Heroku  
-$ echo 'web: badge' > Procfile  
-
-// heroku login  
-$ heroku login  
-
-// run locally  
-$ heroku local  
-$ heroku local web  
 
 
 ******************* mongodb commands *******************  
