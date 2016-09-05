@@ -1,7 +1,7 @@
 
 <div *ngIf="auth.isAdmin()">
 
-<h2>Add New Badge</h2><br>
+<h2 class="text-blue">Add New Badge</h2><br>
 
 <!-- <label>Index: </label>
 <input class="input-index" type="number" [(ngModel)]="newBadge.index" placeholder="Index" /><br> -->
@@ -52,7 +52,7 @@
 <label>Level 9:</label>
 <textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder="Description"></textarea><br>
 
-<button class="button-add" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
+<button class="button-save" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
 <button class="button-cancel" (click)="goBack()">Cancel</button>
 <br>
 <br>

@@ -43,8 +43,8 @@ input {
   color: #999;
 }
 button {
-  width: 100px !important;
-  margin-top: 20px;
+  width: 100px;
+  margin-top: 0px;
   margin-right: 10px;
   font-size: 1em;
   font-family: Arial;
@@ -93,7 +93,7 @@ textarea {
   height: 200px;
   padding-left: .4em;
   padding-top: .4em;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 .ta-overview {
   width: 500px;
@@ -110,9 +110,7 @@ textarea {
   word-wrap: break-word;
 }
 .table-badgelevels td {
-/*  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;*/
+
 }
 .th-level {
   width: 10%;
@@ -140,6 +138,34 @@ textarea {
 .uli-bset:visited{
   color: #607D8B;
 }
+.table-badgelevels-edit {
+  margin-top: 10px;
+  table-layout: fixed;
+  width: 93%;
+  word-wrap: break-word;
+  border: 0;
+}
+.th-level-edit {
+  width: 10%;
+}
+.th-desc-edit {
+  width: 80%;
+}
+.th-last-edit {
+  background-color: #ffffff;
+  width: 15%;
+  border: 0;
+}
+.td-level-edit {
+  text-align: center;
+}
+.td-desc-edit {
+  font-style: italic;
+}
+.td-last-edit {
+  background-color: #ffffff;
+  border: 0 ;
+}
 .button-edit {
   position: relative; 
   left: 62%;
@@ -157,24 +183,44 @@ textarea {
 }
 .label-bName {
   color: #039be5;
-  font-size: 1.2em;
-  width: 6.6em 
+  font-size: 1.5em;
+  width: 5.3em 
 }
-.button-add {
+.button-newBL {
+  position: relative; 
+  left: 70%;
+  width: 120px;
+  color: white;
+  background-color: #039be5;
+  margin-bottom: 5px;
+}
+.button-newBL:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-newB {
   width: 120px;
   color: white;
   background-color: #039be5;
 }
-.button-add:hover {
+.button-newB:hover {
   color: white;
   background-color: limegreen;
+}
+.button-delete {
+  background-color: pink;
+  color: white;
+  vertical-align: bottom;
+  margin-left: 10px;
+}
+.button-delete:hover {
+  background-color: red;
+  color: white;
 }
 .button-s-y {
   width: 40px;
   color: white;
   background-color: #039be5;
-  border-radius: 4px;
-  /*border: 1px solid #cccccc;*/
   margin-left: 10px;
 }
 .button-s-y:hover{
@@ -185,16 +231,37 @@ textarea {
   width: 40px;
   color: white;
   background-color: hotpink;
-  border-radius: 4px;
-  margin-left: 10px;
 }
 .button-s-n:hover{
   color: white;
   background-color: red;
 }
+.button-ov-y {
+  width: 40px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+  vertical-align: bottom;
+  margin-bottom: 20px;
+}
+.button-ov-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-ov-n {
+  width: 40px;
+  color: white;
+  background-color: hotpink;
+  vertical-align: bottom;
+  margin-bottom: 20px;
+}
+.button-ov-n:hover{
+  color: white;
+  background-color: red;
+}
 .button-bl-y {
   position: relative; 
-  left: 50.5%;
+  left: 39%;
   width: 100px;
   color: white;
   background-color: #039be5;
@@ -208,7 +275,7 @@ textarea {
 }
 .button-bl-n {
   position: relative; 
-  left: 50.5%;
+  left: 39%;
   width: 100px;
   color: white;
   background-color: hotpink;
@@ -219,5 +286,79 @@ textarea {
   color: white;
   background-color: red;
 }
-
-
+.button-s-delete {
+  width: 40px;
+  background-color: pink;
+  color: white;
+  vertical-align: bottom;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+.button-s-delete:hover {
+  background-color: red;
+  color: white;
+}
+.button-l-save {
+  position: relative; 
+  left: 35%;
+  color: white;
+  background-color: #039be5;
+  margin-right: 5px;
+}
+.button-l-save:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-l-cancel {
+  position: relative; 
+  left: 35%;
+  color: white;
+  background-color: hotpink;
+}
+.button-l-cancel:hover{
+  color: white;
+  background-color: red;
+}
+.click{
+  cursor: pointer;
+  cursor: hand;
+}
+.click:hover{
+  color: #039be5;
+}
+.click:visited{
+  color: #607D8B;
+}
+.select-status {
+  background: transparent;
+  width: 150px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 0;
+  border: 1px solid #cccccc;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.input-level-edit{
+  width: 50px;
+  border: 1px solid #cccccc;
+}
+.ta-edit {
+  width: 830px;
+  height: 80px;
+  border: 1px solid #cccccc;
+}
+.input-level-new{
+  width: 150px;
+}
+.ta-small {
+  width: 500px;
+  height: 100px;
+  border: 1px solid #cccccc;
+}
+.text-blue {
+  color: #039be5;
+}

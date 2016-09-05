@@ -133,14 +133,28 @@ textarea {
   background-color: red;
   color: white;
 }
-.button-add {
+.button-save {
   position: relative; 
-  left: 40%;
+  left: 30%;
   width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-save:hover{
+  color: white;
+  background-color: limegreen;
 }
 .button-cancel {
   position: relative; 
-  left: 40%;
+  left: 30%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+}
+.button-cancel:hover{
+  color: white;
+  background-color: red;
 }
 .badge-error {
   border-bottom-color: #E22323;
@@ -165,4 +179,7 @@ textarea {
   border: 1px solid #cccccc;
   margin-right: 30px;
   margin-bottom: 30px;
+}
+.text-blue {
+  color: #039be5;
 }

@@ -84,9 +84,9 @@ func updateBadgeByID(id string, newBadge Badge) (err error) {
 	fQuery := bson.M{"_id": idoi}
 	result := Badge{}
     err = collection.Find(fQuery).One(&result)
-    if len(newBadge.BadgeLevels) == 0 {
-    	newBadge.BadgeLevels = result.BadgeLevels
-    }
+    // if len(newBadge.BadgeLevels) == 0 {
+    // 	newBadge.BadgeLevels = result.BadgeLevels
+    // }
 	if err == nil {
 		// change := bson.M{"$set": bson.M{"name": newBadge.Name, "desc": newBadge.Desc, "approved": newBadge.Approved, "inused": newBadge.InUsed, "timestamp": time.Now()}}
 		//change := bson.M{"$set": bson.M{"name": newBadge.Name, "overview": newBadge.Overview, "approved": newBadge.Approved, "inused": newBadge.InUsed}}
