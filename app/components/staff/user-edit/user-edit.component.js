@@ -22,7 +22,7 @@ var UserEditComponent = (function () {
         this.auth = auth;
         this.badges = [];
         this.active = false;
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
         this.brief = 0;
@@ -70,19 +70,19 @@ var UserEditComponent = (function () {
     };
     UserEditComponent.prototype.addBadgeGroup = function () {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({ badge: this.newBadge, level: this.newLevel, status: this.newStatus });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
     };
-    UserEditComponent.prototype.getDesc = function (b, l) {
+    UserEditComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -93,30 +93,30 @@ var UserEditComponent = (function () {
         }
         return desc;
     };
-    UserEditComponent.prototype.getBadgesOptions = function () {
-        var badgesOptions = [];
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].status == 'Accepted') {
-                    badgesOptions.push(this.badges[i].name);
-                }
-            }
-            // console.log('getBadgesOptions: ', badgesOptions);
-            return badgesOptions.sort();
-        }
-    };
-    UserEditComponent.prototype.getLevelsOptions = function (bname) {
-        var levelsOptions = [];
-        for (var i = 0; i < this.badges.length; i++) {
-            if (this.badges[i].name == bname) {
-                for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
-                    levelsOptions.push(this.badges[i].badgelevels[j].level);
-                }
-            }
-        }
-        // console.log('getBadgesOptions: ', badgesOptions);
-        return levelsOptions.sort();
-    };
+    // getBadgesOptions() {
+    //     var badgesOptions = [];
+    //     if (this.badges != null) {
+    //         for (var i = 0; i < this.badges.length; i++) { 
+    //             if (this.badges[i].status=='Accepted') {
+    //                 badgesOptions.push([this.badges[i]._id,this.badges[i].name]);
+    //             }
+    //         }
+    //         // console.log('getBadgesOptions: ', badgesOptions);
+    //         return badgesOptions.sort();
+    //     }
+    // }
+    // getLevelsOptions(bname: string) {
+    //     var levelsOptions = [];
+    //     for (var i = 0; i < this.badges.length; i++) { 
+    //         if (this.badges[i].name == bname) {
+    //             for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+    //                 levelsOptions.push(this.badges[i].badgelevels[j].level);
+    //             }
+    //         }
+    //     }
+    //     // console.log('getBadgesOptions: ', badgesOptions);
+    //     return levelsOptions.sort();
+    // }
     UserEditComponent.prototype.goBack = function () {
         window.history.back();
     };

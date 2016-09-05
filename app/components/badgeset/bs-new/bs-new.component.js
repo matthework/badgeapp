@@ -32,16 +32,16 @@ var BSNewComponent = (function () {
         this.newcbs = [];
         this.total = 0;
         this.newTag = "";
-        this.newBGs = [{ badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" },
-            { badge: "", level: 0, focus: "" }];
+        this.newBGs = [{ bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" },
+            { bid: "", badge: "", level: 0, focus: "" }];
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
         this.newBS = { index: 0, name: "", status: "Accepted", badgegroups: this.newBGs, tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: true, inused: true, others: [] };
     }
@@ -65,20 +65,17 @@ var BSNewComponent = (function () {
     BSNewComponent.prototype.addBadgeSet = function () {
         // var arr = this.newBS.badgegroups.filter(this.checkEmpty);
         // this.newBS.badgegroups = arr; //this.newBS.badgegroups.filter(this.checkEmpty);
-        this.total = 0;
+        // this.total = 0;
         this.newBS.tier = +this.newBS.tier;
         for (var i = 0; i < this.newBS.badgegroups.length; i++) {
             if (this.newBS.badgegroups[i].level != 0) {
                 this.newBS.badgegroups[i].level = +this.newBS.badgegroups[i].level;
             }
-            if (this.newBS.badgegroups[i].badge != "" && this.newBS.badgegroups[i].level != 0) {
-                this.total += 1;
-            }
         }
-        if (this.numBadges == -1) {
-            this.numBadges = Math.round(this.total / 2);
-        }
-        this.newBS.numbadges = this.numBadges;
+        // if (this.numBadges==-1) {
+        //   this.numBadges = Math.round(this.total/2);
+        // }
+        // this.newBS.numbadges = this.numBadges;
         this.newBS.pay = +this.getPay(this.newBS.tier, this.newBS.grade);
         console.log('you submitted total: ', this.total);
         this.newBS.badgegroups.sort(this.toCompare);
@@ -116,11 +113,11 @@ var BSNewComponent = (function () {
         }
         return pay;
     };
-    BSNewComponent.prototype.getDesc = function (b, l) {
+    BSNewComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -136,23 +133,24 @@ var BSNewComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 if (this.badges[i].status == 'Accepted') {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }
         }
         return badgesOptions.sort();
     };
-    BSNewComponent.prototype.getLevelsOptions = function (bname) {
+    BSNewComponent.prototype.getLevelsOptions = function (bid) {
         var levelsOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         levelsOptions.push(this.badges[i].badgelevels[j].level);
                     }
                 }
             }
         }
+        // console.log('getBadgesOptions: ', badgesOptions);
         return levelsOptions.sort();
     };
     BSNewComponent.prototype.getTiersOptions = function () {
@@ -196,7 +194,7 @@ var BSNewComponent = (function () {
         console.log('you submitted cb value: ', array);
         var b = array[0];
         var l = +array[1]; // parse into number
-        this.newBS.corebadges.push({ badge: b, level: l, focus: "" });
+        this.newBS.corebadges.push({ bid: "", badge: b, level: l, focus: "" });
     };
     BSNewComponent.prototype.deleteCoreBadgePop = function (corebadge) {
         var name = this.newBS.name.toUpperCase();

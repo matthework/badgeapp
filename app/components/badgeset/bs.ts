@@ -17,6 +17,7 @@ export class BadgeSet {
 }
 
 export class BadgeGroup {
+	bid: string;
 	badge: string;
 	level: number;
 	focus: string;

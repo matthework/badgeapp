@@ -33,7 +33,7 @@ export class UserDetailComponent implements OnInit {
   // sub: any;
   email: string;
   active = false;
-  newBadge = "";
+  newBID = "";
   newLevel = 0;
   newStatus = false;
   more = false;
@@ -90,11 +90,11 @@ export class UserDetailComponent implements OnInit {
     this._router.navigate(['/user/edit',sid]);
   }
 
-  getDesc(b:string, l:number) {
+  getDesc(bid:string, l:number) {
     var desc = "";
-    if (this.badges != null && l > 0 && b != "") {
+    if (this.badges != null && l > 0 && bid != "") {
       for (var i = 0; i < this.badges.length; i++) { 
-          if (this.badges[i].name == b) {
+          if (this.badges[i]._id == bid) {
               for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
                   if (this.badges[i].badgelevels[j].level == l) {
                     desc = this.badges[i].badgelevels[j].desc;
@@ -106,15 +106,15 @@ export class UserDetailComponent implements OnInit {
     return desc;
   }
 
-  toBadgeDetail(bname:string) {
-    var bid = "";
-    if (this.badges != null) {
-      for (var i = 0; i < this.badges.length; i++) {   
-        if (this.badges[i].name == bname) {
-          bid = this.badges[i]._id;
-        }
-      }
-    }
+  toBadgeDetail(bid:string) {
+    // var bid = "";
+    // if (this.badges != null) {
+    //   for (var i = 0; i < this.badges.length; i++) {   
+    //     if (this.badges[i].name == bname) {
+    //       bid = this.badges[i]._id;
+    //     }
+    //   }
+    // }
     this._router.navigate(['/badge/detail',bid]);
   }
 
@@ -125,7 +125,7 @@ export class UserDetailComponent implements OnInit {
       for (var i = 0; i < this.badgesets.length; i++) { 
         for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
           for (var k = 0; k < sbgs.length; k++) {      
-            if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+            if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
               count += 1;
             }
           }
@@ -184,13 +184,13 @@ export class UserDetailComponent implements OnInit {
     return pay;
   }
 
-  findBadgeSet(sbgs:UserBGroup[], bname:string, l:number) {
+  findBadgeSet(sbgs:UserBGroup[], bid:string, l:number) {
     var bset = [];
     var sortStaffBS = this.getSortStaffBS(sbgs);
     if (sortStaffBS != null && sortStaffBS.length > 0) {
       for (var i = 0; i < sortStaffBS.length; i++) { 
         for (var j = 0; j < sortStaffBS[i].badgegroups.length; j++) {   
-          if (sortStaffBS[i].badgegroups[j].badge == bname && sortStaffBS[i].badgegroups[j].level <= l) {
+          if (sortStaffBS[i].badgegroups[j].bid == bid && sortStaffBS[i].badgegroups[j].level <= l) {
             bset.push(sortStaffBS[i]);
           }
         }
@@ -208,28 +208,28 @@ export class UserDetailComponent implements OnInit {
     if (this.badges != null) {
         for (var i = 0; i < this.badges.length; i++) { 
             if (this.badges[i].status=='Accepted') {
-                badgesOptions.push(this.badges[i].name);
+                badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
             }
         }
     }
     return badgesOptions.sort();
   }
 
-  getNewLevelsOptions(bname: string) {
+  getNewLevelsOptions(bid: string) {
     var levelsOptions = [];
     var userbgs = [];
     if (this.staff.userbgroups.length != 0) {
         for (var j = 0; j < this.staff.userbgroups.length; j++) { 
-            userbgs.push(this.staff.userbgroups[j].badge);
+            userbgs.push(this.staff.userbgroups[j].bid);
         }
     }
     for (var i = 0; i < this.badges.length; i++) { 
-      if (this.badges[i].name == bname) {
+      if (this.badges[i]._id == bid) {
         for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-          let index = userbgs.indexOf(this.badges[i].name);
+          let index = userbgs.indexOf(this.badges[i]._id);
           if (this.staff.userbgroups.length != 0 && index != -1) {
             for (var k = 0; k < this.staff.userbgroups.length; k++) {
-              if (this.staff.userbgroups[k].badge == bname && this.staff.userbgroups[k].level<this.badges[i].badgelevels[j].level) {
+              if (this.staff.userbgroups[k].bid == bid && this.staff.userbgroups[k].level<this.badges[i].badgelevels[j].level) {
                 levelsOptions.push(this.badges[i].badgelevels[j].level);
               }
             }
@@ -244,12 +244,12 @@ export class UserDetailComponent implements OnInit {
 
   addBadgeGroup() {
       this.newLevel = +this.newLevel;
-      this.staff.userbgroups.push({badge: this.newBadge, level: this.newLevel, status: this.newStatus});
+      this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus});
       this.staff.userbgroups.sort(this.toCompare);
       let value = JSON.stringify(this.staff)
       this._staffService.updateStaff(this.staff._id,value).subscribe();
       console.log('you submitted value: ', value);
-      this.newBadge = "";
+      this.newBID = "";
       this.newLevel = 0;
       this.newStatus = false;
   }
@@ -273,11 +273,11 @@ export class UserDetailComponent implements OnInit {
       for (var i = 0; i < bgs.length; i++) { 
         for (var j = 0; j < this.badges.length; j++) { 
           for (var k = 0; k < this.badges[j].badgelevels.length; k++) { 
-            if (bgs[i].badge == this.badges[j].name && bgs[i].level>this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"status":bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":false});
+            if (bgs[i].bid == this.badges[j]._id && bgs[i].level>this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current":false});
             }
-            if (bgs[i].badge == this.badges[j].name && bgs[i].level==this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"status":bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current":true});
+            if (bgs[i].bid == this.badges[j]._id && bgs[i].level==this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current":true});
             }
           }
         }
@@ -285,6 +285,16 @@ export class UserDetailComponent implements OnInit {
       }
     }
     return moreBadges;
+  }
+
+  getBadgeName(bid:string) {
+    var bname = "";
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bname = this.badges[i].name;
+      }
+    }
+    return bname;
   }
 
   goBack() {

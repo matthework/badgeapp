@@ -34,6 +34,5 @@ export class BadgeService {
 		return this._http.post('/api/badge/remove/'+id, "");
 	}
 
-
 }
 

@@ -99,11 +99,11 @@ var BSComponent = (function () {
         }
         return pay;
     };
-    BSComponent.prototype.getDesc = function (b, l) {
+    BSComponent.prototype.getDesc = function (bid, l) {
         this.desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             this.desc = this.badges[i].badgelevels[j].desc;
@@ -131,15 +131,7 @@ var BSComponent = (function () {
         this._router.navigate(['/badgeset']);
         location.reload();
     };
-    BSComponent.prototype.toBadgeDetail = function (bname) {
-        var bid = "";
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
-                    bid = this.badges[i]._id;
-                }
-            }
-        }
+    BSComponent.prototype.toBadgeDetail = function (bid) {
         this._router.navigate(['/badge/detail', bid]);
     };
     BSComponent.prototype.getComBS = function () {
@@ -184,6 +176,15 @@ var BSComponent = (function () {
         }
         result = Math.round(m * 1000 * 0.9 / totalLevels * l);
         return result;
+    };
+    BSComponent.prototype.getBadgeName = function (bid) {
+        var bname = "";
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bname = this.badges[i].name;
+            }
+        }
+        return bname;
     };
     BSComponent = __decorate([
         core_1.Component({

@@ -18,7 +18,7 @@ export class StaffEditComponent implements OnInit {
     staff: Staff;
     badges: Badge[] = [];
     active = false;
-    newBadge = "";
+    newBID = "";
     newLevel = 0;
     newStatus = false;
     sub: any;
@@ -85,11 +85,11 @@ export class StaffEditComponent implements OnInit {
 
     addBadgeGroup() {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({badge: this.newBadge, level: this.newLevel, status: this.newStatus});
+        this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus});
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
     }
@@ -127,11 +127,11 @@ export class StaffEditComponent implements OnInit {
         console.log('you submitted value: ', value);
     }
 
-    getDesc(b:string, l:number) {
+    getDesc(bid:string, l:number) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) { 
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -148,7 +148,7 @@ export class StaffEditComponent implements OnInit {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) { 
                 if (this.badges[i].status=='Accepted') {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
                 }
             }
             // console.log('getBadgesOptions: ', badgesOptions);
@@ -161,24 +161,24 @@ export class StaffEditComponent implements OnInit {
         var userbgs = [];
         if (this.staff.userbgroups != null) {
             for (var j = 0; j < this.staff.userbgroups.length; j++) { 
-                userbgs.push(this.staff.userbgroups[j].badge);
+                userbgs.push(this.staff.userbgroups[j].bid);
             }
         }
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) { 
-                let index = userbgs.indexOf(this.badges[i].name);
+                let index = userbgs.indexOf(this.badges[i]._id);
                 if (this.badges[i].status=='Accepted' && index == -1) {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
                 }
             }
         }
         return badgesOptions.sort();
     }
 
-    getLevelsOptions(bname: string) {
+    getLevelsOptions(bid: string) {
         var levelsOptions = [];
         for (var i = 0; i < this.badges.length; i++) { 
-            if (this.badges[i].name == bname) {
+            if (this.badges[i]._id == bid) {
                 for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
                     levelsOptions.push(this.badges[i].badgelevels[j].level);
                 }

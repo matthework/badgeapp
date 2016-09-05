@@ -22,7 +22,7 @@ var StaffEditComponent = (function () {
         this.auth = auth;
         this.badges = [];
         this.active = false;
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
         this.statusOptions = ['Active', 'Inactive'];
@@ -75,11 +75,11 @@ var StaffEditComponent = (function () {
     };
     StaffEditComponent.prototype.addBadgeGroup = function () {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({ badge: this.newBadge, level: this.newLevel, status: this.newStatus });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
     };
@@ -112,11 +112,11 @@ var StaffEditComponent = (function () {
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
     };
-    StaffEditComponent.prototype.getDesc = function (b, l) {
+    StaffEditComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -132,7 +132,7 @@ var StaffEditComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 if (this.badges[i].status == 'Accepted') {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }
             // console.log('getBadgesOptions: ', badgesOptions);
@@ -144,23 +144,23 @@ var StaffEditComponent = (function () {
         var userbgs = [];
         if (this.staff.userbgroups != null) {
             for (var j = 0; j < this.staff.userbgroups.length; j++) {
-                userbgs.push(this.staff.userbgroups[j].badge);
+                userbgs.push(this.staff.userbgroups[j].bid);
             }
         }
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                var index = userbgs.indexOf(this.badges[i].name);
+                var index = userbgs.indexOf(this.badges[i]._id);
                 if (this.badges[i].status == 'Accepted' && index == -1) {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }
         }
         return badgesOptions.sort();
     };
-    StaffEditComponent.prototype.getLevelsOptions = function (bname) {
+    StaffEditComponent.prototype.getLevelsOptions = function (bid) {
         var levelsOptions = [];
         for (var i = 0; i < this.badges.length; i++) {
-            if (this.badges[i].name == bname) {
+            if (this.badges[i]._id == bid) {
                 for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                     levelsOptions.push(this.badges[i].badgelevels[j].level);
                 }

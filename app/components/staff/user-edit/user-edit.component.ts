@@ -18,7 +18,7 @@ export class UserEditComponent implements OnInit {
     staff: Staff;
     badges: Badge[] = [];
     active = false;
-    newBadge = "";
+    newBID = "";
     newLevel = 0;
     newStatus = false;
     brief = 0;
@@ -80,20 +80,20 @@ export class UserEditComponent implements OnInit {
 
     addBadgeGroup() {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({badge: this.newBadge, level: this.newLevel, status: this.newStatus});
+        this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus});
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
     }
 
-    getDesc(b:string, l:number) {
+    getDesc(bid:string, l:number) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) { 
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -105,31 +105,31 @@ export class UserEditComponent implements OnInit {
         return desc;
     }
 
-    getBadgesOptions() {
-        var badgesOptions = [];
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) { 
-                if (this.badges[i].status=='Accepted') {
-                    badgesOptions.push(this.badges[i].name);
-                }
-            }
-            // console.log('getBadgesOptions: ', badgesOptions);
-            return badgesOptions.sort();
-        }
-    }
+    // getBadgesOptions() {
+    //     var badgesOptions = [];
+    //     if (this.badges != null) {
+    //         for (var i = 0; i < this.badges.length; i++) { 
+    //             if (this.badges[i].status=='Accepted') {
+    //                 badgesOptions.push([this.badges[i]._id,this.badges[i].name]);
+    //             }
+    //         }
+    //         // console.log('getBadgesOptions: ', badgesOptions);
+    //         return badgesOptions.sort();
+    //     }
+    // }
 
-    getLevelsOptions(bname: string) {
-        var levelsOptions = [];
-        for (var i = 0; i < this.badges.length; i++) { 
-            if (this.badges[i].name == bname) {
-                for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-                    levelsOptions.push(this.badges[i].badgelevels[j].level);
-                }
-            }
-        }
-        // console.log('getBadgesOptions: ', badgesOptions);
-        return levelsOptions.sort();
-    }
+    // getLevelsOptions(bname: string) {
+    //     var levelsOptions = [];
+    //     for (var i = 0; i < this.badges.length; i++) { 
+    //         if (this.badges[i].name == bname) {
+    //             for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+    //                 levelsOptions.push(this.badges[i].badgelevels[j].level);
+    //             }
+    //         }
+    //     }
+    //     // console.log('getBadgesOptions: ', badgesOptions);
+    //     return levelsOptions.sort();
+    // }
 
     goBack() {
         window.history.back();

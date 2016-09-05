@@ -55,16 +55,16 @@
 	<div *ngIf!="prerequisite">
 		<div class="badgegroup-block" *ngFor="let badgegroup of badgeset.badgegroups">
 			<label>Badge: </label>
-			<select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+			<select class="select-badge" [(ngModel)]="badgegroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 			<label class="label-level">Level: </label>
-			<select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br>
+			<select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.bid)" [value]="lo">{{lo}}</option></select><br>
 			
 			<label>Focus: </label>
 			<input class="input-focus" type="text" [(ngModel)]="badgegroup.focus" placeholder=""><br>
 
 			<label>Description: </label>
-			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(badgegroup.badge,badgegroup.level)}}</textarea>
+			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(badgegroup.bid,badgegroup.level)}}</textarea>
 
 			<button class="button-s-delete" (click)="deleteBadgeGroupPop(badgegroup)">-</button>
 			
@@ -77,16 +77,16 @@
 		<div *ngIf="active">
 			<h3>Add New Badge</h3><br>
 			<label>Badge: </label>
-			<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+			<select class="select-badge" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 			<label class="label-level">Level: </label>
-			<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+			<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 			
 			<label>Focus: </label>
 			<input class="input-focus" type="text" [(ngModel)]="newFocus" placeholder=""><br>
 
 			<label>Description: </label>
-			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+			<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBID,newLevel)}}</textarea><br>
 
 			<button class="button-l-save" (click)="addBadgeGroup();active=false">Save</button>
 			<button class="button-l-cancel" (click)="active=false">Cancel</button><br>

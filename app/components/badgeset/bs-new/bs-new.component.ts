@@ -31,16 +31,16 @@ export class BSNewComponent{
   total =0;
   newTag = "";
 
-  newBGs = [{badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""},
-            {badge: "", level: 0, focus: ""}];
+  newBGs = [{bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""},
+            {bid: "", badge: "", level: 0, focus: ""}];
 
   statusOptions = ['Accepted','Draft','NotUsed'];
 
@@ -74,20 +74,20 @@ export class BSNewComponent{
   addBadgeSet() {
     // var arr = this.newBS.badgegroups.filter(this.checkEmpty);
     // this.newBS.badgegroups = arr; //this.newBS.badgegroups.filter(this.checkEmpty);
-    this.total = 0;
+    // this.total = 0;
     this.newBS.tier = +this.newBS.tier;
     for (var i = 0; i < this.newBS.badgegroups.length; i++) { 
       if (this.newBS.badgegroups[i].level != 0) {
         this.newBS.badgegroups[i].level = +this.newBS.badgegroups[i].level;
       }
-      if (this.newBS.badgegroups[i].badge != "" && this.newBS.badgegroups[i].level != 0){
-        this.total += 1;
-      }
+      // if (this.newBS.badgegroups[i].badge != "" && this.newBS.badgegroups[i].level != 0){
+      //   this.total += 1;
+      // }
     }
-    if (this.numBadges==-1) {
-      this.numBadges = Math.round(this.total/2);
-    }
-    this.newBS.numbadges = this.numBadges;
+    // if (this.numBadges==-1) {
+    //   this.numBadges = Math.round(this.total/2);
+    // }
+    // this.newBS.numbadges = this.numBadges;
     this.newBS.pay = +this.getPay(this.newBS.tier, this.newBS.grade)
     console.log('you submitted total: ', this.total); 
 
@@ -131,11 +131,11 @@ export class BSNewComponent{
     return pay;
   }
 
-  getDesc(b:string, l:number) {
+  getDesc(bid:string, l:number) {
     var desc = "";
-    if (this.badges != null && l > 0 && b != "") {
+    if (this.badges != null && l > 0 && bid != "") {
       for (var i = 0; i < this.badges.length; i++) { 
-        if (this.badges[i].name == b) {
+        if (this.badges[i]._id == bid) {
           for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
             if (this.badges[i].badgelevels[j].level == l) {
               desc = this.badges[i].badgelevels[j].desc;
@@ -152,24 +152,25 @@ export class BSNewComponent{
     if (this.badges != null) {
       for (var i = 0; i < this.badges.length; i++) { 
         if (this.badges[i].status=='Accepted') {
-          badgesOptions.push(this.badges[i].name);
+          badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
         }
       }
     }
     return badgesOptions.sort();
   }
 
-  getLevelsOptions(bname: string) {
+  getLevelsOptions(bid: string) {
     var levelsOptions = [];
     if (this.badges != null) {
-      for (var i = 0; i < this.badges.length; i++) { 
-        if (this.badges[i].name == bname) {
-          for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-            levelsOptions.push(this.badges[i].badgelevels[j].level);
-          }
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i]._id == bid) {
+                for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+                    levelsOptions.push(this.badges[i].badgelevels[j].level);
+                }
+            }
         }
-      }
     }
+    // console.log('getBadgesOptions: ', badgesOptions);
     return levelsOptions.sort();
   }
 
@@ -219,7 +220,7 @@ export class BSNewComponent{
     console.log('you submitted cb value: ', array); 
     var b = array[0];
     var l = +array[1]; // parse into number
-    this.newBS.corebadges.push({badge: b, level: l, focus: ""});
+    this.newBS.corebadges.push({bid: "", badge: b, level: l, focus: ""});
   }
 
   deleteCoreBadgePop(corebadge:BadgeGroup) {

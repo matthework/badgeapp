@@ -92,10 +92,10 @@
 	  <!-- <th class="th-core">Core Badge</th> -->
 	</tr>
 	<tr *ngFor="let badgegroup of badgeset.badgegroups">
-		<td *ngIf="!bedit" (click)="checkAdmin()"><text class="badge" (click)="bedit=false;toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></text></td>
-		<td *ngIf="!bedit" class="td-desc" (click)="checkAdmin()">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
-		<td *ngIf="bedit"><select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select><select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br><input class="input-focus" type="text" [(ngModel)]="badgegroup.focus" placeholder="Focus"></td>
-		<td *ngIf="bedit" class="td-desc">{{getDesc(badgegroup.badge, badgegroup.level)}}</td>
+		<td *ngIf="!bedit" (click)="checkAdmin()"><text class="badge" (click)="bedit=false;toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></text></td>
+		<td *ngIf="!bedit" class="td-desc" (click)="checkAdmin()">{{getDesc(badgegroup.bid,badgegroup.level)}}</td>
+		<td *ngIf="bedit"><select class="select-badge" [(ngModel)]="badgegroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.bid)" [value]="lo">{{lo}}</option></select><br><input class="input-focus" type="text" [(ngModel)]="badgegroup.focus" placeholder="Focus"></td>
+		<td *ngIf="bedit" class="td-desc">{{getDesc(badgegroup.bid, badgegroup.level)}}</td>
 		<td class="td-last"><button *ngIf="bedit && auth.isAdmin()" class="button-s-delete" (click)="deleteBadgeGroupPop(badgegroup)">X</button></td>
 	</tr>
 </table>
@@ -104,16 +104,16 @@
 	<br>
 	<h3 class="text-blue">Add New Badge: </h3><br>
 	<label>Badge: </label>
-	<select class="select-badge-new" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+	<select class="select-badge-new" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 	<label class="label-level">Level: </label>
-	<select class="select-level-new" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+	<select class="select-level-new" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 	
 	<label>Focus: </label>
 	<input class="input-focus-new" type="text" [(ngModel)]="newFocus" placeholder=""><br>
 
 	<label>Description: </label>
-	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBID,newLevel)}}</textarea><br>
 
 	<button class="button-l-save" (click)="addBadgeGroup();addNew=false">Save</button>
 	<button class="button-l-cancel" (click)="addNew=false">Cancel</button><br>

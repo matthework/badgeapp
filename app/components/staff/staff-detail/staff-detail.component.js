@@ -70,11 +70,11 @@ var StaffDetailComponent = (function () {
     StaffDetailComponent.prototype.toStaffEdit = function (sid) {
         this._router.navigate(['/staff/edit', sid]);
     };
-    StaffDetailComponent.prototype.getDesc = function (b, l) {
+    StaffDetailComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -85,15 +85,15 @@ var StaffDetailComponent = (function () {
         }
         return desc;
     };
-    StaffDetailComponent.prototype.toBadgeDetail = function (bname) {
-        var bid = "";
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
-                    bid = this.badges[i]._id;
-                }
-            }
-        }
+    StaffDetailComponent.prototype.toBadgeDetail = function (bid) {
+        // var bid = "";
+        // if (this.badges != null) {
+        //   for (var i = 0; i < this.badges.length; i++) {   
+        //     if (this.badges[i].name == bname) {
+        //       bid = this.badges[i]._id;
+        //     }
+        //   }
+        // }
         this._router.navigate(['/badge/detail', bid]);
     };
     StaffDetailComponent.prototype.getStaffBS = function (sbgs) {
@@ -103,7 +103,7 @@ var StaffDetailComponent = (function () {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
-                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             count += 1;
                         }
                     }
@@ -160,13 +160,13 @@ var StaffDetailComponent = (function () {
         }
         return pay;
     };
-    StaffDetailComponent.prototype.findBadgeSet = function (sbgs, bname, l) {
+    StaffDetailComponent.prototype.findBadgeSet = function (sbgs, bid, l) {
         var bset = [];
         var sortStaffBS = this.getSortStaffBS(sbgs);
         if (sortStaffBS != null && sortStaffBS.length > 0) {
             for (var i = 0; i < sortStaffBS.length; i++) {
                 for (var j = 0; j < sortStaffBS[i].badgegroups.length; j++) {
-                    if (sortStaffBS[i].badgegroups[j].badge == bname && sortStaffBS[i].badgegroups[j].level <= l) {
+                    if (sortStaffBS[i].badgegroups[j].bid == bid && sortStaffBS[i].badgegroups[j].level <= l) {
                         bset.push(sortStaffBS[i]);
                     }
                 }
@@ -183,17 +183,26 @@ var StaffDetailComponent = (function () {
             for (var i = 0; i < bgs.length; i++) {
                 for (var j = 0; j < this.badges.length; j++) {
                     for (var k = 0; k < this.badges[j].badgelevels.length; k++) {
-                        if (bgs[i].badge == this.badges[j].name && bgs[i].level > this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": false });
+                        if (bgs[i].bid == this.badges[j]._id && bgs[i].level > this.badges[j].badgelevels[k].level) {
+                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current": false });
                         }
-                        if (bgs[i].badge == this.badges[j].name && bgs[i].level == this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": true });
+                        if (bgs[i].bid == this.badges[j]._id && bgs[i].level == this.badges[j].badgelevels[k].level) {
+                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current": true });
                         }
                     }
                 }
             }
         }
         return moreBadges;
+    };
+    StaffDetailComponent.prototype.getBadgeName = function (bid) {
+        var bname = "";
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bname = this.badges[i].name;
+            }
+        }
+        return bname;
     };
     StaffDetailComponent.prototype.goBack = function () {
         window.history.back();

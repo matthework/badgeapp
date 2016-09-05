@@ -99,11 +99,11 @@ export class MainComponent implements OnInit{
 		this._router.navigate(['/staffs']);
 	}
 
-	getDesc(b:string, l:number) {
+	getDesc(bid:string, l:number) {
 		var desc = "";
-		if (this.badges != null && l > 0 && b != "") {
+		if (this.badges != null && l > 0 && bid != "") {
 		  for (var i = 0; i < this.badges.length; i++) { 
-		      if (this.badges[i].name == b) {
+		      if (this.badges[i]._id == bid) {
 		          for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
 		              if (this.badges[i].badgelevels[j].level == l) {
 		                desc = this.badges[i].badgelevels[j].desc;
@@ -115,15 +115,7 @@ export class MainComponent implements OnInit{
 		return desc;
 	}
 
-	toBadgeDetail(bname:string) {
-		var bid = "";
-		if (this.badges != null) {
-			for (var i = 0; i < this.badges.length; i++) {   
-				if (this.badges[i].name == bname) {
-				 	bid = this.badges[i]._id;
-				}
-			}
-		}
+	toBadgeDetail(bid:string) {
 		this._router.navigate(['/badge/detail',bid]);
 	}
 
@@ -134,7 +126,7 @@ export class MainComponent implements OnInit{
 		  for (var i = 0; i < this.badgesets.length; i++) { 
 		    for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
 		      for (var k = 0; k < sbgs.length; k++) {      
-		        if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+		        if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
 		          count += 1;
 		        }
 		      }
@@ -194,13 +186,13 @@ export class MainComponent implements OnInit{
 	  }
 
 
-	findBadgeSet(sbgs:UserBGroup[], bname:string, l:number) {
+	findBadgeSet(sbgs:UserBGroup[], bid:string, l:number) {
 		var bset = [];
 		var sortStaffBS = this.getSortStaffBS(sbgs);
 		if (sortStaffBS != null && sortStaffBS.length > 0) {
 		  for (var i = 0; i < sortStaffBS.length; i++) { 
 		    for (var j = 0; j < sortStaffBS[i].badgegroups.length; j++) {   
-		      if (sortStaffBS[i].badgegroups[j].badge == bname && sortStaffBS[i].badgegroups[j].level <= l) {
+		      if (sortStaffBS[i].badgegroups[j].bid == bid && sortStaffBS[i].badgegroups[j].level <= l) {
 		        bset.push(sortStaffBS[i]);
 		      }
 		    }
@@ -248,6 +240,17 @@ export class MainComponent implements OnInit{
 		}
 		return numOfStaff;
 	}
+
+  getBadgeName(bid:string) {
+    var bname = "";
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bname = this.badges[i].name;
+      }
+    }
+    return bname;
+  }
+  
 }
 
 

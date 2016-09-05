@@ -46,10 +46,10 @@
 	  <th class="th-status">Status</th>
 	</tr>
 	<tr *ngFor="let userbgroup of staff.userbgroups">
-		<td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
-		<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
+		<td class="badge" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</td>
+		<td class="td-desc">{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
 		<td class="td-bs">
-		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
+		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 		</div>
   		</td>
@@ -65,10 +65,10 @@
 	  <th class="th-status">Status</th>
 	</tr>
 	<tr *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
-		<td (click)="toBadgeDetail(userbgroup.badge)"><text *ngIf="userbgroup.current" class="badge">{{userbgroup.badge}} - {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="badge-more">{{userbgroup.badge}} - {{userbgroup.level}}</text></td>
-		<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
+		<td (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="badge">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="badge-more">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</text></td>
+		<td class="td-desc">{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
 		<td class="td-bs">
-		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
+		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 		</div>
   		</td>
@@ -81,13 +81,13 @@
 <div *ngIf="active">
 	<h3 class="text-blue">Apply New Badge</h3><br>
 	<label>Badge: </label>
-	<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+	<select class="select-badge" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 	<label class="label-level">Level: </label>
-	<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getNewLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+	<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getNewLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 
 	<label>Description: </label>
-	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBID,newLevel)}}</textarea><br>
 
 	<button class="button-l-apply" (click)="addBadgeGroup();active=false">Apply</button>
 	<button class="button-l-cancel" (click)="active=false">Cancel</button><br>

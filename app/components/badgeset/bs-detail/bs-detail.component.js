@@ -38,7 +38,7 @@ var BSDetailComponent = (function () {
         this.status = false;
         this.bedit = false;
         this.addNew = false;
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newFocus = "";
     }
@@ -117,11 +117,11 @@ var BSDetailComponent = (function () {
         }
         return pay;
     };
-    BSDetailComponent.prototype.getDesc = function (b, l) {
+    BSDetailComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -137,18 +137,18 @@ var BSDetailComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 if (this.badges[i].status == 'Accepted') {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }
         }
         // console.log('getBadgesOptions: ', badgesOptions);
         return badgesOptions.sort();
     };
-    BSDetailComponent.prototype.getLevelsOptions = function (bname) {
+    BSDetailComponent.prototype.getLevelsOptions = function (bid) {
         var levelsOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         levelsOptions.push(this.badges[i].badgelevels[j].level);
                     }
@@ -179,15 +179,18 @@ var BSDetailComponent = (function () {
         }
         return result;
     };
-    BSDetailComponent.prototype.toBadgeDetail = function (bname) {
-        var bid = "";
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
-                    bid = this.badges[i]._id;
-                }
-            }
-        }
+    // toBadgeDetail(bname:string) {
+    //   var bid = "";
+    //   if (this.badges != null) {
+    //       for (var i = 0; i < this.badges.length; i++) {   
+    //           if (this.badges[i].name == bname) {
+    //               bid = this.badges[i]._id;
+    //           }
+    //       }
+    //   }
+    //   this._router.navigate(['/badge/detail',bid]);
+    // }
+    BSDetailComponent.prototype.toBadgeDetail = function (bid) {
         this._router.navigate(['/badge/detail', bid]);
     };
     BSDetailComponent.prototype.getMoreBadges = function (bgs) {
@@ -222,13 +225,13 @@ var BSDetailComponent = (function () {
         //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
         // }
         this.newLevel = +this.newLevel;
-        this.badgeset.badgegroups.push({ badge: this.newBadge, level: this.newLevel, focus: this.newFocus });
+        this.badgeset.badgegroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus });
         // this.badgeset.badgegroups.sort(this.toCompare);
         // this.badgeset.corebadges.sort(this.toCompare);
         var value = JSON.stringify(this.badgeset);
         // this._bsService.updateBadgeSet(id,value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
     };
     BSDetailComponent.prototype.deleteBadgeGroupPop = function (selectedGroup) {
@@ -273,11 +276,15 @@ var BSDetailComponent = (function () {
             this.bedit = true;
         }
     };
-    // checkEmptyBadge() {
-    //   if(this.badgeset.badgegroups == null) {
-    //     this.bedit = true;
-    //   }
-    // }
+    BSDetailComponent.prototype.getBadgeName = function (bid) {
+        var bname = "";
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bname = this.badges[i].name;
+            }
+        }
+        return bname;
+    };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();
     };

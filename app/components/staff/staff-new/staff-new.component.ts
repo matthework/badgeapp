@@ -18,16 +18,16 @@ export class StaffNewComponent {
   active = false;
   nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  newBGs = [{badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false},
-            {badge: "", level: 0, status: false}];
+  newBGs = [{bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false},
+            {bid: "", badge: "", level: 0, status: false}];
 
   statusOptions = ['Active','Inactive'];
   
@@ -74,11 +74,11 @@ export class StaffNewComponent {
     location.reload();
   }
 
-  getDesc(b:string, l:number) {
+  getDesc(bid:string, l:number) {
     var desc = "";
-    if (this.badges != null && l > 0 && b != "") {
+    if (this.badges != null && l > 0 && bid != "") {
       for (var i = 0; i < this.badges.length; i++) { 
-        if (this.badges[i].name == b) {
+        if (this.badges[i]._id == bid) {
           for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
             if (this.badges[i].badgelevels[j].level == l) {
               desc = this.badges[i].badgelevels[j].desc;
@@ -95,18 +95,18 @@ export class StaffNewComponent {
     if (this.badges != null) {
       for (var i = 0; i < this.badges.length; i++) { 
         if (this.badges[i].status=='Accepted') {
-          badgesOptions.push(this.badges[i].name);
+          badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
         }
       }
     }
     return badgesOptions.sort();
   }
 
-  getLevelsOptions(bname: string) {
+  getLevelsOptions(bid: string) {
     var levelsOptions = [];
     if (this.badges != null) {
       for (var i = 0; i < this.badges.length; i++) { 
-        if (this.badges[i].name == bname) {
+        if (this.badges[i]._id == bid) {
           for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
             levelsOptions.push(this.badges[i].badgelevels[j].level);
           }

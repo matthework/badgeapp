@@ -21,7 +21,7 @@ export class BSEditComponent implements OnInit {
   badges: Badge[] = [];
   tiers: Tier[] = [];
   active = false;
-  newBadge = "";
+  newBID = "";
   newLevel = 0;
   newFocus = "";
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
@@ -117,13 +117,13 @@ export class BSEditComponent implements OnInit {
     //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
     // }
     this.newLevel = +this.newLevel;
-    this.badgeset.badgegroups.push({badge: this.newBadge, level: this.newLevel, focus: this.newFocus});
+    this.badgeset.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus});
     // this.badgeset.badgegroups.sort(this.toCompare);
     // this.badgeset.corebadges.sort(this.toCompare);
     let value = JSON.stringify(this.badgeset)
     // this._bsService.updateBadgeSet(id,value).subscribe();
     console.log('you submitted value: ', value);
-    this.newBadge = "";
+    this.newBID = "";
     this.newLevel = 0;
   }
 
@@ -179,11 +179,11 @@ export class BSEditComponent implements OnInit {
     return pay;
   }
 
-  getDesc(b:string, l:number) {
+  getDesc(bid:string, l:number) {
     var desc = "";
-    if (this.badges != null && l > 0 && b != "") {
+    if (this.badges != null && l > 0 && bid != "") {
       for (var i = 0; i < this.badges.length; i++) { 
-          if (this.badges[i].name == b) {
+          if (this.badges[i]._id == bid) {
               for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
                   if (this.badges[i].badgelevels[j].level == l) {
                     desc = this.badges[i].badgelevels[j].desc;
@@ -200,7 +200,7 @@ export class BSEditComponent implements OnInit {
     if (this.badges != null) {
       for (var i = 0; i < this.badges.length; i++) { 
         if (this.badges[i].status=='Accepted') {
-          badgesOptions.push(this.badges[i].name);
+          badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
         }
       }
     }
@@ -208,30 +208,30 @@ export class BSEditComponent implements OnInit {
     return badgesOptions.sort();
   }
 
-  getNewBadgesOptions() {
-      var badgesOptions = [];
-      var currentBGs = [];
-      if (this.badgeset.badgegroups != null) {
-          for (var j = 0; j < this.badgeset.badgegroups.length; j++) { 
-              currentBGs.push(this.badgeset.badgegroups[j].badge);
-          }
-      }
-      if (this.badges != null) {
-          for (var i = 0; i < this.badges.length; i++) { 
-              let index = currentBGs.indexOf(this.badges[i].name);
-              if (this.badges[i].status=='Accepted' && index == -1) {
-                  badgesOptions.push(this.badges[i].name);
-              }
-          }
-      }
-      return badgesOptions.sort();
-  }
+  // getNewBadgesOptions() {
+  //     var badgesOptions = [];
+  //     var currentBGs = [];
+  //     if (this.badgeset.badgegroups != null) {
+  //         for (var j = 0; j < this.badgeset.badgegroups.length; j++) { 
+  //             currentBGs.push(this.badgeset.badgegroups[j].badge);
+  //         }
+  //     }
+  //     if (this.badges != null) {
+  //         for (var i = 0; i < this.badges.length; i++) { 
+  //             let index = currentBGs.indexOf(this.badges[i]._id);
+  //             if (this.badges[i].status=='Accepted' && index == -1) {
+  //                 badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
+  //             }
+  //         }
+  //     }
+  //     return badgesOptions.sort();
+  // }
 
-  getLevelsOptions(bname: string) {
+  getLevelsOptions(bid: string) {
     var levelsOptions = [];
     if (this.badges != null) {
       for (var i = 0; i < this.badges.length; i++) { 
-        if (this.badges[i].name == bname) {
+        if (this.badges[i]._id == bid) {
           for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
             levelsOptions.push(this.badges[i].badgelevels[j].level);
           }
@@ -289,7 +289,7 @@ export class BSEditComponent implements OnInit {
     console.log('you submitted cb value: ', array); 
     var b = array[0];
     var l = +array[1]; // parse into number
-    this.badgeset.corebadges.push({badge: b, level: l, focus:""});
+    this.badgeset.corebadges.push({bid: "", badge: "", level: l, focus:""});
   }
 
   addTag(tag:string) {

@@ -39,7 +39,7 @@ export class BSDetailComponent implements OnInit {
   status =false;
   bedit =false;
   addNew = false;
-  newBadge = "";
+  newBID = "";
   newLevel = 0;
   newFocus = "";
 
@@ -134,11 +134,11 @@ export class BSDetailComponent implements OnInit {
     return pay;
   }
 
-  getDesc(b:string, l:number) {
+  getDesc(bid:string, l:number) {
     var desc = "";
-    if (this.badges != null && l > 0 && b != "") {
+    if (this.badges != null && l > 0 && bid != "") {
         for (var i = 0; i < this.badges.length; i++) { 
-            if (this.badges[i].name == b) {
+            if (this.badges[i]._id == bid) {
                 for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
                     if (this.badges[i].badgelevels[j].level == l) {
                         desc = this.badges[i].badgelevels[j].desc;
@@ -155,7 +155,7 @@ export class BSDetailComponent implements OnInit {
     if (this.badges != null) {
         for (var i = 0; i < this.badges.length; i++) { 
           if (this.badges[i].status == 'Accepted') {
-            badgesOptions.push(this.badges[i].name);
+            badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
           }
         }
     }
@@ -163,11 +163,11 @@ export class BSDetailComponent implements OnInit {
     return badgesOptions.sort();
   }
 
-  getLevelsOptions(bname: string) {
+  getLevelsOptions(bid: string) {
     var levelsOptions = [];
     if (this.badges != null) {
         for (var i = 0; i < this.badges.length; i++) { 
-            if (this.badges[i].name == bname) {
+            if (this.badges[i]._id == bid) {
                 for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
                     levelsOptions.push(this.badges[i].badgelevels[j].level);
                 }
@@ -201,15 +201,19 @@ export class BSDetailComponent implements OnInit {
     return result;
   }
 
-  toBadgeDetail(bname:string) {
-    var bid = "";
-    if (this.badges != null) {
-        for (var i = 0; i < this.badges.length; i++) {   
-            if (this.badges[i].name == bname) {
-                bid = this.badges[i]._id;
-            }
-        }
-    }
+  // toBadgeDetail(bname:string) {
+  //   var bid = "";
+  //   if (this.badges != null) {
+  //       for (var i = 0; i < this.badges.length; i++) {   
+  //           if (this.badges[i].name == bname) {
+  //               bid = this.badges[i]._id;
+  //           }
+  //       }
+  //   }
+  //   this._router.navigate(['/badge/detail',bid]);
+  // }
+
+  toBadgeDetail(bid:string) {
     this._router.navigate(['/badge/detail',bid]);
   }
 
@@ -249,13 +253,13 @@ export class BSDetailComponent implements OnInit {
     //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
     // }
     this.newLevel = +this.newLevel;
-    this.badgeset.badgegroups.push({badge: this.newBadge, level: this.newLevel, focus: this.newFocus});
+    this.badgeset.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus});
     // this.badgeset.badgegroups.sort(this.toCompare);
     // this.badgeset.corebadges.sort(this.toCompare);
     let value = JSON.stringify(this.badgeset)
     // this._bsService.updateBadgeSet(id,value).subscribe();
     console.log('you submitted value: ', value);
-    this.newBadge = "";
+    this.newBID = "";
     this.newLevel = 0;
   }
 
@@ -305,11 +309,15 @@ export class BSDetailComponent implements OnInit {
     }
   }
 
-  // checkEmptyBadge() {
-  //   if(this.badgeset.badgegroups == null) {
-  //     this.bedit = true;
-  //   }
-  // }
+  getBadgeName(bid:string) {
+    var bname = "";
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bname = this.badges[i].name;
+      }
+    }
+    return bname;
+  }
 
   goBack() {
     window.history.back();

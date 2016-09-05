@@ -49,7 +49,7 @@ func addNewStaff(w http.ResponseWriter, r *http.Request) {
 	}
 	var bgs []UserBGroup
 	for i := range staff.UserBGroups {
-		if staff.UserBGroups[i].Badge != "" && staff.UserBGroups[i].Level != 0 {
+		if staff.UserBGroups[i].BID != "" && staff.UserBGroups[i].Level != 0 {
 			bgs = append(bgs, staff.UserBGroups[i])
 		}
 	}

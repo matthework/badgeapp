@@ -32,7 +32,7 @@ var UserDetailComponent = (function () {
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
         this.active = false;
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
         this.more = false;
@@ -76,11 +76,11 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.toUserEdit = function (sid) {
         this._router.navigate(['/user/edit', sid]);
     };
-    UserDetailComponent.prototype.getDesc = function (b, l) {
+    UserDetailComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -91,15 +91,15 @@ var UserDetailComponent = (function () {
         }
         return desc;
     };
-    UserDetailComponent.prototype.toBadgeDetail = function (bname) {
-        var bid = "";
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
-                    bid = this.badges[i]._id;
-                }
-            }
-        }
+    UserDetailComponent.prototype.toBadgeDetail = function (bid) {
+        // var bid = "";
+        // if (this.badges != null) {
+        //   for (var i = 0; i < this.badges.length; i++) {   
+        //     if (this.badges[i].name == bname) {
+        //       bid = this.badges[i]._id;
+        //     }
+        //   }
+        // }
         this._router.navigate(['/badge/detail', bid]);
     };
     UserDetailComponent.prototype.getStaffBS = function (sbgs) {
@@ -109,7 +109,7 @@ var UserDetailComponent = (function () {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
-                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             count += 1;
                         }
                     }
@@ -163,13 +163,13 @@ var UserDetailComponent = (function () {
         }
         return pay;
     };
-    UserDetailComponent.prototype.findBadgeSet = function (sbgs, bname, l) {
+    UserDetailComponent.prototype.findBadgeSet = function (sbgs, bid, l) {
         var bset = [];
         var sortStaffBS = this.getSortStaffBS(sbgs);
         if (sortStaffBS != null && sortStaffBS.length > 0) {
             for (var i = 0; i < sortStaffBS.length; i++) {
                 for (var j = 0; j < sortStaffBS[i].badgegroups.length; j++) {
-                    if (sortStaffBS[i].badgegroups[j].badge == bname && sortStaffBS[i].badgegroups[j].level <= l) {
+                    if (sortStaffBS[i].badgegroups[j].bid == bid && sortStaffBS[i].badgegroups[j].level <= l) {
                         bset.push(sortStaffBS[i]);
                     }
                 }
@@ -185,27 +185,27 @@ var UserDetailComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 if (this.badges[i].status == 'Accepted') {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }
         }
         return badgesOptions.sort();
     };
-    UserDetailComponent.prototype.getNewLevelsOptions = function (bname) {
+    UserDetailComponent.prototype.getNewLevelsOptions = function (bid) {
         var levelsOptions = [];
         var userbgs = [];
         if (this.staff.userbgroups.length != 0) {
             for (var j = 0; j < this.staff.userbgroups.length; j++) {
-                userbgs.push(this.staff.userbgroups[j].badge);
+                userbgs.push(this.staff.userbgroups[j].bid);
             }
         }
         for (var i = 0; i < this.badges.length; i++) {
-            if (this.badges[i].name == bname) {
+            if (this.badges[i]._id == bid) {
                 for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
-                    var index = userbgs.indexOf(this.badges[i].name);
+                    var index = userbgs.indexOf(this.badges[i]._id);
                     if (this.staff.userbgroups.length != 0 && index != -1) {
                         for (var k = 0; k < this.staff.userbgroups.length; k++) {
-                            if (this.staff.userbgroups[k].badge == bname && this.staff.userbgroups[k].level < this.badges[i].badgelevels[j].level) {
+                            if (this.staff.userbgroups[k].bid == bid && this.staff.userbgroups[k].level < this.badges[i].badgelevels[j].level) {
                                 levelsOptions.push(this.badges[i].badgelevels[j].level);
                             }
                         }
@@ -220,12 +220,12 @@ var UserDetailComponent = (function () {
     };
     UserDetailComponent.prototype.addBadgeGroup = function () {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({ badge: this.newBadge, level: this.newLevel, status: this.newStatus });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus });
         this.staff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newStatus = false;
     };
@@ -246,17 +246,26 @@ var UserDetailComponent = (function () {
             for (var i = 0; i < bgs.length; i++) {
                 for (var j = 0; j < this.badges.length; j++) {
                     for (var k = 0; k < this.badges[j].badgelevels.length; k++) {
-                        if (bgs[i].badge == this.badges[j].name && bgs[i].level > this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": false });
+                        if (bgs[i].bid == this.badges[j]._id && bgs[i].level > this.badges[j].badgelevels[k].level) {
+                            moreBadges.push({ "status": bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current": false });
                         }
-                        if (bgs[i].badge == this.badges[j].name && bgs[i].level == this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "status": bgs[i].status, "badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "current": true });
+                        if (bgs[i].bid == this.badges[j]._id && bgs[i].level == this.badges[j].badgelevels[k].level) {
+                            moreBadges.push({ "status": bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current": true });
                         }
                     }
                 }
             }
         }
         return moreBadges;
+    };
+    UserDetailComponent.prototype.getBadgeName = function (bid) {
+        var bname = "";
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bname = this.badges[i].name;
+            }
+        }
+        return bname;
     };
     UserDetailComponent.prototype.goBack = function () {
         window.history.back();

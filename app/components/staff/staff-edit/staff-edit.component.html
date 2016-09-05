@@ -36,13 +36,13 @@
 
 	<div class="userbgroup-block" *ngFor="let userbgroup of staff.userbgroups">
 		<label>Badge: </label>
-		<select class="select-badge" [(ngModel)]="userbgroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+		<select class="select-badge" [(ngModel)]="userbgroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 		<label class="label-level">Level: </label>
-		<select class="select-level" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.badge)" [value]="lo">{{lo}}</option></select><br>
+		<select class="select-level" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.bid)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Description: </label>
-		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(userbgroup.badge,userbgroup.level)}}</textarea><br>
+		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(userbgroup.bid,userbgroup.level)}}</textarea><br>
 
 		<label>Approved: </label>
 		<input type="checkbox" [(ngModel)]="userbgroup.status" placeholder="Status" />
@@ -58,13 +58,13 @@
 	<div *ngIf="active">
 		<h3>Add New Badge</h3><br>
 		<label>Badge: </label>
-		<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getNewBadgesOptions()" [value]="bo">{{bo}}</option></select>
+		<select class="select-badge" [(ngModel)]="newBID"><option *ngFor="let bo of getnewBIDsOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 		<label class="label-level">Level: </label>
-		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBadge)" [value]="lo">{{lo}}</option></select><br>
+		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Description: </label>
-		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
+		<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBID,newLevel)}}</textarea><br>
 
 		<label>Approved: </label>
 		<input type="checkbox" [(ngModel)]="newStatus" placeholder="Status" /><br>
