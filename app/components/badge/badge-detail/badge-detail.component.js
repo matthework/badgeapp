@@ -21,19 +21,22 @@ var BadgeDetailComponent = (function () {
         this._router = _router;
         this.route = route;
         this.auth = auth;
-        this.title = "Badge";
         this.badgesets = [];
+        this.bName = false;
     }
     BadgeDetailComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.sub = this.route.params.subscribe(function (params) {
-            _this.id = params['id'];
-        });
+        this.getParams();
         this.getBadge();
         this.getBadgeSets();
     };
     BadgeDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
+    };
+    BadgeDetailComponent.prototype.getParams = function () {
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            _this.id = params['id'];
+        });
     };
     BadgeDetailComponent.prototype.getBadge = function () {
         var _this = this;

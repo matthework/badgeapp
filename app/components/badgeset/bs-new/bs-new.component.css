@@ -44,7 +44,7 @@ button {
   background-color: #eee;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 0px !important;
   cursor: pointer; 
   cursor: hand;
 }
@@ -223,14 +223,28 @@ textarea {
   background-color: red;
   color: white;
 }
-.button-add {
-  width: 100px;
+.button-save {
   position: relative; 
-  left: 50%;
+  left: 32%;
+  width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-save:hover{
+  color: white;
+  background-color: limegreen;
 }
 .button-cancel {
   position: relative; 
-  left: 50%;
+  left: 32%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+}
+.button-cancel:hover{
+  color: white;
+  background-color: red;
 }
 .button-c-delete {
   width: 40px;
@@ -264,4 +278,7 @@ textarea {
   border: 1px solid #cccccc;
   margin-right: 30px;
   margin-bottom: 30px;
+}
+.text-blue {
+  color: #039be5;
 }

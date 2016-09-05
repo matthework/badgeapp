@@ -151,6 +151,73 @@ textarea {
 .check-core {
   color: red;
 }
-
+.input-b {
+  width: 300px;
+  margin-right: 20px;
+}
+.label-bName {
+  color: #039be5;
+  font-size: 1.2em;
+  width: 6.6em 
+}
+.button-add {
+  width: 120px;
+  color: white;
+  background-color: #039be5;
+}
+.button-add:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-s-y {
+  width: 40px;
+  color: white;
+  background-color: #039be5;
+  border-radius: 4px;
+  /*border: 1px solid #cccccc;*/
+  margin-left: 10px;
+}
+.button-s-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-s-n {
+  width: 40px;
+  color: white;
+  background-color: hotpink;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+.button-s-n:hover{
+  color: white;
+  background-color: red;
+}
+.button-bl-y {
+  position: relative; 
+  left: 50.5%;
+  width: 100px;
+  color: white;
+  background-color: #039be5;
+  border-radius: 4px;
+  /*border: 1px solid #cccccc;*/
+  margin-left: 10px;
+}
+.button-bl-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-bl-n {
+  position: relative; 
+  left: 50.5%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+.button-bl-n:hover{
+  color: white;
+  background-color: red;
+}
 
 

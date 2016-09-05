@@ -32,6 +32,7 @@ var BSDetailComponent = (function () {
         this.newTag = "";
         this.more = false;
         this.edit = false;
+        this.bsName = false;
         this.tg = false;
         this.tag = false;
         this.status = false;
@@ -75,6 +76,9 @@ var BSDetailComponent = (function () {
     };
     BSDetailComponent.prototype.toBSEdit = function (bsid) {
         this._router.navigate(['/bs/edit', bsid]);
+    };
+    BSDetailComponent.prototype.addBadgeSet = function () {
+        this._router.navigate(['/bs/new']);
     };
     BSDetailComponent.prototype.updateBadgeSet = function () {
         for (var i = 0; i < this.badgeset.badgegroups.length; i++) {
@@ -244,6 +248,17 @@ var BSDetailComponent = (function () {
         var value = JSON.stringify(this.badgeset);
         // this._bsService.updateBadgeSet(id,value).subscribe();
         console.log('you submitted value: ', value);
+    };
+    BSDetailComponent.prototype.removeBadgeSet = function () {
+        this._bsService.deleteBadgeSet(this.id).subscribe();
+        this.toBadgeSets();
+    };
+    BSDetailComponent.prototype.deleteBadgeSetPop = function () {
+        var name = this.badgeset.name;
+        var r = confirm("Are you sure you want to delete BadgeSet: " + name.toUpperCase() + " ?");
+        if (r == true) {
+            this.removeBadgeSet();
+        }
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();

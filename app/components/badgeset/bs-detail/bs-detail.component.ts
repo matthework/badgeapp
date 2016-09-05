@@ -32,6 +32,7 @@ export class BSDetailComponent implements OnInit {
   newTag = "";
   more = false;
   edit = false;
+  bsName = false;
   tg = false;
   tag = false;
   status =false;
@@ -88,6 +89,10 @@ export class BSDetailComponent implements OnInit {
     this._router.navigate(['/bs/edit',bsid]);
   }
 
+  addBadgeSet() {
+    this._router.navigate(['/bs/new']);
+  }
+  
   updateBadgeSet() {
     for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
       this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
@@ -271,7 +276,20 @@ export class BSDetailComponent implements OnInit {
     // this._bsService.updateBadgeSet(id,value).subscribe();
     console.log('you submitted value: ', value);
   }
-  
+
+  removeBadgeSet() {
+    this._bsService.deleteBadgeSet(this.id).subscribe();
+    this.toBadgeSets();
+  }
+
+  deleteBadgeSetPop() {
+    var name = this.badgeset.name
+    var r = confirm("Are you sure you want to delete BadgeSet: " + name.toUpperCase() +" ?");
+    if (r == true) {
+      this.removeBadgeSet();
+    }
+  }
+
   goBack() {
     window.history.back();
   }

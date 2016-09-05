@@ -53,7 +53,7 @@
 			</td>
 <!-- 			<td *ngIf="badgeset.inused || auth.isAdmin()" class="td-inused">{{badgeset.inused | yes_no}}</td> -->
 			<td *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="td-status">{{badgeset.status}}</td>
-			<td *ngIf="(badgeset.status=='Accepted' || auth.isAdmin()) && active" class="td-last"><button *ngIf="auth.isAdmin()" class="button-s-x" (click)="deleteBadgeSetPop(badgeset._id)">X</button><button *ngIf="auth.isAdmin()" class="button-s-e" (click)="toBSEdit(badgeset._id)">E</button></td>
+			<td *ngIf="(badgeset.status=='Accepted' || auth.isAdmin()) && active" class="td-last"><button *ngIf="auth.isAdmin()" class="button-s-x" (click)="deleteBadgeSetPop(badgeset._id)">X</button><!-- <button *ngIf="auth.isAdmin()" class="button-s-e" (click)="toBSEdit(badgeset._id)">E</button> --></td>
 		</tr>
 	</table>
 </div>
