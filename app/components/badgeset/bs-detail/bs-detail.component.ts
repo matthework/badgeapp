@@ -20,6 +20,7 @@ import {YesNoPipe} from '../../pipe/yes-no-pipe';
 
 export class BSDetailComponent implements OnInit {
 
+  badgesets: BadgeSet[];
   badgeset: BadgeSet;
   badges: Badge[] = [];
   tiers: Tier[] = [];
@@ -73,6 +74,10 @@ export class BSDetailComponent implements OnInit {
     this._bsService.getBadgeSet(this.id).subscribe(badgeset => {this.badgeset = badgeset});
   }
 
+  getBadgeSets() {
+    this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
+  }
+
   getBadges() {
     this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
   }
@@ -83,7 +88,7 @@ export class BSDetailComponent implements OnInit {
 
   toBadgeSets() {
     this._router.navigate(['/badgeset']);
-    this.getBadgeSet();
+    this.getBadgeSets();
     // location.reload();
   }
 

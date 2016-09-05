@@ -63,6 +63,10 @@ var BSDetailComponent = (function () {
         console.log('id from _routeParams: ', this.id);
         this._bsService.getBadgeSet(this.id).subscribe(function (badgeset) { _this.badgeset = badgeset; });
     };
+    BSDetailComponent.prototype.getBadgeSets = function () {
+        var _this = this;
+        this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
+    };
     BSDetailComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
@@ -73,7 +77,7 @@ var BSDetailComponent = (function () {
     };
     BSDetailComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);
-        this.getBadgeSet();
+        this.getBadgeSets();
         // location.reload();
     };
     BSDetailComponent.prototype.toBSEdit = function (bsid) {
