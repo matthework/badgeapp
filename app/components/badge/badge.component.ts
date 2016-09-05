@@ -5,6 +5,10 @@ import {Badge} from './badge';
 import {BadgeDetailComponent} from './badge-detail/badge-detail.component';
 import {BadgeEditComponent} from './badge-edit/badge-edit.component';
 import {BadgeService} from './badge.service';
+
+import {BadgeSet} from '../badgeset/bs';
+import {BSService} from '../badgeset/bs.service';
+
 import {AuthService} from '../auth/auth.service';
 
 import {FilterArrayPipe} from '../pipe/filter-array-pipe';
@@ -21,6 +25,7 @@ import {YesNoPipe} from '../pipe/yes-no-pipe';
 export class BadgeComponent implements OnInit {
 
   badges: Badge[] = [];
+  badgesets: BadgeSet[] = [];
   selectedBadge: Badge;
   active = true;
   showBadges = false;
@@ -29,14 +34,23 @@ export class BadgeComponent implements OnInit {
   constructor (
       private _router: Router,
       private _badgeService: BadgeService,
+      private _bsService: BSService,
       private auth: AuthService) {}
 
   ngOnInit() {
     this.getBadges();
+    this.getBadgeSets();
   }
 
   getBadges() {
     this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
+  }
+
+  getBadgeSets() {
+    this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
+    if (this.badgesets == null) {
+      this.active = true;
+    }
   }
 
   onSelect(badge: Badge) { 
@@ -58,6 +72,7 @@ export class BadgeComponent implements OnInit {
   removeBadge(id:string) {
     // let id = this.selectedBadge._id;
     this._badgeService.deleteBadge(id).subscribe();
+    this.removeBadgeFromBS(id);
     location.reload();
   }
 
@@ -78,13 +93,21 @@ export class BadgeComponent implements OnInit {
     this._router.navigate(['/badgecat']);
   }
 
-  // removeBadgeFromBS(bname: BadgeGroup) {
-  //   let index = this.badgeset.badgegroups.indexOf(selectedGroup);
-  //   this.badgeset.badgegroups.splice(index,1);
-  //   let value = JSON.stringify(this.badgeset)
-  //   // this._bsService.updateBadgeSet(id,value).subscribe();
-  //   console.log('you submitted value: ', value);
-  // }
+  removeBadgeFromBS(bid: string) {
+    if (this.badgesets != null) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
+          if (this.badgesets[i].badgegroups[j].bid == bid) {
+            let index = this.badgesets[i].badgegroups.indexOf(this.badgesets[i].badgegroups[j]);
+            this.badgesets[i].badgegroups.splice(index,1);
+          }
+        }
+        let value = JSON.stringify(this.badgesets[i])
+        this._bsService.updateBadgeSet(this.badgesets[i]._id,value).subscribe();
+        console.log('you submitted value: ', value);
+      }
+    }
+  }
 
 }
 

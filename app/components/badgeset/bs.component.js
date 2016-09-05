@@ -24,8 +24,8 @@ var BSComponent = (function () {
         this._badgeService = _badgeService;
         this._tierService = _tierService;
         this.auth = auth;
-        this.badgesets = [];
         this.badges = [];
+        this.badgesets = [];
         this.tiers = [];
         this.active = true;
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
@@ -157,11 +157,11 @@ var BSComponent = (function () {
         }
         return result;
     };
-    BSComponent.prototype.checkCore = function (bs, b) {
+    BSComponent.prototype.checkCore = function (bs, bid) {
         var result = "";
         if (bs != null) {
             for (var i = 0; i < bs.corebadges.length; i++) {
-                if (bs.corebadges[i].badge == b) {
+                if (bs.corebadges[i].bid == bid) {
                     result = " ** ";
                 }
             }
