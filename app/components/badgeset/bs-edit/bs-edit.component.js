@@ -25,7 +25,7 @@ var BSEditComponent = (function () {
         this.badges = [];
         this.tiers = [];
         this.active = false;
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
         this.newFocus = "";
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
@@ -104,13 +104,13 @@ var BSEditComponent = (function () {
         //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
         // }
         this.newLevel = +this.newLevel;
-        this.badgeset.badgegroups.push({ badge: this.newBadge, level: this.newLevel, focus: this.newFocus });
+        this.badgeset.badgegroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus });
         // this.badgeset.badgegroups.sort(this.toCompare);
         // this.badgeset.corebadges.sort(this.toCompare);
         var value = JSON.stringify(this.badgeset);
         // this._bsService.updateBadgeSet(id,value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBadge = "";
+        this.newBID = "";
         this.newLevel = 0;
     };
     BSEditComponent.prototype.removeBadgeSet = function () {
@@ -161,11 +161,11 @@ var BSEditComponent = (function () {
         }
         return pay;
     };
-    BSEditComponent.prototype.getDesc = function (b, l) {
+    BSEditComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -181,36 +181,36 @@ var BSEditComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 if (this.badges[i].status == 'Accepted') {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }
         }
         // console.log('getBadgesOptions: ', badgesOptions);
         return badgesOptions.sort();
     };
-    BSEditComponent.prototype.getNewBadgesOptions = function () {
-        var badgesOptions = [];
-        var currentBGs = [];
-        if (this.badgeset.badgegroups != null) {
-            for (var j = 0; j < this.badgeset.badgegroups.length; j++) {
-                currentBGs.push(this.badgeset.badgegroups[j].badge);
-            }
-        }
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) {
-                var index = currentBGs.indexOf(this.badges[i].name);
-                if (this.badges[i].status == 'Accepted' && index == -1) {
-                    badgesOptions.push(this.badges[i].name);
-                }
-            }
-        }
-        return badgesOptions.sort();
-    };
-    BSEditComponent.prototype.getLevelsOptions = function (bname) {
+    // getNewBadgesOptions() {
+    //     var badgesOptions = [];
+    //     var currentBGs = [];
+    //     if (this.badgeset.badgegroups != null) {
+    //         for (var j = 0; j < this.badgeset.badgegroups.length; j++) { 
+    //             currentBGs.push(this.badgeset.badgegroups[j].badge);
+    //         }
+    //     }
+    //     if (this.badges != null) {
+    //         for (var i = 0; i < this.badges.length; i++) { 
+    //             let index = currentBGs.indexOf(this.badges[i]._id);
+    //             if (this.badges[i].status=='Accepted' && index == -1) {
+    //                 badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
+    //             }
+    //         }
+    //     }
+    //     return badgesOptions.sort();
+    // }
+    BSEditComponent.prototype.getLevelsOptions = function (bid) {
         var levelsOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         levelsOptions.push(this.badges[i].badgelevels[j].level);
                     }
@@ -262,7 +262,7 @@ var BSEditComponent = (function () {
         console.log('you submitted cb value: ', array);
         var b = array[0];
         var l = +array[1]; // parse into number
-        this.badgeset.corebadges.push({ badge: b, level: l, focus: "" });
+        this.badgeset.corebadges.push({ bid: "", badge: "", level: l, focus: "" });
     };
     BSEditComponent.prototype.addTag = function (tag) {
         this.badgeset.tags.push(tag.toUpperCase());

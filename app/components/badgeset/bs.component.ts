@@ -118,11 +118,11 @@ export class BSComponent implements OnInit {
 		return pay;
 	}
 
-	getDesc(b:string, l:number) {
+	getDesc(bid:string, l:number) {
 		this.desc = "";
-		if (this.badges != null && l > 0 && b != "") {
+		if (this.badges != null && l > 0 && bid != "") {
 			for (var i = 0; i < this.badges.length; i++) { 
-				if (this.badges[i].name == b) {
+				if (this.badges[i]._id == bid) {
 					for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
 						if (this.badges[i].badgelevels[j].level == l) {
 							this.desc = this.badges[i].badgelevels[j].desc;
@@ -153,15 +153,7 @@ export class BSComponent implements OnInit {
 		location.reload();
 	}
 
-	toBadgeDetail(bname:string) {
-		var bid = "";
-		if (this.badges != null) {
-			for (var i = 0; i < this.badges.length; i++) {   
-				if (this.badges[i].name == bname) {
-					bid = this.badges[i]._id;
-				}
-			}
-		}
+	toBadgeDetail(bid:string) {
 		this._router.navigate(['/badge/detail',bid]);
 	}
 
@@ -209,6 +201,16 @@ export class BSComponent implements OnInit {
 		}
 		result = Math.round(m*1000*0.9/totalLevels*l);
 		return result;
+	}
+
+	getBadgeName(bid:string) {
+		var bname = "";
+		for (var i = 0; i < this.badges.length; i++) { 
+			if(this.badges[i]._id == bid) {
+				bname = this.badges[i].name;
+			}
+		}
+		return bname;
 	}
 
 }

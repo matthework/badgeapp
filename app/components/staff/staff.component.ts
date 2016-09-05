@@ -103,11 +103,11 @@ export class StaffComponent {
 		}
 	}
 
-	getDesc(b:string, l:number) {
+	getDesc(bid:string, l:number) {
 		this.desc = "";
-		if (this.badges != null && l > 0 && b != "") {
+		if (this.badges != null && l > 0 && bid != "") {
 			for (var i = 0; i < this.badges.length; i++) { 
-				if (this.badges[i].name == b) {
+				if (this.badges[i]._id == bid) {
 					for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
 						if (this.badges[i].badgelevels[j].level == l) {
 								this.desc = this.badges[i].badgelevels[j].desc;
@@ -119,15 +119,7 @@ export class StaffComponent {
 		return this.desc;
 	}
 
-	toBadgeDetail(bname:string) {
-		var bid = "";
-      if (this.badges != null) {
-   		for (var i = 0; i < this.badges.length; i++) {   
-   			if (this.badges[i].name == bname) {
-   					bid = this.badges[i]._id;
-   			}
-   		}
-      }
+	toBadgeDetail(bid:string) {
 		this._router.navigate(['/badge/detail',bid]);
 	}
 
@@ -140,7 +132,7 @@ export class StaffComponent {
 			for (var i = 0; i < this.badgesets.length; i++) { 
 				for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
 					for (var k = 0; k < sbgs.length; k++) {      
-						if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+						if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
 							count += 1;
 						}
 					}
@@ -224,7 +216,7 @@ export class StaffComponent {
 
     approveBadge(staff:Staff, userbgroup:UserBGroup) {
 		for (var i = 0; i < staff.userbgroups.length; i++) { 
-			if (staff.userbgroups[i].badge == userbgroup.badge && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].status) {
+			if (staff.userbgroups[i].bid == userbgroup.bid && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].status) {
 				let index = staff.userbgroups.indexOf(staff.userbgroups[i]);
     			staff.userbgroups.splice(index,1);
 			}
@@ -233,6 +225,16 @@ export class StaffComponent {
         this._staffService.updateStaff(staff._id,value).subscribe();
         console.log('you submitted value: ', value); 
     }
+
+  getBadgeName(bid:string) {
+    var bname = "";
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bname = this.badges[i].name;
+      }
+    }
+    return bname;
+  }
 
 }
 

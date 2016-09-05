@@ -46,10 +46,10 @@
 	  <th class="th-status">Status</th>
 	</tr>
 	<tr *ngFor="let userbgroup of staff.userbgroups">
-		<td class="badge" (click)="toBadgeDetail(userbgroup.badge)">{{userbgroup.badge}} - {{userbgroup.level}}</td>
-		<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
+		<td class="badge" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</td>
+		<td class="td-desc">{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
 		<td class="td-bs">
-		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
+		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 		</div>
   		</td>
@@ -65,10 +65,10 @@
 	  <th class="th-status">Status</th>
 	</tr>
 	<tr *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
-		<td (click)="toBadgeDetail(userbgroup.badge)"><text *ngIf="userbgroup.current" class="badge">{{userbgroup.badge}} - {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="badge-more">{{userbgroup.badge}} - {{userbgroup.level}}</text></td>
-		<td class="td-desc">{{getDesc(userbgroup.badge,userbgroup.level)}}</td>
+		<td (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="badge">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="badge-more">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</text></td>
+		<td class="td-desc">{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
 		<td class="td-bs">
-		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.badge,userbgroup.level)">
+		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 		</div>
   		</td>

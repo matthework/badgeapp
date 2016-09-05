@@ -29,25 +29,26 @@
 <input type="checkbox" [(ngModel)]="newBS.approved" placeholder="Approved" /><br> -->
 
 <br>
+<br>
 <label>Status: </label>
 <select class="select-status" [(ngModel)]="newBS.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 
-<br>
 <div *ngFor="let i of nums">
 <br>
 <label>Badge: </label>
-<select class="select-badge" [(ngModel)]="newBS.badgegroups[i].badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+<select class="select-badge" [(ngModel)]="newBS.badgegroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 <label class="label-level">Level: </label>
-<select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].badge)" [value]="lo">{{lo}}</option></select><br>
+<select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
 <label>Focus: </label>
 <input class="input-focus" type="text" [(ngModel)]="newBS.badgegroups[i].focus" placeholder=""><br>
 <label>Description: </label>
-<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBS.badgegroups[i].badge,newBS.badgegroups[i].level)}}</textarea><br>
+<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)}}</textarea><br>
 </div>
 
 <!-- <br>
 <button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true;getTotalBadges(newBS.badgegroups)">Prerequisite+</button><br>
 <br> -->
+
 <div *ngIf="prerequisite">
 	<h3>Prerequisite: </h3><br>
 	<label>Numbers: </label>

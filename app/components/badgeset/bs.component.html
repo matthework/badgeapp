@@ -41,7 +41,7 @@
 			<td *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="td-badges">
 				<div *ngFor="let badgegroup of badgeset.badgegroups">
 				<li>
-				<text class="tooltip" (click)="toBadgeDetail(badgegroup.badge)"><text class="badge">{{badgegroup.badge}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text><text class="check-core">{{checkCore(badgeset,badgegroup.badge)}}</text><span class="tooltiptext"><li> <b>Level {{badgegroup.level-1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level-1)}}</li><br><li><b><u>Level {{badgegroup.level}}</u>: </b>{{getDesc(badgegroup.badge, badgegroup.level)}}</li><br><li><b>Level {{badgegroup.level+1}}: </b>{{getDesc(badgegroup.badge, badgegroup.level+1)}}</li></span></text>
+				<text class="tooltip" (click)="toBadgeDetail(badgegroup.bid)"><text class="badge">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text><text class="check-core">{{checkCore(badgeset,badgegroup.bid)}}</text><span class="tooltiptext"><li> <b>Level {{badgegroup.level-1}}: </b>{{getDesc(badgegroup.bid, badgegroup.level-1)}}</li><br><li><b><u>Level {{badgegroup.level}}</u>: </b>{{getDesc(badgegroup.bid, badgegroup.level)}}</li><br><li><b>Level {{badgegroup.level+1}}: </b>{{getDesc(badgegroup.bid, badgegroup.level+1)}}</li></span></text>
 				</li>
 				</div>
 			</td>
@@ -79,7 +79,7 @@
 				  <td>
 				  <div *ngFor="let badgegroup of getBS(bsname1).badgegroups">
 				  <li>
-				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} {{badgegroup.level}} </text><text class="money">(+${{0}})</text>
+				  <text class="badge" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="money">(+${{0}})</text>
 				  </li>
 				  </div>
 				  </td>
@@ -100,7 +100,7 @@
 				  <td>
 				  <div *ngFor="let badgegroup of getBS(bsname2).badgegroups">
 				  <li>
-				  <text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname2).badgegroups,getBS(bsname2).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
+				  <text class="badge" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname2).badgegroups,getBS(bsname2).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
 				  </li>
 				  </div>
 				  </td>
@@ -121,7 +121,7 @@
 					<td>
 						<div *ngFor="let badgegroup of getBS(bsname3).badgegroups">
 						<li>
-						<text class="badge" (click)="toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname3).badgegroups,getBS(bsname3).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
+						<text class="badge" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname3).badgegroups,getBS(bsname3).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
 						</li>
 						</div>
 					</td>

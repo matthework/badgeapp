@@ -22,16 +22,16 @@ var StaffNewComponent = (function () {
         this.badges = [];
         this.active = false;
         this.nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        this.newBGs = [{ badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false },
-            { badge: "", level: 0, status: false }];
+        this.newBGs = [{ bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false },
+            { bid: "", badge: "", level: 0, status: false }];
         this.statusOptions = ['Active', 'Inactive'];
         this.newStaff = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief: "", others: [] };
     }
@@ -66,11 +66,11 @@ var StaffNewComponent = (function () {
         this._router.navigate(['/staffs']);
         location.reload();
     };
-    StaffNewComponent.prototype.getDesc = function (b, l) {
+    StaffNewComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -86,17 +86,17 @@ var StaffNewComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 if (this.badges[i].status == 'Accepted') {
-                    badgesOptions.push(this.badges[i].name);
+                    badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }
         }
         return badgesOptions.sort();
     };
-    StaffNewComponent.prototype.getLevelsOptions = function (bname) {
+    StaffNewComponent.prototype.getLevelsOptions = function (bid) {
         var levelsOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         levelsOptions.push(this.badges[i].badgelevels[j].level);
                     }

@@ -36,7 +36,7 @@ func addNewBadgeSet(w http.ResponseWriter, r *http.Request) {
 	}
 	var bgs []BadgeGroup
 	for i := range badgeset.BadgeGroups {
-		if badgeset.BadgeGroups[i].Badge != "" && badgeset.BadgeGroups[i].Level != 0 {
+		if badgeset.BadgeGroups[i].BID != "" && badgeset.BadgeGroups[i].Level != 0 {
 			bgs = append(bgs, badgeset.BadgeGroups[i])
 		}
 	}
@@ -58,7 +58,7 @@ func updateBadgeSet(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	var bgs []BadgeGroup
 	for i := range badgeset.BadgeGroups {
-		if badgeset.BadgeGroups[i].Badge != "" && badgeset.BadgeGroups[i].Level != 0 {
+		if badgeset.BadgeGroups[i].BID != "" && badgeset.BadgeGroups[i].Level != 0 {
 			bgs = append(bgs, badgeset.BadgeGroups[i])
 		}
 	}

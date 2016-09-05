@@ -85,11 +85,11 @@ var MainComponent = (function () {
     MainComponent.prototype.toPerson = function () {
         this._router.navigate(['/staffs']);
     };
-    MainComponent.prototype.getDesc = function (b, l) {
+    MainComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
-        if (this.badges != null && l > 0 && b != "") {
+        if (this.badges != null && l > 0 && bid != "") {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == b) {
+                if (this.badges[i]._id == bid) {
                     for (var j = 0; j < this.badges[i].badgelevels.length; j++) {
                         if (this.badges[i].badgelevels[j].level == l) {
                             desc = this.badges[i].badgelevels[j].desc;
@@ -100,15 +100,7 @@ var MainComponent = (function () {
         }
         return desc;
     };
-    MainComponent.prototype.toBadgeDetail = function (bname) {
-        var bid = "";
-        if (this.badges != null) {
-            for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i].name == bname) {
-                    bid = this.badges[i]._id;
-                }
-            }
-        }
+    MainComponent.prototype.toBadgeDetail = function (bid) {
         this._router.navigate(['/badge/detail', bid]);
     };
     MainComponent.prototype.getStaffBS = function (sbgs) {
@@ -118,7 +110,7 @@ var MainComponent = (function () {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
-                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].badge == sbgs[k].badge && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             count += 1;
                         }
                     }
@@ -172,13 +164,13 @@ var MainComponent = (function () {
         }
         return pay;
     };
-    MainComponent.prototype.findBadgeSet = function (sbgs, bname, l) {
+    MainComponent.prototype.findBadgeSet = function (sbgs, bid, l) {
         var bset = [];
         var sortStaffBS = this.getSortStaffBS(sbgs);
         if (sortStaffBS != null && sortStaffBS.length > 0) {
             for (var i = 0; i < sortStaffBS.length; i++) {
                 for (var j = 0; j < sortStaffBS[i].badgegroups.length; j++) {
-                    if (sortStaffBS[i].badgegroups[j].badge == bname && sortStaffBS[i].badgegroups[j].level <= l) {
+                    if (sortStaffBS[i].badgegroups[j].bid == bid && sortStaffBS[i].badgegroups[j].level <= l) {
                         bset.push(sortStaffBS[i]);
                     }
                 }
@@ -224,6 +216,15 @@ var MainComponent = (function () {
             numOfStaff = 0;
         }
         return numOfStaff;
+    };
+    MainComponent.prototype.getBadgeName = function (bid) {
+        var bname = "";
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bname = this.badges[i].name;
+            }
+        }
+        return bname;
     };
     MainComponent = __decorate([
         core_1.Component({

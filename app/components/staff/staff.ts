@@ -16,6 +16,7 @@ export class Staff {
 }
 
 export class UserBGroup {
+  bid: string;
 	badge: string;
 	level: number;
   status: boolean;
