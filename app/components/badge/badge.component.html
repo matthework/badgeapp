@@ -2,7 +2,7 @@
 <div *ngIf="auth.authenticated()">
 
 <div *ngIf="badges">
-<h2>Badges</h2>
+<h2 class="text-blue">Badges</h2>
 <input [(ngModel)]="query" placeholder="Search for">
 <button class="button-showBCat" *ngIf!="showBadges" (click)="showBadges=true;showBadgeCat()">Badge Category</button>
 <!-- <button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button> -->

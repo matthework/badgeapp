@@ -5,7 +5,7 @@ h1 {
 }
 h2 {
   font-size: 1.6em;
-  color: #999;
+  color: #039be5;
   margin-top: 20px;
   padding-top: 0;
 }
@@ -238,13 +238,28 @@ textarea {
   font-style: italic;
   word-wrap: break-word;
 }
-.button-l-save {
+.button-l-apply {
   position: relative; 
   left: 33%;
+  width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-l-apply:hover{
+  color: white;
+  background-color: limegreen;
 }
 .button-l-cancel {
   position: relative; 
   left: 33%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+}
+.button-l-cancel:hover{
+  color: white;
+  background-color: red;
 }
 .badgeset{
   cursor: pointer;
@@ -271,4 +286,7 @@ textarea {
   color: #999;
   margin-top: 0;
   padding-top: 5px;
+}
+.text-blue {
+  color: #039be5;
 }
