@@ -366,6 +366,11 @@ textarea {
 .click:visited{
   color: #607D8B;
 }
+.click-badgeset{
+  color: #039be5;
+  cursor: pointer;
+  cursor: hand;
+}
 .input-tags{
   width: 120px;
   text-transform: uppercase;

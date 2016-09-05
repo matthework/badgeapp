@@ -286,16 +286,6 @@ th , td  {
 .th-badge {
   width: 28%;
 }
-/*
-.table-inside {
-  table-layout: fixed;
-  width: 100%;
-  white-space: nowrap;
-  margin-bottom: 0px;
+.text-blue {
+  color: #039be5;
 }
-.table-inside td {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}*/
-

@@ -25,7 +25,7 @@
 <textarea class="ta-brief" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea><br>
 
 <br>
-<button class="button-add" [disabled]="!newUser.fname||!newUser.email" (click)="addNewUser()">Save</button>
+<button class="button-save" [disabled]="!newUser.fname||!newUser.email" (click)="addNewUser()">Save</button>
 <button class="button-cancel" (click)="goBack()">Cancel</button>
 <br>
 <br>

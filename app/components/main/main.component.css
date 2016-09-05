@@ -191,3 +191,6 @@ nav a.router-link-active {
   color: red;
   font-size: 1.0em
 }
+.text-blue {
+  color: #039be5;
+}

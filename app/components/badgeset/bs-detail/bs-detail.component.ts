@@ -154,7 +154,9 @@ export class BSDetailComponent implements OnInit {
     var badgesOptions = [];
     if (this.badges != null) {
         for (var i = 0; i < this.badges.length; i++) { 
-          badgesOptions.push(this.badges[i].name);
+          if (this.badges[i].status == 'Accepted') {
+            badgesOptions.push(this.badges[i].name);
+          }
         }
     }
     // console.log('getBadgesOptions: ', badgesOptions);

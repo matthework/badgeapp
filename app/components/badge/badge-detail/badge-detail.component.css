@@ -329,6 +329,11 @@ textarea {
 .click:visited{
   color: #607D8B;
 }
+.click-badge{
+  color: #039be5;
+  cursor: pointer;
+  cursor: hand;
+}
 .select-status {
   background: transparent;
   width: 150px;

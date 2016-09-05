@@ -79,7 +79,7 @@
 <button class="button-apply" *ngIf!="active" (click)="active=true">+ Apply New</button>
 <br>
 <div *ngIf="active">
-	<h3>Apply New Badge</h3><br>
+	<h3 class="text-blue">Apply New Badge</h3><br>
 	<label>Badge: </label>
 	<select class="select-badge" [(ngModel)]="newBadge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
 
@@ -89,7 +89,7 @@
 	<label>Description: </label>
 	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBadge,newLevel)}}</textarea><br>
 
-	<button class="button-l-save" (click)="addBadgeGroup();active=false">Apply</button>
+	<button class="button-l-apply" (click)="addBadgeGroup();active=false">Apply</button>
 	<button class="button-l-cancel" (click)="active=false">Cancel</button><br>
 </div>
 <br>

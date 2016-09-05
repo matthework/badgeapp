@@ -162,14 +162,28 @@ textarea {
 .button-small {
   width: 45px;
 }
-.button-add {
+.button-save {
   position: relative; 
   left: 32%;
   width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-save:hover{
+  color: white;
+  background-color: limegreen;
 }
 .button-cancel {
   position: relative; 
   left: 32%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+}
+.button-cancel:hover{
+  color: white;
+  background-color: red;
 }
 .staff-error {
   border-bottom-color: #E22323;

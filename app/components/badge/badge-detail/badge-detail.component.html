@@ -4,7 +4,7 @@
 <div *ngIf="badge">
 
 <div *ngIf="!bName || !auth.isAdmin()">
-<h2 class="click" (click)="bName=true">Badge - {{badge.name}}</h2><br>
+<h2 class="click-badge" (click)="bName=true">Badge - {{badge.name}}</h2><br>
 </div>
 
 <div *ngIf="bName && auth.isAdmin()">
