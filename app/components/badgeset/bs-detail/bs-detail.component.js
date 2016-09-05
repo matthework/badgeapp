@@ -47,6 +47,7 @@ var BSDetailComponent = (function () {
         this.getBadgeSet();
         this.getBadges();
         this.getTiers();
+        // this.checkEmptyBadge();
     };
     BSDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
@@ -62,6 +63,10 @@ var BSDetailComponent = (function () {
         console.log('id from _routeParams: ', this.id);
         this._bsService.getBadgeSet(this.id).subscribe(function (badgeset) { _this.badgeset = badgeset; });
     };
+    BSDetailComponent.prototype.getBadgeSets = function () {
+        var _this = this;
+        this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
+    };
     BSDetailComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
@@ -72,7 +77,8 @@ var BSDetailComponent = (function () {
     };
     BSDetailComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);
-        location.reload();
+        this.getBadgeSets();
+        // location.reload();
     };
     BSDetailComponent.prototype.toBSEdit = function (bsid) {
         this._router.navigate(['/bs/edit', bsid]);
@@ -260,6 +266,16 @@ var BSDetailComponent = (function () {
             this.removeBadgeSet();
         }
     };
+    BSDetailComponent.prototype.checkAdmin = function () {
+        if (this.auth.isAdmin()) {
+            this.bedit = true;
+        }
+    };
+    // checkEmptyBadge() {
+    //   if(this.badgeset.badgegroups == null) {
+    //     this.bedit = true;
+    //   }
+    // }
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();
     };

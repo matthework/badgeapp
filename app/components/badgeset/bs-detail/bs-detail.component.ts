@@ -20,6 +20,7 @@ import {YesNoPipe} from '../../pipe/yes-no-pipe';
 
 export class BSDetailComponent implements OnInit {
 
+  badgesets: BadgeSet[];
   badgeset: BadgeSet;
   badges: Badge[] = [];
   tiers: Tier[] = [];
@@ -55,6 +56,7 @@ export class BSDetailComponent implements OnInit {
     this.getBadgeSet();
     this.getBadges();
     this.getTiers();
+    // this.checkEmptyBadge();
   }
 
   ngOnDestroy() {
@@ -72,6 +74,10 @@ export class BSDetailComponent implements OnInit {
     this._bsService.getBadgeSet(this.id).subscribe(badgeset => {this.badgeset = badgeset});
   }
 
+  getBadgeSets() {
+    this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
+  }
+
   getBadges() {
     this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
   }
@@ -82,7 +88,8 @@ export class BSDetailComponent implements OnInit {
 
   toBadgeSets() {
     this._router.navigate(['/badgeset']);
-    location.reload();
+    this.getBadgeSets();
+    // location.reload();
   }
 
   toBSEdit(bsid:string) {
@@ -92,7 +99,7 @@ export class BSDetailComponent implements OnInit {
   addBadgeSet() {
     this._router.navigate(['/bs/new']);
   }
-  
+
   updateBadgeSet() {
     for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
       this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
@@ -289,6 +296,18 @@ export class BSDetailComponent implements OnInit {
       this.removeBadgeSet();
     }
   }
+
+  checkAdmin() {
+    if(this.auth.isAdmin()) {
+      this.bedit = true;
+    }
+  }
+
+  // checkEmptyBadge() {
+  //   if(this.badgeset.badgegroups == null) {
+  //     this.bedit = true;
+  //   }
+  // }
 
   goBack() {
     window.history.back();

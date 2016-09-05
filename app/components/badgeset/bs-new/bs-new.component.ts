@@ -17,6 +17,7 @@ import {AuthService} from '../../auth/auth.service';
 
 export class BSNewComponent{
   
+  badgesets: BadgeSet[];
   badges: Badge[] = [];
   tiers: Tier[] = [];
   active = false;
@@ -54,11 +55,16 @@ export class BSNewComponent{
 
   ngOnInit() {
     this.getBadges();
+    this.getBadgeSets();
     this.getTiers();
   }
 
   getBadges() {
     this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
+  }
+
+  getBadgeSets() {
+    this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
   }
 
   getTiers() {
@@ -105,7 +111,8 @@ export class BSNewComponent{
 
   toBadgeSets() {
     this._router.navigate(['/badgeset']);
-    location.reload();
+    this.getBadgeSets();
+    // location.reload();
   }
 
   goBack() {

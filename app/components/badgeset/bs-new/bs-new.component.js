@@ -47,11 +47,16 @@ var BSNewComponent = (function () {
     }
     BSNewComponent.prototype.ngOnInit = function () {
         this.getBadges();
+        this.getBadgeSets();
         this.getTiers();
     };
     BSNewComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
+    };
+    BSNewComponent.prototype.getBadgeSets = function () {
+        var _this = this;
+        this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
     };
     BSNewComponent.prototype.getTiers = function () {
         var _this = this;
@@ -94,7 +99,8 @@ var BSNewComponent = (function () {
     };
     BSNewComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);
-        location.reload();
+        this.getBadgeSets();
+        // location.reload();
     };
     BSNewComponent.prototype.goBack = function () {
         window.history.back();
