@@ -51,11 +51,11 @@ var BadgeEditComponent = (function () {
         // if(!this.badge.approved) {
         //   this.badge.inused = false;
         // }
+        this.badge.badgelevels.sort(this.toCompare);
         var value = JSON.stringify(this.badge);
         this._badgeService.updateBadge(this.id, value).subscribe();
-        console.log('you submitted value: ', value);
-        this.toBadges();
-        // this.toBadgeDetail();
+        console.log('you updated value: ', value);
+        // this.toBadges();
     };
     BadgeEditComponent.prototype.addBadge = function () {
         this._router.navigate(['/badge/new']);

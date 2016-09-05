@@ -73,8 +73,9 @@
 
 <!-- 	<label>Approved: </label>
 <text>{{badgeset.approved | yes_no}}</text><br> -->
-<div *ngIf="auth.isAdmin() && !badgeset.badgegroups[0]" >
-<button *ngIf="auth.isAdmin() && !addNew"  class="button-newBadge" (click)="addNew=true;bedit=true">New Badge</button>
+
+<div *ngIf="auth.isAdmin() && !addNew && !badgeset.badgegroups[0]" >
+<button class="button-newBadge" (click)="addNew=true;bedit=true">New Badge</button>
 </div>
 
 <div *ngIf="badgeset.badgegroups[0]" >

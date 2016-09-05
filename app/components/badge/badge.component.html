@@ -37,7 +37,7 @@
       <td *ngIf="badge.status=='Accepted' || auth.isAdmin()" class="td-overview" (click)="onSelect(badge)">{{badge.overview}}</td>
 <!--       <td *ngIf="badge.inused || auth.isAdmin()" (click)="onSelect(badge)" class="td-approved">{{badge.approved | yes_no}}</td> -->
       <td *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)" class="td-status">{{badge.status}}</td>
-      <td *ngIf="(badge.status=='Accepted' || auth.isAdmin()) && active" class="td-last"><button *ngIf="auth.isAdmin()" class="button-s-x" (click)="deleteBadgePop(badge._id)">X</button><button *ngIf="auth.isAdmin()" class="button-s-e" (click)="toEdit(badge._id)">E</button></td>
+      <td *ngIf="(badge.status=='Accepted' || auth.isAdmin()) && active" class="td-last"><button *ngIf="auth.isAdmin()" class="button-s-x" (click)="deleteBadgePop(badge._id)">X</button><!-- <button *ngIf="auth.isAdmin()" class="button-s-e" (click)="toEdit(badge._id)">E</button> --></td>
    </tr>
 </table>
 </div>

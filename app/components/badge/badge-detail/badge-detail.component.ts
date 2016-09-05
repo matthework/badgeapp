@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 
-import {Badge} from '../badge';
+import {Badge,BadgeLevel} from '../badge';
 import {BadgeService} from '../badge.service';
 import {BadgeSet} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
@@ -19,10 +19,18 @@ import {YesNoPipe} from '../../pipe/yes-no-pipe';
 export class BadgeDetailComponent implements OnInit {
 
     badge: Badge;
+    badges: Badge[] = [];
     badgesets: BadgeSet[] = [];
     sub: any;
     id: string;
+    newLevel = 0;
+    newDesc = "";
+    statusOptions = ['Accepted','Draft','NotUsed'];
     bName = false;
+    oview =false;
+    editStatus = false;
+    bedit = false;
+    addLevel = false;
 
     constructor(
         private _badgeService: BadgeService, 
@@ -34,6 +42,7 @@ export class BadgeDetailComponent implements OnInit {
     ngOnInit() {
         this.getParams();
         this.getBadge();
+        this.getBadges()
         this.getBadgeSets();
     }
 
@@ -52,13 +61,18 @@ export class BadgeDetailComponent implements OnInit {
         this._badgeService.getBadge(this.id).subscribe((badge) => {this.badge = badge;});
     }
 
+    getBadges() {
+        this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
+    }
+
     getBadgeSets() {
         this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
     }
 
     toBadges() {
         this._router.navigate(['/badges']);
-        location.reload();
+        this.getBadges()
+        // location.reload();
     }
 
     editBadge() {
@@ -94,6 +108,72 @@ export class BadgeDetailComponent implements OnInit {
         }
         return result;
     }
+
+  updateBadge() {
+    this.badge.code = this.badge.code.toUpperCase();
+    this.badge.badgelevels = this.badge.badgelevels;
+    this.badge.badgelevels.sort(this.toCompare);
+    let value = JSON.stringify(this.badge)
+    this._badgeService.updateBadge(this.id,value).subscribe();
+    console.log('you updated value: ', value); 
+  }
+
+  addBadge() {
+    this._router.navigate(['/badge/new']);
+  }
+
+  removeBadge() {
+    this._badgeService.deleteBadge(this.id).subscribe();
+    this.toBadges();
+  }
+
+  deleteBadgePop() {
+    var name = this.badge.name
+    var r = confirm("Are you sure you want to delete Badge: " + name.toUpperCase() +" ?");
+    if (r == true) {
+      this.removeBadge();
+    }
+  }
+
+  addBadgeLevel() {
+    this.badge.badgelevels.push({level: this.newLevel, desc: this.newDesc});
+    this.badge.badgelevels.sort(this.toCompare);
+    let value = JSON.stringify(this.badge)
+    console.log('you submitted value: ', value);
+    this.newLevel = 0;
+    this.newDesc = "";
+  }
+
+  toCompare(a,b) {
+    if (a.level < b.level)
+      return -1;
+    else if (a.level > b.level)
+      return 1;
+    else 
+      return 0;
+  }
+
+  removeBadgeLevel(selectedLevel: BadgeLevel) {
+    let index = this.badge.badgelevels.indexOf(selectedLevel);
+    this.badge.badgelevels.splice(index,1);
+    let value = JSON.stringify(this.badge)
+    console.log('you submitted value: ', value);
+  }
+
+  deleteBadgeLevelPop(selectedLevel: BadgeLevel) {
+    var name = this.badge.name
+    var level = selectedLevel.level
+    var r = confirm("Are you sure you want to delete "+ name.toUpperCase() + " Level " + level +" ?");
+    if (r == true) {
+      this.removeBadgeLevel(selectedLevel);
+    }
+  }
+
+  checkAdmin() {
+    if(this.auth.isAdmin()) {
+      this.bedit = true;
+    }
+  }
 
     goBack() {
     window.history.back();

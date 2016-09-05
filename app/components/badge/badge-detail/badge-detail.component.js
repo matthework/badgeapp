@@ -21,12 +21,21 @@ var BadgeDetailComponent = (function () {
         this._router = _router;
         this.route = route;
         this.auth = auth;
+        this.badges = [];
         this.badgesets = [];
+        this.newLevel = 0;
+        this.newDesc = "";
+        this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
         this.bName = false;
+        this.oview = false;
+        this.editStatus = false;
+        this.bedit = false;
+        this.addLevel = false;
     }
     BadgeDetailComponent.prototype.ngOnInit = function () {
         this.getParams();
         this.getBadge();
+        this.getBadges();
         this.getBadgeSets();
     };
     BadgeDetailComponent.prototype.ngOnDestroy = function () {
@@ -43,13 +52,18 @@ var BadgeDetailComponent = (function () {
         console.log('id from _routeParams: ', this.id);
         this._badgeService.getBadge(this.id).subscribe(function (badge) { _this.badge = badge; });
     };
+    BadgeDetailComponent.prototype.getBadges = function () {
+        var _this = this;
+        this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
+    };
     BadgeDetailComponent.prototype.getBadgeSets = function () {
         var _this = this;
         this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
     };
     BadgeDetailComponent.prototype.toBadges = function () {
         this._router.navigate(['/badges']);
-        location.reload();
+        this.getBadges();
+        // location.reload();
     };
     BadgeDetailComponent.prototype.editBadge = function () {
         this._router.navigate(['/badge/edit', this.id]);
@@ -80,6 +94,63 @@ var BadgeDetailComponent = (function () {
             }
         }
         return result;
+    };
+    BadgeDetailComponent.prototype.updateBadge = function () {
+        this.badge.code = this.badge.code.toUpperCase();
+        this.badge.badgelevels = this.badge.badgelevels;
+        this.badge.badgelevels.sort(this.toCompare);
+        var value = JSON.stringify(this.badge);
+        this._badgeService.updateBadge(this.id, value).subscribe();
+        console.log('you updated value: ', value);
+    };
+    BadgeDetailComponent.prototype.addBadge = function () {
+        this._router.navigate(['/badge/new']);
+    };
+    BadgeDetailComponent.prototype.removeBadge = function () {
+        this._badgeService.deleteBadge(this.id).subscribe();
+        this.toBadges();
+    };
+    BadgeDetailComponent.prototype.deleteBadgePop = function () {
+        var name = this.badge.name;
+        var r = confirm("Are you sure you want to delete Badge: " + name.toUpperCase() + " ?");
+        if (r == true) {
+            this.removeBadge();
+        }
+    };
+    BadgeDetailComponent.prototype.addBadgeLevel = function () {
+        this.badge.badgelevels.push({ level: this.newLevel, desc: this.newDesc });
+        this.badge.badgelevels.sort(this.toCompare);
+        var value = JSON.stringify(this.badge);
+        console.log('you submitted value: ', value);
+        this.newLevel = 0;
+        this.newDesc = "";
+    };
+    BadgeDetailComponent.prototype.toCompare = function (a, b) {
+        if (a.level < b.level)
+            return -1;
+        else if (a.level > b.level)
+            return 1;
+        else
+            return 0;
+    };
+    BadgeDetailComponent.prototype.removeBadgeLevel = function (selectedLevel) {
+        var index = this.badge.badgelevels.indexOf(selectedLevel);
+        this.badge.badgelevels.splice(index, 1);
+        var value = JSON.stringify(this.badge);
+        console.log('you submitted value: ', value);
+    };
+    BadgeDetailComponent.prototype.deleteBadgeLevelPop = function (selectedLevel) {
+        var name = this.badge.name;
+        var level = selectedLevel.level;
+        var r = confirm("Are you sure you want to delete " + name.toUpperCase() + " Level " + level + " ?");
+        if (r == true) {
+            this.removeBadgeLevel(selectedLevel);
+        }
+    };
+    BadgeDetailComponent.prototype.checkAdmin = function () {
+        if (this.auth.isAdmin()) {
+            this.bedit = true;
+        }
     };
     BadgeDetailComponent.prototype.goBack = function () {
         window.history.back();

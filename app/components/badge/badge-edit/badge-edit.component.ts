@@ -58,11 +58,11 @@ export class BadgeEditComponent implements OnInit {
     // if(!this.badge.approved) {
     //   this.badge.inused = false;
     // }
+    this.badge.badgelevels.sort(this.toCompare);
     let value = JSON.stringify(this.badge)
     this._badgeService.updateBadge(this.id,value).subscribe();
-    console.log('you submitted value: ', value); 
-    this.toBadges();
-    // this.toBadgeDetail();
+    console.log('you updated value: ', value); 
+    // this.toBadges();
   }
 
   addBadge() {
