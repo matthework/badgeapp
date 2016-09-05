@@ -42,9 +42,7 @@ export class BSEditComponent implements OnInit {
     private auth: AuthService) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.getParams();
     this.getBadgeSet();
     this.getBadges();
     this.getTiers();
@@ -52,6 +50,12 @@ export class BSEditComponent implements OnInit {
 
   ngOnDestroy() {
       this.sub.unsubscribe();
+  }
+
+  getParams() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
   }
 
   getBadgeSet() {

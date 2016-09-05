@@ -41,6 +41,7 @@ select {
   margin-bottom: 0px;
 }
 button {
+  color: #039be5;
   width: 100px;
   margin-top: 0px;
   margin-right: 0px;
@@ -202,14 +203,35 @@ textarea {
 .focus {
   color: #039be5;
 }
-.button-add {
+.button-newBadge {
+  position: relative; 
+  left: 69%;
   width: 120px;
   color: white;
   background-color: #039be5;
 }
-.button-add:hover {
+.button-newBadge:hover {
   color: white;
   background-color: limegreen;
+}
+.button-newBS {
+  width: 140px;
+  color: white;
+  background-color: #039be5;
+}
+.button-newBS:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-delete {
+  background-color: pink;
+  color: white;
+  vertical-align: bottom;
+  margin-left: 10px;
+}
+.button-delete:hover {
+  background-color: red;
+  color: white;
 }
 .button-s-y {
   width: 40px;
@@ -236,12 +258,10 @@ textarea {
 }
 .button-bl-y {
   position: relative; 
-  left: 50.5%;
+  left: 39%;
   width: 100px;
   color: white;
   background-color: #039be5;
-  border-radius: 4px;
-  /*border: 1px solid #cccccc;*/
   margin-left: 10px;
 }
 .button-bl-y:hover{
@@ -250,11 +270,10 @@ textarea {
 }
 .button-bl-n {
   position: relative; 
-  left: 50.5%;
+  left: 39%;
   width: 100px;
   color: white;
   background-color: hotpink;
-  border-radius: 4px;
   margin-left: 10px;
 }
 .button-bl-n:hover{
@@ -456,4 +475,13 @@ textarea {
 }
 .label-level {
   width: 5em;
+}
+.input-bs {
+  width: 300px;
+  margin-right: 20px;
+}
+.label-bsName {
+  color: #039be5;
+  font-size: 1.2em;
+  width: 6.6em 
 }

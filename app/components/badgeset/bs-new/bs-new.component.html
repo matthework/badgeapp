@@ -1,7 +1,7 @@
 
 <div *ngIf="auth.isAdmin()">
 
-<h2>Add New Badge Set</h2><br>
+<h2 class="text-blue">Add New Badge Set</h2><br>
 
 <!-- <label>Index: </label>
 <input class="input-index" type="number" [(ngModel)]="newBS.index" placeholder="Index"><br> -->
@@ -66,7 +66,7 @@
 </div>
 
 <div *ngIf!="prerequisite">
-	<button class="button-add" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>
+	<button class="button-save" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>
 	<button class="button-cancel" (click)="goBack()">Cancel</button>
 </div>
 <br>

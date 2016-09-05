@@ -35,16 +35,19 @@ var BSEditComponent = (function () {
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
     }
     BSEditComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.sub = this.route.params.subscribe(function (params) {
-            _this.id = params['id'];
-        });
+        this.getParams();
         this.getBadgeSet();
         this.getBadges();
         this.getTiers();
     };
     BSEditComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
+    };
+    BSEditComponent.prototype.getParams = function () {
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            _this.id = params['id'];
+        });
     };
     BSEditComponent.prototype.getBadgeSet = function () {
         var _this = this;

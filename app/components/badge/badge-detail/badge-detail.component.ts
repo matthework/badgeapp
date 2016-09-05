@@ -18,11 +18,11 @@ import {YesNoPipe} from '../../pipe/yes-no-pipe';
 
 export class BadgeDetailComponent implements OnInit {
 
-    title: string = "Badge";
     badge: Badge;
     badgesets: BadgeSet[] = [];
     sub: any;
     id: string;
+    bName = false;
 
     constructor(
         private _badgeService: BadgeService, 
@@ -32,15 +32,19 @@ export class BadgeDetailComponent implements OnInit {
         private auth: AuthService) {}
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
-            this.id = params['id'];
-        });
+        this.getParams();
         this.getBadge();
         this.getBadgeSets();
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    getParams() {
+        this.sub = this.route.params.subscribe(params => {
+          this.id = params['id'];
+        });
     }
 
     getBadge() {
