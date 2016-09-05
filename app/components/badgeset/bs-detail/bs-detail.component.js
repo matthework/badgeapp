@@ -47,6 +47,7 @@ var BSDetailComponent = (function () {
         this.getBadgeSet();
         this.getBadges();
         this.getTiers();
+        // this.checkEmptyBadge();
     };
     BSDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
@@ -72,7 +73,8 @@ var BSDetailComponent = (function () {
     };
     BSDetailComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);
-        location.reload();
+        this.getBadgeSet();
+        // location.reload();
     };
     BSDetailComponent.prototype.toBSEdit = function (bsid) {
         this._router.navigate(['/bs/edit', bsid]);
@@ -260,6 +262,16 @@ var BSDetailComponent = (function () {
             this.removeBadgeSet();
         }
     };
+    BSDetailComponent.prototype.checkAdmin = function () {
+        if (this.auth.isAdmin()) {
+            this.bedit = true;
+        }
+    };
+    // checkEmptyBadge() {
+    //   if(this.badgeset.badgegroups == null) {
+    //     this.bedit = true;
+    //   }
+    // }
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();
     };

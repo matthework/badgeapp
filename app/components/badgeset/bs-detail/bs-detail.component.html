@@ -3,11 +3,11 @@
 
 <div *ngIf="badgeset">
 
-<div *ngIf="!bsName">
+<div *ngIf="!bsName || !auth.isAdmin()">
 <h2 class="click" (click)="bsName=true">Badge Set - {{badgeset.name}}</h2><br>
 </div>
 
-<div *ngIf="bsName">
+<div *ngIf="bsName && auth.isAdmin()">
 <br>
 <label class="label-bsName">Badge Set: </label>
 <input class="input-bs" type="text" [(ngModel)]="badgeset.name" placeholder="">
@@ -15,12 +15,12 @@
 <button class="button-s-n" (click)="bsName=false;getBadgeSet()">N</button>
 </div>
 
-<div *ngIf="!tg">
+<div *ngIf="!tg || !auth.isAdmin()">
 <label>Tier/Grade: </label>
 <text  class="click" (click)="tg=true">{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
 </div>
 
-<div *ngIf="tg">
+<div *ngIf="tg && auth.isAdmin()">
 <label class="text-blue">Tier/Grade: </label>
 <select class="select-tier" [(ngModel)]="badgeset.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 <select class="select-grade" [(ngModel)]="badgeset.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select>
@@ -35,12 +35,12 @@
 <label>Pay: </label>
 <text>${{getPay(badgeset.tier,badgeset.grade)}}K</text><br> -->
 
-<div *ngIf="!tag">
+<div *ngIf="!tag && badgeset.tags[0] || !auth.isAdmin()">
 <label>Tags: </label>
 <text class="click" (click)="tag=true">{{badgeset.tags}}</text>
 </div>
 
-<div *ngIf="tag">
+<div *ngIf="auth.isAdmin() && (tag || !badgeset.tags[0])">
 <label class="text-blue">Tags: </label>
 <input class="input-tags" type="text" [(ngModel)]="newTag" placeholder=""><button class="button-t-add" (click)="addTag(newTag)">+</button><text class="right" *ngFor="let tag of badgeset.tags">{{tag}} <button class="button-t-delete" (click)="deleteTag(tag)">-</button></text>
 
@@ -58,12 +58,12 @@
 <text>{{badgeset.inused | yes_no}}</text><br>
 -->
 
-<div *ngIf="!status">
+<div *ngIf="!status || !auth.isAdmin()">
 <label>Status: </label>
 <text class="click" (click)="status=true">{{badgeset.status}}</text><br>
 </div>
 
-<div *ngIf="status">
+<div *ngIf="status && auth.isAdmin()">
 <label class="text-blue">Status: </label>
 <select class="select-status" [(ngModel)]="badgeset.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
 
@@ -73,10 +73,15 @@
 
 <!-- 	<label>Approved: </label>
 <text>{{badgeset.approved | yes_no}}</text><br> -->
+<div *ngIf="auth.isAdmin() && !badgeset.badgegroups[0]" >
+<button *ngIf="auth.isAdmin() && !addNew"  class="button-newBadge" (click)="addNew=true;bedit=true">New Badge</button>
+</div>
 
+<div *ngIf="badgeset.badgegroups[0]" >
 <button *ngIf="!more && !bedit" class="button-more" (click)="more=true">Show More</button>
 <button *ngIf="more && !bedit" class="button-less" (click)="more=false">Show Less</button>
 <button *ngIf="auth.isAdmin() && bedit && !addNew"  class="button-newBadge" (click)="addNew=true">New Badge</button>
+</div>
 
 <table *ngIf="!more" class="table-badgegroups">
 	<tr>
@@ -86,8 +91,8 @@
 	  <!-- <th class="th-core">Core Badge</th> -->
 	</tr>
 	<tr *ngFor="let badgegroup of badgeset.badgegroups">
-		<td *ngIf="!bedit" (click)="bedit=true"><text class="badge" (click)="bedit=false;toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></text></td>
-		<td *ngIf="!bedit" class="td-desc" (click)="bedit=true">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
+		<td *ngIf="!bedit" (click)="checkAdmin()"><text class="badge" (click)="bedit=false;toBadgeDetail(badgegroup.badge)">{{badgegroup.badge}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></text></td>
+		<td *ngIf="!bedit" class="td-desc" (click)="checkAdmin()">{{getDesc(badgegroup.badge,badgegroup.level)}}</td>
 		<td *ngIf="bedit"><select class="select-badge" [(ngModel)]="badgegroup.badge"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select><select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.badge)" [value]="lo">{{lo}}</option></select><br><input class="input-focus" type="text" [(ngModel)]="badgegroup.focus" placeholder="Focus"></td>
 		<td *ngIf="bedit" class="td-desc">{{getDesc(badgegroup.badge, badgegroup.level)}}</td>
 		<td class="td-last"><button *ngIf="bedit && auth.isAdmin()" class="button-s-delete" (click)="deleteBadgeGroupPop(badgegroup)">X</button></td>
@@ -125,13 +130,13 @@
 </table>
 
 <br>
-<button *ngIf="!bedit" (click)="goBack()">Back</button>
+<button *ngIf="!auth.isAdmin() && !bedit" (click)="goBack()">Back</button>
 
-<div *ngIf="auth.isAdmin() && bedit && !addNew">
+<div *ngIf="auth.isAdmin() && !addNew">
 <button class="button-newBS" (click)="addBadgeSet()">New BadgeSet</button>
 <button class="button-delete" (click)="deleteBadgeSetPop()">Delete</button>
-<button class="button-bl-y" (click)="bedit=false;updateBadgeSet()">Save</button>
-<button class="button-bl-n" (click)="bedit=false;getBadgeSet()">Cancel</button>
+<button *ngIf="bedit" class="button-bl-y" (click)="bedit=false;updateBadgeSet()">Save</button>
+<button *ngIf="bedit" class="button-bl-n" (click)="bedit=false;getBadgeSet()">Cancel</button>
 </div>
 
 <!-- <button (click)="goBack()">Back</button> -->
