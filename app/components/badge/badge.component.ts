@@ -102,7 +102,7 @@ export class BadgeComponent implements OnInit {
             this.badgesets[i].badgegroups.splice(index,1);
           }
         }
-        let value = JSON.stringify(this.badgesets[i])
+        let value = JSON.stringify(this.badgesets[i]);
         this._bsService.updateBadgeSet(this.badgesets[i]._id,value).subscribe();
         console.log('you submitted value: ', value);
       }
