@@ -11,6 +11,7 @@ type Badge struct {
 	Name	string	`json:"name" bson:"name"`
 	Code	string	`json:"code" bson:"code"`
 	Overview	string	`json:"overview" bson:"overview"`
+	Focus 	[]string	`json:"focus" bson:"focus"`
 	BadgeLevels	[]BadgeLevel	`json:"badgelevels" bson:"badgelevels"`
 	Approved	bool	`json:"approved" bson:"approved"`
 	InUsed	bool	`json:"inused" bson:"inused"`

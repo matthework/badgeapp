@@ -21,6 +21,7 @@ export class BSEditComponent implements OnInit {
   badges: Badge[] = [];
   tiers: Tier[] = [];
   active = false;
+  newTag = "";
   newBID = "";
   newLevel = 0;
   newFocus = "";
@@ -294,6 +295,7 @@ export class BSEditComponent implements OnInit {
 
   addTag(tag:string) {
     this.badgeset.tags.push(tag.toUpperCase());
+    this.newTag = "";
   }
 
   deleteTag(tag:string) {

@@ -19,6 +19,7 @@ var BadgeEditComponent = (function () {
         this.route = route;
         this.auth = auth;
         this.active = false;
+        this.newFC = "";
         this.newLevel = 0;
         this.newDesc = "";
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];

@@ -36,6 +36,16 @@ var BSComponent = (function () {
         this.bsname1 = "";
         this.bsname2 = "";
         this.bsname3 = "";
+        this.labels = ["I understand... ",
+            "I participate... ",
+            "I contribute... ",
+            "I lead... ",
+            "I advise... ",
+            "I can teach... ",
+            "I plan sophisticated... ",
+            "I have achieved wide recognition... ",
+            "I am a world leading... "
+        ];
     }
     BSComponent.prototype.ngOnInit = function () {
         this.getBadgeSets();

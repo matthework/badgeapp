@@ -15,6 +15,7 @@ export class BadgeEditComponent implements OnInit {
 
   badge: Badge;
   active = false;
+  newFC = "";
   newLevel = 0;
   newDesc = "";
   sub: any;

@@ -244,6 +244,7 @@ export class BSNewComponent{
 
   addTag(tag:string) {
     this.newBS.tags.push(tag.toUpperCase());
+    this.newTag = "";
   }
 
   deleteTag(tag:string) {

@@ -37,6 +37,16 @@ export class UserDetailComponent implements OnInit {
   newLevel = 0;
   newStatus = false;
   more = false;
+  labels = [  "I understand... ", 
+            "I participate... ", 
+            "I contribute... ", 
+            "I lead... ", 
+            "I advise... ", 
+            "I can teach... ", 
+            "I plan sophisticated... ",
+            "I have achieved wide recognition... ", 
+            "I am a world leading... "
+          ];
 
   constructor(
     private _staffService: StaffService, 

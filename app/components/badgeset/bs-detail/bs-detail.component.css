@@ -490,3 +490,8 @@ textarea {
   font-size: 1.2em;
   width: 6.6em 
 }
+.text-light-blue {
+  font-size: 1em;
+  font-style: italic;
+  color: #039be5;
+}

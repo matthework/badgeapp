@@ -23,6 +23,7 @@ export class BadgeDetailComponent implements OnInit {
     badgesets: BadgeSet[] = [];
     sub: any;
     id: string;
+    newFC = "";
     newLevel = 0;
     newDesc = "";
     statusOptions = ['Accepted','Draft','NotUsed'];
@@ -31,6 +32,17 @@ export class BadgeDetailComponent implements OnInit {
     editStatus = false;
     bedit = false;
     addLevel = false;
+    editFC = false;
+    labels = [  "I understand... ", 
+              "I participate... ", 
+              "I contribute... ", 
+              "I lead... ", 
+              "I advise... ", 
+              "I can teach... ", 
+              "I plan sophisticated... ",
+              "I have achieved wide recognition... ", 
+              "I am a world leading... "
+            ];
 
     constructor(
         private _badgeService: BadgeService, 
@@ -111,6 +123,9 @@ export class BadgeDetailComponent implements OnInit {
 
   updateBadge() {
     this.badge.code = this.badge.code.toUpperCase();
+    if(this.badge.focus == null) {
+        this.badge.focus = [];
+    }
     this.badge.badgelevels = this.badge.badgelevels;
     this.badge.badgelevels.sort(this.toCompare);
     let value = JSON.stringify(this.badge)
@@ -174,6 +189,33 @@ export class BadgeDetailComponent implements OnInit {
       this.bedit = true;
     }
   }
+
+  addFC(fc:string) {
+    if(this.badge.focus == null) {
+        this.badge.focus = [];
+    }
+    this.badge.focus.push(fc.toUpperCase());
+    this.newFC = "";
+    this.editFC = true;
+  }
+
+  deleteFC(fc:string) {
+    let index = this.badge.focus.indexOf(fc);
+    this.badge.focus.splice(index,1);
+  }
+
+    checkEmptyFocus() {
+        if (this.badge.focus != null) {
+            if (this.badge.focus.length == 0) {
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return true;
+        }
+
+    }
 
     goBack() {
     window.history.back();

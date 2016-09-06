@@ -14,22 +14,26 @@ var badge_detail_component_1 = require('./badge-detail/badge-detail.component');
 var badge_edit_component_1 = require('./badge-edit/badge-edit.component');
 var badge_service_1 = require('./badge.service');
 var bs_service_1 = require('../badgeset/bs.service');
+var staff_service_1 = require('../staff/staff.service');
 var auth_service_1 = require('../auth/auth.service');
 var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var yes_no_pipe_1 = require('../pipe/yes-no-pipe');
 var BadgeComponent = (function () {
-    function BadgeComponent(_router, _badgeService, _bsService, auth) {
+    function BadgeComponent(_router, _badgeService, _bsService, _staffService, auth) {
         this._router = _router;
         this._badgeService = _badgeService;
         this._bsService = _bsService;
+        this._staffService = _staffService;
         this.auth = auth;
         this.badges = [];
         this.badgesets = [];
+        this.staffs = [];
         this.active = true;
         this.showBadges = false;
         this.showBCat = false;
     }
     BadgeComponent.prototype.ngOnInit = function () {
+        this.getStaffs();
         this.getBadges();
         this.getBadgeSets();
     };
@@ -43,6 +47,10 @@ var BadgeComponent = (function () {
         if (this.badgesets == null) {
             this.active = true;
         }
+    };
+    BadgeComponent.prototype.getStaffs = function () {
+        var _this = this;
+        this._staffService.getStaffs().subscribe(function (staffs) { _this.staffs = staffs; });
     };
     BadgeComponent.prototype.onSelect = function (badge) {
         this.selectedBadge = badge;
@@ -60,6 +68,7 @@ var BadgeComponent = (function () {
         // let id = this.selectedBadge._id;
         this._badgeService.deleteBadge(id).subscribe();
         this.removeBadgeFromBS(id);
+        this.removeBadgeFromPerson(id);
         location.reload();
     };
     BadgeComponent.prototype.deleteBadgePop = function (id) {
@@ -79,15 +88,36 @@ var BadgeComponent = (function () {
     BadgeComponent.prototype.removeBadgeFromBS = function (bid) {
         if (this.badgesets != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
+                var indexArray = [];
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     if (this.badgesets[i].badgegroups[j].bid == bid) {
                         var index = this.badgesets[i].badgegroups.indexOf(this.badgesets[i].badgegroups[j]);
-                        this.badgesets[i].badgegroups.splice(index, 1);
+                        indexArray.push(index);
                     }
+                }
+                for (var k = indexArray.length - 1; k >= 0; k--) {
+                    this.badgesets[i].badgegroups.splice(indexArray[k], 1);
                 }
                 var value = JSON.stringify(this.badgesets[i]);
                 this._bsService.updateBadgeSet(this.badgesets[i]._id, value).subscribe();
-                console.log('you submitted value: ', value);
+            }
+        }
+    };
+    BadgeComponent.prototype.removeBadgeFromPerson = function (bid) {
+        if (this.staffs != null) {
+            for (var i = 0; i < this.staffs.length; i++) {
+                var indexArray = [];
+                for (var j = 0; j < this.staffs[i].userbgroups.length; j++) {
+                    if (this.staffs[i].userbgroups[j].bid == bid) {
+                        var index = this.staffs[i].userbgroups.indexOf(this.staffs[i].userbgroups[j]);
+                        indexArray.push(index);
+                    }
+                }
+                for (var k = indexArray.length - 1; k >= 0; k--) {
+                    this.staffs[i].userbgroups.splice(indexArray[k], 1);
+                }
+                var value = JSON.stringify(this.staffs[i]);
+                this._staffService.updateStaff(this.staffs[i]._id, value).subscribe();
             }
         }
     };
@@ -99,7 +129,7 @@ var BadgeComponent = (function () {
             directives: [badge_detail_component_1.BadgeDetailComponent, badge_edit_component_1.BadgeEditComponent],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, badge_service_1.BadgeService, bs_service_1.BSService, auth_service_1.AuthService])
+        __metadata('design:paramtypes', [router_1.Router, badge_service_1.BadgeService, bs_service_1.BSService, staff_service_1.StaffService, auth_service_1.AuthService])
     ], BadgeComponent);
     return BadgeComponent;
 }());

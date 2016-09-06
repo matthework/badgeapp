@@ -39,7 +39,17 @@ export class BSComponent implements OnInit {
 	bsname1 = "";
 	bsname2 = "";
 	bsname3 = "";
-
+    labels = [  "I understand... ", 
+          "I participate... ", 
+          "I contribute... ", 
+          "I lead... ", 
+          "I advise... ", 
+          "I can teach... ", 
+          "I plan sophisticated... ",
+          "I have achieved wide recognition... ", 
+          "I am a world leading... "
+        ];
+            
 	constructor (
 		private _router: Router,
 		private _bsService: BSService,
@@ -207,7 +217,7 @@ export class BSComponent implements OnInit {
 		var bname = "";
 		for (var i = 0; i < this.badges.length; i++) { 
 			if(this.badges[i]._id == bid) {
-				bname = this.badges[i].name;
+				bname = this.badges[i].name;		
 			}
 		}
 		return bname;

@@ -30,12 +30,26 @@
 <button class="button-ov-n" (click)="oview=false;getBadge()">N</button>
 </div>
 
+<br>
+<br>
+<div *ngIf="!editFC && !checkEmptyFocus() || !auth.isAdmin()">
+<label>Focus: </label>
+<text class="click" (click)="editFC=true">{{badge.focus}}</text>
+</div>
+
+<div *ngIf="auth.isAdmin() && (editFC || checkEmptyFocus())">
+<label class="text-blue">Focus: </label>
+<input class="input-focus" type="text" [(ngModel)]="newFC" placeholder=""><button class="button-t-add" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus">{{fc}} <button class="button-t-delete" (click)="deleteFC(fc)">-</button></text>
+
+<button class="button-s-y" (click)="editFC=false;updateBadge()">Y</button>
+<button class="button-s-n" (click)="editFC=false;getBadge()">N</button>
+</div>
+
 <!-- 	<label>Approved: </label>
 <text>{{badge.approved | yes_no}}</text><br> -->
 
 <!-- 	<label>InUsed: </label>
 <text>{{badge.inused | yes_no}}</text><br> -->
-<br>
 <div *ngIf="!editStatus || !auth.isAdmin()">
 <label>Status: </label>
 <text class="click" (click)="editStatus=true">{{badge.status}}</text>
@@ -60,7 +74,7 @@
 	</tr>
 	<tr *ngFor="let badgelevel of badge.badgelevels">
 		<td class="td-level" (click)="checkAdmin()">{{badgelevel.level}}</td>
-		<td class="td-desc" (click)="checkAdmin()">{{badgelevel.desc}}</td>
+		<td class="td-desc" (click)="checkAdmin()"><text class="text-light-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</td>
 		<td>
 		<div *ngFor="let bs of findBadgeSet(badge.name,badgelevel.level)">
 			<uli (click)="toBSDetail(bs._id)" class="uli-bset">{{bs.name}}</uli><text class="check-core">{{checkCore(bs,badge.name)}}</text>
@@ -77,7 +91,7 @@
 	</tr>
 	<tr *ngFor="let badgelevel of badge.badgelevels">
 		<td class="td-level-edit"><input class="input-level-edit" type="number" [(ngModel)]="badgelevel.level" placeholder="" /></td>
-		<td class="td-desc-edit"><textarea class="ta-edit" [(ngModel)]="badgelevel.desc" placeholder=""></textarea></td>
+		<td class="td-desc-edit"><text class="text-light-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="ta-edit" [(ngModel)]="badgelevel.desc" placeholder=""></textarea></td>
 		<td class="td-last-edit"><button *ngIf="bedit && auth.isAdmin()" class="button-s-delete" (click)="deleteBadgeLevelPop(badgelevel)">X</button></td>
 	</tr>
 </table>
@@ -88,7 +102,9 @@
 	<label>Level: </label>
 	<input class="input-level-new" type="number" [(ngModel)]="newLevel" placeholder="New Level" /><br>
 	<label>Desc: </label>
-	<textarea class="ta-small" [(ngModel)]="newDesc" placeholder="New Level Description"></textarea><br>
+	<text class="text-light">{{labels[newLevel-1]}}</text><br>
+	<label></label>
+	<textarea class="ta-small" [(ngModel)]="newDesc" placeholder=""></textarea><br>
 	<br>
 	<button class="button-l-save" [disabled]="!newLevel" (click)="addBadgeLevel();addLevel=false">Save</button>
 	<button class="button-l-cancel" (click)="addLevel=false">Cancel</button><br>

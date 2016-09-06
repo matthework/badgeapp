@@ -41,6 +41,16 @@ var BSDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = "";
+        this.labels = ["I understand... ",
+            "I participate... ",
+            "I contribute... ",
+            "I lead... ",
+            "I advise... ",
+            "I can teach... ",
+            "I plan sophisticated... ",
+            "I have achieved wide recognition... ",
+            "I am a world leading... "
+        ];
     }
     BSDetailComponent.prototype.ngOnInit = function () {
         this.getParams();
@@ -87,6 +97,9 @@ var BSDetailComponent = (function () {
         this._router.navigate(['/bs/new']);
     };
     BSDetailComponent.prototype.updateBadgeSet = function () {
+        if (this.badgeset.tags == null) {
+            this.badgeset.tags = [];
+        }
         for (var i = 0; i < this.badgeset.badgegroups.length; i++) {
             this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
         }
@@ -212,7 +225,12 @@ var BSDetailComponent = (function () {
         return moreBadges;
     };
     BSDetailComponent.prototype.addTag = function (tag) {
+        if (this.badgeset.tags == null) {
+            this.badgeset.tags = [];
+        }
         this.badgeset.tags.push(tag.toUpperCase());
+        this.newTag = "";
+        this.tag = true;
     };
     BSDetailComponent.prototype.deleteTag = function (tag) {
         var index = this.badgeset.tags.indexOf(tag);
@@ -284,6 +302,24 @@ var BSDetailComponent = (function () {
             }
         }
         return bname;
+    };
+    BSDetailComponent.prototype.resetNewValue = function () {
+        this.newBID = "";
+        this.newLevel = 0;
+        this.newFocus = "";
+    };
+    BSDetailComponent.prototype.checkEmptyTags = function () {
+        if (this.badgeset.tags != null) {
+            if (this.badgeset.tags.length == 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();

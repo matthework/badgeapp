@@ -38,6 +38,16 @@ export class StaffComponent {
 	showBS = false;
 	gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
 	sortStaffBS = [];
+    labels = [  "I understand... ", 
+              "I participate... ", 
+              "I contribute... ", 
+              "I lead... ", 
+              "I advise... ", 
+              "I can teach... ", 
+              "I plan sophisticated... ",
+              "I have achieved wide recognition... ", 
+              "I am a world leading... "
+            ];
 
 	constructor(
 		private _staffService: StaffService,  

@@ -16,6 +16,9 @@
 	<label>Overview: </label>
 	<textarea class="ta-big" [(ngModel)]="badge.overview" placeholder="Overview"></textarea><br>
 
+	<label>Focus: </label>
+	<input class="input-focus" type="text" [(ngModel)]="newFC" placeholder=""><button class="button-t-add" (click)="addFC(newFC)">+</button><text *ngFor="let fc of badgeset.focus">{{fc}} <button class="button-t-delete" (click)="deleteFC(fc)">-</button></text><br>
+
 <!-- 	<label>Approved: </label>
 	<input type="checkbox" [(ngModel)]="badge.approved" placeholder="Approved" /><br>
 
