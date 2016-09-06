@@ -223,11 +223,11 @@ export class BSDetailComponent implements OnInit {
       for (var i = 0; i < bgs.length; i++) { 
         for (var j = 0; j < this.badges.length; j++) { 
           for (var k = 0; k < this.badges[j].badgelevels.length; k++) { 
-            if (bgs[i].badge == this.badges[j].name && bgs[i].level>this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current":false});
+            if (bgs[i].bid == this.badges[j]._id && bgs[i].level>this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current":false});
             }
-            if (bgs[i].badge == this.badges[j].name && bgs[i].level==this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"badge": this.badges[j].name, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current":true});
+            if (bgs[i].bid == this.badges[j]._id && bgs[i].level==this.badges[j].badgelevels[k].level) {
+              moreBadges.push({"bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current":true});
             }
           }
         }

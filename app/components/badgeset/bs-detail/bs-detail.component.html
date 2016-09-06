@@ -125,8 +125,8 @@
 	  <th class="th-desc">Description</th>
 	</tr>
 	<tr *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
-		<td (click)="bedit=true;more=false"><text *ngIf="moreb.current" class="badge" (click)="bedit=false;toBadgeDetail(moreb.badge)">{{moreb.badge}} - {{moreb.level}} <text *ngIf="moreb.focus" class="focus"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" class="badge-more" (click)="toBadgeDetail(moreb.badge)">{{moreb.badge}} - {{moreb.level}}</text></td>
-		<td class="td-desc" (click)="bedit=true;more=false">{{getDesc(moreb.badge,moreb.level)}}</td>
+		<td (click)="bedit=true;more=false"><text *ngIf="moreb.current" class="badge" (click)="bedit=false;toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} - {{moreb.level}} <text *ngIf="moreb.focus" class="focus"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" class="badge-more" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} - {{moreb.level}}</text></td>
+		<td class="td-desc" (click)="bedit=true;more=false">{{getDesc(moreb.bid,moreb.level)}}</td>
 	</tr>
 </table>
 
