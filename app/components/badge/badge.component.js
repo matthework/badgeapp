@@ -13,25 +13,36 @@ var router_1 = require('@angular/router');
 var badge_detail_component_1 = require('./badge-detail/badge-detail.component');
 var badge_edit_component_1 = require('./badge-edit/badge-edit.component');
 var badge_service_1 = require('./badge.service');
+var bs_service_1 = require('../badgeset/bs.service');
 var auth_service_1 = require('../auth/auth.service');
 var filter_array_pipe_1 = require('../pipe/filter-array-pipe');
 var yes_no_pipe_1 = require('../pipe/yes-no-pipe');
 var BadgeComponent = (function () {
-    function BadgeComponent(_router, _badgeService, auth) {
+    function BadgeComponent(_router, _badgeService, _bsService, auth) {
         this._router = _router;
         this._badgeService = _badgeService;
+        this._bsService = _bsService;
         this.auth = auth;
         this.badges = [];
+        this.badgesets = [];
         this.active = true;
         this.showBadges = false;
         this.showBCat = false;
     }
     BadgeComponent.prototype.ngOnInit = function () {
         this.getBadges();
+        this.getBadgeSets();
     };
     BadgeComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
+    };
+    BadgeComponent.prototype.getBadgeSets = function () {
+        var _this = this;
+        this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
+        if (this.badgesets == null) {
+            this.active = true;
+        }
     };
     BadgeComponent.prototype.onSelect = function (badge) {
         this.selectedBadge = badge;
@@ -48,6 +59,7 @@ var BadgeComponent = (function () {
     BadgeComponent.prototype.removeBadge = function (id) {
         // let id = this.selectedBadge._id;
         this._badgeService.deleteBadge(id).subscribe();
+        this.removeBadgeFromBS(id);
         location.reload();
     };
     BadgeComponent.prototype.deleteBadgePop = function (id) {
@@ -64,6 +76,21 @@ var BadgeComponent = (function () {
         this.showBCat = true;
         this._router.navigate(['/badgecat']);
     };
+    BadgeComponent.prototype.removeBadgeFromBS = function (bid) {
+        if (this.badgesets != null) {
+            for (var i = 0; i < this.badgesets.length; i++) {
+                for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
+                    if (this.badgesets[i].badgegroups[j].bid == bid) {
+                        var index = this.badgesets[i].badgegroups.indexOf(this.badgesets[i].badgegroups[j]);
+                        this.badgesets[i].badgegroups.splice(index, 1);
+                    }
+                }
+                var value = JSON.stringify(this.badgesets[i]);
+                this._bsService.updateBadgeSet(this.badgesets[i]._id, value).subscribe();
+                console.log('you submitted value: ', value);
+            }
+        }
+    };
     BadgeComponent = __decorate([
         core_1.Component({
             selector: 'my-badge',
@@ -72,7 +99,7 @@ var BadgeComponent = (function () {
             directives: [badge_detail_component_1.BadgeDetailComponent, badge_edit_component_1.BadgeEditComponent],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, badge_service_1.BadgeService, auth_service_1.AuthService])
+        __metadata('design:paramtypes', [router_1.Router, badge_service_1.BadgeService, bs_service_1.BSService, auth_service_1.AuthService])
     ], BadgeComponent);
     return BadgeComponent;
 }());

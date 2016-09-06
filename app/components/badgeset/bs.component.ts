@@ -26,8 +26,8 @@ import {YesNoPipe} from '../pipe/yes-no-pipe';
 
 export class BSComponent implements OnInit {
 
-	badgesets: BadgeSet[] = [];
 	badges: Badge[] = [];
+	badgesets: BadgeSet[] = [];
 	tiers: Tier[] = [];
 	selectedBadgeSet: BadgeSet;
 	active = true;
@@ -181,11 +181,11 @@ export class BSComponent implements OnInit {
 		return result;
 	}
 
-	checkCore(bs:BadgeSet,b:string) {
+	checkCore(bs:BadgeSet,bid:string) {
 		var result = "";
 		if (bs != null) {
 			for (var i = 0; i < bs.corebadges.length; i++) { 
-				if (bs.corebadges[i].badge == b) {
+				if (bs.corebadges[i].bid == bid) {
 					result = " ** ";
 				}
 			}
