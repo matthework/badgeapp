@@ -4,6 +4,7 @@ export class Badge {
   name: string;
   code: string;
   overview: string;
+  focus: string[];
   badgelevels: BadgeLevel[];
   approved: boolean;
   inused: boolean;

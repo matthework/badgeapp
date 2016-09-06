@@ -214,6 +214,7 @@ var BSNewComponent = (function () {
     };
     BSNewComponent.prototype.addTag = function (tag) {
         this.newBS.tags.push(tag.toUpperCase());
+        this.newTag = "";
     };
     BSNewComponent.prototype.deleteTag = function (tag) {
         var index = this.newBS.tags.indexOf(tag);

@@ -211,6 +211,10 @@ textarea {
   color: red;
   font-size: 1.0em
 }
-
+.text-light-blue {
+  font-size: 1em;
+  font-style: italic;
+  color: #039be5;
+}
 
 

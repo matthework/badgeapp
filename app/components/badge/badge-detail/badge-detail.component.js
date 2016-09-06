@@ -23,6 +23,7 @@ var BadgeDetailComponent = (function () {
         this.auth = auth;
         this.badges = [];
         this.badgesets = [];
+        this.newFC = "";
         this.newLevel = 0;
         this.newDesc = "";
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
@@ -31,6 +32,17 @@ var BadgeDetailComponent = (function () {
         this.editStatus = false;
         this.bedit = false;
         this.addLevel = false;
+        this.editFC = false;
+        this.labels = ["I understand... ",
+            "I participate... ",
+            "I contribute... ",
+            "I lead... ",
+            "I advise... ",
+            "I can teach... ",
+            "I plan sophisticated... ",
+            "I have achieved wide recognition... ",
+            "I am a world leading... "
+        ];
     }
     BadgeDetailComponent.prototype.ngOnInit = function () {
         this.getParams();
@@ -97,6 +109,9 @@ var BadgeDetailComponent = (function () {
     };
     BadgeDetailComponent.prototype.updateBadge = function () {
         this.badge.code = this.badge.code.toUpperCase();
+        if (this.badge.focus == null) {
+            this.badge.focus = [];
+        }
         this.badge.badgelevels = this.badge.badgelevels;
         this.badge.badgelevels.sort(this.toCompare);
         var value = JSON.stringify(this.badge);
@@ -150,6 +165,31 @@ var BadgeDetailComponent = (function () {
     BadgeDetailComponent.prototype.checkAdmin = function () {
         if (this.auth.isAdmin()) {
             this.bedit = true;
+        }
+    };
+    BadgeDetailComponent.prototype.addFC = function (fc) {
+        if (this.badge.focus == null) {
+            this.badge.focus = [];
+        }
+        this.badge.focus.push(fc.toUpperCase());
+        this.newFC = "";
+        this.editFC = true;
+    };
+    BadgeDetailComponent.prototype.deleteFC = function (fc) {
+        var index = this.badge.focus.indexOf(fc);
+        this.badge.focus.splice(index, 1);
+    };
+    BadgeDetailComponent.prototype.checkEmptyFocus = function () {
+        if (this.badge.focus != null) {
+            if (this.badge.focus.length == 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;
         }
     };
     BadgeDetailComponent.prototype.goBack = function () {

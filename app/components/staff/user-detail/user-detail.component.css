@@ -290,3 +290,8 @@ textarea {
 .text-blue {
   color: #039be5;
 }
+.text-light-blue {
+  font-size: 1em;
+  font-style: italic;
+  color: #039be5;
+}

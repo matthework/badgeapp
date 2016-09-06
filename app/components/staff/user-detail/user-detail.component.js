@@ -36,6 +36,16 @@ var UserDetailComponent = (function () {
         this.newLevel = 0;
         this.newStatus = false;
         this.more = false;
+        this.labels = ["I understand... ",
+            "I participate... ",
+            "I contribute... ",
+            "I lead... ",
+            "I advise... ",
+            "I can teach... ",
+            "I plan sophisticated... ",
+            "I have achieved wide recognition... ",
+            "I am a world leading... "
+        ];
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         // this.sub = this.route.params.subscribe(params => {

@@ -32,7 +32,17 @@ export class StaffDetailComponent implements OnInit {
   sub: any;
   id: string;
   more = false;
-
+  labels = [  "I understand... ", 
+          "I participate... ", 
+          "I contribute... ", 
+          "I lead... ", 
+          "I advise... ", 
+          "I can teach... ", 
+          "I plan sophisticated... ",
+          "I have achieved wide recognition... ", 
+          "I am a world leading... "
+        ];
+        
   constructor(
     private _staffService: StaffService, 
     private _badgeService: BadgeService,

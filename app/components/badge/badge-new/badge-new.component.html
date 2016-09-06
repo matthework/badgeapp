@@ -15,6 +15,9 @@
 <label>Overview: </label>
 <textarea class="ta-big" [(ngModel)]="newBadge.overview" placeholder="Overview"></textarea><br>
 
+<label>Focus: </label>
+<input class="input-focus" type="text" [(ngModel)]="newFC" placeholder=""><button class="button-s-add" (click)="addFC(newFC)">+</button><text *ngFor="let fc of newBadge.focus">{{fc}} <button class="button-s-delete" (click)="deleteFC(fc)">-</button></text><br>
+
 <!-- <label>Approved: </label>
 <input type="checkbox" [(ngModel)]="newBadge.approved" placeholder="Approved" /><br> -->
 
@@ -26,31 +29,49 @@
 
 <br>
 <label>Level 1:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[0].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[0]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[0].desc" placeholder=""></textarea><br>
 
 <label>Level 2:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[1].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[1]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[1].desc" placeholder=""></textarea><br>
 
 <label>Level 3:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[2].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[2]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[2].desc" placeholder=""></textarea><br>
 
 <label>Level 4:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[3].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[3]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[3].desc" placeholder=""></textarea><br>
 
 <label>Level 5:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[4].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[4]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[4].desc" placeholder=""></textarea><br>
 
 <label>Level 6:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[5].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[5]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[5].desc" placeholder=""></textarea><br>
 
 <label>Level 7:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[6].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[6]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[6].desc" placeholder=""></textarea><br>
 
 <label>Level 8:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[7].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[7]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[7].desc" placeholder=""></textarea><br>
 
 <label>Level 9:</label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder="Description"></textarea><br>
+<text class="text-light">{{labels[8]}}</text><br>
+<label></label>
+<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder=""></textarea><br>
 
 <button class="button-save" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
 <button class="button-cancel" (click)="goBack()">Cancel</button>

@@ -32,6 +32,16 @@ var StaffDetailComponent = (function () {
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
         this.more = false;
+        this.labels = ["I understand... ",
+            "I participate... ",
+            "I contribute... ",
+            "I lead... ",
+            "I advise... ",
+            "I can teach... ",
+            "I plan sophisticated... ",
+            "I have achieved wide recognition... ",
+            "I am a world leading... "
+        ];
     }
     StaffDetailComponent.prototype.ngOnInit = function () {
         var _this = this;

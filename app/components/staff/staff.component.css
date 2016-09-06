@@ -366,7 +366,9 @@ li:hover {
 .check-pending {
   color: red;
 }
-
+.text-blue {
+  color: #039be5;
+}
 
 
 

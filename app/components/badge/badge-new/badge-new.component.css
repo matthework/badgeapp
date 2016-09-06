@@ -27,6 +27,7 @@ label {
   width: 8em;
   color: #999;
   font-weight: bold;
+  margin-top: 10px;
 }
 input {
   height: 2em;
@@ -97,6 +98,11 @@ textarea {
   width: 350px;
   text-transform: uppercase;
 }
+.input-focus{
+  width: 350px;
+  text-transform: uppercase;
+  margin-right: 30px;
+}
 .badgelevel-block{
   margin-top: 20px;
 }
@@ -108,7 +114,7 @@ textarea {
 .ta-small {
   border: 1px solid #cccccc;
   width: 350px;
-  height: 100px;
+  height: 120px;
 }
 .button-s-add {
   width: 40px;
@@ -182,4 +188,9 @@ textarea {
 }
 .text-blue {
   color: #039be5;
+}
+.text-light {
+  font-size: 1.1em;
+  font-style: italic;
+  color: #999;
 }

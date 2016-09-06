@@ -25,6 +25,7 @@ var BSEditComponent = (function () {
         this.badges = [];
         this.tiers = [];
         this.active = false;
+        this.newTag = "";
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = "";
@@ -266,6 +267,7 @@ var BSEditComponent = (function () {
     };
     BSEditComponent.prototype.addTag = function (tag) {
         this.badgeset.tags.push(tag.toUpperCase());
+        this.newTag = "";
     };
     BSEditComponent.prototype.deleteTag = function (tag) {
         var index = this.badgeset.tags.indexOf(tag);

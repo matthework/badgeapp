@@ -42,6 +42,16 @@ export class BSDetailComponent implements OnInit {
   newBID = "";
   newLevel = 0;
   newFocus = "";
+  labels = [  "I understand... ", 
+          "I participate... ", 
+          "I contribute... ", 
+          "I lead... ", 
+          "I advise... ", 
+          "I can teach... ", 
+          "I plan sophisticated... ",
+          "I have achieved wide recognition... ", 
+          "I am a world leading... "
+        ];
 
   constructor(
     private _bsService: BSService,
@@ -101,6 +111,9 @@ export class BSDetailComponent implements OnInit {
   }
 
   updateBadgeSet() {
+    if(this.badgeset.tags == null) {
+        this.badgeset.tags = [];
+    }
     for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
       this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
     }
@@ -238,7 +251,12 @@ export class BSDetailComponent implements OnInit {
   }
 
   addTag(tag:string) {
+    if(this.badgeset.tags == null) {
+        this.badgeset.tags = [];
+    }
     this.badgeset.tags.push(tag.toUpperCase());
+    this.newTag = "";
+    this.tag = true;
   }
 
   deleteTag(tag:string) {
@@ -317,6 +335,25 @@ export class BSDetailComponent implements OnInit {
       }
     }
     return bname;
+  }
+
+  resetNewValue() {
+    this.newBID = "";
+    this.newLevel = 0;
+    this.newFocus = "";
+  }
+
+  checkEmptyTags() {
+      if (this.badgeset.tags != null) {
+          if (this.badgeset.tags.length == 0) {
+              return true;
+          }else {
+              return false;
+          }
+      }else {
+          return true;
+      }
+
   }
 
   goBack() {
