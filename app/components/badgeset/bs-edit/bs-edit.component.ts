@@ -24,7 +24,7 @@ export class BSEditComponent implements OnInit {
   newTag = "";
   newBID = "";
   newLevel = 0;
-  newFocus = "";
+  newFocus = [];
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   gradesOptions =["A", "B", "C", "D", "E", "F"]; 
   prerequisite = false;
@@ -290,7 +290,7 @@ export class BSEditComponent implements OnInit {
     console.log('you submitted cb value: ', array); 
     var b = array[0];
     var l = +array[1]; // parse into number
-    this.badgeset.corebadges.push({bid: "", badge: "", level: l, focus:""});
+    this.badgeset.corebadges.push({bid: "", badge: "", level: l, focus:[]});
   }
 
   addTag(tag:string) {

@@ -32,16 +32,17 @@ var BSNewComponent = (function () {
         this.newcbs = [];
         this.total = 0;
         this.newTag = "";
-        this.newBGs = [{ bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" },
-            { bid: "", badge: "", level: 0, focus: "" }];
+        this.checked = [];
+        this.newBGs = [{ bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] },
+            { bid: "", badge: "", level: 0, focus: [] }];
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
         this.newBS = { index: 0, name: "", status: "Accepted", badgegroups: this.newBGs, tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: true, inused: true, others: [] };
     }
@@ -153,6 +154,19 @@ var BSNewComponent = (function () {
         // console.log('getBadgesOptions: ', badgesOptions);
         return levelsOptions.sort();
     };
+    BSNewComponent.prototype.getFocusOptions = function (bid) {
+        var focusOptions = [];
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                if (this.badges[i]._id == bid) {
+                    for (var j = 0; j < this.badges[i].focus.length; j++) {
+                        focusOptions.push(this.badges[i].focus[j]);
+                    }
+                }
+            }
+        }
+        return focusOptions.sort();
+    };
     BSNewComponent.prototype.getTiersOptions = function () {
         var tiersOptions = [];
         if (this.tiers != null) {
@@ -194,7 +208,7 @@ var BSNewComponent = (function () {
         console.log('you submitted cb value: ', array);
         var b = array[0];
         var l = +array[1]; // parse into number
-        this.newBS.corebadges.push({ bid: "", badge: b, level: l, focus: "" });
+        this.newBS.corebadges.push({ bid: "", badge: b, level: l, focus: [] });
     };
     BSNewComponent.prototype.deleteCoreBadgePop = function (corebadge) {
         var name = this.newBS.name.toUpperCase();
@@ -219,6 +233,26 @@ var BSNewComponent = (function () {
     BSNewComponent.prototype.deleteTag = function (tag) {
         var index = this.newBS.tags.indexOf(tag);
         this.newBS.tags.splice(index, 1);
+    };
+    BSNewComponent.prototype.updateChecked = function (option, event, bg) {
+        console.log('event.target.value ' + event.target.value);
+        var index = this.checked.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                this.checked.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                this.checked.splice(index, 1);
+            }
+        }
+        //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
+        console.log(this.checked);
+        bg.focus = this.checked;
+        this.checked = [];
     };
     BSNewComponent = __decorate([
         core_1.Component({

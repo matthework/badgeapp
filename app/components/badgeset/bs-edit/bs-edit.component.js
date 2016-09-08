@@ -28,7 +28,7 @@ var BSEditComponent = (function () {
         this.newTag = "";
         this.newBID = "";
         this.newLevel = 0;
-        this.newFocus = "";
+        this.newFocus = [];
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.gradesOptions = ["A", "B", "C", "D", "E", "F"];
         this.prerequisite = false;
@@ -263,7 +263,7 @@ var BSEditComponent = (function () {
         console.log('you submitted cb value: ', array);
         var b = array[0];
         var l = +array[1]; // parse into number
-        this.badgeset.corebadges.push({ bid: "", badge: "", level: l, focus: "" });
+        this.badgeset.corebadges.push({ bid: "", badge: "", level: l, focus: [] });
     };
     BSEditComponent.prototype.addTag = function (tag) {
         this.badgeset.tags.push(tag.toUpperCase());

@@ -41,7 +41,7 @@ export class BSDetailComponent implements OnInit {
   addNew = false;
   newBID = "";
   newLevel = 0;
-  newFocus = "";
+  newFocus = [];
   labels = [  "I understand... ", 
           "I participate... ", 
           "I contribute... ", 
@@ -52,6 +52,8 @@ export class BSDetailComponent implements OnInit {
           "I have achieved wide recognition... ", 
           "I am a world leading... "
         ];
+  focusOptions = [];
+  checked: string[] = [];
 
   constructor(
     private _bsService: BSService,
@@ -191,6 +193,21 @@ export class BSDetailComponent implements OnInit {
     return levelsOptions.sort();
   }
 
+  getFocusOptions(bid:string) {
+    var focusOptions = [];
+    if (this.badges != null) {
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i]._id == bid) {
+              for (var j = 0; j < this.badges[i].focus.length; j++) { 
+                focusOptions.push(this.badges[i].focus[j]);
+              }
+            }
+        }
+    }
+    this.checked = [];
+    return focusOptions.sort();
+  }
+
   getTiersOptions() {
     var tiersOptions =[];
     if (this.tiers != null) {
@@ -213,18 +230,6 @@ export class BSDetailComponent implements OnInit {
     }
     return result;
   }
-
-  // toBadgeDetail(bname:string) {
-  //   var bid = "";
-  //   if (this.badges != null) {
-  //       for (var i = 0; i < this.badges.length; i++) {   
-  //           if (this.badges[i].name == bname) {
-  //               bid = this.badges[i]._id;
-  //           }
-  //       }
-  //   }
-  //   this._router.navigate(['/badge/detail',bid]);
-  // }
 
   toBadgeDetail(bid:string) {
     this._router.navigate(['/badge/detail',bid]);
@@ -279,6 +284,7 @@ export class BSDetailComponent implements OnInit {
     console.log('you submitted value: ', value);
     this.newBID = "";
     this.newLevel = 0;
+    this.newFocus = [];
   }
 
   deleteBadgeGroupPop(selectedGroup: BadgeGroup) {
@@ -340,7 +346,6 @@ export class BSDetailComponent implements OnInit {
   resetNewValue() {
     this.newBID = "";
     this.newLevel = 0;
-    this.newFocus = "";
   }
 
   checkEmptyTags() {
@@ -354,6 +359,44 @@ export class BSDetailComponent implements OnInit {
           return true;
       }
 
+  }
+
+  updateChecked(option, event, focus, bg) {
+    // this.checked = focus;
+    console.log('event.target.value ' + event.target.value);
+    var index = focus.indexOf(option);
+    if(event.target.checked) {
+      console.log('add');
+      if(index === -1) {
+        focus.push(option);
+      }
+    } else {
+      console.log('remove');
+      if(index !== -1) {
+        focus.splice(index, 1);
+      }
+    }
+    //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
+    console.log(focus);
+    bg.focus = focus;
+  }
+
+  updateCheckedNew(option, event) {
+    console.log('event.target.value ' + event.target.value);
+    var index = this.checked.indexOf(option);
+    if(event.target.checked) {
+      console.log('add');
+      if(index === -1) {
+        this.checked.push(option);
+      }
+    } else {
+      console.log('remove');
+      if(index !== -1) {
+        this.checked.splice(index, 1);
+      }
+    }
+    console.log(this.checked);
+    this.newFocus = this.checked;
   }
 
   goBack() {

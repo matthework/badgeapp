@@ -7,10 +7,10 @@
 <input class="input-index" type="number" [(ngModel)]="newBS.index" placeholder="Index"><br> -->
 
 <label>*Name: </label>
-<input class="input-name" type="text" [(ngModel)]="newBS.name" placeholder="Name"><br>
+<input class="input-name" type="text" [(ngModel)]="newBS.name" placeholder=""><br>
 
 <label>Tags: </label>
-<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder="Tags"><button class="button-s-add" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="button-s-delete" (click)="deleteTag(tag)">-</button></text><br>
+<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder=""><button class="button-s-add" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="button-s-delete" (click)="deleteTag(tag)">-</button></text><br>
 
 <label>Tier: </label>
 <select class="select-tier" [(ngModel)]="newBS.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
@@ -37,17 +37,24 @@
 <br>
 <label>Badge: </label>
 <select class="select-badge" [(ngModel)]="newBS.badgegroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
+
 <label class="label-level">Level: </label>
 <select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
 <label>Focus: </label>
-<input class="input-focus" type="text" [(ngModel)]="newBS.badgegroups[i].focus" placeholder=""><br>
+<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])"></text><br>
+
+<!-- <select class="select-focus" [(ngModel)]="newBS.badgegroups[i].focus" multiple="multiple"><option *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)" [value]="fc">{{fc}}</option></select><br> -->
+
+<!-- <input class="input-focus" type="text" [(ngModel)]="newBS.badgegroups[i].focus" placeholder=""><br> -->
+
+<br>
 <label>Description: </label>
-<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)}}</textarea><br>
+<textarea readonly class="ta-desc" placeholder="">{{getDesc(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)}}</textarea><br>
 </div>
 
 <!-- <br>
 <button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true;getTotalBadges(newBS.badgegroups)">Prerequisite+</button><br>
-<br> -->
+<br>
 
 <div *ngIf="prerequisite">
 	<h3>Prerequisite: </h3><br>
@@ -63,8 +70,7 @@
 	<select class="select-badge" [(ngModel)]="coreBadge"><option *ngFor="let cbo of getCoreBadgesOptions(newBS.badgegroups)" [value]="cbo">{{cbo}}</option></select><button class="button-s-add" (click)="addCoreBadge(coreBadge)">+</button><br>
 
 	<button (click)="addNumBadges();prerequisite=false">Done</button>
-	<!-- <button class="button-l-cancel" (click)="prerequisite=false">Cancel</button><br> -->
-</div>
+</div> -->
 
 <div *ngIf!="prerequisite">
 	<button class="button-save" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>
