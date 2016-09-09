@@ -106,7 +106,7 @@ textarea {
 .table-userbgroups {
   margin-top: 10px;
   table-layout: fixed;
-  width: 75%;
+  width: 90%;
   /*white-space: nowrap;*/
   word-wrap: break-word;
 }
@@ -116,7 +116,7 @@ textarea {
   text-overflow: ellipsis;*/
 }
 .th-badge {
-  width: 30%;
+  width: 40%;
 }
 .th-desc {
   width: 50%;
@@ -144,7 +144,7 @@ textarea {
   color: #039be5;
   margin-top: 0px;
   position: relative; 
-  left: 54%;
+  left: 69%;
   margin-bottom: 5px;
 }
 .button-less {
@@ -152,7 +152,7 @@ textarea {
   color: #039be5;
   margin-top: 0px;
   position: relative; 
-  left: 54%;
+  left: 69%;
   margin-bottom: 5px;
 }
 .button-edit {

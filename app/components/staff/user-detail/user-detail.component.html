@@ -84,8 +84,12 @@
 	<select class="select-badge" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 	<label class="label-level">Level: </label>
-	<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getNewLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
+	<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 
+	<label>Focus: </label>
+	<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+
+	<br>
 	<label>Description: </label>
 	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBID,newLevel)}}</textarea><br>
 

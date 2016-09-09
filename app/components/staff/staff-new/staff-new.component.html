@@ -41,7 +41,7 @@
 <label class="label-level">Level: </label>
 <select class="select-level" [(ngModel)]="newStaff.userbgroups[i].level"><option *ngFor="let lo of getLevelsOptions(newStaff.userbgroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
 <label>Focus: </label>
-<text *ngFor="let fc of getFocusOptions(newStaff.userbgroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newStaff.userbgroups[i])"></text><br>
+<text *ngFor="let fc of getFocusOptions(newStaff.userbgroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newStaff.userbgroups[i])">, </text><br>
 <br>
 <label>Description: </label>
 <textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newStaff.userbgroups[i].bid,newStaff.userbgroups[i].level)}}</textarea><br>

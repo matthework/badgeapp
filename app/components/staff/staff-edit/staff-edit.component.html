@@ -42,7 +42,7 @@
 		<select class="select-level" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.bid)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Focus: </label>
-		<text *ngFor="let fc of getFocusOptions(userbgroup.bid)">{{fc}} <input class="checkbox" type="checkbox" [checked]="checkFocus(fc,userbgroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, userbgroup)"> </text><br>
+		<text *ngFor="let fc of getFocusOptions(userbgroup.bid)">{{fc}} <input class="checkbox" type="checkbox" [checked]="checkFocus(fc,userbgroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, userbgroup)">, </text><br>
 
 		<br>
 		<label>Description: </label>
@@ -68,7 +68,7 @@
 		<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 
 		<label>Focus: </label>
-		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="checkbox" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)"> </text><br>
+		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="checkbox" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
 
 		<br>
 		<label>Description: </label>
