@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var bs_edit_component_1 = require('./bs-edit/bs-edit.component');
 var bs_service_1 = require('./bs.service');
 var badge_service_1 = require('../badge/badge.service');
 var tier_service_1 = require('../tier/tier.service');
@@ -78,9 +77,6 @@ var BSComponent = (function () {
     };
     BSComponent.prototype.onSelect = function (badgeset) {
         this.selectedBadgeSet = badgeset;
-    };
-    BSComponent.prototype.toBSEdit = function (bsid) {
-        this._router.navigate(['/bs/edit', bsid]);
     };
     BSComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
@@ -201,7 +197,7 @@ var BSComponent = (function () {
             selector: 'my-badgeset',
             templateUrl: 'app/components/badgeset/bs.component.html',
             styleUrls: ['app/components/badgeset/bs.component.css'],
-            directives: [bs_edit_component_1.BSEditComponent],
+            directives: [],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
         }), 
         __metadata('design:paramtypes', [router_1.Router, bs_service_1.BSService, badge_service_1.BadgeService, tier_service_1.TierService, auth_service_1.AuthService])

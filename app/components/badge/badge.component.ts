@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 
 import {Badge} from './badge';
 import {BadgeDetailComponent} from './badge-detail/badge-detail.component';
-import {BadgeEditComponent} from './badge-edit/badge-edit.component';
 import {BadgeService} from './badge.service';
 
 import {BadgeSet} from '../badgeset/bs';
@@ -21,7 +20,7 @@ import {YesNoPipe} from '../pipe/yes-no-pipe';
     selector: 'my-badge',
     templateUrl: 'app/components/badge/badge.component.html',
     styleUrls: ['app/components/badge/badge.component.css'],
-    directives: [BadgeDetailComponent,BadgeEditComponent],
+    directives: [BadgeDetailComponent],
     pipes: [FilterArrayPipe,YesNoPipe]
 })
 
@@ -69,10 +68,6 @@ export class BadgeComponent implements OnInit {
 
   toDetail() {
     this._router.navigate(['/badge/detail', this.selectedBadge._id]);
-  }
-
-  toEdit(bid:string) {
-    this._router.navigate(['/badge/edit', bid]);
   }
 
   addBadge() {

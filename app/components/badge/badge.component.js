@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var badge_detail_component_1 = require('./badge-detail/badge-detail.component');
-var badge_edit_component_1 = require('./badge-edit/badge-edit.component');
 var badge_service_1 = require('./badge.service');
 var bs_service_1 = require('../badgeset/bs.service');
 var staff_service_1 = require('../staff/staff.service');
@@ -57,9 +56,6 @@ var BadgeComponent = (function () {
     };
     BadgeComponent.prototype.toDetail = function () {
         this._router.navigate(['/badge/detail', this.selectedBadge._id]);
-    };
-    BadgeComponent.prototype.toEdit = function (bid) {
-        this._router.navigate(['/badge/edit', bid]);
     };
     BadgeComponent.prototype.addBadge = function () {
         this._router.navigate(['/badge/new']);
@@ -126,7 +122,7 @@ var BadgeComponent = (function () {
             selector: 'my-badge',
             templateUrl: 'app/components/badge/badge.component.html',
             styleUrls: ['app/components/badge/badge.component.css'],
-            directives: [badge_detail_component_1.BadgeDetailComponent, badge_edit_component_1.BadgeEditComponent],
+            directives: [badge_detail_component_1.BadgeDetailComponent],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe]
         }), 
         __metadata('design:paramtypes', [router_1.Router, badge_service_1.BadgeService, bs_service_1.BSService, staff_service_1.StaffService, auth_service_1.AuthService])

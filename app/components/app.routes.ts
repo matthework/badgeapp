@@ -5,7 +5,6 @@ import {AboutComponent} from './about/about.component';
 
 import {BadgeComponent} from './badge/badge.component';
 import {BadgeDetailComponent} from './badge/badge-detail/badge-detail.component';
-import {BadgeEditComponent} from './badge/badge-edit/badge-edit.component';
 import {BadgeNewComponent} from './badge/badge-new/badge-new.component';
 
 import {StaffComponent} from './staff/staff.component';
@@ -24,7 +23,6 @@ import {TierDetailComponent} from './tier/tier-detail/tier-detail.component';
 import {TierNewComponent} from './tier/tier-new/tier-new.component';
 
 import {BSComponent} from './badgeset/bs.component';
-import {BSEditComponent} from './badgeset/bs-edit/bs-edit.component';
 import {BSDetailComponent} from './badgeset/bs-detail/bs-detail.component';
 import {BSNewComponent} from './badgeset/bs-new/bs-new.component';
 
@@ -63,11 +61,6 @@ const routes: RouterConfig = [
       path: 'badge/detail/:id',
       // name: 'BadgeDetail',
       component: BadgeDetailComponent,
-  },
-  {
-      path: 'badge/edit/:id',
-      // name: 'BadgeEdit',
-      component: BadgeEditComponent,
   },
   {
       path: 'badge/new',
@@ -143,11 +136,6 @@ const routes: RouterConfig = [
       path: 'bs/detail/:id',
       // name: 'BSDetail',
       component: BSDetailComponent,
-  },
-  {
-      path: 'bs/edit/:id',
-      // name: 'BSEdit',
-      component: BSEditComponent,
   },
   {
       path: 'bs/new',

@@ -4,7 +4,6 @@ var main_component_1 = require('./main/main.component');
 var about_component_1 = require('./about/about.component');
 var badge_component_1 = require('./badge/badge.component');
 var badge_detail_component_1 = require('./badge/badge-detail/badge-detail.component');
-var badge_edit_component_1 = require('./badge/badge-edit/badge-edit.component');
 var badge_new_component_1 = require('./badge/badge-new/badge-new.component');
 var staff_component_1 = require('./staff/staff.component');
 var staff_edit_component_1 = require('./staff/staff-edit/staff-edit.component');
@@ -19,7 +18,6 @@ var tier_edit_component_1 = require('./tier/tier-edit/tier-edit.component');
 var tier_detail_component_1 = require('./tier/tier-detail/tier-detail.component');
 var tier_new_component_1 = require('./tier/tier-new/tier-new.component');
 var bs_component_1 = require('./badgeset/bs.component');
-var bs_edit_component_1 = require('./badgeset/bs-edit/bs-edit.component');
 var bs_detail_component_1 = require('./badgeset/bs-detail/bs-detail.component');
 var bs_new_component_1 = require('./badgeset/bs-new/bs-new.component');
 var bcat_component_1 = require('./badgecat/bcat.component');
@@ -53,11 +51,6 @@ var routes = [
         path: 'badge/detail/:id',
         // name: 'BadgeDetail',
         component: badge_detail_component_1.BadgeDetailComponent,
-    },
-    {
-        path: 'badge/edit/:id',
-        // name: 'BadgeEdit',
-        component: badge_edit_component_1.BadgeEditComponent,
     },
     {
         path: 'badge/new',
@@ -133,11 +126,6 @@ var routes = [
         path: 'bs/detail/:id',
         // name: 'BSDetail',
         component: bs_detail_component_1.BSDetailComponent,
-    },
-    {
-        path: 'bs/edit/:id',
-        // name: 'BSEdit',
-        component: bs_edit_component_1.BSEditComponent,
     },
     {
         path: 'bs/new',
