@@ -400,6 +400,14 @@ export class BSDetailComponent implements OnInit {
     this.newFocus = focus;
   }
 
+  checkFocus(fc,focus) {
+    var result = false;
+    if(focus.includes(fc)) {
+      result = true;
+    }
+    return result;
+  }
+
   goBack() {
     window.history.back();
   }
