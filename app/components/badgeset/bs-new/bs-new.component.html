@@ -41,7 +41,7 @@
 <label class="label-level">Level: </label>
 <select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
 <label>Focus: </label>
-<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])"></text><br>
+<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])">, </text><br>
 
 <!-- <select class="select-focus" [(ngModel)]="newBS.badgegroups[i].focus" multiple="multiple"><option *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)" [value]="fc">{{fc}}</option></select><br> -->
 

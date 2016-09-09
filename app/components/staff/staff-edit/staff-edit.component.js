@@ -152,7 +152,7 @@ var StaffEditComponent = (function () {
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
                 var index = userbgs.indexOf(this.badges[i]._id);
-                if (this.badges[i].status == 'Accepted' && index == -1) {
+                if (this.badges[i].status == 'Accepted') {
                     badgesOptions.push([this.badges[i].name, this.badges[i]._id]);
                 }
             }

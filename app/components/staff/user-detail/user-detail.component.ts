@@ -233,31 +233,60 @@ export class UserDetailComponent implements OnInit {
     return badgesOptions.sort();
   }
 
-  getNewLevelsOptions(bid: string) {
+  getLevelsOptions(bid: string) {
     var levelsOptions = [];
-    var userbgs = [];
-    if (this.staff.userbgroups.length != 0) {
-        for (var j = 0; j < this.staff.userbgroups.length; j++) { 
-            userbgs.push(this.staff.userbgroups[j].bid);
+    if (this.badges != null) {
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i]._id == bid) {
+                for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+                    levelsOptions.push(this.badges[i].badgelevels[j].level);
+                }
+            }
         }
     }
-    for (var i = 0; i < this.badges.length; i++) { 
-      if (this.badges[i]._id == bid) {
-        for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
-          let index = userbgs.indexOf(this.badges[i]._id);
-          if (this.staff.userbgroups.length != 0 && index != -1) {
-            for (var k = 0; k < this.staff.userbgroups.length; k++) {
-              if (this.staff.userbgroups[k].bid == bid && this.staff.userbgroups[k].level<this.badges[i].badgelevels[j].level) {
-                levelsOptions.push(this.badges[i].badgelevels[j].level);
+    // console.log('getBadgesOptions: ', badgesOptions);
+    return levelsOptions.sort();
+  }
+  
+  // getNewLevelsOptions(bid: string) {
+  //   var levelsOptions = [];
+  //   var userbgs = [];
+  //   if (this.staff.userbgroups.length != 0) {
+  //       for (var j = 0; j < this.staff.userbgroups.length; j++) { 
+  //           userbgs.push(this.staff.userbgroups[j].bid);
+  //       }
+  //   }
+  //   for (var i = 0; i < this.badges.length; i++) { 
+  //     if (this.badges[i]._id == bid) {
+  //       for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+  //         let index = userbgs.indexOf(this.badges[i]._id);
+  //         if (this.staff.userbgroups.length != 0) { // && index != -1) {
+  //           for (var k = 0; k < this.staff.userbgroups.length; k++) {
+  //             if (this.staff.userbgroups[k].bid == bid ) { //&& this.staff.userbgroups[k].level<this.badges[i].badgelevels[j].level) {
+  //               levelsOptions.push(this.badges[i].badgelevels[j].level);
+  //             }
+  //           }
+  //         }else{
+  //           levelsOptions.push(this.badges[i].badgelevels[j].level);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return levelsOptions.sort();
+  // }
+
+  getFocusOptions(bid:string) {
+    var focusOptions = [];
+    if (this.badges != null) {
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+              for (var j = 0; j < this.badges[i].focus.length; j++) { 
+                focusOptions.push(this.badges[i].focus[j]);
               }
             }
-          }else{
-            levelsOptions.push(this.badges[i].badgelevels[j].level);
-          }
         }
-      }
     }
-    return levelsOptions.sort();
+    return focusOptions.sort();
   }
 
   addBadgeGroup() {
@@ -314,6 +343,24 @@ export class UserDetailComponent implements OnInit {
       }
     }
     return bname;
+  }
+
+  updateCheckedNew(option, event, focus) {
+    console.log('event.target.value ' + event.target.value);
+    var index = focus.indexOf(option);
+    if(event.target.checked) {
+      console.log('add');
+      if(index === -1) {
+        focus.push(option);
+      }
+    } else {
+      console.log('remove');
+      if(index !== -1) {
+        focus.splice(index, 1);
+      }
+    }
+    console.log(focus);
+    this.newFocus = focus;
   }
 
   goBack() {
