@@ -220,6 +220,13 @@ var StaffEditComponent = (function () {
         console.log(focus);
         this.newFocus = focus;
     };
+    StaffEditComponent.prototype.checkFocus = function (fc, focus) {
+        var result = false;
+        if (focus.includes(fc)) {
+            result = true;
+        }
+        return result;
+    };
     StaffEditComponent.prototype.goBack = function () {
         window.history.back();
     };

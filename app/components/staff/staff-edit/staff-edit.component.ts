@@ -239,6 +239,14 @@ export class StaffEditComponent implements OnInit {
         console.log(focus);
         this.newFocus = focus;
     }
+
+    checkFocus(fc,focus) {
+        var result = false;
+        if(focus.includes(fc)) {
+          result = true;
+        }
+        return result;
+    }
   
     goBack() {
         window.history.back();

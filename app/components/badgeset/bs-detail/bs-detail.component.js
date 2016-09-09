@@ -365,6 +365,13 @@ var BSDetailComponent = (function () {
         console.log(focus);
         this.newFocus = focus;
     };
+    BSDetailComponent.prototype.checkFocus = function (fc, focus) {
+        var result = false;
+        if (focus.includes(fc)) {
+            result = true;
+        }
+        return result;
+    };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();
     };
