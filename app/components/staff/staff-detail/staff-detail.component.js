@@ -109,13 +109,20 @@ var StaffDetailComponent = (function () {
     StaffDetailComponent.prototype.getStaffBS = function (sbgs) {
         var allbset = [];
         var count = 0;
+        var focusCheck = false;
         if (this.badgesets != null && sbgs != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
-                        if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        var a1 = sbgs[k].focus;
+                        var a2 = this.badgesets[i].badgegroups[j].focus;
+                        if (a1.length >= a2.length) {
+                            focusCheck = true;
+                        }
+                        if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             count += 1;
                         }
+                        focusCheck = false;
                     }
                 }
                 if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].status == 'Accepted') {
