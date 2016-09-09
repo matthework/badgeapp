@@ -124,7 +124,7 @@ var StaffComponent = (function () {
                     for (var k = 0; k < sbgs.length; k++) {
                         var a1 = sbgs[k].focus;
                         var a2 = this.badgesets[i].badgegroups[j].focus;
-                        if (a1.length >= a2.length && a2.every(function (v, i) { return v === a1[i]; })) {
+                        if (a1.length >= a2.length && a2.every(function (v, i) { return a1.includes(v); })) {
                             focusCheck = true;
                         }
                         if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
