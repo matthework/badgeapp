@@ -22,16 +22,16 @@ var StaffNewComponent = (function () {
         this.badges = [];
         this.active = false;
         this.nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        this.newBGs = [{ bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false },
-            { bid: "", badge: "", level: 0, status: false }];
+        this.newBGs = [{ bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] },
+            { bid: "", badge: "", level: 0, status: false, focus: [] }];
         this.statusOptions = ['Active', 'Inactive'];
         this.newStaff = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief: "", others: [] };
     }
@@ -104,6 +104,38 @@ var StaffNewComponent = (function () {
             }
         }
         return levelsOptions.sort();
+    };
+    StaffNewComponent.prototype.getFocusOptions = function (bid) {
+        var focusOptions = [];
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+                    for (var j = 0; j < this.badges[i].focus.length; j++) {
+                        focusOptions.push(this.badges[i].focus[j]);
+                    }
+                }
+            }
+        }
+        return focusOptions.sort();
+    };
+    StaffNewComponent.prototype.updateChecked = function (option, event, bg) {
+        console.log('event.target.value ' + event.target.value);
+        var index = bg.focus.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                bg.focus.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                bg.focus.splice(index, 1);
+            }
+        }
+        //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
+        console.log(bg.focus);
+        bg.focus = bg.focus;
     };
     StaffNewComponent.prototype.goBack = function () {
         window.history.back();

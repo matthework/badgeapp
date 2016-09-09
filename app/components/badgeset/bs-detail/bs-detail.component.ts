@@ -53,7 +53,6 @@ export class BSDetailComponent implements OnInit {
           "I am a world leading... "
         ];
   focusOptions = [];
-  checked: string[] = [];
 
   constructor(
     private _bsService: BSService,
@@ -118,6 +117,9 @@ export class BSDetailComponent implements OnInit {
     }
     for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
       this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+      if(this.badgeset.badgegroups[i].focus == null) {
+        this.badgeset.badgegroups[i].focus = [];
+      }
     }
     this.badgeset.tier = +this.badgeset.tier;
     this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade)
@@ -197,14 +199,13 @@ export class BSDetailComponent implements OnInit {
     var focusOptions = [];
     if (this.badges != null) {
         for (var i = 0; i < this.badges.length; i++) { 
-            if (this.badges[i]._id == bid) {
+            if (this.badges[i]._id == bid && this.badges[i].focus != null) {
               for (var j = 0; j < this.badges[i].focus.length; j++) { 
                 focusOptions.push(this.badges[i].focus[j]);
               }
             }
         }
     }
-    this.checked = [];
     return focusOptions.sort();
   }
 
@@ -361,8 +362,27 @@ export class BSDetailComponent implements OnInit {
 
   }
 
-  updateChecked(option, event, focus, bg) {
+  updateChecked(option, event, bg) {
     // this.checked = focus;
+    console.log('event.target.value ' + event.target.value);
+    var index = bg.focus.indexOf(option);
+    if(event.target.checked) {
+      console.log('add');
+      if(index === -1) {
+        bg.focus.push(option);
+      }
+    } else {
+      console.log('remove');
+      if(index !== -1) {
+        bg.focus.splice(index, 1);
+      }
+    }
+    //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
+    console.log(bg.focus);
+    // bg.focus = bg.focus;
+  }
+
+  updateCheckedNew(option, event, focus) {
     console.log('event.target.value ' + event.target.value);
     var index = focus.indexOf(option);
     if(event.target.checked) {
@@ -376,27 +396,8 @@ export class BSDetailComponent implements OnInit {
         focus.splice(index, 1);
       }
     }
-    //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
     console.log(focus);
-    bg.focus = focus;
-  }
-
-  updateCheckedNew(option, event) {
-    console.log('event.target.value ' + event.target.value);
-    var index = this.checked.indexOf(option);
-    if(event.target.checked) {
-      console.log('add');
-      if(index === -1) {
-        this.checked.push(option);
-      }
-    } else {
-      console.log('remove');
-      if(index !== -1) {
-        this.checked.splice(index, 1);
-      }
-    }
-    console.log(this.checked);
-    this.newFocus = this.checked;
+    this.newFocus = focus;
   }
 
   goBack() {

@@ -20,6 +20,7 @@ export class UserEditComponent implements OnInit {
     active = false;
     newBID = "";
     newLevel = 0;
+    newFocus = [];
     newStatus = false;
     brief = 0;
     sub: any;
@@ -80,12 +81,13 @@ export class UserEditComponent implements OnInit {
 
     addBadgeGroup() {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus});
+        this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
         this.newStatus = false;
     }
 

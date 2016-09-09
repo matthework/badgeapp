@@ -52,7 +52,6 @@ var BSDetailComponent = (function () {
             "I am a world leading... "
         ];
         this.focusOptions = [];
-        this.checked = [];
     }
     BSDetailComponent.prototype.ngOnInit = function () {
         this.getParams();
@@ -104,6 +103,9 @@ var BSDetailComponent = (function () {
         }
         for (var i = 0; i < this.badgeset.badgegroups.length; i++) {
             this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+            if (this.badgeset.badgegroups[i].focus == null) {
+                this.badgeset.badgegroups[i].focus = [];
+            }
         }
         this.badgeset.tier = +this.badgeset.tier;
         this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade);
@@ -177,14 +179,13 @@ var BSDetailComponent = (function () {
         var focusOptions = [];
         if (this.badges != null) {
             for (var i = 0; i < this.badges.length; i++) {
-                if (this.badges[i]._id == bid) {
+                if (this.badges[i]._id == bid && this.badges[i].focus != null) {
                     for (var j = 0; j < this.badges[i].focus.length; j++) {
                         focusOptions.push(this.badges[i].focus[j]);
                     }
                 }
             }
         }
-        this.checked = [];
         return focusOptions.sort();
     };
     BSDetailComponent.prototype.getTiersOptions = function () {
@@ -326,8 +327,27 @@ var BSDetailComponent = (function () {
             return true;
         }
     };
-    BSDetailComponent.prototype.updateChecked = function (option, event, focus, bg) {
+    BSDetailComponent.prototype.updateChecked = function (option, event, bg) {
         // this.checked = focus;
+        console.log('event.target.value ' + event.target.value);
+        var index = bg.focus.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                bg.focus.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                bg.focus.splice(index, 1);
+            }
+        }
+        //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
+        console.log(bg.focus);
+        // bg.focus = bg.focus;
+    };
+    BSDetailComponent.prototype.updateCheckedNew = function (option, event, focus) {
         console.log('event.target.value ' + event.target.value);
         var index = focus.indexOf(option);
         if (event.target.checked) {
@@ -342,27 +362,8 @@ var BSDetailComponent = (function () {
                 focus.splice(index, 1);
             }
         }
-        //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
         console.log(focus);
-        bg.focus = focus;
-    };
-    BSDetailComponent.prototype.updateCheckedNew = function (option, event) {
-        console.log('event.target.value ' + event.target.value);
-        var index = this.checked.indexOf(option);
-        if (event.target.checked) {
-            console.log('add');
-            if (index === -1) {
-                this.checked.push(option);
-            }
-        }
-        else {
-            console.log('remove');
-            if (index !== -1) {
-                this.checked.splice(index, 1);
-            }
-        }
-        console.log(this.checked);
-        this.newFocus = this.checked;
+        this.newFocus = focus;
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();

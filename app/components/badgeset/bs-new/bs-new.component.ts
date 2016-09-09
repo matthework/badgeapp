@@ -179,7 +179,7 @@ export class BSNewComponent{
     var focusOptions = [];
     if (this.badges != null) {
         for (var i = 0; i < this.badges.length; i++) { 
-            if (this.badges[i]._id == bid) {
+            if (this.badges[i]._id == bid && this.badges[i].focus != null) {
               for (var j = 0; j < this.badges[i].focus.length; j++) { 
                 focusOptions.push(this.badges[i].focus[j]);
               }
@@ -269,22 +269,21 @@ export class BSNewComponent{
 
   updateChecked(option, event, bg) {
     console.log('event.target.value ' + event.target.value);
-    var index = this.checked.indexOf(option);
+    var index = bg.focus.indexOf(option);
     if(event.target.checked) {
       console.log('add');
       if(index === -1) {
-        this.checked.push(option);
+        bg.focus.push(option);
       }
     } else {
       console.log('remove');
       if(index !== -1) {
-        this.checked.splice(index, 1);
+        bg.focus.splice(index, 1);
       }
     }
     //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
-    console.log(this.checked);
-    bg.focus = this.checked;
-    this.checked = [];
+    console.log(bg.focus);
+    bg.focus = bg.focus;
   }
 
 }

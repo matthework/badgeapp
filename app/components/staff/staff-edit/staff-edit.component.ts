@@ -20,6 +20,7 @@ export class StaffEditComponent implements OnInit {
     active = false;
     newBID = "";
     newLevel = 0;
+    newFocus = [];
     newStatus = false;
     sub: any;
     id: string;
@@ -85,12 +86,13 @@ export class StaffEditComponent implements OnInit {
 
     addBadgeGroup() {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus});
+        this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
         let value = JSON.stringify(this.staff)
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus =[];
         this.newStatus = false;
     }
 
@@ -188,6 +190,56 @@ export class StaffEditComponent implements OnInit {
         return levelsOptions.sort();
     }
 
+    getFocusOptions(bid:string) {
+        var focusOptions = [];
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) { 
+                if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+                  for (var j = 0; j < this.badges[i].focus.length; j++) { 
+                    focusOptions.push(this.badges[i].focus[j]);
+                  }
+                }
+            }
+        }
+        return focusOptions.sort();
+    }
+
+    updateChecked(option, event, bg) {
+        // this.checked = focus;
+        console.log('event.target.value ' + event.target.value);
+        var index = bg.focus.indexOf(option);
+        if(event.target.checked) {
+          console.log('add');
+          if(index === -1) {
+            bg.focus.push(option);
+          }
+        } else {
+          console.log('remove');
+          if(index !== -1) {
+            bg.focus.splice(index, 1);
+          }
+        }
+        console.log(bg.focus);
+    }
+
+    updateCheckedNew(option, event, focus) {
+        console.log('event.target.value ' + event.target.value);
+        var index = focus.indexOf(option);
+        if(event.target.checked) {
+          console.log('add');
+          if(index === -1) {
+            focus.push(option);
+          }
+        } else {
+          console.log('remove');
+          if(index !== -1) {
+            focus.splice(index, 1);
+          }
+        }
+        console.log(focus);
+        this.newFocus = focus;
+    }
+  
     goBack() {
         window.history.back();
     }

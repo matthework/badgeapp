@@ -26,6 +26,7 @@ type UserBGroup struct {
 	BID 	string	`json:"bid" bson:"bid"`	
 	Badge 	string	`json:"badge" bson:"badge"`	
 	Level	int	`json:"level" bson:"level"`
+	Focus 	[]string	`json:"focus" bson:"focus"`
 	Status	bool	`json:"status" bson:"status"`
 }
 

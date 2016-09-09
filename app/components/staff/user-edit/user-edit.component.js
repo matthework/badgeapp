@@ -24,6 +24,7 @@ var UserEditComponent = (function () {
         this.active = false;
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
         this.newStatus = false;
         this.brief = 0;
     }
@@ -70,12 +71,13 @@ var UserEditComponent = (function () {
     };
     UserEditComponent.prototype.addBadgeGroup = function () {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
         this.newStatus = false;
     };
     UserEditComponent.prototype.getDesc = function (bid, l) {

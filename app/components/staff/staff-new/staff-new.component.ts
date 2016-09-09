@@ -18,16 +18,16 @@ export class StaffNewComponent {
   active = false;
   nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  newBGs = [{bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false},
-            {bid: "", badge: "", level: 0, status: false}];
+  newBGs = [{bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []},
+            {bid: "", badge: "", level: 0, status: false, focus: []}];
 
   statusOptions = ['Active','Inactive'];
   
@@ -114,6 +114,39 @@ export class StaffNewComponent {
       }
     }
     return levelsOptions.sort();
+  }
+
+  getFocusOptions(bid:string) {
+    var focusOptions = [];
+    if (this.badges != null) {
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+              for (var j = 0; j < this.badges[i].focus.length; j++) { 
+                focusOptions.push(this.badges[i].focus[j]);
+              }
+            }
+        }
+    }
+    return focusOptions.sort();
+  }
+  
+  updateChecked(option, event, bg) {
+    console.log('event.target.value ' + event.target.value);
+    var index = bg.focus.indexOf(option);
+    if(event.target.checked) {
+      console.log('add');
+      if(index === -1) {
+        bg.focus.push(option);
+      }
+    } else {
+      console.log('remove');
+      if(index !== -1) {
+        bg.focus.splice(index, 1);
+      }
+    }
+    //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
+    console.log(bg.focus);
+    bg.focus = bg.focus;
   }
 
   goBack() {

@@ -37,9 +37,12 @@
 <div *ngFor="let i of nums">
 <br>
 <label>Badge: </label>
-<select class="select-badge" [(ngModel)]="newStaff.userbgroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo">{{bo}}</option></select>
+<select class="select-badge" [(ngModel)]="newStaff.userbgroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 <label class="label-level">Level: </label>
 <select class="select-level" [(ngModel)]="newStaff.userbgroups[i].level"><option *ngFor="let lo of getLevelsOptions(newStaff.userbgroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
+<label>Focus: </label>
+<text *ngFor="let fc of getFocusOptions(newStaff.userbgroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newStaff.userbgroups[i])"></text><br>
+<br>
 <label>Description: </label>
 <textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newStaff.userbgroups[i].bid,newStaff.userbgroups[i].level)}}</textarea><br>
 <label>Approved: </label>
