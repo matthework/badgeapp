@@ -372,4 +372,6 @@ li:hover {
 .focus {
   color: #039be5;
 }
-
+.focus-pending {
+  color: lightgrey;
+}

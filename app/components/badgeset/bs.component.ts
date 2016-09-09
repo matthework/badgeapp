@@ -6,7 +6,6 @@ import {BadgeSet} from './bs';
 import {BadgeGroup} from './bs';
 import {Badge} from '../badge/badge';
 import {Tier} from '../tier/tier';
-import {BSEditComponent} from './bs-edit/bs-edit.component';
 import {BSDetailComponent} from './bs-detail/bs-detail.component';
 import {BSService} from './bs.service';
 import {BadgeService} from '../badge/badge.service';
@@ -20,7 +19,7 @@ import {YesNoPipe} from '../pipe/yes-no-pipe';
 	selector: 'my-badgeset',
 	templateUrl: 'app/components/badgeset/bs.component.html',
 	styleUrls: ['app/components/badgeset/bs.component.css'],
-	directives: [BSEditComponent],
+	directives: [],
 	pipes: [FilterArrayPipe,YesNoPipe]
 })
 
@@ -49,7 +48,7 @@ export class BSComponent implements OnInit {
           "I have achieved wide recognition... ", 
           "I am a world leading... "
         ];
-            
+
 	constructor (
 		private _router: Router,
 		private _bsService: BSService,
@@ -90,10 +89,6 @@ export class BSComponent implements OnInit {
 
 	onSelect(badgeset: BadgeSet) { 
 		this.selectedBadgeSet = badgeset;
-	}
-
-	toBSEdit(bsid:string) {
-		this._router.navigate(['/bs/edit',bsid]);
 	}
 
 	toBSDetail(bsid:string) {

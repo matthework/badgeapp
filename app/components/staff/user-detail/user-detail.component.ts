@@ -286,10 +286,10 @@ export class UserDetailComponent implements OnInit {
         for (var j = 0; j < this.badges.length; j++) { 
           for (var k = 0; k < this.badges[j].badgelevels.length; k++) { 
             if (bgs[i].bid == this.badges[j]._id && bgs[i].level>this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current":false});
+              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus":bgs[i].focus, "current":false});
             }
             if (bgs[i].bid == this.badges[j]._id && bgs[i].level==this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "current":true});
+              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus":bgs[i].focus, "current":true});
             }
           }
         }
