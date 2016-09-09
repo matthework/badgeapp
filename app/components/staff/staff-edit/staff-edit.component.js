@@ -24,6 +24,7 @@ var StaffEditComponent = (function () {
         this.active = false;
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
         this.newStatus = false;
         this.statusOptions = ['Active', 'Inactive'];
     }
@@ -75,12 +76,13 @@ var StaffEditComponent = (function () {
     };
     StaffEditComponent.prototype.addBadgeGroup = function () {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(id,value).subscribe();
         console.log('you submitted value: ', value);
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
         this.newStatus = false;
     };
     StaffEditComponent.prototype.removeStaff = function () {
@@ -168,6 +170,55 @@ var StaffEditComponent = (function () {
         }
         // console.log('getBadgesOptions: ', badgesOptions);
         return levelsOptions.sort();
+    };
+    StaffEditComponent.prototype.getFocusOptions = function (bid) {
+        var focusOptions = [];
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+                    for (var j = 0; j < this.badges[i].focus.length; j++) {
+                        focusOptions.push(this.badges[i].focus[j]);
+                    }
+                }
+            }
+        }
+        return focusOptions.sort();
+    };
+    StaffEditComponent.prototype.updateChecked = function (option, event, bg) {
+        // this.checked = focus;
+        console.log('event.target.value ' + event.target.value);
+        var index = bg.focus.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                bg.focus.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                bg.focus.splice(index, 1);
+            }
+        }
+        console.log(bg.focus);
+    };
+    StaffEditComponent.prototype.updateCheckedNew = function (option, event, focus) {
+        console.log('event.target.value ' + event.target.value);
+        var index = focus.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                focus.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                focus.splice(index, 1);
+            }
+        }
+        console.log(focus);
+        this.newFocus = focus;
     };
     StaffEditComponent.prototype.goBack = function () {
         window.history.back();

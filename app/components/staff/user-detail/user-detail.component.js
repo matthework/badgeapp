@@ -34,6 +34,7 @@ var UserDetailComponent = (function () {
         this.active = false;
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
         this.newStatus = false;
         this.more = false;
         this.labels = ["I understand... ",
@@ -230,13 +231,14 @@ var UserDetailComponent = (function () {
     };
     UserDetailComponent.prototype.addBadgeGroup = function () {
         this.newLevel = +this.newLevel;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, status: this.newStatus });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus });
         this.staff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
         this.newStatus = false;
     };
     UserDetailComponent.prototype.toCompare = function (a, b) {

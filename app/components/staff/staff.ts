@@ -19,5 +19,6 @@ export class UserBGroup {
   bid: string;
 	badge: string;
 	level: number;
+  focus: string[];
   status: boolean;
 }

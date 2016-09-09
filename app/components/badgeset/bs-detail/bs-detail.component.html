@@ -92,9 +92,9 @@
 	  <!-- <th class="th-core">Core Badge</th> -->
 	</tr>
 	<tr *ngFor="let badgegroup of badgeset.badgegroups">
-		<td *ngIf="!bedit" (click)="checkAdmin()"><text class="badge" (click)="bedit=false;toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus" class="focus"> [{{badgegroup.focus}}]</text></text></td>
+		<td *ngIf="!bedit" (click)="checkAdmin()"><text class="badge" (click)="bedit=false;toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} - {{badgegroup.level}} <text *ngIf="badgegroup.focus.length!=0" class="focus"> [{{badgegroup.focus}}]</text></text></td>
 		<td *ngIf="!bedit" class="td-desc" (click)="checkAdmin()"><text class="text-light-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}</td>
-		<td *ngIf="bedit"><select class="select-badge" [(ngModel)]="badgegroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.bid)" [value]="lo">{{lo}}</option></select><br><input class="input-focus" type="text" [(ngModel)]="badgegroup.focus" placeholder="Focus"></td>
+		<td *ngIf="bedit"><select class="select-badge" [(ngModel)]="badgegroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="select-level" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.bid)" [value]="lo">{{lo}}</option></select><br><text *ngFor="let fc of getFocusOptions(badgegroup.bid)">{{fc}} <input class="checkbox" type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, badgegroup)"></text></td>
 		<td *ngIf="bedit" class="td-desc"><text class="text-light-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid, badgegroup.level)}}</td>
 		<td class="td-last"><button *ngIf="bedit && auth.isAdmin()" class="button-s-delete" (click)="deleteBadgeGroupPop(badgegroup)">X</button></td>
 	</tr>
@@ -110,7 +110,11 @@
 	<select class="select-level-new" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 	
 	<label>Focus: </label>
-	<input class="input-focus-new" type="text" [(ngModel)]="newFocus" placeholder=""><br>
+	<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)"></text><br>
+	
+	<!-- <select class="select-focus-new" [(ngModel)]="newLevel"><option *ngFor="let fc of getFocusOptions(newBID)" [value]="fc">{{fc}}</option></select><br>
+
+	<input class="input-focus-new" type="text" [(ngModel)]="newFocus" placeholder=""><br> -->
 
 	<label>Description: </label>
 	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBID,newLevel)}}</textarea><br>

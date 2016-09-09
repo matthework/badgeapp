@@ -40,7 +40,7 @@ var BSDetailComponent = (function () {
         this.addNew = false;
         this.newBID = "";
         this.newLevel = 0;
-        this.newFocus = "";
+        this.newFocus = [];
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",
@@ -51,6 +51,7 @@ var BSDetailComponent = (function () {
             "I have achieved wide recognition... ",
             "I am a world leading... "
         ];
+        this.focusOptions = [];
     }
     BSDetailComponent.prototype.ngOnInit = function () {
         this.getParams();
@@ -102,6 +103,9 @@ var BSDetailComponent = (function () {
         }
         for (var i = 0; i < this.badgeset.badgegroups.length; i++) {
             this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+            if (this.badgeset.badgegroups[i].focus == null) {
+                this.badgeset.badgegroups[i].focus = [];
+            }
         }
         this.badgeset.tier = +this.badgeset.tier;
         this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade);
@@ -171,6 +175,19 @@ var BSDetailComponent = (function () {
         // console.log('getBadgesOptions: ', badgesOptions);
         return levelsOptions.sort();
     };
+    BSDetailComponent.prototype.getFocusOptions = function (bid) {
+        var focusOptions = [];
+        if (this.badges != null) {
+            for (var i = 0; i < this.badges.length; i++) {
+                if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+                    for (var j = 0; j < this.badges[i].focus.length; j++) {
+                        focusOptions.push(this.badges[i].focus[j]);
+                    }
+                }
+            }
+        }
+        return focusOptions.sort();
+    };
     BSDetailComponent.prototype.getTiersOptions = function () {
         var tiersOptions = [];
         if (this.tiers != null) {
@@ -192,17 +209,6 @@ var BSDetailComponent = (function () {
         }
         return result;
     };
-    // toBadgeDetail(bname:string) {
-    //   var bid = "";
-    //   if (this.badges != null) {
-    //       for (var i = 0; i < this.badges.length; i++) {   
-    //           if (this.badges[i].name == bname) {
-    //               bid = this.badges[i]._id;
-    //           }
-    //       }
-    //   }
-    //   this._router.navigate(['/badge/detail',bid]);
-    // }
     BSDetailComponent.prototype.toBadgeDetail = function (bid) {
         this._router.navigate(['/badge/detail', bid]);
     };
@@ -251,6 +257,7 @@ var BSDetailComponent = (function () {
         console.log('you submitted value: ', value);
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
     };
     BSDetailComponent.prototype.deleteBadgeGroupPop = function (selectedGroup) {
         var isCore = false;
@@ -306,7 +313,6 @@ var BSDetailComponent = (function () {
     BSDetailComponent.prototype.resetNewValue = function () {
         this.newBID = "";
         this.newLevel = 0;
-        this.newFocus = "";
     };
     BSDetailComponent.prototype.checkEmptyTags = function () {
         if (this.badgeset.tags != null) {
@@ -320,6 +326,44 @@ var BSDetailComponent = (function () {
         else {
             return true;
         }
+    };
+    BSDetailComponent.prototype.updateChecked = function (option, event, bg) {
+        // this.checked = focus;
+        console.log('event.target.value ' + event.target.value);
+        var index = bg.focus.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                bg.focus.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                bg.focus.splice(index, 1);
+            }
+        }
+        //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
+        console.log(bg.focus);
+        // bg.focus = bg.focus;
+    };
+    BSDetailComponent.prototype.updateCheckedNew = function (option, event, focus) {
+        console.log('event.target.value ' + event.target.value);
+        var index = focus.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                focus.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                focus.splice(index, 1);
+            }
+        }
+        console.log(focus);
+        this.newFocus = focus;
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();
