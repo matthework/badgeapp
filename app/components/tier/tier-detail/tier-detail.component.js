@@ -23,17 +23,24 @@ var TierDetailComponent = (function () {
         this.badgesets = [];
         this.gradesIndex = [0, 1, 2, 3, 4, 5];
         this.gmap = { 0: "A", 1: "B", 2: "C", 3: "D", 4: "E", 5: "F" };
+        this.tName = false;
+        this.judge = false;
+        this.expert = false;
+        this.bedit = false;
     }
     TierDetailComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.sub = this.route.params.subscribe(function (params) {
-            _this.id = params['id'];
-        });
+        this.getParams();
         this.getTier();
         this.getBadgeSets();
     };
     TierDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
+    };
+    TierDetailComponent.prototype.getParams = function () {
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            _this.id = params['id'];
+        });
     };
     TierDetailComponent.prototype.getTier = function () {
         var _this = this;
@@ -46,10 +53,30 @@ var TierDetailComponent = (function () {
     };
     TierDetailComponent.prototype.toTiers = function () {
         this._router.navigate(['/tiers']);
-        // location.reload();
+        location.reload();
     };
     TierDetailComponent.prototype.toTierEdit = function (tid) {
         this._router.navigate(['/tier/edit', tid]);
+    };
+    TierDetailComponent.prototype.updateTier = function () {
+        this.tier.tier = +this.tier.tier;
+        var value = JSON.stringify(this.tier);
+        this._tierService.updateTier(this.tier._id, value).subscribe();
+        console.log('you submitted value: ', value);
+    };
+    TierDetailComponent.prototype.addTier = function () {
+        this._router.navigate(['/tier/new']);
+    };
+    TierDetailComponent.prototype.removeTier = function () {
+        this._tierService.deleteTier(this.tier._id).subscribe();
+        this.toTiers();
+    };
+    TierDetailComponent.prototype.deleteTierPop = function () {
+        var tier = this.tier.tier;
+        var r = confirm("Are you sure you want to delete Tier: " + tier + " ?");
+        if (r == true) {
+            this.removeTier();
+        }
     };
     TierDetailComponent.prototype.getTierBS = function (t) {
         var bset = [];
@@ -71,6 +98,11 @@ var TierDetailComponent = (function () {
     };
     TierDetailComponent.prototype.toBSDetail = function (bsid) {
         this._router.navigate(['/bs/detail', bsid]);
+    };
+    TierDetailComponent.prototype.checkAdmin = function () {
+        if (this.auth.isAdmin()) {
+            this.bedit = true;
+        }
     };
     TierDetailComponent.prototype.goBack = function () {
         window.history.back();

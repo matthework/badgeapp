@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var tier_edit_component_1 = require('./tier-edit/tier-edit.component');
 var tier_service_1 = require('./tier.service');
 var bs_service_1 = require('../badgeset/bs.service');
 var auth_service_1 = require('../auth/auth.service');
@@ -85,7 +84,7 @@ var TierComponent = (function () {
             selector: 'my-tier',
             templateUrl: 'app/components/tier/tier.component.html',
             styleUrls: ['app/components/tier/tier.component.css'],
-            directives: [tier_edit_component_1.TierEditComponent],
+            directives: [],
             pipes: [filter_array_pipe_1.FilterArrayPipe]
         }), 
         __metadata('design:paramtypes', [tier_service_1.TierService, bs_service_1.BSService, router_1.Router, auth_service_1.AuthService])

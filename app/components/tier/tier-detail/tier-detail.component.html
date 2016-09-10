@@ -2,42 +2,83 @@
 <div *ngIf="auth.authenticated()">
 
 <div *ngIf="tier">
-	<h2>Tier - {{tier.tier}}</h2>
-	
-	<br>
-	<label>Badge Sets: </label>
-	<text *ngFor="let bs of getTierBS(tier.tier)">
-		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}, </uli>
-	</text><br>
 
-	<label>Judgement: </label>
-	<textarea readonly class="ta-judgement">{{tier.judgement}}</textarea><br>
+<div *ngIf="!tName || !auth.isAdmin()">
+<h2 class="click-tier" (click)="tName=true">Tier - {{tier.tier}}</h2>
+</div>
 
-	<label>Expertise: </label>
-	<textarea readonly class="ta-expertise">{{tier.expertise}}</textarea><br>
+<div *ngIf="tName && auth.isAdmin()">
+<label class="label-tName">Tier: </label>
+<input class="input-tier" type="text" [(ngModel)]="tier.tier">
+<button class="button-s-y" (click)="tName=false;updateTier()">Y</button>
+<button class="button-s-n" (click)="tName=false;getTier()">N</button>
+</div>
 
-	<table class="table-grades">
-		<tr>
-		  <th class="th-grade">Grade</th>
-		  <th class="th-pay">$$</th>
-		  <th class="th-bs">Badge Set</th>
-		</tr>
-		<tr *ngFor="let i of gradesIndex">
-			<td class="td-grade">{{gmap[i]}}</td>
-			<td class="td-pay">${{tier.grades[i]}}K</td>
-			<td class="td-bs">
-				<div *ngFor="let bs of getTierGradeBS(tier.tier, gmap[i])">
-					<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
-				</div>
-      	</td>
-		</tr>
-	</table>
+<br>
+<label>Badge Sets: </label>
+<text *ngFor="let bs of getTierBS(tier.tier)">
+	<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}, </uli>
+</text><br>
 
-	<button (click)="goBack()">Back</button>
-	<button *ngIf="auth.isAdmin()" class="button-edit" (click)="toTierEdit(tier._id)">Edit</button>
-	<br>
-	<br>
-	<br>
+<br>
+<div *ngIf="!judge || !auth.isAdmin()">
+<label class="click" (click)="judge=true">Judgement: </label>
+<textarea readonly class="ta-judgement" (click)="judge=true">{{tier.judgement}}</textarea>
+</div>
+
+<div *ngIf="judge && auth.isAdmin()">
+<label class="text-blue">Judgement: </label>
+<textarea class="ta-judgement" type="text" [(ngModel)]="tier.judgement">{{tier.judgement}}</textarea>
+<button class="button-bf-y" (click)="judge=false;updateTier()">Y</button>
+<button class="button-bf-n" (click)="judge=false;getTier()">N</button>
+</div>
+<br>
+
+<div *ngIf="!expert || !auth.isAdmin()">
+<label class="click" (click)="expert=true">Expertise: </label>
+<textarea readonly class="ta-judgement" (click)="expert=true">{{tier.expertise}}</textarea>
+</div>
+
+<div *ngIf="expert && auth.isAdmin()">
+<label class="text-blue">Expertise: </label>
+<textarea class="ta-judgement" type="text" [(ngModel)]="tier.expertise">{{tier.expertise}}</textarea>
+<button class="button-bf-y" (click)="expert=false;updateTier()">Y</button>
+<button class="button-bf-n" (click)="expert=false;getTier()">N</button>
+</div>
+<br>
+
+<table class="table-grades">
+	<tr>
+	  <th class="th-grade">Grade</th>
+	  <th class="th-pay">$$</th>
+	  <th class="th-bs">Badge Set</th>
+	</tr>
+	<tr *ngFor="let i of gradesIndex">
+		<td (click)="checkAdmin()" class="td-grade">{{gmap[i]}}</td>
+		<td *ngIf="!bedit" (click)="checkAdmin()"  class="td-pay">${{tier.grades[i]}}K</td>
+		<td *ngIf="bedit" class="td-pay">$ <input class="input-grade" type="number" [(ngModel)]="tier.grades[i]"> K</td>
+		<td (click)="checkAdmin()" class="td-bs">
+			<div *ngFor="let bs of getTierGradeBS(tier.tier, gmap[i])">
+				<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+			</div>
+  		</td>
+	</tr>
+</table>
+
+<br>
+<button *ngIf="!auth.isAdmin() && !bedit" (click)="goBack()">Back</button>
+
+<div *ngIf="auth.isAdmin()">
+<button class="button-newTier" (click)="addTier()">New Tier</button>
+<button class="button-delete" (click)="deleteTierPop()">Delete</button>
+<button *ngIf="bedit" class="button-bl-y" (click)="bedit=false;updateTier()">Save</button>
+<button *ngIf="bedit" class="button-bl-n" (click)="bedit=false;getTier()">Cancel</button>
+</div>
+
+<br>
+<br>
+<br>
+
 </div>
 
 </div>

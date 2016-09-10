@@ -164,12 +164,26 @@ textarea {
 }
 .button-add {
   position: relative; 
-  left: 42%;
+  left: 35%;
   width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-add:hover{
+  color: white;
+  background-color: limegreen;
 }
 .button-cancel {
   position: relative; 
-  left: 42%;
+  left: 35%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+}
+.button-cancel:hover{
+  color: white;
+  background-color: red;
 }
 /*.label-approved｛
 

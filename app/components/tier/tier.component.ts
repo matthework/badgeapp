@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {Tier} from './tier';
-import {TierEditComponent} from './tier-edit/tier-edit.component';
 import {TierService} from './tier.service';
 import {BadgeSet} from '../badgeset/bs';
 import {BSService} from '../badgeset/bs.service';
@@ -14,7 +13,7 @@ import {FilterArrayPipe} from '../pipe/filter-array-pipe';
     selector: 'my-tier',
     templateUrl: 'app/components/tier/tier.component.html',
     styleUrls: ['app/components/tier/tier.component.css'],
-    directives: [TierEditComponent],
+    directives: [],
     pipes: [FilterArrayPipe]
 })
 export class TierComponent {

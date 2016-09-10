@@ -428,6 +428,7 @@ export class StaffDetailComponent implements OnInit {
       this.bedit = true;
     }
   }
+  
   resetNewValue() {
     this.newBID = "";
     this.newLevel = 0;

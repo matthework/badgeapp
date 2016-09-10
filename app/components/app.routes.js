@@ -11,7 +11,6 @@ var staff_new_component_1 = require('./staff/staff-new/staff-new.component');
 var user_detail_component_1 = require('./staff/user-detail/user-detail.component');
 var user_new_component_1 = require('./staff/user-new/user-new.component');
 var tier_component_1 = require('./tier/tier.component');
-var tier_edit_component_1 = require('./tier/tier-edit/tier-edit.component');
 var tier_detail_component_1 = require('./tier/tier-detail/tier-detail.component');
 var tier_new_component_1 = require('./tier/tier-new/tier-new.component');
 var bs_component_1 = require('./badgeset/bs.component');
@@ -73,10 +72,6 @@ var routes = [
     {
         path: 'tier/detail/:id',
         component: tier_detail_component_1.TierDetailComponent,
-    },
-    {
-        path: 'tier/edit/:id',
-        component: tier_edit_component_1.TierEditComponent,
     },
     {
         path: 'tier/new',

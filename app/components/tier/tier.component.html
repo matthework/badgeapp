@@ -47,7 +47,7 @@
 	<td class="td-gf" (click)="onSelect(tier)">${{tier.grades[5]}}K</td>
 	<td class="td-judge" (click)="onSelect(tier)">{{tier.judgement}}</td>
 	<td class="td-expert" (click)="onSelect(tier)">{{tier.expertise}}</td>
-	<td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
+	<td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><!-- <button class="button-s-e" (click)="toTierEdit(tier._id)">E</button> --></td>
 	</tr>
 </table>
 </div>
@@ -96,7 +96,7 @@
 		<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
 	</div>
 	</td>
-	<td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><button class="button-s-e" (click)="toTierEdit(tier._id)">E</button></td>
+	<td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteTierPop(tier._id)">X</button><!-- <button class="button-s-e" (click)="toTierEdit(tier._id)">E</button> --></td>
 	</tr>
 </table>
 </div>
