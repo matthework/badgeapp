@@ -139,7 +139,7 @@ textarea {
   background-color: red;
   color: white;
 }
-.button-save {
+.button-add {
   position: relative; 
   left: 30%;
   width: 100px;
@@ -147,7 +147,7 @@ textarea {
   background-color: #039be5;
   margin-left: 10px;
 }
-.button-save:hover{
+.button-add:hover{
   color: white;
   background-color: limegreen;
 }

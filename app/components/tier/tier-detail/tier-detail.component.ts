@@ -21,6 +21,10 @@ export class TierDetailComponent implements OnInit {
   gmap = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F"};
   sub: any;
   id: string;
+  tName =false;
+  judge =false;
+  expert =false;
+  bedit = false;
 
   constructor(
     private _tierService: TierService, 
@@ -30,15 +34,19 @@ export class TierDetailComponent implements OnInit {
     private auth: AuthService) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.getParams();
     this.getTier();
     this.getBadgeSets();
   }
 
   ngOnDestroy() {
       this.sub.unsubscribe();
+  }
+
+  getParams() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
   }
 
   getTier() {
@@ -52,11 +60,35 @@ export class TierDetailComponent implements OnInit {
 
   toTiers() {
     this._router.navigate(['/tiers']);
-    // location.reload();
+    location.reload();
   }
 
   toTierEdit(tid:string) {
     this._router.navigate(['/tier/edit',tid]);
+  }
+
+  updateTier() {
+      this.tier.tier = +this.tier.tier;
+      let value = JSON.stringify(this.tier)
+      this._tierService.updateTier(this.tier._id,value).subscribe();
+      console.log('you submitted value: ', value); 
+  }
+
+  addTier() {
+    this._router.navigate(['/tier/new']);
+  }
+
+  removeTier() {
+    this._tierService.deleteTier(this.tier._id).subscribe();
+    this.toTiers();
+  }
+
+  deleteTierPop() {
+    var tier = this.tier.tier;
+    var r = confirm("Are you sure you want to delete Tier: " + tier +" ?");
+    if (r == true) {
+      this.removeTier();
+    }
   }
 
   getTierBS(t:number) {
@@ -81,6 +113,12 @@ export class TierDetailComponent implements OnInit {
 
   toBSDetail(bsid:string){
     this._router.navigate(['/bs/detail',bsid]);
+  }
+
+  checkAdmin() {
+    if(this.auth.isAdmin()) {
+      this.bedit = true;
+    }
   }
 
   goBack() {

@@ -94,12 +94,26 @@ margin-left: 0;
 }
 .button-add {
   position: relative; 
-  left: 30%;
+  left: 25%;
   width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-add:hover{
+  color: white;
+  background-color: limegreen;
 }
 .button-cancel {
   position: relative; 
-  left: 30%;
+  left: 25%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+}
+.button-cancel:hover{
+  color: white;
+  background-color: red;
 }
 
 

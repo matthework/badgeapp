@@ -26,7 +26,7 @@
 </div>
 
 <div *ngIf="staff">
-<text class="text-topbs">Top BadgeSet: </text><text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text>
+<text class="text-topbs">Top BadgeSet: </text><text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text>
 <br>
 <br>
   <table class="table-userbgroups">

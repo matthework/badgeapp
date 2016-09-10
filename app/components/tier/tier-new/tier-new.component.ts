@@ -31,7 +31,7 @@ export class TierNewComponent {
 
   toTiers() {
     this._router.navigate(['/tiers']);
-    // location.reload();
+    location.reload();
   }
 
   goBack() {

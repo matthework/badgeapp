@@ -29,7 +29,7 @@ var TierNewComponent = (function () {
     };
     TierNewComponent.prototype.toTiers = function () {
         this._router.navigate(['/tiers']);
-        // location.reload();
+        location.reload();
     };
     TierNewComponent.prototype.goBack = function () {
         window.history.back();
