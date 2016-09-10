@@ -29,7 +29,6 @@ var BadgeComponent = (function () {
         this.staffs = [];
         this.active = true;
         this.showBadges = false;
-        this.showBCat = false;
     }
     BadgeComponent.prototype.ngOnInit = function () {
         this.getStaffs();
@@ -76,10 +75,6 @@ var BadgeComponent = (function () {
     BadgeComponent.prototype.toBadges = function () {
         this._router.navigate(['/badges']);
         location.reload();
-    };
-    BadgeComponent.prototype.showBadgeCat = function () {
-        this.showBCat = true;
-        this._router.navigate(['/badgecat']);
     };
     BadgeComponent.prototype.removeBadgeFromBS = function (bid) {
         if (this.badgesets != null) {

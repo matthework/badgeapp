@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {Staff,UserBGroup} from './staff';
-import {StaffEditComponent} from './staff-edit/staff-edit.component';
 import {StaffService} from './staff.service';
 import {Badge} from '../badge/badge';
 import {BadgeService} from '../badge/badge.service';
@@ -22,7 +21,7 @@ import {ApprovedPipe} from '../pipe/approved-pipe';
 	selector: 'my-staff',
 	templateUrl: 'app/components/staff/staff.component.html',
 	styleUrls: ['app/components/staff/staff.component.css'],
-	directives: [StaffEditComponent],
+	directives: [],
 	pipes: [FilterArrayPipe,YesNoPipe,ApprovedPipe]
 })
 export class StaffComponent {
@@ -87,10 +86,6 @@ export class StaffComponent {
 	toStaffs() {
 		this._router.navigate(['/staffs']);
 		// location.reload();
-	}
-
-	toStaffEdit(sid:string) {
-		this._router.navigate(['/staff/edit',sid]);
 	}
 	
 	toStaffDetail(sid:string) {

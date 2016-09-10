@@ -2,6 +2,9 @@
 <div *ngIf="auth.authenticated()">
 
 <div *ngIf="staff">
+
+<div *ngIf="!edit">
+
 <h2>User - {{staff.fname}} {{staff.lname}}</h2>
 
 <br>
@@ -10,12 +13,6 @@
 
 <label>Email: </label>
 <text>{{staff.email}}</text><br>
-
-<!-- 	<label>Phone: </label>
-<text>{{staff.phone}}</text><br> -->
-
-<!-- 	<label>Salary: </label>
-<text>${{staff.salary}}K</text><br> -->
 
 <label>Top BSet: </label>
 <text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
@@ -28,7 +25,7 @@
 <label>Brief: </label>
 <textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
 
-<button *ngIf="auth.authenticated()" class="button-edit" (click)="toUserEdit(staff._id)">Edit Profile</button><br>
+<button *ngIf="auth.authenticated()" class="button-edit" (click)="edit=true">Edit Profile</button><br>
 
 <br>
 <br>
@@ -66,7 +63,7 @@
 	</tr>
 	<tr *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
 		<td (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="badge">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="badge-more">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text> <text *ngIf="userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text></td>
-		<td class="td-desc"><text class="text-light-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
+		<td class="td-desc"><text *ngIf="userbgroup.current" class="text-light-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
 		<td class="td-bs">
 		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
@@ -102,6 +99,31 @@
 <br>
 <br>
 <br>
+</div>
+
+</div>
+
+<div *ngIf="edit">
+	<h2>Edit User - {{staff.fname}} {{staff.lname}}</h2><br>
+
+	<label>FName: </label>
+	<input class="input-fname" type="text" [(ngModel)]="staff.fname" placeholder="First Name"><br>
+
+	<label>LName: </label>
+	<input class="input-lname" type="text" [(ngModel)]="staff.lname" placeholder="Last Name"><br>
+
+	<label>Position: </label>
+	<input class="input-pos" type="text" [(ngModel)]="staff.position" placeholder="Position"><br>
+
+	<label>Brief: </label>
+	<textarea class="ta-brief" type="text" [(ngModel)]="staff.brief" placeholder="Brief">{{staff.brief}}</textarea><br>
+
+	<button class="button-save" [disabled]="!staff.fname||!staff.email" (click)="updateStaff();edit=false">Save</button>
+	<button class="button-cancel" (click)="edit=false">Cancel</button>
+
+	<br>
+	<br>
+	<br>
 </div>
 
 <div *ngIf="!staff">

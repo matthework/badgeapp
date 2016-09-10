@@ -39,12 +39,12 @@ input {
   height: 2em;
   font-size: 1em;
   padding-left: .4em;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   color: #999;
 }
 button {
   width: 100px;
-  margin-top: 20px;
+  margin-top: 0px;
   margin-right: 10px;
   font-size: 1em;
   font-family: Arial;
@@ -216,5 +216,270 @@ textarea {
   font-style: italic;
   color: #039be5;
 }
-
-
+.click{
+  cursor: pointer;
+  cursor: hand;
+}
+.click:hover{
+  color: #039be5;
+}
+.click:visited{
+  color: #607D8B;
+}
+.click-staff{
+  color: #039be5;
+  cursor: pointer;
+  cursor: hand;
+}
+.text-blue {
+  color: #039be5;
+}
+.right {
+  margin-right: 20px;
+}
+.input-focus {
+  width: 370px;
+  margin-left: 2px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  border-radius: 3;
+}
+.input-focus1 {
+  width: 300px;
+}
+.ta-desc {
+  width: 470px;
+  height: 100px;
+  border: 1px solid #cccccc;
+  font-style: italic;
+  word-wrap: break-word;
+}
+.button-s-delete {
+  width: 40px;
+  background-color: pink;
+  color: white;
+  vertical-align: bottom;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+.button-s-delete:hover {
+  background-color: red;
+  color: white;
+}
+.select-badge-new {
+  background: transparent;
+  width: 300px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-left: 2px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+}
+.select-level-new {
+  background: transparent;
+  width: 60px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-bottom: 0px;
+}
+.input-focus-new {
+  width: 300px;
+  margin-left: 2px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  border-radius: 3;
+}
+.button-l-save {
+  position: relative; 
+  left: 33%;
+  color: white;
+  background-color: #039be5;
+  margin-right: 5px;
+}
+.button-l-save:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-l-cancel {
+  position: relative; 
+  left: 33%;
+  color: white;
+  background-color: hotpink;
+}
+.button-l-cancel:hover{
+  color: white;
+  background-color: red;
+}
+.label-level {
+  width: 5em;
+}
+.input-pos {
+  width: 300px;
+  margin-right: 20px;
+}
+.label-staffName {
+  color: #039be5;
+  font-size: 1.6em;
+  font-style: lighter;
+  width: 5em 
+}
+.text-light-blue {
+  font-size: 1em;
+  font-style: italic;
+  color: #039be5;
+}
+.checkBox {
+  margin-bottom: 0px;
+}
+.button-s-y {
+  width: 40px;
+  color: white;
+  background-color: #039be5;
+  border-radius: 4px;
+  /*border: 1px solid #cccccc;*/
+  margin-left: 10px;
+}
+.button-s-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-s-n {
+  width: 40px;
+  color: white;
+  background-color: hotpink;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+.button-s-n:hover{
+  color: white;
+  background-color: red;
+}
+.button-bl-y {
+  position: relative; 
+  left: 45%;
+  width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-bl-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-bl-n {
+  position: relative; 
+  left: 45%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+  margin-left: 10px;
+}
+.button-bl-n:hover{
+  color: white;
+  background-color: red;
+}
+.select-status {
+  background: transparent;
+  width: 150px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-right: 30px;
+  margin-bottom: 0px;
+}
+.button-bf-y {
+  width: 40px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+  vertical-align: bottom;
+  margin-bottom: 20px;
+}
+.button-bf-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-bf-n {
+  width: 40px;
+  color: white;
+  background-color: hotpink;
+  vertical-align: bottom;
+  margin-bottom: 20px;
+}
+.button-bf-n:hover{
+  color: white;
+  background-color: red;
+}
+.focus {
+  color: #039be5;
+}
+.button-newBadge {
+  position: relative; 
+  left: 75%;
+  width: 120px;
+  color: white;
+  background-color: #039be5;
+}
+.button-newBadge:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-newStaff {
+  width: 110px;
+  color: white;
+  background-color: #039be5;
+}
+.button-newStaff:hover {
+  color: white;
+  background-color: limegreen;
+}
+.button-delete {
+  background-color: pink;
+  color: white;
+  vertical-align: bottom;
+  margin-left: 10px;
+}
+.button-delete:hover {
+  background-color: red;
+  color: white;
+}
+.select-badge {
+  background: transparent;
+  width: 300px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-left: 2px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+.select-level {
+  background: transparent;
+  width: 60px;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-bottom: 0px;
+}

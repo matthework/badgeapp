@@ -38,6 +38,7 @@ export class UserDetailComponent implements OnInit {
   newFocus = [];
   newStatus = false;
   more = false;
+  edit = false;
   labels = [  "I understand... ", 
             "I participate... ", 
             "I contribute... ", 
@@ -97,10 +98,6 @@ export class UserDetailComponent implements OnInit {
     location.reload();
   }
 
-  toUserEdit(sid:string) {
-    this._router.navigate(['/user/edit',sid]);
-  }
-
   getDesc(bid:string, l:number) {
     var desc = "";
     if (this.badges != null && l > 0 && bid != "") {
@@ -127,6 +124,12 @@ export class UserDetailComponent implements OnInit {
     //   }
     // }
     this._router.navigate(['/badge/detail',bid]);
+  }
+
+  updateStaff() {
+      let value = JSON.stringify(this.staff)
+      this._staffService.updateStaff(this.staff._id,value).subscribe();
+      console.log('you submitted value: ', value); 
   }
 
   getStaffBS(sbgs:UserBGroup[]) {
