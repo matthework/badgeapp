@@ -11,7 +11,6 @@ import {StaffComponent} from './staff/staff.component';
 import {StaffDetailComponent} from './staff/staff-detail/staff-detail.component';
 import {StaffNewComponent} from './staff/staff-new/staff-new.component';
 import {UserDetailComponent} from './staff/user-detail/user-detail.component';
-import {UserNewComponent} from './staff/user-new/user-new.component';
 
 import {TierComponent} from './tier/tier.component';
 import {TierDetailComponent} from './tier/tier-detail/tier-detail.component';
@@ -64,10 +63,6 @@ const routes: RouterConfig = [
   {
       path: 'user',
       component: UserDetailComponent,
-  },
-  {
-      path: 'user/new/:email',
-      component: UserNewComponent,
   },
   {
       path: 'user/detail/:email',

@@ -1,34 +1,58 @@
 
 <div *ngIf="auth.authenticated()">
 
-<div *ngIf="staff">
+<div *ngIf="checkProfile() && staff">
 
-<div *ngIf="!edit">
+<div *ngIf="!userName">
+<h2 class="click" (click)="userName=true">User - {{staff.fname}} {{staff.lname}}</h2>
+</div>
 
-<h2>User - {{staff.fname}} {{staff.lname}}</h2>
-
+<div *ngIf="userName">
 <br>
-<label>Position: </label>
-<text>{{staff.position}}</text><br>
+<label class="label-userName">User: </label>
+<input class="input-staff" type="text" [(ngModel)]="staff.fname">
+<input class="input-staff" type="text" [(ngModel)]="staff.lname">
+<button class="button-s-y" (click)="userName=false;updateStaff()">Y</button>
+<button class="button-s-n" (click)="userName=false;getStaffByEmail()">N</button>
+</div>
+
+<div *ngIf="!pos">
+<label class="click" (click)="pos=true">Position: </label>
+<text class="click" (click)="pos=true">{{staff.position}}</text>
+</div>
+
+<div *ngIf="pos">
+<label class="text-blue">Position: </label>
+<input class="input-pos" type="text" [(ngModel)]="staff.position">
+<button class="button-s-y" (click)="pos=false;updateStaff()">Y</button>
+<button class="button-s-n" (click)="pos=false;getStaffByEmail()">N</button>
+</div>
+
 
 <label>Email: </label>
 <text>{{staff.email}}</text><br>
 
 <label>Top BSet: </label>
-<text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
+<text class="badgeset" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
 
 <label>Badge Sets: </label>
 <text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 	<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
 </text><br>
 
-<label>Brief: </label>
-<textarea readonly class="ta-brief">{{staff.brief}}</textarea><br>
+<div *ngIf="!brief">
+<label class="click" (click)="brief=true">Brief: </label>
+<textarea readonly class="ta-brief" (click)="brief=true">{{staff.brief}}</textarea>
+</div>
 
-<button *ngIf="auth.authenticated()" class="button-edit" (click)="edit=true">Edit Profile</button><br>
+<div *ngIf="brief">
+<label class="text-blue">Brief: </label>
+<textarea class="ta-brief" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
+<button class="button-bf-y" (click)="brief=false;updateStaff()">Y</button>
+<button class="button-bf-n" (click)="brief=false;getStaffByEmail()">N</button>
+</div>
+<br>
 
-<br>
-<br>
 <br>
 <text class="text-userb">User's Badges:</text>
 
@@ -101,35 +125,22 @@
 <br>
 </div>
 
-</div>
 
-<div *ngIf="edit">
-	<h2>Edit User - {{staff.fname}} {{staff.lname}}</h2><br>
-
-	<label>FName: </label>
-	<input class="input-fname" type="text" [(ngModel)]="staff.fname" placeholder="First Name"><br>
-
-	<label>LName: </label>
-	<input class="input-lname" type="text" [(ngModel)]="staff.lname" placeholder="Last Name"><br>
-
+<div *ngIf="!checkProfile()">
+	<h2>User Profile</h2><br>
+	<label>*FName: </label>
+	<input class="input-fname" type="text" [(ngModel)]="newUser.fname" placeholder="First Name" /><br>
+	<label>*LName: </label>
+	<input class="input-lname" type="text" [(ngModel)]="newUser.lname" placeholder="Last Name" /><br>
 	<label>Position: </label>
-	<input class="input-pos" type="text" [(ngModel)]="staff.position" placeholder="Position"><br>
-
+	<input class="input-pos" type="text" [(ngModel)]="newUser.position" placeholder="Position" /><br>
 	<label>Brief: </label>
-	<textarea class="ta-brief" type="text" [(ngModel)]="staff.brief" placeholder="Brief">{{staff.brief}}</textarea><br>
-
-	<button class="button-save" [disabled]="!staff.fname||!staff.email" (click)="updateStaff();edit=false">Save</button>
-	<button class="button-cancel" (click)="edit=false">Cancel</button>
-
+	<textarea class="ta-brief" type="text" [(ngModel)]="newUser.brief" placeholder=""></textarea><br>
 	<br>
-	<br>
-	<br>
+	<button class="button-save" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
+	<button class="button-cancel" (click)="location.reload()">Cancel</button>
 </div>
 
-<div *ngIf="!staff">
-	<br>
-	<button class="button-add" (click)="addNewUser(auth.userProfile.email)">Create Profile</button><text> Please complete your profile.</text>
-</div>
 
 </div>
 

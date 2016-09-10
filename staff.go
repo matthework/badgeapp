@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 	"gopkg.in/mgo.v2/bson"	
 )
@@ -78,7 +79,7 @@ func findStaffByEmail(email string) (staff Staff) {
 	fQuery := bson.M{"email": email}
 	err := collection.Find(fQuery).One(&staff)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return staff
 }

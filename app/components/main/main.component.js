@@ -30,6 +30,7 @@ var MainComponent = (function () {
         this.tiers = [];
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
+        this.newUser = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief: "", others: [] };
     }
     MainComponent.prototype.ngOnInit = function () {
         if (this.auth.userProfile) {
@@ -76,8 +77,12 @@ var MainComponent = (function () {
         // console.log('you submitted value: ', hasProfile); 
         return hasProfile;
     };
-    MainComponent.prototype.addNewUser = function (email) {
-        this._router.navigate(['/user/new', email]);
+    MainComponent.prototype.addNewUser = function () {
+        this.newUser.email = this.auth.userProfile.email;
+        var value = JSON.stringify(this.newUser);
+        this._staffService.addStaff(value).subscribe();
+        console.log('you submitted value: ', value);
+        this.toUserDetail(this.newUser.email);
     };
     MainComponent.prototype.toUserDetail = function (email) {
         this._router.navigate(['/user/detail', email]);

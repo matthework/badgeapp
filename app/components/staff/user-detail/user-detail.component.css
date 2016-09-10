@@ -41,12 +41,13 @@ input {
   font-size: 1em;
   padding-left: .4em;
   margin-bottom: 20px;
+  margin-right: 10px;
   color: #999;
 }
 button {
   width: 100px;
-  margin-top: 20px;
-  margin-right: 10px;
+  margin-top: 0px;
+  margin-right: 0px;
   font-size: 1em;
   font-family: Arial;
   background-color: #eee;
@@ -293,5 +294,117 @@ textarea {
 .text-light-blue {
   font-size: 1em;
   font-style: italic;
+  color: #039be5;
+}
+.button-save {
+  position: relative; 
+  left: 30%;
+  width: 100px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+}
+.button-save:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-cancel {
+  position: relative; 
+  left: 30%;
+  width: 100px;
+  color: white;
+  background-color: hotpink;
+}
+.button-cancel:hover{
+  color: white;
+  background-color: red;
+}
+.input-fname{
+  width: 300px;
+}
+.input-lname{
+  width: 300px;
+}
+.input-pos{
+  width: 300px;
+}
+.input-email{
+  width: 300px;
+}
+.ta-brief {
+  width: 400px;
+  height: 100px;
+  border: 1px solid #cccccc;
+  font-style: italic;
+  word-wrap: break-word;
+}
+.button-s-y {
+  width: 40px;
+  color: white;
+  background-color: #039be5;
+  border-radius: 4px;
+  /*border: 1px solid #cccccc;*/
+  margin-left: 10px;
+}
+.button-s-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-s-n {
+  width: 40px;
+  color: white;
+  background-color: hotpink;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+.button-s-n:hover{
+  color: white;
+  background-color: red;
+}
+.button-bf-y {
+  width: 40px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 10px;
+  vertical-align: bottom;
+  margin-bottom: 20px;
+}
+.button-bf-y:hover{
+  color: white;
+  background-color: limegreen;
+}
+.button-bf-n {
+  width: 40px;
+  color: white;
+  background-color: hotpink;
+  vertical-align: bottom;
+  margin-bottom: 20px;
+}
+.button-bf-n:hover{
+  color: white;
+  background-color: red;
+}
+.click{
+  cursor: pointer;
+  cursor: hand;
+}
+.click:hover{
+  color: #039be5;
+}
+.click:visited{
+  color: #607D8B;
+}
+.click-staff{
+  color: #039be5;
+  cursor: pointer;
+  cursor: hand;
+}
+.label-userName {
+  color: #039be5;
+  font-size: 1.5em;
+  font-style: lighter;
+  width: 5em 
+}
+.text-blue {
   color: #039be5;
 }
