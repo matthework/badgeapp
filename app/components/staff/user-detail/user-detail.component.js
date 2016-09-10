@@ -37,6 +37,7 @@ var UserDetailComponent = (function () {
         this.newFocus = [];
         this.newStatus = false;
         this.more = false;
+        this.edit = false;
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",
@@ -84,9 +85,6 @@ var UserDetailComponent = (function () {
         this._router.navigate(['/staffs']);
         location.reload();
     };
-    UserDetailComponent.prototype.toUserEdit = function (sid) {
-        this._router.navigate(['/user/edit', sid]);
-    };
     UserDetailComponent.prototype.getDesc = function (bid, l) {
         var desc = "";
         if (this.badges != null && l > 0 && bid != "") {
@@ -112,6 +110,11 @@ var UserDetailComponent = (function () {
         //   }
         // }
         this._router.navigate(['/badge/detail', bid]);
+    };
+    UserDetailComponent.prototype.updateStaff = function () {
+        var value = JSON.stringify(this.staff);
+        this._staffService.updateStaff(this.staff._id, value).subscribe();
+        console.log('you submitted value: ', value);
     };
     UserDetailComponent.prototype.getStaffBS = function (sbgs) {
         var allbset = [];

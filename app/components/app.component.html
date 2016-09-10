@@ -4,7 +4,6 @@
 	<li><a [routerLink]="['/badgeset']" routerLinkActive="active">Badge Set</a></li>
 	<li><a [routerLink]="['/user']" routerLinkActive="active">User</a></li>
 	<li *ngIf="auth.isAdmin()"><a [routerLink]="['/staffs']" routerLinkActive="active">Person</a></li>
-<!-- 	<li *ngIf="auth.isAdmin()"><a [routerLink]="['/admin']" routerLinkActive="active">Admin</a></li> -->
 	<li><a [routerLink]="['/tiers']" routerLinkActive="active">Tiers</a></li>
 	<li><a [routerLink]="['/about']" routerLinkActive="active">About</a></li>
 	<li style="float:right"><a class="active" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</a></li>

@@ -14,7 +14,6 @@ var badge_service_1 = require('./badge/badge.service');
 var staff_service_1 = require('./staff/staff.service');
 var tier_service_1 = require('./tier/tier.service');
 var bs_service_1 = require('./badgeset/bs.service');
-var bcat_service_1 = require('./badgecat/bcat.service');
 var auth_service_1 = require('./auth/auth.service');
 var AppComponent = (function () {
     function AppComponent(auth) {
@@ -32,7 +31,6 @@ var AppComponent = (function () {
                 staff_service_1.StaffService,
                 tier_service_1.TierService,
                 bs_service_1.BSService,
-                bcat_service_1.BCatService,
                 auth_service_1.AuthService
             ]
         }), 

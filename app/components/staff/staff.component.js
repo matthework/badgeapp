@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var staff_edit_component_1 = require('./staff-edit/staff-edit.component');
 var staff_service_1 = require('./staff.service');
 var badge_service_1 = require('../badge/badge.service');
 var bs_service_1 = require('../badgeset/bs.service');
@@ -76,9 +75,6 @@ var StaffComponent = (function () {
     StaffComponent.prototype.toStaffs = function () {
         this._router.navigate(['/staffs']);
         // location.reload();
-    };
-    StaffComponent.prototype.toStaffEdit = function (sid) {
-        this._router.navigate(['/staff/edit', sid]);
     };
     StaffComponent.prototype.toStaffDetail = function (sid) {
         this._router.navigate(['/staff/detail', sid]);
@@ -250,7 +246,7 @@ var StaffComponent = (function () {
             selector: 'my-staff',
             templateUrl: 'app/components/staff/staff.component.html',
             styleUrls: ['app/components/staff/staff.component.css'],
-            directives: [staff_edit_component_1.StaffEditComponent],
+            directives: [],
             pipes: [filter_array_pipe_1.FilterArrayPipe, yes_no_pipe_1.YesNoPipe, approved_pipe_1.ApprovedPipe]
         }), 
         __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, bs_service_1.BSService, tier_service_1.TierService, router_1.Router, auth_service_1.AuthService])

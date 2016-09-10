@@ -32,6 +32,19 @@ export class StaffDetailComponent implements OnInit {
   sub: any;
   id: string;
   more = false;
+  staffName = false;
+  pos = false;
+  email = false;
+  sta = false;
+  brief = false;
+  bedit =false;
+  newBID = "";
+  newLevel = 0;
+  newFocus = [];
+  newStatus = false;
+  addNew = false;
+  statusOptions = ['Active','Inactive'];
+
   labels = [  "I understand... ", 
           "I participate... ", 
           "I contribute... ", 
@@ -53,9 +66,7 @@ export class StaffDetailComponent implements OnInit {
     private auth: AuthService) {}
   
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.getParams();
     this.getStaff();
     this.getBadges();
     this.getBadgeSets();
@@ -64,6 +75,12 @@ export class StaffDetailComponent implements OnInit {
 
   ngOnDestroy() {
       this.sub.unsubscribe();
+  }
+
+  getParams() {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
   }
 
   getStaff() {
@@ -88,8 +105,75 @@ export class StaffDetailComponent implements OnInit {
     location.reload();
   }
 
-  toStaffEdit(sid:string) {
-    this._router.navigate(['/staff/edit',sid]);
+  toBadgeDetail(bid:string) {
+    this._router.navigate(['/badge/detail',bid]);
+  }
+
+  updateStaff() {
+      // pasrse string into number
+      for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+          this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
+      }
+      this.staff.userbgroups.sort(this.toCompare);
+      let value = JSON.stringify(this.staff)
+      this._staffService.updateStaff(this.staff._id,value).subscribe();
+  }
+
+  toCompare(a,b) {
+      if (a.badge < b.badge)
+        return -1;
+      else if (a.badge > b.badge)
+        return 1;
+      else 
+        return 0;
+  }
+
+  addStaff() {
+      this._router.navigate(['/staff/new']);
+  }
+
+  addBadgeGroup() {
+      this.newLevel = +this.newLevel;
+      this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
+      let value = JSON.stringify(this.staff)
+      console.log('you submitted value: ', value);
+      this.newBID = "";
+      this.newLevel = 0;
+      this.newFocus =[];
+      this.newStatus = false;
+  }
+
+  removeStaff() {
+      this._staffService.deleteStaff(this.id).subscribe();
+      this.toStaffs();
+  }
+
+  deleteStaffPop() {
+      var fname = this.staff.fname;
+      var lname = this.staff.lname;
+      var name = fname.toUpperCase() + " " + lname.toUpperCase();
+      var r = confirm("Are you sure you want to delete Staff: " + name +" ?");
+      if (r == true) {
+          this.removeStaff();
+      }
+  }
+
+  deleteBadgeGroupPop(selectedGroup: UserBGroup) {
+      var name = this.staff.fname.toUpperCase() + " " + this.staff.lname.toUpperCase();
+      var badge = selectedGroup.badge.toUpperCase();
+      var level = selectedGroup.level;
+      var r = confirm("Are you sure you want to delete "+ badge + " " + level + " from " + name +" ?");
+      if (r == true) {
+          this.removeBadgeGroup(selectedGroup);
+      }
+  }
+
+  removeBadgeGroup(selectedGroup: UserBGroup) {
+      let index = this.staff.userbgroups.indexOf(selectedGroup);
+      this.staff.userbgroups.splice(index,1);
+      let value = JSON.stringify(this.staff)
+      // this._staffService.updateStaff(id,value).subscribe();
+      console.log('you submitted value: ', value);
   }
 
   getDesc(bid:string, l:number) {
@@ -106,18 +190,6 @@ export class StaffDetailComponent implements OnInit {
       }
     }
     return desc;
-  }
-
-  toBadgeDetail(bid:string) {
-    // var bid = "";
-    // if (this.badges != null) {
-    //   for (var i = 0; i < this.badges.length; i++) {   
-    //     if (this.badges[i].name == bname) {
-    //       bid = this.badges[i]._id;
-    //     }
-    //   }
-    // }
-    this._router.navigate(['/badge/detail',bid]);
   }
 
   getStaffBS(sbgs:UserBGroup[]) {
@@ -248,6 +320,119 @@ export class StaffDetailComponent implements OnInit {
     return bname;
   }
 
+  getBadgesOptions() {
+      var badgesOptions = [];
+      if (this.badges != null) {
+          for (var i = 0; i < this.badges.length; i++) { 
+              if (this.badges[i].status=='Accepted') {
+                  badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
+              }
+          }
+          // console.log('getBadgesOptions: ', badgesOptions);
+          return badgesOptions.sort();
+      }
+  }
+
+  // getNewBadgesOptions() {
+  //     var badgesOptions = [];
+  //     var userbgs = [];
+  //     if (this.staff.userbgroups != null) {
+  //         for (var j = 0; j < this.staff.userbgroups.length; j++) { 
+  //             userbgs.push(this.staff.userbgroups[j].bid);
+  //         }
+  //     }
+  //     if (this.badges != null) {
+  //         for (var i = 0; i < this.badges.length; i++) { 
+  //             let index = userbgs.indexOf(this.badges[i]._id);
+  //             if (this.badges[i].status=='Accepted') { // && index == -1) {
+  //                 badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
+  //             }
+  //         }
+  //     }
+  //     return badgesOptions.sort();
+  // }
+
+  getLevelsOptions(bid: string) {
+      var levelsOptions = [];
+      for (var i = 0; i < this.badges.length; i++) { 
+          if (this.badges[i]._id == bid) {
+              for (var j = 0; j < this.badges[i].badgelevels.length; j++) { 
+                  levelsOptions.push(this.badges[i].badgelevels[j].level);
+              }
+          }
+      }
+      // console.log('getBadgesOptions: ', badgesOptions);
+      return levelsOptions.sort();
+  }
+
+  getFocusOptions(bid:string) {
+      var focusOptions = [];
+      if (this.badges != null) {
+          for (var i = 0; i < this.badges.length; i++) { 
+              if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+                for (var j = 0; j < this.badges[i].focus.length; j++) { 
+                  focusOptions.push(this.badges[i].focus[j]);
+                }
+              }
+          }
+      }
+      return focusOptions.sort();
+  }
+
+  updateChecked(option, event, bg) {
+      // this.checked = focus;
+      console.log('event.target.value ' + event.target.value);
+      var index = bg.focus.indexOf(option);
+      if(event.target.checked) {
+        console.log('add');
+        if(index === -1) {
+          bg.focus.push(option);
+        }
+      } else {
+        console.log('remove');
+        if(index !== -1) {
+          bg.focus.splice(index, 1);
+        }
+      }
+      console.log(bg.focus);
+  }
+
+  updateCheckedNew(option, event, focus) {
+      console.log('event.target.value ' + event.target.value);
+      var index = focus.indexOf(option);
+      if(event.target.checked) {
+        console.log('add');
+        if(index === -1) {
+          focus.push(option);
+        }
+      } else {
+        console.log('remove');
+        if(index !== -1) {
+          focus.splice(index, 1);
+        }
+      }
+      console.log(focus);
+      this.newFocus = focus;
+  }
+
+  checkFocus(fc,focus) {
+      var result = false;
+      if(focus.includes(fc)) {
+        result = true;
+      }
+      return result;
+  }
+
+  checkAdmin() {
+    if(this.auth.isAdmin()) {
+      this.bedit = true;
+    }
+  }
+  resetNewValue() {
+    this.newBID = "";
+    this.newLevel = 0;
+  }
+  
   goBack() {
     window.history.back();
   }

@@ -32,7 +32,6 @@ export class BadgeComponent implements OnInit {
   selectedBadge: Badge;
   active = true;
   showBadges = false;
-  showBCat = false;
 
   constructor (
       private _router: Router,
@@ -92,11 +91,6 @@ export class BadgeComponent implements OnInit {
   toBadges() {
     this._router.navigate(['/badges']);
     location.reload();
-  }
-
-  showBadgeCat() {
-    this.showBCat = true;
-    this._router.navigate(['/badgecat']);
   }
 
   removeBadgeFromBS(bid: string) {

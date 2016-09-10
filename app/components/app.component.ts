@@ -5,7 +5,6 @@ import {BadgeService} from './badge/badge.service';
 import {StaffService} from './staff/staff.service';
 import {TierService} from './tier/tier.service';
 import {BSService} from './badgeset/bs.service';
-import {BCatService} from './badgecat/bcat.service';
 
 import {AuthService} from './auth/auth.service';
 
@@ -19,7 +18,6 @@ import {AuthService} from './auth/auth.service';
         StaffService,
         TierService,
         BSService,
-        BCatService,
         AuthService
     ]
 })

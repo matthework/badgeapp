@@ -19,7 +19,7 @@
 <text>{{badge.code}}</text><br> -->
 
 <div *ngIf="!oview || !auth.isAdmin()">
-<label>Overview: </label>
+<label class="click" (click)="oview=true">Overview: </label>
 <textarea readonly class="ta-overview" (click)="oview=true" placeholder="Overview">{{badge.overview}}</textarea>
 </div>
 
@@ -32,12 +32,12 @@
 
 <br>
 <br>
-<div *ngIf="!editFC && !checkEmptyFocus() || !auth.isAdmin()">
-<label>Focus: </label>
+<div *ngIf="!editFC || !auth.isAdmin()">
+<label class="click" (click)="editFC=true">Focus: </label>
 <text class="click" (click)="editFC=true">{{badge.focus}}</text>
 </div>
 
-<div *ngIf="auth.isAdmin() && (editFC || checkEmptyFocus())">
+<div *ngIf="auth.isAdmin() && editFC">
 <label class="text-blue">Focus: </label>
 <input class="input-focus" type="text" [(ngModel)]="newFC" placeholder=""><button class="button-t-add" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus">{{fc}} <button class="button-t-delete" (click)="deleteFC(fc)">-</button></text>
 
@@ -51,7 +51,7 @@
 <!-- 	<label>InUsed: </label>
 <text>{{badge.inused | yes_no}}</text><br> -->
 <div *ngIf="!editStatus || !auth.isAdmin()">
-<label>Status: </label>
+<label class="click" (click)="editStatus=true">Status: </label>
 <text class="click" (click)="editStatus=true">{{badge.status}}</text>
 </div>
 
