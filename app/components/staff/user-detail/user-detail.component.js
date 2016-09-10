@@ -26,9 +26,11 @@ var UserDetailComponent = (function () {
         this._router = _router;
         this.route = route;
         this.auth = auth;
+        this.staffs = [];
         this.badges = [];
         this.badgesets = [];
         this.tiers = [];
+        this.newUser = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief: "", others: [] };
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
         this.active = false;
@@ -38,6 +40,9 @@ var UserDetailComponent = (function () {
         this.newStatus = false;
         this.more = false;
         this.edit = false;
+        this.userName = false;
+        this.pos = false;
+        this.brief = false;
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",
@@ -50,20 +55,19 @@ var UserDetailComponent = (function () {
         ];
     }
     UserDetailComponent.prototype.ngOnInit = function () {
-        // this.sub = this.route.params.subscribe(params => {
-        //   this.email = params['email'];
-        // });
         if (this.auth.authenticated()) {
             this.email = this.auth.userProfile.email;
             this.getStaffByEmail();
         }
+        this.getStaffs();
         this.getBadges();
         this.getBadgeSets();
         this.getTiers();
     };
-    // ngOnDestroy() {
-    //     this.sub.unsubscribe();
-    // }
+    UserDetailComponent.prototype.getStaffs = function () {
+        var _this = this;
+        this._staffService.getStaffs().subscribe(function (staffs) { _this.staffs = staffs; });
+    };
     UserDetailComponent.prototype.getStaffByEmail = function () {
         var _this = this;
         console.log('email from _routeParams: ', this.email);
@@ -101,20 +105,22 @@ var UserDetailComponent = (function () {
         return desc;
     };
     UserDetailComponent.prototype.toBadgeDetail = function (bid) {
-        // var bid = "";
-        // if (this.badges != null) {
-        //   for (var i = 0; i < this.badges.length; i++) {   
-        //     if (this.badges[i].name == bname) {
-        //       bid = this.badges[i]._id;
-        //     }
-        //   }
-        // }
         this._router.navigate(['/badge/detail', bid]);
     };
     UserDetailComponent.prototype.updateStaff = function () {
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
+    };
+    UserDetailComponent.prototype.addNewUser = function () {
+        this.newUser.email = this.auth.userProfile.email;
+        var value = JSON.stringify(this.newUser);
+        this._staffService.addStaff(value).subscribe();
+        console.log('you submitted value: ', value);
+        this.toUserDetail(this.newUser.email);
+    };
+    UserDetailComponent.prototype.toUserDetail = function (email) {
+        this._router.navigate(['/user/detail', email]);
     };
     UserDetailComponent.prototype.getStaffBS = function (sbgs) {
         var allbset = [];
@@ -285,9 +291,6 @@ var UserDetailComponent = (function () {
         else
             return 0;
     };
-    UserDetailComponent.prototype.addNewUser = function (email) {
-        this._router.navigate(['/user/new', email]);
-    };
     UserDetailComponent.prototype.getMoreBadges = function (bgs) {
         var moreBadges = [];
         if (bgs != null) {
@@ -332,6 +335,20 @@ var UserDetailComponent = (function () {
         }
         console.log(focus);
         this.newFocus = focus;
+    };
+    UserDetailComponent.prototype.checkProfile = function () {
+        var hasProfile = false;
+        if (this.auth.userProfile != null && this.staffs != null) {
+            for (var i = 0; i < this.staffs.length; i++) {
+                var name = this.staffs[i].fname + " " + this.staffs[i].lname;
+                if (this.staffs[i].email == this.auth.userProfile.email) {
+                    hasProfile = true;
+                    break;
+                }
+            }
+        }
+        // console.log('you submitted value: ', hasProfile); 
+        return hasProfile;
     };
     UserDetailComponent.prototype.goBack = function () {
         window.history.back();

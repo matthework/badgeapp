@@ -25,9 +25,11 @@ import {ApprovedPipe} from '../../pipe/approved-pipe';
 export class UserDetailComponent implements OnInit {
 
   staff: Staff;
+  staffs: Staff[] = [];
   badges: Badge[] = [];
   badgesets: BadgeSet[] = [];
   tiers: Tier[] = [];
+  newUser = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief:"", others: []}
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   sortStaffBS = [];
   // sub: any;
@@ -39,6 +41,9 @@ export class UserDetailComponent implements OnInit {
   newStatus = false;
   more = false;
   edit = false;
+  userName = false;
+  pos = false;
+  brief = false;
   labels = [  "I understand... ", 
             "I participate... ", 
             "I contribute... ", 
@@ -60,21 +65,19 @@ export class UserDetailComponent implements OnInit {
     private auth: AuthService) {}
   
   ngOnInit() {
-    // this.sub = this.route.params.subscribe(params => {
-    //   this.email = params['email'];
-    // });
     if (this.auth.authenticated()) {
       this.email = this.auth.userProfile.email;
       this.getStaffByEmail();
     }
+    this.getStaffs();
     this.getBadges();
     this.getBadgeSets();
     this.getTiers();
   }
 
-  // ngOnDestroy() {
-  //     this.sub.unsubscribe();
-  // }
+  getStaffs() {
+    this._staffService.getStaffs().subscribe(staffs => { this.staffs = staffs});
+  }
 
   getStaffByEmail() {
     console.log('email from _routeParams: ', this.email); 
@@ -115,14 +118,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   toBadgeDetail(bid:string) {
-    // var bid = "";
-    // if (this.badges != null) {
-    //   for (var i = 0; i < this.badges.length; i++) {   
-    //     if (this.badges[i].name == bname) {
-    //       bid = this.badges[i]._id;
-    //     }
-    //   }
-    // }
     this._router.navigate(['/badge/detail',bid]);
   }
 
@@ -130,6 +125,18 @@ export class UserDetailComponent implements OnInit {
       let value = JSON.stringify(this.staff)
       this._staffService.updateStaff(this.staff._id,value).subscribe();
       console.log('you submitted value: ', value); 
+  }
+
+  addNewUser() {
+    this.newUser.email = this.auth.userProfile.email;
+    let value = JSON.stringify(this.newUser)
+    this._staffService.addStaff(value).subscribe();
+    console.log('you submitted value: ', value);
+    this.toUserDetail(this.newUser.email);
+  }
+
+  toUserDetail(email:string) {
+    this._router.navigate(['/user/detail',email]);
   }
 
   getStaffBS(sbgs:UserBGroup[]) {
@@ -314,10 +321,6 @@ export class UserDetailComponent implements OnInit {
       return 0;
   }
 
-  addNewUser(email:string) {
-    this._router.navigate(['/user/new',email]);
-  }
-
   getMoreBadges(bgs:UserBGroup[]) {
     var moreBadges = [];
     if (bgs != null) {
@@ -364,6 +367,21 @@ export class UserDetailComponent implements OnInit {
     }
     console.log(focus);
     this.newFocus = focus;
+  }
+
+  checkProfile() {
+    var hasProfile = false;
+    if (this.auth.userProfile != null && this.staffs != null) {
+      for (var i = 0; i < this.staffs.length; i++) { 
+        var name = this.staffs[i].fname + " " + this.staffs[i].lname;
+        if(this.staffs[i].email==this.auth.userProfile.email){
+          hasProfile = true;
+          break;
+        }
+      }
+    }
+    // console.log('you submitted value: ', hasProfile); 
+    return hasProfile;
   }
 
   goBack() {

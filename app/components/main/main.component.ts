@@ -31,6 +31,8 @@ export class MainComponent implements OnInit{
 	email: string;
 	gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
 	sortStaffBS = [];
+	newUser = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief:"", others: []}
+
 	
 	constructor(private auth: AuthService,
 				private _router: Router,
@@ -67,7 +69,6 @@ export class MainComponent implements OnInit{
 	}
 
 	getStaffByEmail() {
-		
 		console.log('email from _routeParams: ', this.email); 
 		this._staffService.getStaffByEmail(this.email).subscribe((staff) => {this.staff = staff;});
 	}
@@ -87,8 +88,12 @@ export class MainComponent implements OnInit{
 		return hasProfile;
 	}
 
-	addNewUser(email:string) {
-		this._router.navigate(['/user/new',email]);
+	addNewUser() {
+		this.newUser.email = this.auth.userProfile.email;
+		let value = JSON.stringify(this.newUser)
+		this._staffService.addStaff(value).subscribe();
+		console.log('you submitted value: ', value);
+		this.toUserDetail(this.newUser.email);
 	}
 
 	toUserDetail(email:string) {

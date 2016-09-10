@@ -9,7 +9,6 @@ var staff_component_1 = require('./staff/staff.component');
 var staff_detail_component_1 = require('./staff/staff-detail/staff-detail.component');
 var staff_new_component_1 = require('./staff/staff-new/staff-new.component');
 var user_detail_component_1 = require('./staff/user-detail/user-detail.component');
-var user_new_component_1 = require('./staff/user-new/user-new.component');
 var tier_component_1 = require('./tier/tier.component');
 var tier_detail_component_1 = require('./tier/tier-detail/tier-detail.component');
 var tier_new_component_1 = require('./tier/tier-new/tier-new.component');
@@ -56,10 +55,6 @@ var routes = [
     {
         path: 'user',
         component: user_detail_component_1.UserDetailComponent,
-    },
-    {
-        path: 'user/new/:email',
-        component: user_new_component_1.UserNewComponent,
     },
     {
         path: 'user/detail/:email',
