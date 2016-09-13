@@ -29,6 +29,7 @@ var BadgeComponent = (function () {
         this.staffs = [];
         this.active = true;
         this.showBadges = false;
+        this.showB = false;
     }
     BadgeComponent.prototype.ngOnInit = function () {
         this.getStaffs();

@@ -131,7 +131,6 @@ var BSComponent = (function () {
             }
         }
         this.badgesets = bsets;
-        this.showBS = true;
     };
     BSComponent.prototype.toBadgeSets = function () {
         this._router.navigate(['/badgeset']);

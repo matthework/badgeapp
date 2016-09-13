@@ -1,4 +1,4 @@
-
+<div class="col-md-10 col-md-offset-1">
 <div *ngIf="auth.isAdmin()">
 
 <div *ngIf="staffs">
@@ -6,9 +6,7 @@
 <input [(ngModel)]="query" placeholder="Search for">
 <button class="button-showbs" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
 <button class="button-back" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
-<!-- <button class="button-more" *ngIf!="active && auth.isAdmin()" (click)="active=true">></button> -->
 <button class="button-add" *ngIf="auth.isAdmin()" (click)="addStaff()">+</button>
-<!-- <button class="button-less" *ngIf="active" (click)="active=false"><</button> -->
 <br>
 </div>
 
@@ -29,11 +27,6 @@
     <th class="th-name">Name</th>
     <th class="th-bg">Badges</th>
     <th class="th-topbs">Top BadgeSet</th>
-    <!-- <th class="th-pos">Position</th> -->
-   	<!-- <th class="th-salary">Salary</th> -->
-    <!-- <th class="th-email">Email</th> -->
-    <!-- <th class="th-phone">Phone</th> -->
-    <!-- <th class="th-active">Active</th> -->
     <th class="th-status">Status</th>
     <th class="th-last"></th>
   </tr>
@@ -42,18 +35,13 @@
     <td class="td-badges">
   	<div *ngFor="let userbgroup of staff.userbgroups">
   	<li>
-  	<text class="tooltip" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="badge">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
-    <text *ngIf="!userbgroup.status" class="badge-pending">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="focus-pending"> [{{userbgroup.focus}}]</text><!-- <text *ngIf="!userbgroup.status" class="check-pending"> ??</text> --><!-- <text *ngIf="userbgroup.status" class="check-approved"> **</text> --><span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b><text class="text-blue">{{labels[userbgroup.level-2]}}</text>{{getDesc(userbgroup.bid, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b><text class="text-blue">{{labels[userbgroup.level-1]}}</text>{{getDesc(userbgroup.bid, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b><text class="text-blue">{{labels[userbgroup.level]}}</text>{{getDesc(userbgroup.bd, userbgroup.level+1)}}</li></span></text>
+  	<text class="" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
+    <text *ngIf="!userbgroup.status" class="badge-pending">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="focus-pending"> [{{userbgroup.focus}}]</text><!-- <span class="tooltiptext"><li> <b>Level {{userbgroup.level-1}}: </b><text class="text-blue">{{labels[userbgroup.level-2]}}</text>{{getDesc(userbgroup.bid, userbgroup.level-1)}}</li><br><li><b><u>Level {{userbgroup.level}}</u>: </b><text class="text-blue">{{labels[userbgroup.level-1]}}</text>{{getDesc(userbgroup.bid, userbgroup.level)}}</li><br><li><b>Level {{userbgroup.level+1}}: </b><text class="text-blue">{{labels[userbgroup.level]}}</text>{{getDesc(userbgroup.bd, userbgroup.level+1)}}</li></span> --></text>
     <button *ngIf="!userbgroup.status" class="button-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">Approve</button>
   	</li>
   	</div>
   	</td>
   	<td class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</td>
-    <!-- <td (click)="onSelect(staff)">{{staff.position}}</td> -->
-    <!-- <td class="td-salary" (click)="onSelect(staff)">${{staff.salary}}K</td> -->
-    <!-- <td (click)="onSelect(staff)">{{staff.email}}</td> -->
-    <!-- <td (click)="onSelect(staff)">{{staff.phone}}</td> -->
-    <!-- <td class="td-active" (click)="onSelect(staff)">{{staff.active | yes_no}}</td> -->
     <td class="td-status" (click)="onSelect(staff)">{{staff.status}}</td>
     <td *ngIf="auth.isAdmin()" class="td-last"><button class="button-s-x" (click)="deleteStaffPop(staff._id)">X</button><!-- <button class="button-s-e" (click)="toStaffEdit(staff._id)">E</button> --></td>
   </tr>
@@ -99,6 +87,5 @@
 {{auth.login()}}
 </div>
 
-<!-- <h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3> -->
-
+</div>
 

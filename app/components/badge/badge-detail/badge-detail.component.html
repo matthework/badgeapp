@@ -1,4 +1,4 @@
-
+<div class="col-md-10 col-md-offset-1">
 <div *ngIf="auth.authenticated()">
 
 <div *ngIf="badge">
@@ -77,7 +77,7 @@
 	<tr *ngFor="let badgelevel of badge.badgelevels">
 		<td class="td-level" (click)="checkAdmin()">{{badgelevel.level}}</td>
 		<td class="td-desc" (click)="checkAdmin()"><text class="text-light-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</td>
-		<td>
+		<td (click)="checkAdmin()">
 		<div *ngFor="let bs of findBadgeSet(badge.name,badgelevel.level)">
 			<uli (click)="toBSDetail(bs._id)" class="uli-bset">{{bs.name}}</uli><text class="check-core">{{checkCore(bs,badge.name)}}</text>
 		</div>
@@ -121,12 +121,17 @@
 <button *ngIf="bedit" class="button-bl-y" (click)="bedit=false;updateBadge()">Save</button>
 <button *ngIf="bedit" class="button-bl-n" (click)="bedit=false;getBadge()">Cancel</button>
 </div>
-<!-- <button *ngIf="auth.isAdmin()" class="button-edit" (click)="editBadge()">Edit</button> -->
 
 </div>
 
 </div>
 
 <h3 *ngIf="!auth.authenticated()"><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+
+<br>
+<br>
+<br>
+
+</div>
 
 

@@ -39,7 +39,7 @@ button:hover {
 }
 table {
   table-layout: auto;
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   border-collapse: collapse;
   padding: 5px;
   margin-bottom: 20px;
@@ -51,7 +51,7 @@ table tr:nth-child(even) {
   background-color: #ffffff;
 }
 th , td  {
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   border-collapse: collapse;
   padding: 5px;
 }

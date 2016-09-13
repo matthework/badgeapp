@@ -68,7 +68,7 @@ margin-left: 0;
 }
 table {
   table-layout: auto;
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   border-collapse: collapse;
   padding: 5px;
   margin-bottom: 20px;
@@ -81,7 +81,7 @@ table tr:nth-child(even) {
   background-color: #ffffff;
 }
 th , td  {
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   border-collapse: collapse;
   padding: 5px;
 }
@@ -96,12 +96,12 @@ textarea {
   margin-bottom: 20px;
 }
 .ta-judgement {
-  border: 1px solid #cccccc;
+  /*border: 1px solid #cccccc;*/
   width: 470px;
   height: 100px;
 }
 .ta-expertise {
-  border: 1px solid #cccccc;
+  /*border: 1px solid #cccccc;*/
   width: 470px;
   height: 100px;
 }
