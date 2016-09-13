@@ -150,7 +150,6 @@ export class BSComponent implements OnInit {
 			}
 		}
 		this.badgesets = bsets;
-		this.showBS = true;
 	}
 
 	toBadgeSets() {

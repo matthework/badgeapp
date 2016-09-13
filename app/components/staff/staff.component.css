@@ -1,4 +1,4 @@
-h1 {
+/*h1 {
   font-size: 2em;
   color: #999;
   margin-bottom: 20px;
@@ -15,7 +15,7 @@ h3 {
   color: #999;
   margin-top: 0;
   padding-top: 5px;
-}
+}*/
 input {
   height: 2em;
   font-size: 1em;
@@ -39,7 +39,7 @@ button:hover {
 }
 table, th , td  {
   width: 60%;
-  border: 1px solid grey;
+  /*border: 1px solid grey;*/
   border-collapse: collapse;
   padding: 5px;
   margin-bottom: 20px;
@@ -73,18 +73,6 @@ table tr:nth-child(even) {
 .th-topbs {
   width: 28%;
 }
-/*.th-pos {
-  width: 20%;
-}*/
-/*.th-salary {
-  width: 8%;
-}*/
-/*.th-email {
-  width: 20%;
-}*/
-/*.th-phone {
-  width: 15%;
-}*/
 .th-active {
   width: 10%;
 }
@@ -103,14 +91,6 @@ table tr:nth-child(even) {
 }
 .td-position {
 }
-/*.td-salary {
-  text-align: center;
-}*/
-/*.td-email {
-  word-wrap: normal;
-}*/
-/*.td-phone {
-}*/
 .td-active {
   text-align: center;
 }
@@ -124,7 +104,6 @@ table tr:nth-child(even) {
 .table-sbs {
   table-layout: fixed;
   width: 100%;
-  /*white-space: nowrap;*/
   word-wrap: break-word;
   border: 0;
   margin-bottom: 50px;
@@ -230,7 +209,6 @@ table tr:nth-child(even) {
   color: white;
 }
 .button-s-e{
-  /*border: 1px solid grey;*/
   color: #039be5;
   width: 40px;
   text-align: center;
@@ -295,10 +273,8 @@ table tr:nth-child(even) {
 li {
     width: 100%;
     list-style-type: none;
-    /*padding: 6px 10px;*/
 }
 li:hover {
-    /*background: #cfd8dc;*/
 }
 .li-bs {
   font-size: 1em;
@@ -325,15 +301,12 @@ li:hover {
 .animate-show.ng-hide {
     opacity: 0;
 }
-.tooltip {
+/*.tooltip {
   position: relative;
-  /*display: inline-block;*/
-  /*border-bottom: 1px dotted black;*/
 }
 .tooltip .tooltiptext {
   overflow: hidden;
   visibility: hidden;
-  /*max-height: none;*/
   width: 500px;
   height: 300px;
   background-color: white;
@@ -342,24 +315,18 @@ li:hover {
   border-radius: 6px;
   padding: 5px 15px;
   border: 1px solid grey;
-/*    opacity: 0;
-  transition: opacity 1s;*/
-
   bottom: 200%;
   left: 60%;
-
-  /* Position the tooltip */
   position: absolute;
   z-index: 1;
 
 }
 .tooltip:hover .tooltiptext {
   visibility: visible;
-  /*opacity: 1;*/
 }
 .tooltip:hover {
   color: #039be5;
-}
+}*/
 .check-approved {
   color: limegreen;
 }

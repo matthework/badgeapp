@@ -32,6 +32,7 @@ export class BadgeComponent implements OnInit {
   selectedBadge: Badge;
   active = true;
   showBadges = false;
+  showB = false;
 
   constructor (
       private _router: Router,
