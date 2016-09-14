@@ -1,59 +1,7 @@
-/*h1 {
-  font-size: 2em;
-  color: #999;
-  margin-bottom: 20px;
-}
-h2 {
-  font-size: 1.8em;
-  color: #039be5;
-  margin-top: 0;
-  padding-top: 20px;
-}
-h3 {
-  word-wrap: break-word;
-  font-size: 1.2em;
-  color: #999;
-  margin-top: 0;
-  padding-top: 5px;
-}*/
-input {
-  height: 2em;
-  font-size: 1em;
-  padding-left: .4em;
-  margin-bottom: 20px;
-}
-button {
-  margin-top: 10px;
-  margin-right: 10px;
-  font-size: 1em;
-  font-family: Arial;
-  background-color: #eee;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 0px !important;
-  cursor: pointer;
-  cursor: hand;
-}
-button:hover {
-  background-color: #cfd8dc;
-}
-table, th , td  {
-  width: 60%;
-  /*border: 1px solid grey;*/
-  border-collapse: collapse;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
-}
-table tr:nth-child(even) {
-  background-color: #ffffff;
-}
+/*
 .table-staffs {
   table-layout: fixed;
   width: 100%;
-  /*white-space: nowrap;*/
   word-wrap: break-word;
   border: 0;
   margin-bottom: 50px;
@@ -197,7 +145,6 @@ table tr:nth-child(even) {
   background-color: pink;
   color: white;
   width: 40px;
-  /*padding: 10px 10px;*/
   text-align: center;
   margin-top: 0;
   margin-left: 10px;
@@ -301,7 +248,7 @@ li:hover {
 .animate-show.ng-hide {
     opacity: 0;
 }
-/*.tooltip {
+.tooltip {
   position: relative;
 }
 .tooltip .tooltiptext {
@@ -326,7 +273,7 @@ li:hover {
 }
 .tooltip:hover {
   color: #039be5;
-}*/
+}
 .check-approved {
   color: limegreen;
 }
@@ -342,3 +289,4 @@ li:hover {
 .focus-pending {
   color: lightgrey;
 }
+*/
