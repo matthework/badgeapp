@@ -12,6 +12,8 @@
 
 <div *ngIf="auth.authenticated()">
 
+<div *ngIf="auth.isAdmin()">
+
     <div class="form-inline">
       <div *ngIf="tiers" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
@@ -101,11 +103,12 @@
 		</div>
 	</div>
 
+</div>
 
 </div>
 
 <br>
-<div *ngIf="!auth.authenticated()">
+<div *ngIf!="auth.authenticated()">
 <h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 {{auth.login()}}
 </div>

@@ -17,9 +17,9 @@
 			<li><a [routerLink]="['/main']" routerLinkActive="active">Home</a></li>
 			<li><a [routerLink]="['/badges']" routerLinkActive="active">Badges</a></li>
 			<li><a [routerLink]="['/badgeset']" routerLinkActive="active">Badge Set</a></li>
-			<li><a [routerLink]="['/user']" routerLinkActive="active">User</a></li>
-			<li *ngIf="auth.isAdmin()"><a [routerLink]="['/staffs']" routerLinkActive="active">Person</a></li>
-			<li><a [routerLink]="['/tiers']" routerLinkActive="active">Tiers</a></li>
+			<li><a [routerLink]="['/user']" routerLinkActive="active">You</a></li>
+			<li *ngIf="auth.isAdmin()"><a [routerLink]="['/staffs']" routerLinkActive="active">Admin</a></li>
+			<li *ngIf="auth.isAdmin()"><a [routerLink]="['/tiers']" routerLinkActive="active">Tiers</a></li>
 			<li><a [routerLink]="['/about']" routerLinkActive="active">About</a></li>
 			
 		</ul>

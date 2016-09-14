@@ -15,7 +15,7 @@
 <button class="button-s-n" (click)="bsName=false;getBadgeSet()">N</button>
 </div>
 
-<div *ngIf="!tg || !auth.isAdmin()">
+<div *ngIf="!tg && auth.isAdmin()">
 <label class="click" (click)="tg=true">Tier/Grade: </label>
 <text  class="click" (click)="tg=true">{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
 </div>
@@ -126,7 +126,7 @@
 	  <th class="th-desc">Description</th>
 	</tr>
 	<tr *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
-		<td (click)="bedit=true;more=false"><text *ngIf="moreb.current" class="" (click)="bedit=false;toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} - {{moreb.level}} <text *ngIf="moreb.focus" class="focus"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" class="badge-more" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} - {{moreb.level}}</text></td>
+		<td (click)="bedit=true;more=false"><text *ngIf="moreb.current" class="" (click)="bedit=false;toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} - {{moreb.level}} <text *ngIf="moreb.focus.length!=0" class="focus"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" class="badge-more" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} - {{moreb.level}}</text></td>
 		<td class="td-desc" (click)="bedit=true;more=false"><text *ngIf="moreb.current" class="text-light-blue">{{labels[moreb.level-1]}}</text><text *ngIf="!moreb.current">{{labels[moreb.level-1]}}</text><br>{{getDesc(moreb.bid,moreb.level)}}</td>
 	</tr>
 </table>
