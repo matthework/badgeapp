@@ -1,24 +1,27 @@
+
 <!-- Header -->
 <div class="docs-header">
    <h1 class=" col-md-10 col-md-offset-1" >PHL Badge App</h1>
 </div>
 
 <!-- Content -->
-<div *ngIf="auth.authenticated()" class="col-md-10 col-md-offset-1">
+<div class="col-md-10 col-md-offset-1">
+
+<div *ngIf="auth.authenticated()">
 
   <div *ngIf="checkProfile() && staff" class="row col-xs-12">
 
-    <div>
+    <div class="row padding-large-vertical">
         <h2 *ngIf="auth.userProfile"><i>{{auth.userProfile.name}}, you are just logged in.</i></h2>
         <h2 *ngIf="!checkProfile()"><i>You don't have any badge yet.</i></h2>
     </div>
 
     <div class="row padding-large-vertical">
-      <text class="text-topbs">Top BadgeSet: </text><text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text>
+      <h4>Top BadgeSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
     </div>
 
     <!-- Badge container -->
-    <div class=" row padding-large-vertical col-xs-12 table-userbgroups">
+    <div class=" row padding-large-vertical col-xs-12">
       <div class="header row">
         <div class="div-badge col-xs-4">Badge</div>
         <div class="div-bs col-xs-4">Badge Set</div>
@@ -35,13 +38,15 @@
         </div>
         <div class="div-status col-xs-4"><i><text class="text-approve" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></div>
       </div>
+      <br>
+      <br>
     </div>
   </div>
 
   <!-- Button group-->
   <div class="row padding-large-vertical">
     <div *ngIf="!checkProfile()">
-      <h3><i>You don't have any badge yet. Please create a user profile!</i></h3>
+      <h3><i>Please create a user profile!</i></h3>
       <br>
       <h3>User Profile:</h3>
       <label>*FName: </label>
@@ -56,13 +61,12 @@
       <button class="button-save" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
       <button class="button-cancel" (click)="location.reload()">Cancel</button>
     </div>
-    <button *ngIf="checkProfile()" class="button-user btn btn-default" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text><br>
+    <br>
+    <button *ngIf="checkProfile()" class="btn btn-default" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text>
   </div>
 
-
-  <div *ngIf="auth.isAdmin()">
-    <br>
-    <button class="button-admin btn btn-default" (click)="toPerson()">Admin Page</button><text> You have <text class="text-pending">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-pendingStaff">{{checkPendingStaff()}}</text> staff(s).</text><br>
+  <div *ngIf="auth.isAdmin()" class="row padding-large-vertical">
+    <button class="button-admin btn btn-default" (click)="toPerson()">Admin Page</button><text> You have <text class="text-pending">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-pendingStaff">{{checkPendingStaff()}}</text> staff(s).</text>
   </div>
 
 </div>
@@ -73,9 +77,5 @@
 <h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>
 </div>
 
-
-<br>
-<br>
-<br>
-
+</div>
 

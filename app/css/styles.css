@@ -5,9 +5,50 @@ header .container{
   margin:0px;
   background-color: black;
 }
-
 nav {
   margin-bottom: 0px !important;
+}
+label {
+  width: 6em;
+}
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  margin-bottom: 0px;
+  color: #999;
+}
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+th , td  {
+  border-collapse: collapse;
+  padding: 5px;
+}
+input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+  margin-bottom: 20px;
+}
+textarea {
+  vertical-align: top;
+  font-size: 1em;
+  color: #999;
+  width: 350px;
+  height: 200px;
+  padding-left: .4em;
+  padding-top: .4em;
+  margin-bottom: 20px;
 }
 
 /* List */
