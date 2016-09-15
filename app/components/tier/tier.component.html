@@ -17,14 +17,14 @@
     <div class="form-inline">
       <div *ngIf="tiers" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-		<button class="btn btn-default" *ngIf!="toPay" (click)="toPay=true">Show BadgeSet</button>
-		<button class="btn btn-default" *ngIf="toPay" (click)="toPay=false">Show $$</button>
-		<button class="btn btn-default" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
+		<button class="btn btn-primary" *ngIf!="toPay" (click)="toPay=true">Show BadgeSet</button>
+		<button class="btn btn-primary" *ngIf="toPay" (click)="toPay=false">Show $$</button>
+		<button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
       </div>
 
       <div class="form-group" *ngIf="!tiers && auth.isAdmin()">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-		<button class="btn btn-default" (click)="addTier()">+</button>
+		<button class="btn btn-primary" (click)="addTier()">+</button>
       </div>
     </div>
     <br>
@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="row col-xs-12 div-list-item" *ngFor="let tier of tiers | filter:query">
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
+			<div class="click col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[0]}}K</div>
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[1]}}K</div>
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[2]}}K</div>
@@ -53,7 +53,7 @@
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[5]}}K</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">{{tier.judgement}}</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">{{tier.expertise}}</div>
-			<div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
+			<div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
 		</div>
 	</div>
 
@@ -69,7 +69,7 @@
 		</div>
 
 		<div class="row col-xs-12 div-list-item" *ngFor="let tier of tiers | filter:query">
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
+			<div class="click col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">
 				<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[0])">
 					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
