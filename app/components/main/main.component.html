@@ -17,56 +17,75 @@
     </div>
 
     <div class="row padding-large-vertical">
-      <h4>Top BadgeSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
+      <h4>Top BadgeSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
     </div>
 
     <!-- Badge container -->
     <div class=" row padding-large-vertical col-xs-12">
       <div class="header row">
-        <div class="div-badge col-xs-4">Badge</div>
-        <div class="div-bs col-xs-4">Badge Set</div>
-        <div class="div-status col-xs-4">Status</div>
+        <div class="col-xs-4">Badge</div>
+        <div class="col-xs-4">Badge Set</div>
+        <div class="col-xs-4">Status</div>
       </div>
 
 
       <div *ngFor="let userbgroup of staff.userbgroups" class="row  div-list-item">
-        <div class="div-badge col-xs-4" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text></div>
-        <div class="div-bs col-xs-4">
+        <div class="click col-xs-4" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text></div>
+        <div class="col-xs-4">
           <div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
-            <uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+            <uli class="click" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
           </div>
         </div>
-        <div class="div-status col-xs-4"><i><text class="text-approve" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></div>
+        <div class="col-xs-4"><i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></div>
       </div>
       <br>
-      <br>
     </div>
+  </div>
+
+  <div class="row padding-large-vertical" *ngIf="!checkProfile()">
+    <div>
+      <h3><i>Please create a user profile!</i></h3>
+    </div>
+    <br>
+    <br>
+    <div class="form-inline">
+      <label>*FName: </label>
+      <input class="input form-control" type="text" [(ngModel)]="newUser.fname" placeholder="First Name"/>
+    </div>
+    <br>
+    <div class="form-inline">
+      <label>*LName: </label>
+      <input class="input form-control" type="text" [(ngModel)]="newUser.lname" placeholder="Last Name" />
+    </div>
+    <br>
+    <div class="form-inline">
+      <label>Position: </label>
+      <input class="input form-control" type="text" [(ngModel)]="newUser.position" placeholder="Position" />
+    </div>
+    <br>
+    <div class="form-inline">
+      <label>Brief: </label>
+      <textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea>
+    </div>
+    <br>
+    <br>
+    <div class="form-inline col-xs-5">
+      <button class="btn btn-primary pull-right" (click)="location.reload()">Cancel</button>
+      <button class="btn btn-primary pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
+
+    </div>
+    <br>
   </div>
 
   <!-- Button group-->
   <div class="row padding-large-vertical">
-    <div *ngIf="!checkProfile()">
-      <h3><i>Please create a user profile!</i></h3>
-      <br>
-      <h3>User Profile:</h3>
-      <label>*FName: </label>
-      <input class="input-fname" type="text" [(ngModel)]="newUser.fname" placeholder="First Name" /><br>
-      <label>*LName: </label>
-      <input class="input-lname" type="text" [(ngModel)]="newUser.lname" placeholder="Last Name" /><br>
-      <label>Position: </label>
-      <input class="input-pos" type="text" [(ngModel)]="newUser.position" placeholder="Position" /><br>
-      <label>Brief: </label>
-      <textarea class="ta-brief" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea><br>
-      <br>
-      <button class="button-save" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
-      <button class="button-cancel" (click)="location.reload()">Cancel</button>
+    <div>
+      <button *ngIf="checkProfile()" class="btn btn-primary" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text>
     </div>
     <br>
-    <button *ngIf="checkProfile()" class="btn btn-default" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text>
-  </div>
-
-  <div *ngIf="auth.isAdmin()" class="row padding-large-vertical">
-    <button class="button-admin btn btn-default" (click)="toPerson()">Admin Page</button><text> You have <text class="text-pending">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-pendingStaff">{{checkPendingStaff()}}</text> staff(s).</text>
+    <div *ngIf="auth.isAdmin()">
+      <button class="btn btn-primary" (click)="toPerson()">Admin Page</button><text> You have <text class="text-blue">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-blue">{{checkPendingStaff()}}</text> staff(s).</text>
+    </div>
   </div>
 
 </div>

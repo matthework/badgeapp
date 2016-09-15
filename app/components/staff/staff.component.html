@@ -17,14 +17,14 @@
     <div class="form-inline">
       <div *ngIf="staffs" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-        <button class="btn btn-default" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
-        <button class="btn btn-default" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
-        <button class="btn btn-default" *ngIf="auth.isAdmin()" (click)="addStaff()">+</button>
+        <button class="btn btn-primary" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
+        <button class="btn btn-primary" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
+        <button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addStaff()">+</button>
       </div>
 
       <div *ngIf="!staffs && auth.isAdmin()" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-        <button class="btn btn-default" (click)="addStaff()">+</button>
+        <button class="btn btn-primary" (click)="addStaff()">+</button>
       </div>
     </div>
     <br>
@@ -51,7 +51,7 @@
       	</div>
       	<div class="badgeset col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>
         <div class="col-sm-1 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div>
-        <div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-default" (click)="deleteStaffPop(staff._id)">X</button></div>
+        <div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteStaffPop(staff._id)">X</button></div>
       </div>
     </div>
 

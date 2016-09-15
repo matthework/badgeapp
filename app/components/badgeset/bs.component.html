@@ -16,14 +16,14 @@
 		<div class="form-inline">
 			<div *ngIf="badgesets" class="form-group">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-				<button class="btn btn-default" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
-				<button class="button-back btn btn-default" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
-				<button class="button-add btn btn-default" *ngIf="auth.isAdmin()" (click)="addBadgeSet()">+</button>
+				<button class="btn btn-primary" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
+				<button class="btn btn-primary" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
+				<button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addBadgeSet()">+</button>
 			</div>
 
 			<div *ngIf="!badgesets && auth.isAdmin()" class="form-group">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-				<button class="btn btn-default" (click)="addBadgeSet()">+</button><br>
+				<button class="btn btn-primary" (click)="addBadgeSet()">+</button><br>
 			</div>
 		</div>
 		<br>
@@ -43,7 +43,7 @@
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badgeset);toBSDetail(badgeset._id)" class="badgeset col-sm-2 col-xs-12 btn btn-primary wrap">{{badgeset.name}}</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-badges col-sm-4 col-xs-12">
 				<uli *ngFor="let badgegroup of badgeset.badgegroups">
-				<div class="" (click)="toBadgeDetail(badgegroup.bid)"><text class="">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus.length!=0" class="focus"> [{{badgegroup.focus}}]</text></div>
+				<div class="click" (click)="toBadgeDetail(badgegroup.bid)"><text class="">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus.length!=0" class="focus"> [{{badgegroup.focus}}]</text></div>
 				</uli>
 			</div>
 			<div *ngIf="auth.isAdmin()" class="div-tier col-sm-1 col-xs-2">{{badgeset.tier}}</div>
@@ -53,7 +53,7 @@
 				<text *ngFor="let tag of badgeset.tags" class="btn btn-default"><text class="t-tag" (click)="groupByTag(tag);showBS=true;"> {{tag}}</text></text>
 			</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-status col-sm-1 col-xs-2">{{badgeset.status}}</div>
-			<div *ngIf="(badgeset.status=='Accepted' || auth.isAdmin()) && active" class="div-last  col-sm-1 col-xs-2"><button *ngIf="auth.isAdmin()" class="btn btn-default" (click)="deleteBadgeSetPop(badgeset._id)">X</button></div>
+			<div *ngIf="(badgeset.status=='Accepted' || auth.isAdmin()) && active" class="div-last  col-sm-1 col-xs-2"><button *ngIf="auth.isAdmin()" class="btn btn-delete btn-default" (click)="deleteBadgeSetPop(badgeset._id)">X</button></div>
 		</div>
 	</div>
 
@@ -73,17 +73,17 @@
 					
 					<table class="table-c">
 					<tr>
-						<td class="" (click)="toBSDetail(getBS(bsname1)._id)">{{getBS(bsname1).name}}</td>
+						<td class="click" (click)="toBSDetail(getBS(bsname1)._id)">{{getBS(bsname1).name}}</td>
 					</tr>
 					<tr>
-						<td class="td-tier">{{getBS(bsname1).tier}}-{{getBS(bsname1).grade}} (${{getBS(bsname1).pay}}K)</td>
+						<td class="td-center">{{getBS(bsname1).tier}}-{{getBS(bsname1).grade}} (${{getBS(bsname1).pay}}K)</td>
 					</tr>
 					<tr>
 					  <td>
 					  <div *ngFor="let badgegroup of getBS(bsname1).badgegroups">
-					  <li>
-					  <text class="" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="money">(+${{0}})</text>
-					  </li>
+					  <uli>
+					  <text class="click" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="click">(+${{0}})</text>
+					  </uli>
 					  </div>
 					  </td>
 					</tr>
@@ -94,17 +94,17 @@
 					
 					<table class="table-c">
 					<tr>
-						<td class="" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}</td>
+						<td class="click" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}</td>
 					</tr>
 					<tr>
-						<td class="td-tier">{{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} (${{getBS(bsname2).pay}}K)</td>
+						<td class="td-center">{{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} (${{getBS(bsname2).pay}}K)</td>
 					</tr>
 					<tr>
 					  <td>
 					  <div *ngFor="let badgegroup of getBS(bsname2).badgegroups">
-					  <li>
-					  <text class="" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname2).badgegroups,getBS(bsname2).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
-					  </li>
+					  <uli>
+					  <text class="click" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="click">(+${{getMoney(getBS(bsname2).badgegroups,getBS(bsname2).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
+					  </uli>
 					  </div>
 					  </td>
 					</tr>
@@ -115,17 +115,17 @@
 					
 					<table class="table-c">
 					<tr>
-						<td class="" (click)="toBSDetail(getBS(bsname3)._id)">{{getBS(bsname3).name}}</td>
+						<td class="click" (click)="toBSDetail(getBS(bsname3)._id)">{{getBS(bsname3).name}}</td>
 					</tr>
 					<tr>
-						<td class="td-tier">{{getBS(bsname3).tier}}-{{getBS(bsname3).grade}} (${{getBS(bsname3).pay}}K)</td>
+						<td class="td-center">{{getBS(bsname3).tier}}-{{getBS(bsname3).grade}} (${{getBS(bsname3).pay}}K)</td>
 					</tr>
 					<tr>
 						<td>
 							<div *ngFor="let badgegroup of getBS(bsname3).badgegroups">
-							<li>
-							<text class="" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="money">(+${{getMoney(getBS(bsname3).badgegroups,getBS(bsname3).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
-							</li>
+							<uli>
+							<text class="click" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="click">(+${{getMoney(getBS(bsname3).badgegroups,getBS(bsname3).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
+							</uli>
 							</div>
 						</td>
 					</tr>

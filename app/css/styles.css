@@ -11,13 +11,6 @@ nav {
 label {
   width: 6em;
 }
-input {
-  height: 2em;
-  font-size: 1em;
-  padding-left: .4em;
-  margin-bottom: 0px;
-  color: #999;
-}
 table {
   table-layout: auto;
   border-collapse: collapse;
@@ -34,22 +27,7 @@ th , td  {
   border-collapse: collapse;
   padding: 5px;
 }
-input {
-  height: 2em;
-  font-size: 1em;
-  padding-left: .4em;
-  margin-bottom: 20px;
-}
-textarea {
-  vertical-align: top;
-  font-size: 1em;
-  color: #999;
-  width: 350px;
-  height: 200px;
-  padding-left: .4em;
-  padding-top: .4em;
-  margin-bottom: 20px;
-}
+
 
 /* List */
 .docs-header{
@@ -94,6 +72,25 @@ textarea {
   }
 }
 
+.click{
+  color: #039be5;
+  cursor: pointer;
+  cursor: hand;
+}
+.click:hover{
+  color: #039be5;
+}
+.click:visited{
+  color: #607D8B;
+}
 .text-blue {
   color: #039be5;
 }
+.text-green {
+  color: limegreen;
+}
+.text-red {
+  color: red;
+}
+
+

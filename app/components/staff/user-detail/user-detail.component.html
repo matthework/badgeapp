@@ -1,7 +1,8 @@
 <!-- Header -->
 <div class="docs-header">
    <h1 class=" col-md-10 col-md-offset-1" >
-      <span *ngIf="staff">User</span>
+      <span *ngIf="!checkProfile()">Profile</span>
+      <span *ngIf="checkProfile()">You</span>
    </h1>
 </div>
 
@@ -134,19 +135,39 @@
 	</div>
 
 
-	<div *ngIf="!checkProfile()">
-		<h2>User Profile</h2><br>
-		<label>*FName: </label>
-		<input class="input-fname" type="text" [(ngModel)]="newUser.fname" placeholder="First Name" /><br>
-		<label>*LName: </label>
-		<input class="input-lname" type="text" [(ngModel)]="newUser.lname" placeholder="Last Name" /><br>
-		<label>Position: </label>
-		<input class="input-pos" type="text" [(ngModel)]="newUser.position" placeholder="Position" /><br>
-		<label>Brief: </label>
-		<textarea class="ta-brief" type="text" [(ngModel)]="newUser.brief" placeholder=""></textarea><br>
+	<div class="row padding-large-vertical" *ngIf="!checkProfile()">
+		<div>
+		  <h3><i>Please create a user profile!</i></h3>
+		</div>
 		<br>
-		<button class="button-save" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
-		<button class="button-cancel" (click)="location.reload()">Cancel</button>
+		<br>
+		<div class="form-inline">
+		  <label>*FName: </label>
+		  <input class="input form-control" type="text" [(ngModel)]="newUser.fname" placeholder="First Name"/>
+		</div>
+		<br>
+		<div class="form-inline">
+		  <label>*LName: </label>
+		  <input class="input form-control" type="text" [(ngModel)]="newUser.lname" placeholder="Last Name"/>
+		</div>
+		<br>
+		<div class="form-inline">
+		  <label>Position: </label>
+		  <input class="input form-control" type="text" [(ngModel)]="newUser.position" placeholder="Position" />
+		</div>
+		<br>
+		<div class="form-inline">
+		  <label>Brief: </label>
+		  <textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea>
+		</div>
+		<br>
+		<br>
+		<div class="form-inline col-xs-5">
+		  <button class="btn btn-primary pull-right" (click)="location.reload()">Cancel</button>
+		  <button class="btn btn-primary pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
+
+		</div>
+		<br>
 	</div>
 
 
