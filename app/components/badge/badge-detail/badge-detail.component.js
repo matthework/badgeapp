@@ -112,7 +112,6 @@ var BadgeDetailComponent = (function () {
         if (this.badge.focus == null) {
             this.badge.focus = [];
         }
-        this.badge.badgelevels = this.badge.badgelevels;
         this.badge.badgelevels.sort(this.toCompare);
         var value = JSON.stringify(this.badge);
         this._badgeService.updateBadge(this.id, value).subscribe();
@@ -191,6 +190,15 @@ var BadgeDetailComponent = (function () {
         else {
             return true;
         }
+    };
+    BadgeDetailComponent.prototype.cleanEmpty = function (bls) {
+        var b = [];
+        for (var i = 0; i < this.badge.badgelevels.length; i++) {
+            if (this.badge.badgelevels[i].desc != "") {
+                b.push(this.badge.badgelevels[i]);
+            }
+        }
+        return b;
     };
     BadgeDetailComponent.prototype.goBack = function () {
         window.history.back();

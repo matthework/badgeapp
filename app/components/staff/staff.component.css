@@ -1,11 +1,3 @@
-.btn-delete {
-  color: white;
-  background-color: pink;
-}
-.btn-delete:hover {
-  color: white;
-  background-color: red;
-}
 .btn-approve {
   background-color: white;
   color: limegreen;
