@@ -80,6 +80,11 @@ th , td  {
   padding-bottom: 20px;
 }
 
+.btn {
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
 .click{
   cursor: pointer;
   cursor: hand;
@@ -113,3 +118,5 @@ th , td  {
   color: white;
   background-color: red;
 }
+
+
