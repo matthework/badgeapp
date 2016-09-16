@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="row col-xs-12 div-list-item" *ngFor="let tier of tiers | filter:query">
-			<div class="click col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
+			<div class="click text-blue col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[0]}}K</div>
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[1]}}K</div>
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[2]}}K</div>

@@ -40,17 +40,17 @@
 		</div>
 		
 		<div class="row col-xs-12 div-list-item" *ngFor="let badgeset of badgesets | filter:query">
-			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badgeset);toBSDetail(badgeset._id)" class="badgeset col-sm-2 col-xs-12 btn btn-primary wrap">{{badgeset.name}}</div>
+			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badgeset);toBSDetail(badgeset._id)" class="col-sm-2 col-xs-12 btn btn-primary wrap">{{badgeset.name}}</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-badges col-sm-4 col-xs-12">
 				<uli *ngFor="let badgegroup of badgeset.badgegroups">
-				<div class="click" (click)="toBadgeDetail(badgegroup.bid)"><text class="">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus.length!=0" class="focus"> [{{badgegroup.focus}}]</text></div>
+				<div class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)"><text>{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text></div>
 				</uli>
 			</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-tier col-sm-1 col-xs-2" >{{badgeset.tier}}</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-grade col-sm-1 col-xs-2">{{badgeset.grade}}</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-pay col-sm-1 col-xs-2">${{getPay(badgeset.tier,badgeset.grade)}}K</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-tags col-sm-1 col-xs-2">
-				<text *ngFor="let tag of badgeset.tags" class="btn btn-default"><text class="t-tag" (click)="groupByTag(tag);showBS=true;"> {{tag}}</text></text>
+				<text *ngFor="let tag of badgeset.tags" class="click text-blue"><text class="t-tag" (click)="groupByTag(tag);showBS=true;"> {{tag}}</text></text>
 			</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-status col-sm-1 col-xs-2">{{badgeset.status}}</div>
 			<div *ngIf="(badgeset.status=='Accepted' || auth.isAdmin()) && active" class="div-last  col-sm-1 col-xs-2"><button *ngIf="auth.isAdmin()" class="btn btn-delete btn-default" (click)="deleteBadgeSetPop(badgeset._id)">X</button></div>

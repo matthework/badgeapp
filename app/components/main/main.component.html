@@ -17,7 +17,7 @@
     </div>
 
     <div class="row padding-large-vertical">
-      <h4>Top BadgeSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
+      <h4>Top BadgeSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
     </div>
 
     <!-- Badge container -->
@@ -30,13 +30,13 @@
 
 
       <div *ngFor="let userbgroup of staff.userbgroups" class="row  div-list-item">
-        <div class="click col-xs-4" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text></div>
+        <div class="click text-blue col-xs-4" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></div>
         <div class="col-xs-4">
           <div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
             <uli class="click" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
           </div>
         </div>
-        <div class="col-xs-4"><i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></div>
+        <div class="col-xs-4"><i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></div>
       </div>
       <br>
     </div>
@@ -72,7 +72,6 @@
     <div class="form-inline col-xs-5">
       <button class="btn btn-primary pull-right" (click)="location.reload()">Cancel</button>
       <button class="btn btn-primary pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
-
     </div>
     <br>
   </div>
