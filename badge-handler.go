@@ -34,13 +34,13 @@ func addNewBadge(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewDecoder(r.Body).Decode(&badge); err != nil {
 		panic(err)
 	}
-	var bls []BadgeLevel
-	for i := range badge.BadgeLevels {
-		if badge.BadgeLevels[i].Desc != "" {
-			bls = append(bls, badge.BadgeLevels[i])
-		}
-	}
-	badge.BadgeLevels = bls
+	// var bls []BadgeLevel
+	// for i := range badge.BadgeLevels {
+	// 	if badge.BadgeLevels[i].Desc != "" {
+	// 		bls = append(bls, badge.BadgeLevels[i])
+	// 	}
+	// }
+	// badge.BadgeLevels = bls
 	badge.TimeStamp = time.Now()
 	if badge.Name != "" {
 		if err := insertBadge(badge); err != nil {

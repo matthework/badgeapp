@@ -126,7 +126,6 @@ export class BadgeDetailComponent implements OnInit {
     if(this.badge.focus == null) {
         this.badge.focus = [];
     }
-    this.badge.badgelevels = this.badge.badgelevels;
     this.badge.badgelevels.sort(this.toCompare);
     let value = JSON.stringify(this.badge)
     this._badgeService.updateBadge(this.id,value).subscribe();
@@ -216,6 +215,15 @@ export class BadgeDetailComponent implements OnInit {
         }
 
     }
+  cleanEmpty(bls:BadgeLevel[]) {
+    var b = [];
+    for (var i = 0; i < this.badge.badgelevels.length; i++) { 
+      if(this.badge.badgelevels[i].desc != "") {
+        b.push(this.badge.badgelevels[i]);
+      }
+    }
+    return b;
+  }
 
     goBack() {
     window.history.back();
