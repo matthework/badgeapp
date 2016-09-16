@@ -46,9 +46,9 @@
 				<div class="click" (click)="toBadgeDetail(badgegroup.bid)"><text class="">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus.length!=0" class="focus"> [{{badgegroup.focus}}]</text></div>
 				</uli>
 			</div>
-			<div class="div-tier col-sm-1 col-xs-2">{{badgeset.tier}}</div>
-			<div class="div-grade col-sm-1 col-xs-2">{{badgeset.grade}}</div>
-			<div class="div-pay col-sm-1 col-xs-2">${{getPay(badgeset.tier,badgeset.grade)}}K</div>
+			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-tier col-sm-1 col-xs-2" >{{badgeset.tier}}</div>
+			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-grade col-sm-1 col-xs-2">{{badgeset.grade}}</div>
+			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-pay col-sm-1 col-xs-2">${{getPay(badgeset.tier,badgeset.grade)}}K</div>
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-tags col-sm-1 col-xs-2">
 				<text *ngFor="let tag of badgeset.tags" class="btn btn-default"><text class="t-tag" (click)="groupByTag(tag);showBS=true;"> {{tag}}</text></text>
 			</div>
