@@ -1,13 +1,14 @@
 <!-- Header -->
 <div class="docs-header">
-   <h1 class=" col-md-10 col-md-offset-1" >
+   <h1 class=" col-md-10 col-md-offset-1">
       <span *ngIf="!checkProfile()">Profile</span>
       <span *ngIf="checkProfile()">You</span>
    </h1>
 </div>
 
+<div class=" col-md-10 col-md-offset-1">
 <!-- Content -->
-<div *ngIf="auth.authenticated()" class="col-md-10 col-md-offset-1">
+<div *ngIf="auth.authenticated()">
 
 	<div *ngIf="checkProfile() && staff">
 
@@ -179,4 +180,4 @@
 {{auth.login()}}
 </div>
 
-
+</div>
