@@ -58,14 +58,16 @@
 	</div>
 
 	<div *ngIf="showCompare">
-		<div class="form-inline">
-			<div class="form-group">
-				<h2>Compare Badge Sets</h2>
-				<button class="btn btn-default" (click)="showCompare=false">Back</button>
-			</div>
+
+		<h2>Compare Badge Sets</h2>
+
+		<div class="row col-xs-12">
+			<button class="btn btn-primary pull-right" (click)="showCompare=false">Back</button><br>
 		</div>
 		<br>
+		<br>
 
+		<div class="row col-xs-12">
 		<table *ngIf="badgesets" class="table-big">
 			<tr>
 				<td>
@@ -133,6 +135,7 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 	</div>
 
 </div>

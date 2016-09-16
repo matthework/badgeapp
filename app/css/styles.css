@@ -9,7 +9,7 @@ nav {
   margin-bottom: 0px !important;
 }
 label {
-  width: 6em;
+  width: 8em;
 }
 table {
   table-layout: auto;
@@ -73,7 +73,6 @@ th , td  {
 }
 
 .click{
-  color: #039be5;
   cursor: pointer;
   cursor: hand;
 }
@@ -82,6 +81,9 @@ th , td  {
 }
 .click:visited{
   color: #607D8B;
+}
+.text-big {
+  font-size: 1.2em;
 }
 .text-blue {
   color: #039be5;
@@ -92,5 +94,7 @@ th , td  {
 .text-red {
   color: red;
 }
-
+.text-grey {
+  color: lightgrey;
+}
 
