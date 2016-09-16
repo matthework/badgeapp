@@ -39,17 +39,17 @@
       </div>
 
       <div class="row col-xs-12 div-list-item" *ngFor="let staff of staffs | filter:query">
-        <div (click)="onSelect(staff);toStaffDetail(staff._id)" class="staff col-sm-2 col-xs-12">{{staff.fname}} {{staff.lname}}</div>
+        <div (click)="onSelect(staff);toStaffDetail(staff._id)" class="col-sm-2 col-xs-12 btn btn-primary wrap">{{staff.fname}} {{staff.lname}}</div>
         <div class="staff col-sm-5 col-xs-12">
         	<div *ngFor="let userbgroup of staff.userbgroups">
         	<uli>
-        	<text class="" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
-          <text *ngIf="!userbgroup.status" class="badge-pending">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="focus-pending"> [{{userbgroup.focus}}]</text></text>
-          <button *ngIf="!userbgroup.status" class="button-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">Approve</button>
+        	<text class="click text-blue" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
+          <text *ngIf="!userbgroup.status" class="text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="text-grey"> [{{userbgroup.focus}}]</text></text>
+          <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">Approve</button>
         	</uli>
         	</div>
       	</div>
-      	<div class="badgeset col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>
+      	<div class="click text-blue col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>
         <div class="col-sm-1 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div>
         <div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteStaffPop(staff._id)">X</button></div>
       </div>

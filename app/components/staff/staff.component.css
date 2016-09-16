@@ -6,3 +6,15 @@
   color: white;
   background-color: red;
 }
+.btn-approve {
+  background-color: white;
+  color: limegreen;
+  border: 1px solid limegreen;
+  margin-left: 10px;
+  height: 25px;
+  border-radius: 4px;
+}
+.btn-approve:hover {
+  color: white;
+  background-color: #039be5;
+}
