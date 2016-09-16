@@ -148,13 +148,16 @@
 	<div *ngIf="auth.isAdmin() && !addLevel">
 		<button class="btn-big btn btn-default" (click)="addBadge()">New Badge</button>
 		<button class="btn-big btn btn-default" (click)="deleteBadgePop()">Delete</button>
-		<button *ngIf="bedit" class="btn-big btn btn-success" (click)="bedit=false;updateBadge()">Save</button>
-		<button *ngIf="bedit" class="btn-big btn btn-danger" (click)="bedit=false;getBadge()">Cancel</button>
+		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadge()">Cancel</button>
+		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadge()">Save</button>
 	</div>
 
 	</div>
 
 </div>
+<br>
+<br>
+<br>
 
 <div *ngIf="!auth.authenticated()">
    <h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>
