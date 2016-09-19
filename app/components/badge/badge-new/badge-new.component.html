@@ -1,22 +1,32 @@
-<div class="col-md-10 col-md-offset-1">
-<div *ngIf="auth.isAdmin()">
+<!-- Header -->
+<div class="docs-header">
+   <h1 class="col-md-10 col-md-offset-1">
+      <span>Add New Badge</span>
+   </h1>
+</div>
 
-<h2 class="text-blue">Add New Badge</h2><br>
+<!-- Content -->
+<div class="col-md-10 col-md-offset-1 form-inline">
+
+<div *ngIf="auth.isAdmin()">
 
 <!-- <label>Index: </label>
 <input class="input-index" type="number" [(ngModel)]="newBadge.index" placeholder="Index" /><br> -->
-
+<br>
 <label>*Name: </label>
-<input class="input-name" type="text" [(ngModel)]="newBadge.name" placeholder="Name" /><br>
+<input class="input-name form-control" type="text" [(ngModel)]="newBadge.name" placeholder="Name"><br>
+<br>
 
 <!-- <label>Code: </label>
 <input class="input-code" type="text" [(ngModel)]="newBadge.code" placeholder="Code" /><br> -->
 
 <label>Overview: </label>
-<textarea class="ta-big" [(ngModel)]="newBadge.overview" placeholder="Overview"></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.overview" placeholder="Overview"></textarea><br>
+<br>
 
 <label>Focus: </label>
-<input class="input-focus" type="text" [(ngModel)]="newFC" placeholder=""><button class="button-s-add" (click)="addFC(newFC)">+</button><text *ngFor="let fc of newBadge.focus">{{fc}} <button class="button-s-delete" (click)="deleteFC(fc)">-</button></text><br>
+<input class="input-small form-control" type="text" [(ngModel)]="newFC" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text *ngFor="let fc of newBadge.focus">{{fc}} <button class="btn-small btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text><br>
+<br>
 
 <!-- <label>Approved: </label>
 <input type="checkbox" [(ngModel)]="newBadge.approved" placeholder="Approved" /><br> -->
@@ -25,63 +35,78 @@
 <input type="checkbox" [disabled]="!newBadge.approved" [(ngModel)]="newBadge.inused" placeholder="InUsed" /><br> -->
 
 <label>Status: </label>
-<select class="select-status" [(ngModel)]="newBadge.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<select class="form-control" [(ngModel)]="newBadge.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<br>
 
 <br>
 <label>Level 1:</label>
-<text class="text-light">{{labels[0]}}</text><br>
+<text class="text-blue">{{labels[0]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[0].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[0].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 2:</label>
-<text class="text-light">{{labels[1]}}</text><br>
+<text class="text-blue">{{labels[1]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[1].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[1].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 3:</label>
-<text class="text-light">{{labels[2]}}</text><br>
+<text class="text-blue">{{labels[2]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[2].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[2].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 4:</label>
-<text class="text-light">{{labels[3]}}</text><br>
+<text class="text-blue">{{labels[3]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[3].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[3].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 5:</label>
-<text class="text-light">{{labels[4]}}</text><br>
+<text class="text-blue">{{labels[4]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[4].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[4].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 6:</label>
-<text class="text-light">{{labels[5]}}</text><br>
+<text class="text-blue">{{labels[5]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[5].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[5].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 7:</label>
-<text class="text-light">{{labels[6]}}</text><br>
+<text class="text-blue">{{labels[6]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[6].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[6].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 8:</label>
-<text class="text-light">{{labels[7]}}</text><br>
+<text class="text-blue">{{labels[7]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[7].desc" placeholder=""></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[7].desc" placeholder=""></textarea><br>
+<br>
 
 <label>Level 9:</label>
-<text class="text-light">{{labels[8]}}</text><br>
+<text class="text-blue">{{labels[8]}}</text><br>
 <label></label>
-<textarea class="ta-small" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder=""></textarea><br>
-
-<button class="button-add" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
-<button class="button-cancel" (click)="goBack()">Cancel</button>
-<br>
-<br>
+<textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder=""></textarea><br>
 <br>
 
+<div class="row col-xs-6">
+<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
+<button class="btn-big btn btn-success pull-right" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
 </div>
 
-<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
+</div>
+<br>
+<br>
+<br>
+
+<div *ngIf="!auth.authenticated()">
+   <h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+   {{auth.login()}}
+</div>
 
 </div>
 

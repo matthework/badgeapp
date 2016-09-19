@@ -70,8 +70,8 @@
     <br>
     <br>
     <div class="form-inline col-xs-5">
-      <button class="btn btn-primary pull-right" (click)="location.reload()">Cancel</button>
-      <button class="btn btn-primary pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
+      <button class="btn btn-big btn-primary pull-right" (click)="location.reload()">Cancel</button>
+      <button class="btn btn-big btn-primary pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
     </div>
     <br>
   </div>
@@ -79,11 +79,11 @@
   <!-- Button group-->
   <div class="row padding-large-vertical">
     <div>
-      <button *ngIf="checkProfile()" class="btn btn-primary" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text>
+      <button *ngIf="checkProfile()" class="btn btn-big btn-primary" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text>
     </div>
     <br>
     <div *ngIf="auth.isAdmin()">
-      <button class="btn btn-primary" (click)="toPerson()">Admin Page</button><text> You have <text class="text-blue">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-blue">{{checkPendingStaff()}}</text> staff(s).</text>
+      <button class="btn btn-big btn-primary" (click)="toPerson()">Admin Page</button><text> You have <text class="text-blue">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-blue">{{checkPendingStaff()}}</text> staff(s).</text>
     </div>
   </div>
 

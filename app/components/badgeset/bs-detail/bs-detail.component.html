@@ -66,7 +66,7 @@
 
 	<div *ngIf="tag && auth.isAdmin()" class="form-inline">
 	<label class="text-blue">Tags: </label>
-	<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of badgeset.tags">{{tag}} <button class="btn-small btn btn-default" (click)="deleteTag(tag)">-</button></text>
+	<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of badgeset.tags">{{tag}} <button class="btn-small btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text>
 
 	<button class="btn-small btn btn-success" (click)="tag=false;updateBadgeSet()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="tag=false;getBadgeSet()">N</button>

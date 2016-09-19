@@ -1,4 +1,10 @@
-
+.btn-small {
+  margin-right: 5px;
+}
+.btn-big {
+  margin-top: 20px;
+  margin-right: 5px;
+}
 .input{
   width: 300px;
 }

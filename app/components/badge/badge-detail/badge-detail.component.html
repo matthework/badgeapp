@@ -61,7 +61,7 @@
 
 	<div *ngIf="auth.isAdmin() && editFC" class="form-inline">
 		<label class="text-blue">Focus: </label>
-		<input class="input-small form-control" type="text" [(ngModel)]="newFC" placeholder=""><button class="btn-small btn btn-default" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus">{{fc}} <button class="btn-small btn btn-default" (click)="deleteFC(fc)">-</button></text>
+		<input class="input-small form-control" type="text" [(ngModel)]="newFC" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus">{{fc}} <button class="btn-small btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text>
 
 		<button class="btn-small btn btn-success" (click)="editFC=false;updateBadge()">Y</button>
 		<button class="btn-small btn btn-danger" (click)="editFC=false;getBadge()">N</button>

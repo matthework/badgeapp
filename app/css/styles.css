@@ -120,12 +120,19 @@ th , td  {
 
 .btn-small {
   width: 40px;
-  margin-right: 10px;
 }
 .btn-big {
   width: 100px;
-  margin-right: 10px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+}
+.label-small {
+  width: 6em;
 }
 
+.btn-add:hover{
+  color: white;
+  background-color: limegreen;
+}
+.btn-del:hover{
+  color: white;
+  background-color: red;
+}
