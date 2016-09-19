@@ -42,38 +42,30 @@
     </div>
   </div>
 
-  <div class="row padding-large-vertical" *ngIf="!checkProfile()">
-    <div>
-      <h3><i>Please create a user profile!</i></h3>
-    </div>
+  <div class="row col-xs-6 form-inline" *ngIf="!checkProfile()">
+
+    <h3><i>Please create a user profile!</i></h3>
     <br>
+
+    <label>*FName: </label>
+    <input class="input form-control" type="text" [(ngModel)]="newUser.fname" placeholder="First Name"><br>
     <br>
-    <div class="form-inline">
-      <label>*FName: </label>
-      <input class="input form-control" type="text" [(ngModel)]="newUser.fname" placeholder="First Name"/>
-    </div>
+
+    <label>*LName: </label>
+    <input class="input form-control" type="text" [(ngModel)]="newUser.lname" placeholder="Last Name"><br>
     <br>
-    <div class="form-inline">
-      <label>*LName: </label>
-      <input class="input form-control" type="text" [(ngModel)]="newUser.lname" placeholder="Last Name" />
-    </div>
+
+    <label>Position: </label>
+    <input class="input form-control" type="text" [(ngModel)]="newUser.position" placeholder="Position"><br>
     <br>
-    <div class="form-inline">
-      <label>Position: </label>
-      <input class="input form-control" type="text" [(ngModel)]="newUser.position" placeholder="Position" />
-    </div>
+
+    <label>Brief: </label>
+    <textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea><br>
     <br>
-    <div class="form-inline">
-      <label>Brief: </label>
-      <textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea>
-    </div>
-    <br>
-    <br>
-    <div class="form-inline col-xs-5">
-      <button class="btn btn-big btn-primary pull-right" (click)="location.reload()">Cancel</button>
-      <button class="btn btn-big btn-primary pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
-    </div>
-    <br>
+
+    <button class="btn btn-big btn-danger pull-right" (click)="location.reload()">Cancel</button>
+    <button class="btn btn-big btn-success pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
+
   </div>
 
   <!-- Button group-->
