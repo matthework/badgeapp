@@ -1,23 +1,26 @@
-.btn {
-  margin-left: 10px;
-}
 .btn-small {
-  width: 40px;
+  margin-right: 5px;
 }
 .btn-big {
-  width: 100px;
+  margin-top: 20px;
+  margin-right: 5px;
+  margin-bottom: 20px;
 }
 .btn-apply {
-  margin-top: 30px;
+  width: 110px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .input{
-  width: 300px;
+  width: 310px;
 }
 .input-small {
   width: 150px;
+  margin-right: 5px;
 }
 .textarea {
   width: 350px;
+  background-color: transparent;
 }
 .select-badge {
   width: 200px;
