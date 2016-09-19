@@ -13,7 +13,7 @@ a {
   cursor: hand;
 }
 label {
-  width: 8em;
+  width: 9em;
 }
 input{
   width: 300px;
@@ -120,10 +120,12 @@ th , td  {
 
 .btn-small {
   width: 40px;
+  margin-right: 10px;
 }
 .btn-big {
   width: 100px;
   margin-right: 10px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
