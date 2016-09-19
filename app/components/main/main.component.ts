@@ -77,14 +77,12 @@ export class MainComponent implements OnInit{
 		var hasProfile = false;
 		if (this.auth.userProfile != null && this.staffs != null) {
 			for (var i = 0; i < this.staffs.length; i++) { 
-				var name = this.staffs[i].fname + " " + this.staffs[i].lname;
 				if(this.staffs[i].email==this.auth.userProfile.email){
 					hasProfile = true;
 					break;
 				}
 			}
 		}
-		// console.log('you submitted value: ', hasProfile); 
 		return hasProfile;
 	}
 
