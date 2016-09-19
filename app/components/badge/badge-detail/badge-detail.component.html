@@ -146,8 +146,8 @@
 	<button *ngIf="!auth.isAdmin() && !bedit" (click)="goBack()">Back</button>
 
 	<div *ngIf="auth.isAdmin() && !addLevel">
-		<button class="btn-big btn btn-default" (click)="addBadge()">New Badge</button>
-		<button class="btn-big btn btn-default" (click)="deleteBadgePop()">Delete</button>
+		<button class="btn-big btn btn-primary" (click)="addBadge()">New Badge</button>
+		<button class="btn-big btn btn-primary" (click)="deleteBadgePop()">Delete</button>
 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadge()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadge()">Save</button>
 	</div>
