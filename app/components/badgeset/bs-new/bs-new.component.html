@@ -1,25 +1,37 @@
-<div class="col-md-10 col-md-offset-1">
+<!-- Header -->
+<div class="docs-header">
+   <h1 class="col-md-10 col-md-offset-1">
+      <span>Add New Badge Set</span>
+   </h1>
+</div>
+
+<!-- Content -->
+<div class="col-md-10 col-md-offset-1 form-inline">
+
 <div *ngIf="auth.isAdmin()">
 
-<h2 class="text-blue">Add New Badge Set</h2><br>
 
 <!-- <label>Index: </label>
 <input class="input-index" type="number" [(ngModel)]="newBS.index" placeholder="Index"><br> -->
-
+<br>
 <label>*Name: </label>
-<input class="input-name" type="text" [(ngModel)]="newBS.name" placeholder=""><br>
+<input class="input-name form-control" type="text" [(ngModel)]="newBS.name" placeholder=""><br>
+<br>
 
 <label>Tags: </label>
-<input class="input-tags" type="text" [(ngModel)]="newTag" placeholder=""><button class="button-s-add" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="button-s-delete" (click)="deleteTag(tag)">-</button></text><br>
+<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="btn-small btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text><br>
+<br>
 
 <label>Tier: </label>
-<select class="select-tier" [(ngModel)]="newBS.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
+<select class="select-small form-control" [(ngModel)]="newBS.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 
 <label class="label-grade">Grade: </label>
-<select class="select-grade" [(ngModel)]="newBS.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select><br>
+<select class="select-small form-control"[(ngModel)]="newBS.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select><br>
+<br>
 
 <label>$$: </label>
 <text>${{getPay(newBS.tier,newBS.grade)}}K</text><br>
+<br>
 
 <!-- <br>
 <label>InUsed: </label>
@@ -28,28 +40,29 @@
 <!-- <label>Approved: </label>
 <input type="checkbox" [(ngModel)]="newBS.approved" placeholder="Approved" /><br> -->
 
-<br>
-<br>
 <label>Status: </label>
-<select class="select-status" [(ngModel)]="newBS.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<select class="form-control" [(ngModel)]="newBS.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<br>
 
 <div *ngFor="let i of nums">
 <br>
 <label>Badge: </label>
-<select class="select-badge" [(ngModel)]="newBS.badgegroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
+<select class="select-badge form-control" [(ngModel)]="newBS.badgegroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
-<label class="label-level">Level: </label>
-<select class="select-level" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
+<label class="label-small label-level">Level: </label>
+<select class="select-small form-control" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
+<br>
+
 <label>Focus: </label>
-<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])">, </text><br>
+<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input class="form-control" type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])">, </text><br>
 
 <!-- <select class="select-focus" [(ngModel)]="newBS.badgegroups[i].focus" multiple="multiple"><option *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)" [value]="fc">{{fc}}</option></select><br> -->
 
 <!-- <input class="input-focus" type="text" [(ngModel)]="newBS.badgegroups[i].focus" placeholder=""><br> -->
 
-<br>
 <label>Description: </label>
-<textarea readonly class="ta-desc" placeholder="">{{getDesc(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)}}</textarea><br>
+<textarea readonly class="textarea form-control" placeholder="">{{getDesc(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)}}</textarea><br>
+<br>
 </div>
 
 <!-- <br>
@@ -72,9 +85,9 @@
 	<button (click)="addNumBadges();prerequisite=false">Done</button>
 </div> -->
 
-<div *ngIf!="prerequisite">
-	<button class="button-save" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>
-	<button class="button-cancel" (click)="goBack()">Cancel</button>
+<div *ngIf!="prerequisite" class="row col-xs-6">
+	<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
+	<button class="btn-big btn btn-success pull-right" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>
 </div>
 <br>
 <br>
@@ -82,7 +95,10 @@
 
 </div>
 
-<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
+<div *ngIf="!auth.authenticated()">
+   <h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+   {{auth.login()}}
+</div>
 
 </div>
 

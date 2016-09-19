@@ -47,3 +47,8 @@
 .td-center {
   text-align: center;
 }
+
+.btn-compare {
+  width: 100px;
+  margin-right: 5px;
+}

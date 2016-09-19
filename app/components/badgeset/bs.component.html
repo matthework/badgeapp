@@ -16,8 +16,8 @@
 		<div class="form-inline">
 			<div *ngIf="badgesets" class="form-group">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-				<button class="btn btn-primary" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
-				<button class="btn btn-primary" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
+				<button class="btn-compare btn btn-primary" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
+				<button class="btn btn-big btn-primary" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
 				<button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addBadgeSet()">+</button>
 			</div>
 
@@ -62,7 +62,7 @@
 		<h2>Compare Badge Sets</h2>
 
 		<div class="row col-xs-12">
-			<button class="btn btn-primary pull-right" (click)="showCompare=false">Back</button><br>
+			<button class="btn btn-big btn-primary pull-right" (click)="showCompare=false">Back</button><br>
 		</div>
 		<br>
 		<br>
