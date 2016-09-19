@@ -8,6 +8,10 @@ header .container{
 nav {
   margin-bottom: 0px !important;
 }
+a {
+  cursor: pointer;
+  cursor: hand;
+}
 label {
   width: 8em;
 }
@@ -82,7 +86,6 @@ th , td  {
 
 .btn {
   margin-top: 20px;
-  margin-right: 10px;
 }
 
 .click{
