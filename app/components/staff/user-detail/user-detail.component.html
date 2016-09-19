@@ -20,21 +20,21 @@
 	<label class="text-blue"><h3>Name: </h3></label>
 	<input class="input-small form-control" type="text" [(ngModel)]="staff.fname">
 	<input class="input-small form-control" type="text" [(ngModel)]="staff.lname">
-	<button class="btn btn-default" (click)="userName=false;updateStaff()">Y</button>
-	<button class="btn btn-default" (click)="userName=false;getStaffByEmail()">N</button>
+	<button class="btn btn-success" (click)="userName=false;updateStaff()">Y</button>
+	<button class="btn btn-danger" (click)="userName=false;getStaffByEmail()">N</button>
 	</div>
 	<br>
 
 	<div *ngIf="!pos" class="form-inline">
-	<label class="click" (click)="pos=true">Position: </label>
-	<text class="click" (click)="pos=true">{{staff.position}}</text>
+	<label class="click text-blue" (click)="pos=true">Position: </label>
+	<text class="click text-blue" (click)="pos=true">{{staff.position}}</text>
 	</div>
 
 	<div *ngIf="pos" class="form-inline">
 	<label class="text-blue">Position: </label>
 	<input class="input form-control" type="text" [(ngModel)]="staff.position">
-	<button class="btn btn-default" (click)="pos=false;updateStaff()">Y</button>
-	<button class="btn btn-default" (click)="pos=false;getStaffByEmail()">N</button>
+	<button class="btn btn-success" (click)="pos=false;updateStaff()">Y</button>
+	<button class="btn btn-danger" (click)="pos=false;getStaffByEmail()">N</button>
 	</div>
 	<br>
 
@@ -43,25 +43,25 @@
 	<br>
 
 	<label>Top BSet: </label>
-	<text class="badgeset" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
+	<text class="click text-blue" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
 	<br>
 
 	<label>Badge Sets: </label>
 	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
-		<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
+		<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
 	</text><br>
 	<br>
 
 	<div *ngIf="!brief" class="form-inline">
-	<label class="click" (click)="brief=true">Brief: </label>
+	<label class="click text-blue" (click)="brief=true">Brief: </label>
 	<textarea readonly class="textarea form-control" rows="5" (click)="brief=true">{{staff.brief}}</textarea>
 	</div>
 
 	<div *ngIf="brief" class="form-inline">
 	<label class="text-blue">Brief: </label>
 	<textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
-	<button class="btn btn-default" (click)="brief=false;updateStaff()">Y</button>
-	<button class="btn btn-default" (click)="brief=false;getStaffByEmail()">N</button>
+	<button class="btn btn-success" (click)="brief=false;updateStaff()">Y</button>
+	<button class="btn btn-danger" (click)="brief=false;getStaffByEmail()">N</button>
 	</div>
 	<br>
 
@@ -120,34 +120,25 @@
 		<button class="btn btn-apply btn-primary" *ngIf!="active" (click)="active=true">+ Apply New</button>
 	</div>
 
-	<div *ngIf="active" class="row col-xs-8">
-		<br>
-		<br>
-		<h4 class="text-blue">Apply New Badge</h4><br>
-		<div class="form-inline">
-			<label>Badge: </label>
-			<select class="select-badge form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
-			<label class="label-level">Level: </label>
-			<select class="form-control" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
-		</div>
+	<div *ngIf="active" class="row col-xs-6 form-inline">
+	
+		<h3 class="text-blue">Apply New Badge</h3><br>
+
+		<label>Badge: </label>
+		<select class="select-badge form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
+		<label class="label-level">Level: </label>
+		<select class="form-control" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 		<br>
 
-		<div class="form-inline">
-			<label>Focus: </label>
-			<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
-		</div>
+		<label>Focus: </label>
+		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="form-control" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+
+		<label>Description: </label>
+		<textarea readonly class="textarea form-control" rows="5" placeholder="">{{getDesc(newBID,newLevel)}}</textarea><br>
 		<br>
 
-		<div class="form-inline">
-			<label>Description: </label>
-			<textarea readonly class="textarea form-control" rows="5" placeholder="">{{getDesc(newBID,newLevel)}}</textarea><br>
-		</div>
-		<br>
-
-		<div class="form-inline col-xs-9">
-			<button class="btn btn-big btn-primary pull-right" (click)="active=false">Cancel</button>
-			<button class="btn btn-big btn-primary pull-right" (click)="addBadgeGroup();active=false">Apply</button><br>
-		</div>
+		<button class="btn btn-big btn-danger pull-right" (click)="active=false">Cancel</button>
+		<button class="btn btn-big btn-success pull-right" (click)="addBadgeGroup();active=false">Apply</button><br>
 		<br>
 		<br>
 	</div>
