@@ -143,7 +143,7 @@
 		<button class="btn-big btn btn-danger" (click)="addLevel=false">Cancel</button><br>
 	</div> -->
 
-	<button *ngIf="!auth.isAdmin() && !bedit" (click)="goBack()">Back</button>
+	<button *ngIf="!auth.isAdmin() && !bedit" class="btn-big btn btn-default" (click)="goBack()">Back</button>
 
 	<div *ngIf="auth.isAdmin() && !addLevel">
 		<button class="btn-big btn btn-primary" (click)="addBadge()">New Badge</button>
