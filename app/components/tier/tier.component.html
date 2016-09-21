@@ -17,8 +17,8 @@
     <div class="form-inline">
       <div *ngIf="tiers" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-		<button class="btn btn-primary" *ngIf!="toPay" (click)="toPay=true">Show BadgeSet</button>
-		<button class="btn btn-primary" *ngIf="toPay" (click)="toPay=false">Show $$</button>
+		<button class="btn btn-primary" *ngIf!="toPay" (click)="toPay=true;tedit=false">Show BadgeSet</button>
+		<button class="btn btn-primary" *ngIf="toPay" (click)="toPay=false;tedit=false">Show $$</button>
 		<button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
       </div>
 
@@ -29,31 +29,66 @@
     </div>
     <br>
 
+    <br>
     <div *ngIf!="toPay">
-		<div *ngIf="tiers" class="row col-xs-12 header hidden-xs">
-			<div class=" col-xs-1">Tier</div>
-			<div class=" col-xs-1">A</div>
-			<div class=" col-xs-1">B</div>
-			<div class=" col-xs-1">C</div>
-			<div class=" col-xs-1">D</div>
-			<div class=" col-xs-1">E</div>
-			<div class=" col-xs-1">F</div>
-			<div class=" col-xs-2">Judgement</div>
-			<div class=" col-xs-2">Expertise</div>
-			<div class=" col-xs-1"></div>
-		</div>
+    	<div *ngIf="!tedit"> 
+			<div *ngIf="tiers" class="row col-xs-12 header hidden-xs">
+				<div class=" col-xs-1">Tier</div>
+				<div class=" col-xs-1">A</div>
+				<div class=" col-xs-1">B</div>
+				<div class=" col-xs-1">C</div>
+				<div class=" col-xs-1">D</div>
+				<div class=" col-xs-1">E</div>
+				<div class=" col-xs-1">F</div>
+				<div class=" col-xs-2">Judgement</div>
+				<div class=" col-xs-2">Expertise</div>
+				<div class=" col-xs-1"></div>
+			</div>
 
-		<div class="row col-xs-12 div-list-item" *ngFor="let tier of tiers | filter:query">
-			<div class="click text-blue text-big col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[0]}}K</div>
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[1]}}K</div>
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[2]}}K</div>
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[3]}}K</div>
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[4]}}K</div>
-			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">${{tier.grades[5]}}K</div>
-			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">{{tier.judgement}}</div>
-			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">{{tier.expertise}}</div>
-			<div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
+			<div class="row col-xs-12 div-list-item" *ngFor="let tier of tiers | filter:query">
+				<div class="text-big col-sm-1 col-xs-12">{{tier.tier}}</div>
+				<div class="col-sm-1" (click)="checkAdmin()">${{tier.grades[0]}}K</div>
+				<div class="col-sm-1" (click)="checkAdmin()">${{tier.grades[1]}}K</div>
+				<div class="col-sm-1" (click)="checkAdmin()">${{tier.grades[2]}}K</div>
+				<div class="col-sm-1" (click)="checkAdmin()">${{tier.grades[3]}}K</div>
+				<div class="col-sm-1" (click)="checkAdmin()">${{tier.grades[4]}}K</div>
+				<div class="col-sm-1" (click)="checkAdmin()">${{tier.grades[5]}}K</div>
+				<div class="col-sm-2" (click)="checkAdmin()">{{tier.judgement}}</div>
+				<div class="col-sm-2" (click)="checkAdmin()">{{tier.expertise}}</div>
+				<div class="col-sm-1" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
+			</div>
+		</div>
+		<div *ngIf="tedit"> 
+			<div *ngIf="tiers" class="row col-xs-12 header hidden-xs">
+				<div class=" col-xs-1">Tier</div>
+				<div class=" col-xs-1">A</div>
+				<div class=" col-xs-1">B</div>
+				<div class=" col-xs-1">C</div>
+				<div class=" col-xs-1">D</div>
+				<div class=" col-xs-1">E</div>
+				<div class=" col-xs-1">F</div>
+				<div class=" col-xs-2">Judgement</div>
+				<div class=" col-xs-2">Expertise</div>
+				<div class=" col-xs-1"></div>
+			</div>
+
+			<div class="row col-xs-12 div-list-item form-inline" *ngFor="let tier of tiers | filter:query">
+				<div class="click text-blue text-big col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)"><input class="input-small form-control" type="text" [(ngModel)]="tier.tier"></div>
+				<div class="col-sm-1" (click)="onSelect(tier)">$<input class="input-small form-control" type="text" [(ngModel)]="tier.grades[0]">K</div>
+				<div class="col-sm-1" (click)="onSelect(tier)">$<input class="input-small form-control" type="text" [(ngModel)]="tier.grades[1]">K</div>
+				<div class="col-sm-1" (click)="onSelect(tier)">$<input class="input-small form-control" type="text" [(ngModel)]="tier.grades[2]">K</div>
+				<div class="col-sm-1" (click)="onSelect(tier)">$<input class="input-small form-control" type="text" [(ngModel)]="tier.grades[3]">K</div>
+				<div class="col-sm-1" (click)="onSelect(tier)">$<input class="input-small form-control" type="text" [(ngModel)]="tier.grades[4]">K</div>
+				<div class="col-sm-1" (click)="onSelect(tier)">$<input class="input-small form-control" type="text" [(ngModel)]="tier.grades[5]">K</div>
+				<div class="col-sm-2" (click)="onSelect(tier)"><textarea class="textarea form-control" rows="5" [(ngModel)]="tier.judgement"></textarea></div>
+				<div class="col-sm-2" (click)="onSelect(tier)"><textarea class="textarea form-control" rows="5" [(ngModel)]="tier.expertise"></textarea></div>
+				<div class="col-sm-1" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
+			</div>
+			<div *ngIf="auth.isAdmin()">
+				<button class="btn-big btn btn-primary" (click)="addTier()">New Tier</button>
+<!-- 				<button class="btn-big btn btn-danger pull-right" (click)="bedit=false;getTier()">Cancel</button>
+				<button class="btn-big btn btn-success pull-right" (click)="bedit=false;updateTier()">Save</button> -->
+			</div>
 		</div>
 	</div>
 
@@ -69,35 +104,35 @@
 		</div>
 
 		<div class="row col-xs-12 div-list-item" *ngFor="let tier of tiers | filter:query">
-			<div class="click col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
+			<div class="click text-blue text-big col-sm-1 col-xs-12" (click)="onSelect(tier);toTierDetail(tier._id)">{{tier.tier}}</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">
 				<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[0])">
-					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
 			</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">		
 				<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[1])">
-					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
 			</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">		
 				<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[2])">
-					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
 			</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">
 				<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[3])">
-					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
 			</div>
 			<div class="col-sm-2 col-xs-12" (click)="onSelect(tier)">		
 				<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[4])">
-					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
 			</div>
 			<div class="col-sm-1 col-xs-12" (click)="onSelect(tier)">		
 				<div *ngFor="let bs of getTierGradeBS(tier.tier,gmap[5])">
-					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
 			</div>
 		</div>

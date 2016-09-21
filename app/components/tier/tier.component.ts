@@ -18,12 +18,15 @@ import {FilterArrayPipe} from '../pipe/filter-array-pipe';
 })
 export class TierComponent {
 
+  tier: Tier;
   tiers: Tier[] = [];
   selectedTier: Tier;
   active = false;
   badgesets: BadgeSet[] = [];
   toPay = false;
+  tedit =false;
   gmap = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F"};
+  id = "";
 
   constructor(
     private _tierService: TierService,
@@ -32,8 +35,14 @@ export class TierComponent {
     private auth: AuthService) {}
 
   ngOnInit() {
+    this.getTier();
     this.getTiers();
     this.getBadgeSets();
+  }
+
+  getTier() {
+    console.log('id from _routeParams: ', this.id); 
+    this._tierService.getTier(this.id).subscribe((tier) => {this.tier = tier;});
   }
 
   getTiers() {
@@ -93,6 +102,19 @@ export class TierComponent {
   toTiers() {
     this._router.navigate(['/tiers']);
     location.reload();
+  }
+
+  updateTier() {
+      this.tier.tier = +this.tier.tier;
+      let value = JSON.stringify(this.tier)
+      this._tierService.updateTier(this.tier._id,value).subscribe();
+      console.log('you submitted value: ', value); 
+  }
+
+  checkAdmin() {
+    if(this.auth.isAdmin()) {
+      this.tedit = true;
+    }
   }
 
 }
