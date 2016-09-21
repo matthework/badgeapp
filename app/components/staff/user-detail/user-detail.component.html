@@ -26,7 +26,7 @@
 	<br>
 
 	<div *ngIf="!pos" class="form-inline">
-	<label class="click text-blue" (click)="pos=true">Position: </label>
+	<label class="click" (click)="pos=true">Position: </label>
 	<text class="click text-blue" (click)="pos=true">{{staff.position}}</text>
 	</div>
 
@@ -53,7 +53,7 @@
 	<br>
 
 	<div *ngIf="!brief" class="form-inline">
-	<label class="click text-blue" (click)="brief=true">Brief: </label>
+	<label class="click" (click)="brief=true">Brief: </label>
 	<textarea readonly class="textarea form-control" rows="5" (click)="brief=true">{{staff.brief}}</textarea>
 	</div>
 
@@ -105,7 +105,7 @@
 		</div>
 
 		<div class="row col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
-			<div class="col-sm-3 col-xs-12" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="click text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text> <text *ngIf="userbgroup.focus.length!=0" class=""> [{{userbgroup.focus}}]</text></div>
+			<div class="col-sm-3 col-xs-12" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="click text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text> <text *ngIf="userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text></div>
 			<div class="col-sm-5 col-xs-12"><text *ngIf="userbgroup.current" class="text-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
 			<div class="col-sm-3 col-xs-12">
 				<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">

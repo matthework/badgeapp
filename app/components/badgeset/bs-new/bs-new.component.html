@@ -25,7 +25,7 @@
 <label>Tier: </label>
 <select class="select-small form-control" [(ngModel)]="newBS.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 
-<label class="label-grade">Grade: </label>
+<label class="label-small label-grade">Grade: </label>
 <select class="select-small form-control"[(ngModel)]="newBS.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select><br>
 <br>
 
@@ -54,7 +54,7 @@
 <br>
 
 <label>Focus: </label>
-<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input class="form-control" type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])">, </text><br>
+<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])">, </text><br>
 
 <!-- <select class="select-focus" [(ngModel)]="newBS.badgegroups[i].focus" multiple="multiple"><option *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)" [value]="fc">{{fc}}</option></select><br> -->
 
@@ -62,6 +62,7 @@
 
 <label>Description: </label>
 <textarea readonly class="textarea form-control" placeholder="">{{getDesc(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)}}</textarea><br>
+<br>
 <br>
 </div>
 

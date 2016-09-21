@@ -17,7 +17,7 @@
 	</div>
 
 	<div *ngIf="!bName && auth.isAdmin()">
-		<h3 class="click text-blue" (click)="bName=true">Badge - {{badge.name}}</h3>
+		<h3 class="click text-blue" (click)="bName=true">{{badge.name}}</h3>
 	</div>
 
 	<div *ngIf="bName && auth.isAdmin()" class="form-inline">
@@ -37,7 +37,7 @@
 	</div>
 
 	<div *ngIf="!oview && auth.isAdmin()" class="form-inline">
-		<label class="click text-blue" (click)="oview=true">Overview: </label>
+		<label class="click" (click)="oview=true">Overview: </label>
 		<textarea readonly class="textarea form-control" rows="5" (click)="oview=true" placeholder="">{{badge.overview}}</textarea>
 	</div>
 
@@ -55,7 +55,7 @@
 	</div>
 
 	<div *ngIf="!editFC && auth.isAdmin()" class="form-inline">
-		<label class="click text-blue" (click)="editFC=true">Focus: </label>
+		<label class="click" (click)="editFC=true">Focus: </label>
 		<text class="click text-blue" (click)="editFC=true">{{badge.focus}}</text>
 	</div>
 
@@ -80,7 +80,7 @@
 	</div>
 
 	<div *ngIf="!editStatus && auth.isAdmin()" class="form-inline">
-		<label class="click text-blue" (click)="editStatus=true">Status: </label>
+		<label class="click" (click)="editStatus=true">Status: </label>
 		<text class="click text-blue" (click)="editStatus=true">{{badge.status}}</text>
 	</div>
 
