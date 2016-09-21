@@ -27,9 +27,8 @@
    <div *ngIf="badges" class="row col-xs-12 header hidden-xs">
          <div class="col-xs-2">Badge Name</div>
          <div class="col-xs-8">Overview</div>
-         <div class="col-xs-1">Status</div>
-         <div class="col-xs-1"></div>
-         
+         <div class="col-xs-2">Status</div>
+         <!-- <div class="col-xs-1"></div> -->
    </div>
 
    <div class="row col-xs-12 div-list-item" *ngFor="let badge of badges | filter:query">
@@ -37,10 +36,10 @@
          <span>{{badge.name}}</span>
       </div>
       <div class="col-xs-6 col-sm-8" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.overview}}</div>
-      <div class="col-xs-1 col-sm-1" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.status}}</div>
-      <div class="col-xs-1 col-sm-1" *ngIf="(badge.status=='Accepted' || auth.isAdmin()) && active">
+      <div class="col-xs-2 col-sm-2" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.status}}</div>
+<!--       <div class="col-xs-1 col-sm-1" *ngIf="(badge.status=='Accepted' || auth.isAdmin()) && active">
          <button class="btn btn-delete btn-default" *ngIf="auth.isAdmin()" (click)="deleteBadgePop(badge._id)">X</button>
-      </div>
+      </div> -->
    </div>
 
 </div>

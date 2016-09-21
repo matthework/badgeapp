@@ -34,8 +34,8 @@
         <div class=" col-xs-2">Name</div>
         <div class=" col-xs-5">Badges</div>
         <div class=" col-xs-3">Top BadgeSet</div>
-        <div class=" col-xs-1">Status</div>
-        <div class=" col-xs-1"></div>
+        <div class=" col-xs-2">Status</div>
+        <!-- <div class=" col-xs-1"></div> -->
       </div>
 
       <div class="row col-xs-12 div-list-item" *ngFor="let staff of staffs | filter:query">
@@ -50,8 +50,9 @@
         	</div>
       	</div>
       	<div class="click text-blue col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>
-        <div class="col-sm-1 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div>
-        <div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteStaffPop(staff._id)">X</button></div>
+        <div class="col-sm-2 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div>
+<!--         <div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteStaffPop(staff._id)">X</button>
+        </div> -->
       </div>
     </div>
 

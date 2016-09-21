@@ -110,6 +110,7 @@ th , td  {
   color: lightgrey;
 }
 .btn-delete {
+  width: 40px;
   color: white;
   background-color: pink;
 }
@@ -117,7 +118,6 @@ th , td  {
   color: white;
   background-color: red;
 }
-
 .btn-small {
   width: 40px;
 }
@@ -127,7 +127,6 @@ th , td  {
 .label-small {
   width: 6em;
 }
-
 .btn-add:hover{
   color: white;
   background-color: limegreen;

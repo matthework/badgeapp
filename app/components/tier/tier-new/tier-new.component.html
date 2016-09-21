@@ -1,45 +1,64 @@
-<div class="col-md-10 col-md-offset-1">
-<div *ngIf="auth.isAdmin()">
+<!-- Header -->
+<div class="docs-header">
+   <h1 class="col-md-10 col-md-offset-1">
+      <span>Add New Tier</span>
+   </h1>
+</div>
 
-<h2>Add New Tier</h2><br>
+<!-- Content -->
+<div class="col-md-10 col-md-offset-1 form-inline">
+
+<div *ngIf="auth.isAdmin()">
 
 <!-- <label>Index: </label>
 <input class="input-index" type="number" [(ngModel)]="newTier.index" placeholder="Index"><br> -->
 
-<label>Tier: </label>
-<input class="input-tier" type="number" [(ngModel)]="newTier.tier" placeholder="Tier"><br>
+<label>*Tier: </label>
+<input class="input form-control" type="number" [(ngModel)]="newTier.tier" placeholder=""><br>
+<br>
 
 <label>Judgement: </label>
-<textarea class="ta-judgement" [(ngModel)]="newTier.judgement" placeholder="Judgement"></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newTier.judgement" placeholder=""></textarea><br>
+<br>
 
 <label>Expertise: </label>
-<textarea class="ta-expertise" [(ngModel)]="newTier.expertise" placeholder="Expertise"></textarea><br>
+<textarea class="textarea form-control" [(ngModel)]="newTier.expertise" placeholder=""></textarea><br>
+<br>
 
 <label>Grade A: </label>
-<input class="input-gradea" type="number" [(ngModel)]="newTier.grades[0]" placeholder="$"> K<br>
+<input class="input form-control" type="number" [(ngModel)]="newTier.grades[0]" placeholder="$"> K<br>
+<br>
 
 <label>Grade B: </label>
-<input class="input-gradeb" type="number" [(ngModel)]="newTier.grades[1]" placeholder="$"> K<br>
+<input class="input form-control" type="number" [(ngModel)]="newTier.grades[1]" placeholder="$"> K<br>
+<br>
 
 <label>Grade C: </label>
-<input class="input-gradec" type="number" [(ngModel)]="newTier.grades[2]" placeholder="$"> K<br>
+<input class="input form-control" type="number" [(ngModel)]="newTier.grades[2]" placeholder="$"> K<br>
+<br>
 
 <label>Grade D: </label>
-<input class="input-graded" type="number" [(ngModel)]="newTier.grades[3]" placeholder="$"> K<br>
+<input class="input form-control" type="number" [(ngModel)]="newTier.grades[3]" placeholder="$"> K<br>
+<br>
 
 <label>Grade E: </label>
-<input class="input-gradee" type="number" [(ngModel)]="newTier.grades[4]" placeholder="$"> K<br>
+<input class="input form-control" type="number" [(ngModel)]="newTier.grades[4]" placeholder="$"> K<br>
+<br>
 
 <label>Grade F: </label>
-<input class="input-gradef" type="number" [(ngModel)]="newTier.grades[5]" placeholder="$"> K<br>
+<input class="input form-control" type="number" [(ngModel)]="newTier.grades[5]" placeholder="$"> K<br>
+<br>
 
-<button class="button-add" [disabled]="!newTier.tier" (click)="addTier()">Save</button>
-<button class="button-cancel" (click)="goBack()">Cancel</button><br>
-<br>
-<br>
+<div class="row col-xs-5">
+<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
+<button class="btn-big btn btn-success pull-right" [disabled]="!newTier.tier" (click)="addTier()">Save</button>
+</div>
 
 </div>
 
-<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
+<div *ngIf="!auth.isAdmin()">
+   <h3><i>You are not an admin, please login as an admin to continue!</i></h3>
+   {{auth.login()}}
+</div>
 
 </div>

@@ -24,11 +24,17 @@ var TierComponent = (function () {
         this.active = false;
         this.badgesets = [];
         this.toPay = false;
+        this.tedit = false;
         this.gmap = { 0: "A", 1: "B", 2: "C", 3: "D", 4: "E", 5: "F" };
     }
     TierComponent.prototype.ngOnInit = function () {
         this.getTiers();
         this.getBadgeSets();
+    };
+    TierComponent.prototype.getTier = function () {
+        var _this = this;
+        console.log('id from _routeParams: ', this.selectedTier._id);
+        this._tierService.getTier(this.selectedTier._id).subscribe(function (tier) { _this.tier = tier; });
     };
     TierComponent.prototype.getTiers = function () {
         var _this = this;
@@ -43,9 +49,6 @@ var TierComponent = (function () {
     };
     TierComponent.prototype.toTierDetail = function (tid) {
         this._router.navigate(['/tier/detail', tid]);
-    };
-    TierComponent.prototype.toTierEdit = function (tid) {
-        this._router.navigate(['/tier/edit', tid]);
     };
     TierComponent.prototype.addTier = function () {
         this._router.navigate(['/tier/new']);
@@ -78,6 +81,16 @@ var TierComponent = (function () {
     TierComponent.prototype.toTiers = function () {
         this._router.navigate(['/tiers']);
         location.reload();
+    };
+    TierComponent.prototype.updateTier = function (t) {
+        var value = JSON.stringify(t);
+        this._tierService.updateTier(t._id, value).subscribe();
+        console.log('you submitted value: ', value);
+    };
+    TierComponent.prototype.checkAdmin = function () {
+        if (this.auth.isAdmin()) {
+            this.tedit = true;
+        }
     };
     TierComponent = __decorate([
         core_1.Component({

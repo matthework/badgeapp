@@ -110,16 +110,16 @@
 			  <div class="col-xs-1">Status</div>
 			</div>
 			<div class="row col-xs-12 div-list-item"  *ngFor="let userbgroup of staff.userbgroups">
-				<div class="click text-blue col-sm-3" *ngIf="!bedit" (click)="checkAdmin()">
+				<div class="click text-blue col-sm-3" (click)="checkAdmin()">
 					<text (click)="bedit=false;toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></text>
 				</div>
-				<div class="col-sm-5" *ngIf="!bedit" (click)="checkAdmin()"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
+				<div class="col-sm-5" (click)="checkAdmin()"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
 				<div class="col-sm-3" *ngIf="!bedit" (click)="checkAdmin()">
 					<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 						<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 					</div>
 		  		</div>
-		  		<div class="col-sm-1" *ngIf="!bedit" (click)="checkAdmin()">
+		  		<div class="col-sm-1" (click)="checkAdmin()">
 		  			<i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i>
 		  		</div>
 			</div>
@@ -133,13 +133,13 @@
 			  <div class="col-xs-1"></div>
 			</div>
 			<div class="row col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">
-		  		<div class="col-sm-4"  *ngIf="bedit">
+		  		<div class="col-sm-4">
 		  			<select class="form-control" [(ngModel)]="userbgroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="form-control" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.bid)" [value]="lo">{{lo}}</option></select><br><text *ngFor="let fc of getFocusOptions(userbgroup.bid)">{{fc}} <input class="form-control" type="checkbox" [checked]="checkFocus(fc,userbgroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, userbgroup)">, </text>
 		  		</div>
-				<div class="col-sm-6" *ngIf="bedit">
+				<div class="col-sm-6">
 					<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid, userbgroup.level)}}
 				</div>
-				<div class="col-sm-1" *ngIf="bedit">
+				<div class="col-sm-1">
 					<input type="checkbox" [(ngModel)]="userbgroup.status">
 				</div>
 				<div class="col-sm-1">

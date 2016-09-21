@@ -12,14 +12,14 @@
   margin-bottom: 20px;
 }
 .input{
-  width: 310px;
+  width: 300px;
 }
 .input-small {
   width: 150px;
   margin-right: 5px;
 }
 .textarea {
-  width: 350px;
+  width: 300px;
   background-color: transparent;
 }
 .select-badge {

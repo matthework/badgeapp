@@ -44,7 +44,7 @@
 
   <div class="row col-xs-6 form-inline" *ngIf="!checkProfile()">
 
-    <h3><i>Please create a user profile!</i></h3>
+    <h3><i>Please create a User profile!</i></h3>
     <br>
 
     <label>*FName: </label>
@@ -69,7 +69,7 @@
   </div>
 
   <!-- Button group-->
-  <div class="row padding-large-vertical">
+  <div class="row col-xs-8">
     <div>
       <button *ngIf="checkProfile()" class="btn btn-big btn-primary" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text>
     </div>
