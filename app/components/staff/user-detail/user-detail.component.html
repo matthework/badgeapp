@@ -131,7 +131,7 @@
 		<br>
 
 		<label>Focus: </label>
-		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="form-control" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
 
 		<label>Description: </label>
 		<textarea readonly class="textarea form-control" rows="5" placeholder="">{{getDesc(newBID,newLevel)}}</textarea><br>

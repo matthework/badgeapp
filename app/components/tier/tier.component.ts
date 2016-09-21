@@ -26,7 +26,6 @@ export class TierComponent {
   toPay = false;
   tedit =false;
   gmap = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F"};
-  id = "";
 
   constructor(
     private _tierService: TierService,
@@ -35,14 +34,13 @@ export class TierComponent {
     private auth: AuthService) {}
 
   ngOnInit() {
-    this.getTier();
     this.getTiers();
     this.getBadgeSets();
   }
 
   getTier() {
-    console.log('id from _routeParams: ', this.id); 
-    this._tierService.getTier(this.id).subscribe((tier) => {this.tier = tier;});
+    console.log('id from _routeParams: ', this.selectedTier._id); 
+    this._tierService.getTier(this.selectedTier._id).subscribe((tier) => {this.tier = tier;});
   }
 
   getTiers() {
@@ -59,10 +57,6 @@ export class TierComponent {
 
   toTierDetail(tid:string) {
     this._router.navigate(['/tier/detail',tid]);
-  }
-
-  toTierEdit(tid:string) {
-    this._router.navigate(['/tier/edit',tid]);
   }
   
   addTier() {
@@ -104,10 +98,9 @@ export class TierComponent {
     location.reload();
   }
 
-  updateTier() {
-      this.tier.tier = +this.tier.tier;
-      let value = JSON.stringify(this.tier)
-      this._tierService.updateTier(this.tier._id,value).subscribe();
+  updateTier(t:Tier) {
+      let value = JSON.stringify(t)
+      this._tierService.updateTier(t._id,value).subscribe();
       console.log('you submitted value: ', value); 
   }
 

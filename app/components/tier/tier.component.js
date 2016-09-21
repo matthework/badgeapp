@@ -26,17 +26,15 @@ var TierComponent = (function () {
         this.toPay = false;
         this.tedit = false;
         this.gmap = { 0: "A", 1: "B", 2: "C", 3: "D", 4: "E", 5: "F" };
-        this.id = "";
     }
     TierComponent.prototype.ngOnInit = function () {
-        this.getTier();
         this.getTiers();
         this.getBadgeSets();
     };
     TierComponent.prototype.getTier = function () {
         var _this = this;
-        console.log('id from _routeParams: ', this.id);
-        this._tierService.getTier(this.id).subscribe(function (tier) { _this.tier = tier; });
+        console.log('id from _routeParams: ', this.selectedTier._id);
+        this._tierService.getTier(this.selectedTier._id).subscribe(function (tier) { _this.tier = tier; });
     };
     TierComponent.prototype.getTiers = function () {
         var _this = this;
@@ -51,9 +49,6 @@ var TierComponent = (function () {
     };
     TierComponent.prototype.toTierDetail = function (tid) {
         this._router.navigate(['/tier/detail', tid]);
-    };
-    TierComponent.prototype.toTierEdit = function (tid) {
-        this._router.navigate(['/tier/edit', tid]);
     };
     TierComponent.prototype.addTier = function () {
         this._router.navigate(['/tier/new']);
@@ -87,10 +82,9 @@ var TierComponent = (function () {
         this._router.navigate(['/tiers']);
         location.reload();
     };
-    TierComponent.prototype.updateTier = function () {
-        this.tier.tier = +this.tier.tier;
-        var value = JSON.stringify(this.tier);
-        this._tierService.updateTier(this.tier._id, value).subscribe();
+    TierComponent.prototype.updateTier = function (t) {
+        var value = JSON.stringify(t);
+        this._tierService.updateTier(t._id, value).subscribe();
         console.log('you submitted value: ', value);
     };
     TierComponent.prototype.checkAdmin = function () {

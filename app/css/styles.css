@@ -110,6 +110,7 @@ th , td  {
   color: lightgrey;
 }
 .btn-delete {
+  width: 40px;
   color: white;
   background-color: pink;
 }
