@@ -16,7 +16,7 @@ label {
   width: 9em;
 }
 input{
-  width: 300px;
+  /*width: 300px;*/
   margin-right: 10px;
 }
 select {

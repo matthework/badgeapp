@@ -17,7 +17,7 @@
 	</div>
 
 	<div *ngIf="!bsName && auth.isAdmin()">
-	<h3 class="click text-blue" (click)="bsName=true">Badge Set - {{badgeset.name}}</h3>
+	<h3 class="click text-blue" (click)="bsName=true">{{badgeset.name}}</h3>
 	</div>
 
 	<div *ngIf="bsName && auth.isAdmin()" class="form-inline">
@@ -34,7 +34,7 @@
 	</div>
 
 	<div *ngIf="!tg && auth.isAdmin()">
-	<label class="click text-blue" (click)="tg=true">Tier/Grade: </label>
+	<label class="click" (click)="tg=true">Tier/Grade: </label>
 	<text  class="click text-blue" (click)="tg=true">{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
 	</div>
 
@@ -60,7 +60,7 @@
 	</div>
 
 	<div *ngIf="!tag && auth.isAdmin()">
-	<label class="click text-blue" (click)="tag=true">Tags: </label>
+	<label class="click" (click)="tag=true">Tags: </label>
 	<text class="click text-blue" (click)="tag=true">{{badgeset.tags}}</text>
 	</div>
 
@@ -89,7 +89,7 @@
 	</div>
 
 	<div *ngIf="!status && auth.isAdmin()">
-	<label class="click text-blue" (click)="status=true">Status: </label>
+	<label class="click" (click)="status=true">Status: </label>
 	<text class="click text-blue" (click)="status=true">{{badgeset.status}}</text>
 	</div>
 

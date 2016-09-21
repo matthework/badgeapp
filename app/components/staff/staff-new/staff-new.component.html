@@ -1,34 +1,47 @@
-<div class="col-md-10 col-md-offset-1">
-<div *ngIf="auth.isAdmin()">
+<!-- Header -->
+<div class="docs-header">
+   <h1 class="col-md-10 col-md-offset-1">
+      <span>Add New Person</span>
+   </h1>
+</div>
 
-<h2>Add New Person: </h2><br>
+<!-- Content -->
+<div class="col-md-10 col-md-offset-1 form-inline">
+
+<div *ngIf="auth.isAdmin()">
 
 <!-- <label>Index: </label>
 <input class="input-input" type="number" [(ngModel)]="newStaff.index" placeholder="Index" /><br> -->
 
 <label>*FName: </label>
-<input class="input-fname" type="text" [(ngModel)]="newStaff.fname" placeholder="First Name" /><br>
+<input class="input form-control" type="text" [(ngModel)]="newStaff.fname" placeholder="First Name" /><br>
+<br>
 
 <label>*LName: </label>
-<input class="input-lname" type="text" [(ngModel)]="newStaff.lname" placeholder="Last Name" /><br>
+<input class="input form-control" type="text" [(ngModel)]="newStaff.lname" placeholder="Last Name" /><br>
+<br>
 
 <label>Position: </label>
-<input class="input-pos" type="text" [(ngModel)]="newStaff.position" placeholder="Position" /><br>
+<input class="input form-control" type="text" [(ngModel)]="newStaff.position" placeholder="" /><br>
+<br>
 
 <!-- <label>Salary: </label>
 <input class="input-salary" type="number" [(ngModel)]="newStaff.salary" placeholder="0"> K<br> -->
 
 <label>*Email: </label>
-<input class="input-email" type="text" [(ngModel)]="newStaff.email" placeholder="Email" /><br>
+<input class="input form-control" type="text" [(ngModel)]="newStaff.email" placeholder="" /><br>
+<br>
 
 <!-- <label>Phone: </label>
 <input class="input-phone" type="text" [(ngModel)]="newStaff.phone" placeholder="Phone" /><br> -->
 
 <label>Status: </label>
-<select class="select-status" [(ngModel)]="newStaff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<select class="form-control" [(ngModel)]="newStaff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<br>
 
 <label>Brief: </label>
-<textarea class="ta-brief" type="text" [(ngModel)]="newStaff.brief" placeholder="Brief"></textarea><br>
+<textarea class="textarea form-control" type="text" [(ngModel)]="newStaff.brief" placeholder=""></textarea><br>
+<br>
 
 <!-- <label>Others: </label>
 <input class="input-others" type="text" [(ngModel)]="newStaff.others" placeholder="Others" /><br> -->
@@ -37,28 +50,32 @@
 <div *ngFor="let i of nums">
 <br>
 <label>Badge: </label>
-<select class="select-badge" [(ngModel)]="newStaff.userbgroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
-<label class="label-level">Level: </label>
-<select class="select-level" [(ngModel)]="newStaff.userbgroups[i].level"><option *ngFor="let lo of getLevelsOptions(newStaff.userbgroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
+<select class="select-badge form-control" [(ngModel)]="newStaff.userbgroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
+<label class="label-small label-level">Level: </label>
+<select class="form-control" [(ngModel)]="newStaff.userbgroups[i].level"><option *ngFor="let lo of getLevelsOptions(newStaff.userbgroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
+<br>
 <label>Focus: </label>
 <text *ngFor="let fc of getFocusOptions(newStaff.userbgroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newStaff.userbgroups[i])">, </text><br>
-<br>
 <label>Description: </label>
-<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newStaff.userbgroups[i].bid,newStaff.userbgroups[i].level)}}</textarea><br>
+<textarea readonly class="textarea form-control" placeholder="Description">{{getDesc(newStaff.userbgroups[i].bid,newStaff.userbgroups[i].level)}}</textarea><br>
+<br>
 <label>Approved: </label>
-<input type="checkbox" [(ngModel)]="newStaff.userbgroups[i].status" placeholder="Status" /><br>
+<input type="checkbox" [(ngModel)]="newStaff.userbgroups[i].status" placeholder="" /><br>
+<br>
 <br>
 </div>
 
-<button class="button-add" [disabled]="!newStaff.fname||!newStaff.email" (click)="addStaff()">Save</button>
-<button class="button-cancel" (click)="goBack()">Cancel</button>
-<br>
-<br>
-<br>
+<div class="row col-xs-6">
+<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
+<button class="btn-big btn btn-success pull-right" [disabled]="!newStaff.fname||!newStaff.email" (click)="addStaff()">Save</button>
+</div>
 
 </div>
 
-<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
+<div *ngIf="!auth.isAdmin()">
+   <h3><i>You are not an admin, please login as an admin to continue!</i></h3>
+   {{auth.login()}}
+</div>
 
 </div>
 

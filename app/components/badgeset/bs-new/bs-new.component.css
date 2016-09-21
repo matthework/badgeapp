@@ -4,7 +4,7 @@
   margin-bottom: 20px;
 }
 .input-name{
-  width: 300px;
+  width: 250px;
 }
 .textarea {
   width: 350px;
@@ -12,7 +12,7 @@
   background-color: transparent;
 }
 .input-small {
-  width: 240px;
+  width: 250px;
   margin-right: 20px;
 }
 .select-small {
@@ -24,7 +24,7 @@
   margin-right: 5px;
 }
 .label-grade {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 .label-level {
   margin-left: 40px;

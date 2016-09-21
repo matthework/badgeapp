@@ -1,171 +1,211 @@
-<div class="col-md-10 col-md-offset-1">
+<!-- Header -->
+<div class="docs-header">
+   <h1 class=" col-md-10 col-md-offset-1">
+      <span>Person</span>
+   </h1>
+</div>
+
+<div class=" col-md-10 col-md-offset-1">
+<!-- Content -->
 <div *ngIf="auth.isAdmin()">
 
-<div *ngIf="staff">
+	<div *ngIf="staff">
 
-<div *ngIf="!staffName || !auth.isAdmin()">
-<h2 class="click-staff" (click)="staffName=true">Person - {{staff.fname}} {{staff.lname}}</h2>
-</div>
+	<div *ngIf="!staffName && auth.isAdmin()">
+	<h3 class="click text-blue" (click)="staffName=true">{{staff.fname}} {{staff.lname}}</h3>
+	</div>
 
-<div *ngIf="staffName && auth.isAdmin()">
-<br>
-<label class="label-staffName">Person: </label>
-<input class="input-staff" type="text" [(ngModel)]="staff.fname">
-<input class="input-staff" type="text" [(ngModel)]="staff.lname">
-<button class="button-s-y" (click)="staffName=false;updateStaff()">Y</button>
-<button class="button-s-n" (click)="staffName=false;getStaff()">N</button>
-</div>
-
-<div *ngIf="!pos || !auth.isAdmin()">
-<label class="click" (click)="pos=true">Position: </label>
-<text class="click" (click)="pos=true">{{staff.position}}</text>
-</div>
-
-<div *ngIf="pos && auth.isAdmin()">
-<label class="text-blue">Position: </label>
-<input class="input-pos" type="text" [(ngModel)]="staff.position">
-<button class="button-s-y" (click)="pos=false;updateStaff()">Y</button>
-<button class="button-s-n" (click)="pos=false;getStaff()">N</button>
-</div>
-
-<div *ngIf="!email || !auth.isAdmin()">
-<label class="click" (click)="email=true">Email: </label>
-<text class="click" (click)="email=true">{{staff.email}}</text>
-</div>
-
-<div *ngIf="email && auth.isAdmin()">
-<label class="text-blue">Email: </label>
-<input class="input-pos" type="text" [(ngModel)]="staff.email">
-<button class="button-s-y" (click)="email=false;updateStaff()">Y</button>
-<button class="button-s-n" (click)="email=false;getStaff()">N</button>
-</div>
-
-<label>Top BSet: </label>
-<text class="badgeset" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
-
-<label>Badge Sets: </label>
-<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
-	<uli class="uli-bs" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
-</text><br>
-
-<div *ngIf="!sta || !auth.isAdmin()">
-<label class="click" (click)="sta=true">Status: </label>
-<text class="click" (click)="sta=true">{{staff.status}}</text>
-</div>
-
-<div *ngIf="sta && auth.isAdmin()">
-<label class="text-blue">Status: </label>
-<select class="select-status" [(ngModel)]="staff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
-<button class="button-s-y" (click)="sta=false;updateStaff()">Y</button>
-<button class="button-s-n" (click)="sta=false;getStaff()">N</button>
-</div>
-
-<div *ngIf="!brief || !auth.isAdmin()">
-<label class="click" (click)="brief=true">Brief: </label>
-<textarea readonly class="ta-brief" (click)="brief=true">{{staff.brief}}</textarea>
-</div>
-
-<div *ngIf="brief && auth.isAdmin()">
-<label class="text-blue">Brief: </label>
-<textarea class="ta-brief" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
-<button class="button-bf-y" (click)="brief=false;updateStaff()">Y</button>
-<button class="button-bf-n" (click)="brief=false;getStaff()">N</button>
-</div>
-<br>
-
-<div *ngIf="auth.isAdmin() && !addNew && !staff.userbgroups[0]">
-<button class="button-newBadge" (click)="addNew=true;resetNewValue();bedit=true">New Badge</button>
-</div>
-
-<div *ngIf="staff.userbgroups[0]">
-<button *ngIf="!more && !bedit" class="button-more" (click)="more=true">Show More</button>
-<button *ngIf="more && !bedit" class="button-less" (click)="more=false">Show Less</button>
-<button *ngIf="auth.isAdmin() && bedit && !addNew"  class="button-newBadge" (click)="addNew=true;resetNewValue()">New Badge</button>
-</div>
-
-<table *ngIf="!more" class="table-userbgroups">
-	<tr>
-	  <th class="th-badge">Badge</th>
-	  <th class="th-desc">Description</th>
-	  <th *ngIf="!bedit" class="th-bs">Badge Set</th>
-	  <th class="th-status">Status</th>
-	</tr>
-	<tr *ngFor="let userbgroup of staff.userbgroups">
-		<td *ngIf="!bedit" (click)="checkAdmin()"><text class="text-blue" (click)="bedit=false;toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0" class="focus"> [{{userbgroup.focus}}]</text></text></td>
-		<td *ngIf="!bedit" class="td-desc" (click)="checkAdmin()"><text class="text-light-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
-		<td *ngIf="!bedit" class="td-bs" (click)="checkAdmin()">
-		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
-			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
-		</div>
-  		</td>
-  		<td *ngIf="!bedit" class="td-status" (click)="checkAdmin()"><i><text class="text-approve" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i></td>
-
-  		<td *ngIf="bedit"><select class="select-badge" [(ngModel)]="userbgroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="select-level" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.bid)" [value]="lo">{{lo}}</option></select><br><text *ngFor="let fc of getFocusOptions(userbgroup.bid)">{{fc}} <input class="" type="checkbox" [checked]="checkFocus(fc,userbgroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, userbgroup)">, </text></td>
-		<td *ngIf="bedit" class="td-desc"><text class="text-light-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid, userbgroup.level)}}</td>
-		<td *ngIf="bedit" class="td-status"><input type="checkbox" [(ngModel)]="userbgroup.status"></td>
-		<td class="td-last"><button *ngIf="bedit && auth.isAdmin()" class="button-s-delete" (click)="deleteBadgeGroupPop(userbgroup)">X</button></td>
-	</tr>
-</table>
-
-<div *ngIf="addNew">
-	<h3>Add New Badge</h3><br>
-	<label>Badge: </label>
-	<select class="select-badge" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
-
-	<label class="label-level">Level: </label>
-	<select class="select-level" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
-
-	<label>Focus: </label>
-	<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="checkbox" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
-
+	<div *ngIf="staffName && auth.isAdmin()" class="form-inline">
+	<label class="text-blue"><h3>Person: </h3></label>
+	<input class="input form-control" type="text" [(ngModel)]="staff.fname">
+	<input class="input form-control" type="text" [(ngModel)]="staff.lname">
+	<button class="btn-small btn btn-success" (click)="staffName=false;updateStaff()">Y</button>
+	<button class="btn-small btn btn-danger" (click)="staffName=false;getStaff()">N</button>
+	</div>
 	<br>
-	<label>Description: </label>
-	<textarea readonly class="ta-desc" placeholder="Description">{{getDesc(newBID,newLevel)}}</textarea><br>
 
-	<label>Approved: </label>
-	<input type="checkbox" [(ngModel)]="newStatus" placeholder="Status" /><br>
+	<div *ngIf="!pos && auth.isAdmin()">
+	<label class="click" (click)="pos=true">Position: </label>
+	<text class="click text-blue" (click)="pos=true">{{staff.position}}</text>
+	</div>
 
-	<button class="button-l-save" (click)="addBadgeGroup();addNew=false">Save</button>
-	<button class="button-l-cancel" (click)="addNew=false">Cancel</button><br>
-</div>
+	<div *ngIf="pos && auth.isAdmin()" class="form-inline">
+	<label class="text-blue">Position: </label>
+	<input class="input form-control" type="text" [(ngModel)]="staff.position">
+	<button class="btn-small btn btn-success" (click)="pos=false;updateStaff()">Y</button>
+	<button class="btn-small btn btn-danger" (click)="pos=false;getStaff()">N</button>
+	</div>
+	<br>
 
-<table *ngIf="more" class="table-userbgroups">
-	<tr>
-	  <th class="th-badge">Badge</th>
-	  <th class="th-desc">Description</th>
-	  <th class="th-bs">Badge Set</th>
-	  <th class="th-status">Status</th>
-	</tr>
-	<tr *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
-		<td (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="text-blue">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><text *ngIf="!userbgroup.current" class="badge-more">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0" class="focus"><text> [{{userbgroup.focus}}]</text></text></td>
-		<td class="td-desc"><text *ngIf="userbgroup.current" class="text-light-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</td>
-		<td class="td-bs">
-		<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
-			<uli (click)="toBSDetail(bs._id)" class="uli-bs">{{bs.name}}</uli>
+	<div *ngIf="!email || !auth.isAdmin()">
+	<label class="click" (click)="email=true">Email: </label>
+	<text class="click text-blue" (click)="email=true">{{staff.email}}</text>
+	</div>
+
+	<div *ngIf="email && auth.isAdmin()" class="form-inline">
+	<label class="text-blue">Email: </label>
+	<input class="input input-big form-control" type="text" [(ngModel)]="staff.email">
+	<button class="btn-small btn btn-success" (click)="email=false;updateStaff()">Y</button>
+	<button class="btn-small btn btn-danger" (click)="email=false;getStaff()">N</button>
+	</div>
+	<br>
+
+	<div>
+	<label>Top BSet: </label>
+	<text class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text>
+	</div>
+	<br>
+
+	<div>
+	<label>Badge Sets: </label>
+	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
+		<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
+	</text>
+	</div>
+	<br>
+
+	<div *ngIf="!sta || !auth.isAdmin()">
+	<label class="click" (click)="sta=true">Status: </label>
+	<text class="click text-blue" (click)="sta=true">{{staff.status}}</text>
+	</div>
+
+	<div *ngIf="sta && auth.isAdmin()" class="form-inline">
+	<label class="text-blue">Status: </label>
+	<select class="form-control" [(ngModel)]="staff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
+	<button class="btn-small btn btn-success" (click)="sta=false;updateStaff()">Y</button>
+	<button class="btn-small btn btn-danger" (click)="sta=false;getStaff()">N</button>
+	</div>
+	<br>
+
+	<div *ngIf="!brief || !auth.isAdmin()" class="form-inline">
+	<label class="click" (click)="brief=true">Brief: </label>
+	<textarea readonly class="textarea form-control" rows="5" (click)="brief=true">{{staff.brief}}</textarea>
+	</div>
+
+	<div *ngIf="brief && auth.isAdmin()" class="form-inline">
+	<label class="text-blue">Brief: </label>
+	<textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
+	<button class="btn-small btn btn-success" (click)="brief=false;updateStaff()">Y</button>
+	<button class="btn-small btn btn-danger" (click)="brief=false;getStaff()">N</button>
+	</div>
+	<br>
+
+	<div *ngIf="auth.isAdmin() && !addNew && !staff.userbgroups[0]">
+	<button class="btn btn-primary" (click)="addNew=true;resetNewValue();bedit=true">New Badge</button>
+	</div>
+
+	<div *ngIf="staff.userbgroups[0]" class="row col-xs-12">
+	<button *ngIf="!more && !bedit" class="btn btn-big btn-primary pull-right" (click)="more=true">Show More</button>
+	<button *ngIf="more && !bedit" class="btn btn-big btn-primary pull-right" (click)="more=false">Show Less</button>
+	<button *ngIf="auth.isAdmin() && bedit && !addNew"  class="btn btn-big btn-primary pull-right" (click)="addNew=true;resetNewValue()">New Badge</button>
+	</div>
+	<br>
+
+	<div *ngIf="!more">
+		<div *ngIf="!bedit">
+			<div class="row col-xs-12 header hidden-xs">
+			  <div class="col-xs-3">Badge</div>
+			  <div class="col-xs-5">Description</div>
+			  <div class="col-xs-3">Badge Set</div>
+			  <div class="col-xs-1">Status</div>
+			</div>
+			<div class="row col-xs-12 div-list-item"  *ngFor="let userbgroup of staff.userbgroups">
+				<div class="click text-blue col-sm-3" *ngIf="!bedit" (click)="checkAdmin()">
+					<text (click)="bedit=false;toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></text>
+				</div>
+				<div class="col-sm-5" *ngIf="!bedit" (click)="checkAdmin()"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
+				<div class="col-sm-3" *ngIf="!bedit" (click)="checkAdmin()">
+					<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
+						<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					</div>
+		  		</div>
+		  		<div class="col-sm-1" *ngIf="!bedit" (click)="checkAdmin()">
+		  			<i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i>
+		  		</div>
+			</div>
 		</div>
-  		</td>
-  		<td class="td-status"><i><text class="text-approve" *ngIf="userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text><text class="text-pending2" *ngIf="!userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text></i></td>
-	</tr>
-</table>
 
-<br>
-<button *ngIf="!auth.isAdmin() && !bedit" (click)="goBack()">Back</button>
+		<div *ngIf="bedit">
+			<div class="row col-xs-12 header hidden-xs">
+			  <div class="col-xs-4">Badge</div>
+			  <div class="col-xs-6">Description</div>
+			  <div class="col-xs-1">Status</div>
+			  <div class="col-xs-1"></div>
+			</div>
+			<div class="row col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">
+		  		<div class="col-sm-4"  *ngIf="bedit">
+		  			<select class="form-control" [(ngModel)]="userbgroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="form-control" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.bid)" [value]="lo">{{lo}}</option></select><br><text *ngFor="let fc of getFocusOptions(userbgroup.bid)">{{fc}} <input class="form-control" type="checkbox" [checked]="checkFocus(fc,userbgroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, userbgroup)">, </text>
+		  		</div>
+				<div class="col-sm-6" *ngIf="bedit">
+					<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid, userbgroup.level)}}
+				</div>
+				<div class="col-sm-1" *ngIf="bedit">
+					<input type="checkbox" [(ngModel)]="userbgroup.status">
+				</div>
+				<div class="col-sm-1">
+					<button *ngIf="bedit && auth.isAdmin()" class="btn-delete btn btn-default" (click)="deleteBadgeGroupPop(userbgroup)">X</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div *ngIf="auth.isAdmin() && !addNew">
-<button class="button-newStaff" (click)="addStaff()">New Staff</button>
-<button class="button-delete" (click)="deleteStaffPop()">Delete</button>
-<button *ngIf="bedit" class="button-bl-y" (click)="bedit=false;updateStaff()">Save</button>
-<button *ngIf="bedit" class="button-bl-n" (click)="bedit=false;getStaff()">Cancel</button>
+	<div *ngIf="addNew" class="row col-xs-6 form-inline">
+		<h3 class="text-blue">Add New Badge</h3><br>
+		<label>Badge: </label>
+		<select class="form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
+
+		<label class="label-level">Level: </label>
+		<select class="form-control" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
+		<br>
+
+		<label>Focus: </label>
+		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="form-control" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+
+		<br>
+		<label>Description: </label>
+		<textarea readonly class="textarea form-control" placeholder="">{{getDesc(newBID,newLevel)}}</textarea><br>
+
+		<label>Approved: </label>
+		<input class="form-control" type="checkbox" [(ngModel)]="newStatus" placeholder="" /><br>
+
+		<button class="btn-big btn btn-danger pull-right" (click)="addNew=false">Cancel</button>
+		<button class="btn-big btn btn-success pull-right" (click)="addBadgeGroup();addNew=false">Save</button>
+	</div>
+
+	<div *ngIf="more">
+		<div class="row col-xs-12 header hidden-xs">
+		  <div class="col-xs-3">Badge</div>
+		  <div class="col-xs-5">Description</div>
+		  <div class="col-xs-3">Badge Set</div>
+		  <div class="col-xs-1">Status</div>
+		</div>
+		<div class="row col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
+			<div class="col-sm-3"  (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="click text-blue">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><text *ngIf="!userbgroup.current">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0" class="text-blue"><text> [{{userbgroup.focus}}]</text></text></div>
+			<div class="col-sm-5" ><text *ngIf="userbgroup.current" class="text-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
+			<div class="col-sm-3">
+				<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
+					<uli (click)="toBSDetail(bs._id)" *ngIf="userbgroup.current" class="click text-blue">{{bs.name}}</uli>
+				</div>
+	  		</div>
+	  		<div class="col-sm-1" ><i><text class="text-green" *ngIf="userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text></i></div>
+		</div>
+	</div>
+
+	<div *ngIf="auth.isAdmin() && !addNew" class="row col-xs-12">
+		<button class="btn-big btn btn-primary" (click)="addStaff()">New Staff</button>
+		<button class="btn-big btn btn-primary" (click)="deleteStaffPop()">Delete</button>
+		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getStaff()">Cancel</button>
+		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateStaff()">Save</button>
+	</div>
+
+	</div>
+
 </div>
 
-<br>
-<br>
-<br>
+<div *ngIf="!auth.authenticated()">
+	<h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>
+	{{auth.login()}}
 </div>
-
-</div>
-
-<h3 *ngIf!="auth.isAdmin()"><i>You are not an admin, please login as an admin to continue!</i></h3>
 
 </div>
 
