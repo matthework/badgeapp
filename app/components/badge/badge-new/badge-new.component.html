@@ -38,6 +38,14 @@
 <select class="form-control" [(ngModel)]="newBadge.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 <br>
 
+<label>Published: </label>
+<input type="checkbox" [(ngModel)]="newBadge.published"><br>
+<br>
+
+<label>Owner: </label>
+<input class="form-control" type="text" [(ngModel)]="newBadge.owner"><br>
+<br>
+
 <br>
 <label>Level 1:</label>
 <text class="text-blue">{{labels[0]}}</text><br>

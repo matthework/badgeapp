@@ -16,8 +16,7 @@ label {
   width: 9em;
 }
 input{
-  /*width: 300px;*/
-  margin-right: 10px;
+  margin-right: 5px;
 }
 select {
   margin-right: 10px;
@@ -134,4 +133,7 @@ th , td  {
 .btn-del:hover{
   color: white;
   background-color: red;
+}
+.input-upper {
+  text-transform: uppercase;
 }

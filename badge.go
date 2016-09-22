@@ -11,11 +11,13 @@ type Badge struct {
 	Index	int	`json:"index" bson:"index"`
 	Name	string	`json:"name" bson:"name"`
 	Code	string	`json:"code" bson:"code"`
+	Owner	string	`json:"owner" bson:"owner"`
 	Overview	string	`json:"overview" bson:"overview"`
 	Focus 	[]string	`json:"focus" bson:"focus"`
 	BadgeLevels	[]BadgeLevel	`json:"badgelevels" bson:"badgelevels"`
 	Approved	bool	`json:"approved" bson:"approved"`
 	InUsed	bool	`json:"inused" bson:"inused"`
+	Published	bool	`json:"published" bson:"published"`
 	Status	string	`json:"status" bson:"status"`
 	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
 }
@@ -63,6 +65,19 @@ func findBadgeByID(id string) (badge Badge) {
 		fmt.Println(err)
 	}
 	return badge
+}
+
+func listMarketBadges() (badges []Badge) {
+	session := connect()
+	defer session.Close()
+
+	collection := session.DB(DB).C(col_badge)
+	fQuery := bson.M{"published": true}
+	err := collection.Find(fQuery).Sort("name").All(&badges)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return badges
 }
 
 func insertBadge(badge Badge) (err error) {

@@ -36,6 +36,9 @@ var BadgeService = (function () {
     BadgeService.prototype.deleteBadge = function (id) {
         return this._http.post('/api/badge/remove/' + id, "");
     };
+    BadgeService.prototype.getMarketBadges = function () {
+        return this._http.get('/api/marketbadges').map(function (r) { return r.json(); });
+    };
     BadgeService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

@@ -30,7 +30,7 @@
 	</div>
 
 	<div *ngIf="pos && auth.isAdmin()" class="form-inline">
-	<label class="text-blue">Position: </label>
+	<label>Position: </label>
 	<input class="input-big form-control" type="text" [(ngModel)]="staff.position">
 	<button class="btn-small btn btn-success" (click)="pos=false;updateStaff()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="pos=false;getStaff()">N</button>
@@ -43,7 +43,7 @@
 	</div>
 
 	<div *ngIf="email && auth.isAdmin()" class="form-inline">
-	<label class="text-blue">Email: </label>
+	<label>Email: </label>
 	<input class="input input-big form-control" type="text" [(ngModel)]="staff.email">
 	<button class="btn-small btn btn-success" (click)="email=false;updateStaff()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="email=false;getStaff()">N</button>
@@ -70,7 +70,7 @@
 	</div>
 
 	<div *ngIf="sta && auth.isAdmin()" class="form-inline">
-	<label class="text-blue">Status: </label>
+	<label>Status: </label>
 	<select class="form-control" [(ngModel)]="staff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
 	<button class="btn-small btn btn-success" (click)="sta=false;updateStaff()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="sta=false;getStaff()">N</button>
@@ -83,7 +83,7 @@
 	</div>
 
 	<div *ngIf="brief && auth.isAdmin()" class="form-inline">
-	<label class="text-blue">Brief: </label>
+	<label>Brief: </label>
 	<textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
 	<button class="btn-small btn btn-success" (click)="brief=false;updateStaff()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="brief=false;getStaff()">N</button>

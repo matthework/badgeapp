@@ -34,5 +34,9 @@ export class BadgeService {
 		return this._http.post('/api/badge/remove/'+id, "");
 	}
 
+	getMarketBadges():Observable<any> {
+		return this._http.get('/api/marketbadges').map(r => r.json());
+	}
+
 }
 

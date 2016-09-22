@@ -33,6 +33,7 @@ export class BadgeDetailComponent implements OnInit {
     bedit = false;
     addLevel = false;
     editFC = false;
+    editOwner = false;
     labels = [  "I understand... ", 
               "I participate... ", 
               "I contribute... ", 
@@ -123,6 +124,7 @@ export class BadgeDetailComponent implements OnInit {
 
   updateBadge() {
     this.badge.code = this.badge.code.toUpperCase();
+    this.badge.owner = this.badge.owner.toUpperCase();
     if(this.badge.focus == null) {
         this.badge.focus = [];
     }
@@ -203,18 +205,19 @@ export class BadgeDetailComponent implements OnInit {
     this.badge.focus.splice(index,1);
   }
 
-    checkEmptyFocus() {
-        if (this.badge.focus != null) {
-            if (this.badge.focus.length == 0) {
-                return true;
-            }else {
-                return false;
-            }
-        }else {
-            return true;
-        }
+  checkEmptyFocus() {
+      if (this.badge.focus != null) {
+          if (this.badge.focus.length == 0) {
+              return true;
+          }else {
+              return false;
+          }
+      }else {
+          return true;
+      }
 
-    }
+  }
+
   cleanEmpty(bls:BadgeLevel[]) {
     var b = [];
     for (var i = 0; i < this.badge.badgelevels.length; i++) { 
@@ -225,9 +228,18 @@ export class BadgeDetailComponent implements OnInit {
     return b;
   }
 
-    goBack() {
-    window.history.back();
+  updatePublish(event) {
+    if(event.target.checked) {
+      this.badge.published = true;
+    }else {
+      this.badge.published = false;
     }
+    this.updateBadge();
+  }
+
+  goBack() {
+  window.history.back();
+  }
 }
 
 

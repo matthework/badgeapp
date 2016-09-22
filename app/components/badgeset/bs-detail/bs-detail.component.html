@@ -39,7 +39,7 @@
 	</div>
 
 	<div *ngIf="tg && auth.isAdmin()" class="form-inline">
-	<label class="text-blue">Tier/Grade: </label>
+	<label>Tier/Grade: </label>
 	<select class="form-control" [(ngModel)]="badgeset.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 	<select class="form-control" [(ngModel)]="badgeset.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select>
 	<text>( ${{getPay(badgeset.tier,badgeset.grade)}}K ) </text>
@@ -65,7 +65,7 @@
 	</div>
 
 	<div *ngIf="tag && auth.isAdmin()" class="form-inline">
-	<label class="text-blue">Tags: </label>
+	<label>Tags: </label>
 	<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of badgeset.tags">{{tag}} <button class="btn-small btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text>
 
 	<button class="btn-small btn btn-success" (click)="tag=false;updateBadgeSet()">Y</button>
@@ -94,7 +94,7 @@
 	</div>
 
 	<div *ngIf="status && auth.isAdmin()" class="form-inline">
-	<label class="text-blue">Status: </label>
+	<label>Status: </label>
 	<select class="form-control" [(ngModel)]="badgeset.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
 
 	<button class="btn-small btn btn-success" (click)="status=false;updateBadgeSet()">Y</button>

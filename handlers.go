@@ -62,6 +62,7 @@ func addRoutes() {
 	router.HandleFunc("/api/badge/new", addNewBadge).Methods("POST")
 	router.HandleFunc("/api/badge/update/{id}", updateBadge).Methods("POST")
 	router.HandleFunc("/api/badge/remove/{id}", removeBadge).Methods("POST")
+	router.HandleFunc("/api/marketbadges", viewMarketBadges).Methods("GET")
 
 	router.HandleFunc("/api/staffs", viewStaffs).Methods("GET")
 	router.HandleFunc("/api/staff/edit/{id}", viewFindStaffByID).Methods("GET")

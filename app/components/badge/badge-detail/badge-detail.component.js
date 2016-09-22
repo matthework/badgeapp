@@ -33,6 +33,7 @@ var BadgeDetailComponent = (function () {
         this.bedit = false;
         this.addLevel = false;
         this.editFC = false;
+        this.editOwner = false;
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",
@@ -109,6 +110,7 @@ var BadgeDetailComponent = (function () {
     };
     BadgeDetailComponent.prototype.updateBadge = function () {
         this.badge.code = this.badge.code.toUpperCase();
+        this.badge.owner = this.badge.owner.toUpperCase();
         if (this.badge.focus == null) {
             this.badge.focus = [];
         }
@@ -199,6 +201,15 @@ var BadgeDetailComponent = (function () {
             }
         }
         return b;
+    };
+    BadgeDetailComponent.prototype.updatePublish = function (event) {
+        if (event.target.checked) {
+            this.badge.published = true;
+        }
+        else {
+            this.badge.published = false;
+        }
+        this.updateBadge();
     };
     BadgeDetailComponent.prototype.goBack = function () {
         window.history.back();
