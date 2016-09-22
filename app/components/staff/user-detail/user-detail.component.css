@@ -14,18 +14,25 @@
 .input{
   width: 300px;
 }
+.input-medium{
+  width: 250px;
+}
 .input-small {
   width: 150px;
   margin-right: 5px;
 }
-.textarea {
+.textarea-small {
   width: 300px;
+  background-color: transparent;
+}
+.textarea {
+  width: 350px;
   background-color: transparent;
 }
 .select-badge {
   width: 200px;
-  margin-right: 20px;
 }
 .label-level {
   width: 6em;
+  margin-left: 20px;
 }

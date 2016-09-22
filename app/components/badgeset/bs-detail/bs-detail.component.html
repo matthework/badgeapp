@@ -109,7 +109,6 @@
 	<div *ngIf="badgeset.badgegroups[0]" class="row col-xs-11">
 		<button *ngIf="!more && !bedit" class="btn-big btn btn-primary pull-right" (click)="more=true">Show More</button>
 		<button *ngIf="more && !bedit" class="btn-big btn btn-primary pull-right" (click)="more=false">Show Less</button>
-		<button *ngIf="auth.isAdmin() && bedit && !addNew"  class="btn-big btn btn-primary pull-right" (click)="addNew=true;resetNewValue()">New Badge</button>
 	</div>
 
 	<div *ngIf="!more">
@@ -138,7 +137,7 @@
 		<br>
 		
 		<label>Focus: </label>
-		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="form-control" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
 
 		<label>Description: </label>
 		<textarea readonly class="textarea form-control" placeholder="">{{getDesc(newBID,newLevel)}}</textarea><br>
@@ -166,6 +165,8 @@
 	<div *ngIf="auth.isAdmin() && !addNew" class="row col-xs-11">
 		<button class="btn-bs btn btn-primary" (click)="addBadgeSet()">New BadgeSet</button>
 		<button class="btn-big btn btn-primary" (click)="deleteBadgeSetPop()">Delete</button>
+		<button class="btn-big btn btn-primary" (click)="addNew=true;resetNewValue()">New Badge</button>
+
 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadgeSet()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadgeSet()">Save</button>
 	</div>
