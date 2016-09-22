@@ -13,7 +13,7 @@
 	<div *ngIf="badgeset">
 
 	<div *ngIf="!bsName && !auth.isAdmin()">
-	<h3>Badge Set - {{badgeset.name}}</h3>
+	<h3 class="text-blue">{{badgeset.name}}</h3>
 	</div>
 
 	<div *ngIf="!bsName && auth.isAdmin()">

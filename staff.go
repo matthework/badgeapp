@@ -40,7 +40,7 @@ func listStaffs() (staffs []Staff) {
 	collection := session.DB(DB).C(col_staff)
 	err := collection.Find(nil).All(&staffs)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return staffs
 }
@@ -52,7 +52,7 @@ func listStaffsSort() (staffs []Staff) {
 	collection := session.DB(DB).C(col_staff)
 	err := collection.Find(nil).Sort("status","fname","lname").All(&staffs)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return staffs
 }
@@ -66,7 +66,7 @@ func findStaffByID(id string) (staff Staff) {
 	fQuery := bson.M{"_id": idoi}
 	err := collection.Find(fQuery).One(&staff)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return staff
 }
@@ -91,7 +91,7 @@ func insertStaff(staff Staff) (err error) {
 	collection := session.DB(DB).C(col_staff)
 	err = collection.Insert(staff)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }
@@ -111,10 +111,10 @@ func updateStaffByID(id string, newStaff Staff) (err error) {
 		change := bson.M{"$set": newStaff}
 		err = collection.Update(fQuery, change)
 		if err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}else{
-    	panic(err)
+    	fmt.Println(err)
     }
 	return err
 }
@@ -128,7 +128,7 @@ func removeStaffByID(id string) (err error) {
 	fQuery := bson.M{"_id": idoi}
 	err = collection.Remove(fQuery)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }
@@ -140,7 +140,7 @@ func removeAllStaffs() (err error) {
 	collection := session.DB(DB).C(col_staff)
 	collection.RemoveAll(nil)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 	"encoding/json"
@@ -12,7 +13,7 @@ func viewBadgeSets(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	if err := json.NewEncoder(w).Encode(listBadgeSetsSort()); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 }
 
@@ -24,7 +25,7 @@ func viewFindBadgeSetByID(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
   	if id != "" {
   		if err := json.NewEncoder(w).Encode(findBadgeSetByID(id)); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -32,7 +33,7 @@ func viewFindBadgeSetByID(w http.ResponseWriter, r *http.Request) {
 func addNewBadgeSet(w http.ResponseWriter, r *http.Request) {
 	var badgeset BadgeSet
 	if err := json.NewDecoder(r.Body).Decode(&badgeset); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	var bgs []BadgeGroup
 	for i := range badgeset.BadgeGroups {
@@ -44,7 +45,7 @@ func addNewBadgeSet(w http.ResponseWriter, r *http.Request) {
 	badgeset.TimeStamp = time.Now()
 	if badgeset.Name != "" {
 		if err := insertBadgeSet(badgeset); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -52,7 +53,7 @@ func addNewBadgeSet(w http.ResponseWriter, r *http.Request) {
 func updateBadgeSet(w http.ResponseWriter, r *http.Request) {
 	var badgeset BadgeSet
 	if err := json.NewDecoder(r.Body).Decode(&badgeset); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
@@ -66,7 +67,7 @@ func updateBadgeSet(w http.ResponseWriter, r *http.Request) {
 	badgeset.TimeStamp = time.Now()
 	if id != "" {
 		if err := updateBadgeSetByID(id,badgeset); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -76,7 +77,7 @@ func removeBadgeSet(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	if id != "" {
 		if err := removeBadgeSetByID(id); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }

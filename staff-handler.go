@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 	"encoding/json"
@@ -12,7 +13,7 @@ func viewStaffs(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	if err := json.NewEncoder(w).Encode(listStaffsSort()); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 }
 
@@ -24,7 +25,7 @@ func viewFindStaffByID(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	if id != "" {
 		if err := json.NewEncoder(w).Encode(findStaffByID(id)); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -37,7 +38,7 @@ func viewFindStaffByEmail(w http.ResponseWriter, r *http.Request) {
 	email := vars["email"]
 	if email != "" {
 		if err := json.NewEncoder(w).Encode(findStaffByEmail(email)); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -45,7 +46,7 @@ func viewFindStaffByEmail(w http.ResponseWriter, r *http.Request) {
 func addNewStaff(w http.ResponseWriter, r *http.Request) {
 	var staff Staff
 	if err := json.NewDecoder(r.Body).Decode(&staff); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	var bgs []UserBGroup
 	for i := range staff.UserBGroups {
@@ -57,7 +58,7 @@ func addNewStaff(w http.ResponseWriter, r *http.Request) {
 	staff.TimeStamp = time.Now()
 	if staff.FName != "" {
 		if err := insertStaff(staff); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -65,14 +66,14 @@ func addNewStaff(w http.ResponseWriter, r *http.Request) {
 func updateStaff(w http.ResponseWriter, r *http.Request) {
 	var staff Staff
 	if err := json.NewDecoder(r.Body).Decode(&staff); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
 	staff.TimeStamp = time.Now()
 	if id != "" {
 		if err := updateStaffByID(id,staff); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -82,7 +83,7 @@ func removeStaff(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	if id != "" {
 		if err := removeStaffByID(id); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
