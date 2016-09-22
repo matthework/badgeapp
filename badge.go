@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 	"gopkg.in/mgo.v2/bson"	
 )
@@ -33,7 +34,7 @@ func listBadges() (badges []Badge) {
 	collection := session.DB(DB).C(col_badge)
 	err := collection.Find(nil).All(&badges)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return badges
 }
@@ -45,7 +46,7 @@ func listBadgesSort() (badges []Badge) {
 	collection := session.DB(DB).C(col_badge)
 	err := collection.Find(nil).Sort("status","name").All(&badges)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return badges
 }
@@ -59,7 +60,7 @@ func findBadgeByID(id string) (badge Badge) {
 	fQuery := bson.M{"_id": idoi}
 	err := collection.Find(fQuery).One(&badge)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return badge
 }
@@ -71,7 +72,7 @@ func insertBadge(badge Badge) (err error) {
 	collection := session.DB(DB).C(col_badge)
 	err = collection.Insert(badge)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }
@@ -94,10 +95,10 @@ func updateBadgeByID(id string, newBadge Badge) (err error) {
 		change := bson.M{"$set": newBadge}
 		err = collection.Update(fQuery, change)
 		if err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}else{
-    	panic(err)
+    	fmt.Println(err)
     }
 	return err
 }
@@ -111,7 +112,7 @@ func removeBadgeByID(id string) (err error) {
 	fQuery := bson.M{"_id": idoi}
 	err = collection.Remove(fQuery)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }
@@ -123,7 +124,7 @@ func removeAllBadges() (err error) {
 	collection := session.DB(DB).C(col_badge)
 	collection.RemoveAll(nil)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }

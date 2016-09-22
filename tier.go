@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 	"gopkg.in/mgo.v2/bson"	
 )
@@ -24,7 +25,7 @@ func listTiersSort() (tiers []Tier) {
 	collection := session.DB(DB).C(col_tier)
 	err := collection.Find(nil).Sort("tier").All(&tiers)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return tiers
 }
@@ -38,7 +39,7 @@ func findTierByID(id string) (tier Tier) {
 	fQuery := bson.M{"_id": idoi}
 	err := collection.Find(fQuery).One(&tier)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return tier
 }
@@ -50,7 +51,7 @@ func insertTier(tier Tier) (err error) {
 	collection := session.DB(DB).C(col_tier)
 	err = collection.Insert(tier)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }
@@ -68,10 +69,10 @@ func updateTierByID(id string, newTier Tier) (err error) {
 		change := bson.M{"$set": newTier}
 		err = collection.Update(fQuery, change)
 		if err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}else{
-    	panic(err)
+    	fmt.Println(err)
     }
 	return err
 }
@@ -85,7 +86,7 @@ func removeTierByID(id string) (err error) {
 	fQuery := bson.M{"_id": idoi}
 	err = collection.Remove(fQuery)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }
@@ -97,7 +98,7 @@ func removeAllTiers() (err error) {
 	collection := session.DB(DB).C(col_tier)
 	collection.RemoveAll(nil)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	return err
 }

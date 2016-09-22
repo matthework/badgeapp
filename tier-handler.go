@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 	"encoding/json"
@@ -12,7 +13,7 @@ func viewTiers(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	if err := json.NewEncoder(w).Encode(listTiersSort()); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 }
 
@@ -24,7 +25,7 @@ func viewFindTierByID(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	if id != "" {
 		if err := json.NewEncoder(w).Encode(findTierByID(id)); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -32,12 +33,12 @@ func viewFindTierByID(w http.ResponseWriter, r *http.Request) {
 func addNewTier(w http.ResponseWriter, r *http.Request) {
 	var tier Tier
 	if err := json.NewDecoder(r.Body).Decode(&tier); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	tier.TimeStamp = time.Now()
 	if tier.Tier != 0 {
 		if err := insertTier(tier); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -45,7 +46,7 @@ func addNewTier(w http.ResponseWriter, r *http.Request) {
 func updateTier(w http.ResponseWriter, r *http.Request) {
 	var tier Tier
 	if err := json.NewDecoder(r.Body).Decode(&tier); err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
@@ -53,7 +54,7 @@ func updateTier(w http.ResponseWriter, r *http.Request) {
 
 	if id != "" {
 		if err := updateTierByID(id,tier); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
@@ -63,7 +64,7 @@ func removeTier(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	if id != "" {
 		if err := removeTierByID(id); err != nil {
-			panic(err)
+			fmt.Println(err)
 		}
 	}
 }
