@@ -15,6 +15,7 @@ var tier_new_component_1 = require('./tier/tier-new/tier-new.component');
 var bs_component_1 = require('./badgeset/bs.component');
 var bs_detail_component_1 = require('./badgeset/bs-detail/bs-detail.component');
 var bs_new_component_1 = require('./badgeset/bs-new/bs-new.component');
+var market_component_1 = require('./market/market.component');
 var routes = [
     {
         path: '',
@@ -83,6 +84,10 @@ var routes = [
     {
         path: 'bs/new',
         component: bs_new_component_1.BSNewComponent,
+    },
+    {
+        path: 'market',
+        component: market_component_1.MarketComponent,
     }
 ];
 exports.AppRouterProviders = [

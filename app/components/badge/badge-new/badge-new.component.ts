@@ -60,7 +60,7 @@ export class BadgeNewComponent {
 
   statusOptions = ['Accepted','Draft','NotUsed'];
 
-  newBadge = {index: 0, name: "", code: "", overview: "", focus: [], status: "Accepted", badgelevels: this.newbls, approved: true, inused: true};
+  newBadge = {index: 0, name: "", code: "", owner: "PHL", published: false, overview: "", focus: [], status: "Accepted", badgelevels: this.newbls, approved: true, inused: true};
 
   constructor(
     private _badgeService: BadgeService, 
@@ -69,6 +69,7 @@ export class BadgeNewComponent {
 
   addBadge() {
     this.newBadge.code = this.newBadge.code.toUpperCase();
+    this.newBadge.owner = this.newBadge.owner.toUpperCase();
     this.newBadge.badgelevels.sort(this.toCompare);
     this.newBadge.focus = this.newBadge.focus.sort();
     let value = JSON.stringify(this.newBadge);

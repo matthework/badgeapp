@@ -1,0 +1,8 @@
+.input {
+	width: 300px;
+}
+.div-list-item-empty {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 0px #ddd solid;
+}

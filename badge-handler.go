@@ -30,6 +30,15 @@ func viewFindBadgeByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func viewMarketBadges(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	if err := json.NewEncoder(w).Encode(listMarketBadges()); err != nil {
+		fmt.Println(err)
+	}
+}
+
 func addNewBadge(w http.ResponseWriter, r *http.Request) {
 	var badge Badge
 	if err := json.NewDecoder(r.Body).Decode(&badge); err != nil {

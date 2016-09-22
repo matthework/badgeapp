@@ -31,7 +31,7 @@
 	</div>
 
 	<div *ngIf="pos" class="form-inline">
-	<label class="text-blue">Position: </label>
+	<label>Position: </label>
 	<input class="input-medium form-control" type="text" [(ngModel)]="staff.position">
 	<button class="btn btn-success" (click)="pos=false;updateStaff()">Y</button>
 	<button class="btn btn-danger" (click)="pos=false;getStaffByEmail()">N</button>
@@ -58,7 +58,7 @@
 	</div>
 
 	<div *ngIf="brief" class="form-inline">
-	<label class="text-blue">Brief: </label>
+	<label>Brief: </label>
 	<textarea class="textarea-small form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
 	<button class="btn btn-success" (click)="brief=false;updateStaff()">Y</button>
 	<button class="btn btn-danger" (click)="brief=false;getStaffByEmail()">N</button>

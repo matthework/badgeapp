@@ -59,10 +59,11 @@ var BadgeNewComponent = (function () {
         //           {level: 8, desc:"I have achieved wide recognition "},
         //           {level: 9, desc:"I am a world leading "}];
         this.statusOptions = ['Accepted', 'Draft', 'NotUsed'];
-        this.newBadge = { index: 0, name: "", code: "", overview: "", focus: [], status: "Accepted", badgelevels: this.newbls, approved: true, inused: true };
+        this.newBadge = { index: 0, name: "", code: "", owner: "PHL", published: false, overview: "", focus: [], status: "Accepted", badgelevels: this.newbls, approved: true, inused: true };
     }
     BadgeNewComponent.prototype.addBadge = function () {
         this.newBadge.code = this.newBadge.code.toUpperCase();
+        this.newBadge.owner = this.newBadge.owner.toUpperCase();
         this.newBadge.badgelevels.sort(this.toCompare);
         this.newBadge.focus = this.newBadge.focus.sort();
         var value = JSON.stringify(this.newBadge);

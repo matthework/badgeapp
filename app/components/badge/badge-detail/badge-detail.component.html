@@ -42,7 +42,7 @@
 	</div>
 
 	<div *ngIf="oview && auth.isAdmin()" class="form-inline">
-		<label class="text-blue">Overview: </label>
+		<label>Overview: </label>
 		<textarea class="textarea form-control" rows="5" [(ngModel)]="badge.overview" placeholder=""></textarea>
 		<button class="btn-small btn btn-success" (click)="oview=false;updateBadge()">Y</button>
 		<button class="btn-small btn btn-danger" (click)="oview=false;getBadge()">N</button>
@@ -60,7 +60,7 @@
 	</div>
 
 	<div *ngIf="auth.isAdmin() && editFC" class="form-inline">
-		<label class="text-blue">Focus: </label>
+		<label>Focus: </label>
 		<input class="input-small form-control" type="text" [(ngModel)]="newFC" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus">{{fc}} <button class="btn-small btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text>
 
 		<button class="btn-small btn btn-success" (click)="editFC=false;updateBadge()">Y</button>
@@ -85,10 +85,29 @@
 	</div>
 
 	<div *ngIf="editStatus && auth.isAdmin()" class="form-inline">
-		<label class="text-blue">Status: </label>
+		<label>Status: </label>
 		<select class="form-control" [(ngModel)]="badge.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
 		<button class="btn-small btn btn-success" (click)="editStatus=false;updateBadge()">Y</button>
 		<button class="btn-small btn btn-danger" (click)="editStatus=false;getBadge()">N</button>
+	</div>
+	<br>
+
+	<div *ngIf="auth.isAdmin()" class="form-inline">
+		<label>Published: </label>
+		<input type="checkbox" [(ngModel)]="badge.published" (change)="updatePublish($event)">
+	</div>
+	<br>
+
+	<div *ngIf="!editOwner && auth.isAdmin()" class="form-inline">
+		<label class="click" (click)="editOwner=true">Owner: </label>
+		<text class="click text-blue" (click)="editOwner=true">{{badge.owner}}</text>
+	</div>
+
+	<div *ngIf="editOwner && auth.isAdmin()" class="form-inline">
+		<label>Owner: </label>
+		<input class="input-upper form-control" type="text" [(ngModel)]="badge.owner">
+		<button class="btn-small btn btn-success" (click)="editOwner=false;updateBadge()">Y</button>
+		<button class="btn-small btn btn-danger" (click)="editOwner=false;getBadge()">N</button>
 	</div>
 	<br>
 	<br>

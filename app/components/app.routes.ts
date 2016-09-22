@@ -20,6 +20,8 @@ import {BSComponent} from './badgeset/bs.component';
 import {BSDetailComponent} from './badgeset/bs-detail/bs-detail.component';
 import {BSNewComponent} from './badgeset/bs-new/bs-new.component';
 
+import {MarketComponent} from './market/market.component';
+
 const routes: RouterConfig = [
   {
       path: '',
@@ -91,6 +93,10 @@ const routes: RouterConfig = [
   {
       path: 'bs/new',
       component: BSNewComponent,
+  },
+  {
+      path: 'market',
+      component: MarketComponent,
   }
 ];
 

@@ -1,0 +1,34 @@
+<!-- Header -->
+<div class="docs-header">
+   <h1 class=" col-md-10 col-md-offset-1" >Marketplace</h1>
+</div>
+
+<!-- Content -->
+<div class="col-md-10 col-md-offset-1">
+<h3><i>Publish and share your badges here!</i></h3>
+<br>
+
+<div class="row col-xs-2">
+ <input class="form-control" type="text" [(ngModel)]="query" placeholder="Search for"><br>
+</div>
+<br>
+
+<div class="row col-xs-12 header hidden-xs">
+	<div class="col-xs-2">Badge Name</div>
+	<div class="col-xs-8">Overview</div>
+	<div class="col-xs-2">Owner</div>
+</div>
+
+<div class="row col-xs-12 div-list-item" *ngFor="let badge of marketBadges | filter:query">
+  <div class="col-xs-4 col-sm-2 btn btn-primary wrap" *ngIf="badge.published" (click)="onSelect(badge);toDetail()">
+     <span>{{badge.name}}</span>
+  </div>
+  <div class="col-xs-6 col-sm-8" *ngIf="badge.published" (click)="onSelect(badge)">{{badge.overview}}</div>
+  <div class="col-xs-2 col-sm-2" *ngIf="badge.published" (click)="onSelect(badge)">{{badge.owner}}</div>
+</div>
+
+</div> 
+
+<br>
+<br>
+<br>
