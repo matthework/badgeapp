@@ -31,7 +31,7 @@
 
 	<div *ngIf="pos && auth.isAdmin()" class="form-inline">
 	<label class="text-blue">Position: </label>
-	<input class="input form-control" type="text" [(ngModel)]="staff.position">
+	<input class="input-big form-control" type="text" [(ngModel)]="staff.position">
 	<button class="btn-small btn btn-success" (click)="pos=false;updateStaff()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="pos=false;getStaff()">N</button>
 	</div>
@@ -97,7 +97,6 @@
 	<div *ngIf="staff.userbgroups[0]" class="row col-xs-12">
 	<button *ngIf="!more && !bedit" class="btn btn-big btn-primary pull-right" (click)="more=true">Show More</button>
 	<button *ngIf="more && !bedit" class="btn btn-big btn-primary pull-right" (click)="more=false">Show Less</button>
-	<button *ngIf="auth.isAdmin() && bedit && !addNew"  class="btn btn-big btn-primary pull-right" (click)="addNew=true;resetNewValue()">New Badge</button>
 	</div>
 	<br>
 
@@ -152,21 +151,21 @@
 	<div *ngIf="addNew" class="row col-xs-6 form-inline">
 		<h3 class="text-blue">Add New Badge</h3><br>
 		<label>Badge: </label>
-		<select class="form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
+		<select class="select-badge form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
 
 		<label class="label-level">Level: </label>
 		<select class="form-control" [(ngModel)]="newLevel"><option *ngFor="let lo of getLevelsOptions(newBID)" [value]="lo">{{lo}}</option></select><br>
 		<br>
 
 		<label>Focus: </label>
-		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input class="form-control" type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+		<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
 
-		<br>
 		<label>Description: </label>
-		<textarea readonly class="textarea form-control" placeholder="">{{getDesc(newBID,newLevel)}}</textarea><br>
+		<textarea readonly class="textarea form-control" rows="5" placeholder="">{{getDesc(newBID,newLevel)}}</textarea><br>
+		<br>
 
 		<label>Approved: </label>
-		<input class="form-control" type="checkbox" [(ngModel)]="newStatus" placeholder="" /><br>
+		<input type="checkbox" [(ngModel)]="newStatus" placeholder=""><br>
 
 		<button class="btn-big btn btn-danger pull-right" (click)="addNew=false">Cancel</button>
 		<button class="btn-big btn btn-success pull-right" (click)="addBadgeGroup();addNew=false">Save</button>
@@ -192,8 +191,10 @@
 	</div>
 
 	<div *ngIf="auth.isAdmin() && !addNew" class="row col-xs-12">
-		<button class="btn-big btn btn-primary" (click)="addStaff()">New Staff</button>
+		<button class="btn-big btn btn-primary" (click)="addStaff()">New Person</button>
 		<button class="btn-big btn btn-primary" (click)="deleteStaffPop()">Delete</button>
+		<button class="btn btn-big btn-primary" (click)="addNew=true;resetNewValue()">New Badge</button>
+
 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getStaff()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateStaff()">Save</button>
 	</div>

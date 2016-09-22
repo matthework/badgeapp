@@ -32,7 +32,7 @@
 
 	<div *ngIf="pos" class="form-inline">
 	<label class="text-blue">Position: </label>
-	<input class="input form-control" type="text" [(ngModel)]="staff.position">
+	<input class="input-medium form-control" type="text" [(ngModel)]="staff.position">
 	<button class="btn btn-success" (click)="pos=false;updateStaff()">Y</button>
 	<button class="btn btn-danger" (click)="pos=false;getStaffByEmail()">N</button>
 	</div>
@@ -54,27 +54,21 @@
 
 	<div *ngIf="!brief" class="form-inline">
 	<label class="click" (click)="brief=true">Brief: </label>
-	<textarea readonly class="textarea form-control" rows="5" (click)="brief=true">{{staff.brief}}</textarea>
+	<textarea readonly class="textarea-small form-control" rows="5" (click)="brief=true">{{staff.brief}}</textarea>
 	</div>
 
 	<div *ngIf="brief" class="form-inline">
 	<label class="text-blue">Brief: </label>
-	<textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
+	<textarea class="textarea-small form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
 	<button class="btn btn-success" (click)="brief=false;updateStaff()">Y</button>
 	<button class="btn btn-danger" (click)="brief=false;getStaffByEmail()">N</button>
 	</div>
 	<br>
 
-	<br>
-	<h4>User's Badges:</h4>
-
 	<div class="row col-xs-12">
-		<button *ngIf="!more" class="btn btn-primary pull-right" (click)="more=true">Show More</button>
-		<button *ngIf="more" class="btn btn-primary pull-right" (click)="more=false">Show Less</button><br>
+		<button *ngIf="!more" class="btn btn-big btn-primary pull-right" (click)="more=true">Show More</button>
+		<button *ngIf="more" class="btn btn-big btn-primary pull-right" (click)="more=false">Show Less</button><br>
 	</div>
-	<br>
-	<br>
-	<br>
 
 	<div *ngIf="!more">
 		<div class="row col-xs-12 header hidden-xs">
@@ -163,7 +157,7 @@
 		<br>
 
 		<label>Brief: </label>
-		<textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea><br>
+		<textarea class="textarea-small form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea><br>
 		<br>
 
 		<button class="btn btn-big btn-danger pull-right" (click)="location.reload()">Cancel</button>
