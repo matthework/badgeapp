@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-// # Filter Array of Objects
+// Filter Array of Objects
 var FilterArrayPipe = (function () {
     function FilterArrayPipe() {
     }
@@ -19,9 +19,17 @@ var FilterArrayPipe = (function () {
         }
         else if (value) {
             return value.filter(function (item) {
-                for (var key in item) {
-                    if ((typeof item[key] === 'string' || item[key] instanceof String) &&
-                        ((item[key].toLowerCase()).indexOf(args[0].toLowerCase()) !== -1)) {
+                for (var _i = 0, _a = Object.keys(item); _i < _a.length; _i++) {
+                    var key = _a[_i];
+                    // console.log('you submitted value: ', key);
+                    if ((typeof item[key] === 'string' || item[key] instanceof String) && key != '_id' && key != 'timestamp' &&
+                        (item[key].toLowerCase().indexOf(args.toLowerCase()) !== -1)) {
+                        console.log('you submitted value: ', item[key]);
+                        return true;
+                    }
+                    else if ((typeof item[key] === 'number' || item[key] instanceof Number) &&
+                        (item[key].toString().indexOf(args) !== -1)) {
+                        console.log('you submitted value2: ', item[key]);
                         return true;
                     }
                 }
@@ -29,6 +37,7 @@ var FilterArrayPipe = (function () {
         }
     };
     FilterArrayPipe = __decorate([
+        core_1.Injectable(),
         core_1.Pipe({ name: 'filter' }), 
         __metadata('design:paramtypes', [])
     ], FilterArrayPipe);

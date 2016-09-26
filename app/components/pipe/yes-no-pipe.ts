@@ -7,6 +7,5 @@ export class YesNoPipe {
       return 'Yes';
     }
     return 'No';
-
   }
 }
