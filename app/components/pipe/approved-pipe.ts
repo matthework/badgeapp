@@ -7,6 +7,5 @@ export class ApprovedPipe {
       return 'Approved';
     }
     return 'Pending';
-
   }
 }
