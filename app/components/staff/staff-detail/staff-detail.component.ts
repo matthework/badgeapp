@@ -26,6 +26,7 @@ export class StaffDetailComponent implements OnInit {
   staff: Staff;
   badges: Badge[] = [];
   badgesets: BadgeSet[] = [];
+  selectedUG: UserBGroup;
   tiers: Tier[] = [];
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   sortStaffBS = [];
@@ -86,6 +87,10 @@ export class StaffDetailComponent implements OnInit {
   getStaff() {
     console.log('id from _routeParams: ', this.id); 
     this._staffService.getStaff(this.id).subscribe((staff) => {this.staff = staff;});
+  }
+
+  onSelect(ug: UserBGroup) { 
+    this.selectedUG = ug;
   }
 
   getBadges() {
@@ -428,7 +433,16 @@ export class StaffDetailComponent implements OnInit {
       this.bedit = true;
     }
   }
-  
+
+   checkCurrent(current) {
+      if(current) {
+         this.more = false;
+         
+      }else {
+         this.bedit = false;
+      }
+   }
+   
   resetNewValue() {
     this.newBID = "";
     this.newLevel = 0;

@@ -1,4 +1,6 @@
-.btn-small {
+.btn-s {
+  width: 40px;
+  margin-top: 5px;
   margin-right: 5px;
 }
 .btn-big {
@@ -21,7 +23,7 @@
   background-color: transparent;
 }
 .btn-delete {
-  margin-top: 20px;
+  margin-top: 5px;
 }
 .btn-bs {
   margin-top: 20px;

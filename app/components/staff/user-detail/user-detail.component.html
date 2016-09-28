@@ -38,9 +38,9 @@
 	</div>
 	<br>
 
-	<label>Email: </label>
+<!-- 	<label>Email: </label>
 	<text>{{staff.email}}</text><br>
-	<br>
+	<br> -->
 
 	<label>Top BSet: </label>
 	<text class="click text-blue" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>

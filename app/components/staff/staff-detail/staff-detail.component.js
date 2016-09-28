@@ -76,6 +76,9 @@ var StaffDetailComponent = (function () {
         console.log('id from _routeParams: ', this.id);
         this._staffService.getStaff(this.id).subscribe(function (staff) { _this.staff = staff; });
     };
+    StaffDetailComponent.prototype.onSelect = function (ug) {
+        this.selectedUG = ug;
+    };
     StaffDetailComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
@@ -385,6 +388,14 @@ var StaffDetailComponent = (function () {
     StaffDetailComponent.prototype.checkAdmin = function () {
         if (this.auth.isAdmin()) {
             this.bedit = true;
+        }
+    };
+    StaffDetailComponent.prototype.checkCurrent = function (current) {
+        if (current) {
+            this.more = false;
+        }
+        else {
+            this.bedit = false;
         }
     };
     StaffDetailComponent.prototype.resetNewValue = function () {
