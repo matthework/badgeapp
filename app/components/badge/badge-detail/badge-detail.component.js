@@ -65,6 +65,9 @@ var BadgeDetailComponent = (function () {
         console.log('id from _routeParams: ', this.id);
         this._badgeService.getBadge(this.id).subscribe(function (badge) { _this.badge = badge; });
     };
+    BadgeDetailComponent.prototype.onSelect = function (bl) {
+        this.selectedBL = bl;
+    };
     BadgeDetailComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });

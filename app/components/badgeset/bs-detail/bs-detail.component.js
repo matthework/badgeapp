@@ -69,6 +69,9 @@ var BSDetailComponent = (function () {
             _this.id = params['id'];
         });
     };
+    BSDetailComponent.prototype.onSelect = function (bg) {
+        this.selectedBG = bg;
+    };
     BSDetailComponent.prototype.getBadgeSet = function () {
         var _this = this;
         console.log('id from _routeParams: ', this.id);
@@ -300,6 +303,9 @@ var BSDetailComponent = (function () {
         if (this.auth.isAdmin()) {
             this.bedit = true;
         }
+        else {
+            this.bedit = false;
+        }
     };
     BSDetailComponent.prototype.getBadgeName = function (bid) {
         var bname = "";
@@ -371,6 +377,14 @@ var BSDetailComponent = (function () {
             result = true;
         }
         return result;
+    };
+    BSDetailComponent.prototype.checkCurrent = function (current) {
+        if (current) {
+            this.more = false;
+        }
+        else {
+            this.bedit = false;
+        }
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();

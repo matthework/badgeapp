@@ -22,6 +22,7 @@ export class BSDetailComponent implements OnInit {
 
   badgesets: BadgeSet[];
   badgeset: BadgeSet;
+  selectedBG: BadgeGroup;
   badges: Badge[] = [];
   tiers: Tier[] = [];
   active = false;
@@ -78,6 +79,10 @@ export class BSDetailComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
+  }
+
+  onSelect(bg: BadgeGroup) { 
+    this.selectedBG = bg;
   }
 
   getBadgeSet() {
@@ -331,6 +336,8 @@ export class BSDetailComponent implements OnInit {
   checkAdmin() {
     if(this.auth.isAdmin()) {
       this.bedit = true;
+    }else {
+      this.bedit = false;
     }
   }
 
@@ -407,6 +414,15 @@ export class BSDetailComponent implements OnInit {
     }
     return result;
   }
+
+   checkCurrent(current) {
+      if(current) {
+         this.more = false;
+         
+      }else {
+         this.bedit = false;
+      }
+   }
 
   goBack() {
     window.history.back();

@@ -116,36 +116,42 @@
 		<button class="btn-big btn btn-default" (click)="addLevel=true;bedit=true">New Level</button>
 	</div> -->
 
-	<div *ngIf="!bedit">
-		<div class="row col-xs-12 header hidden-xs">
-		  <div class="col-xs-1">Level</div>
-		  <div class="col-xs-7">Description</div>
-		  <div class="col-xs-4">BadgeSet</div>
+	<div class="row col-xs-12 header hidden-xs">
+		<div *ngIf="!bedit">
+			<div class="col-xs-1">Level</div>
+			<div class="col-xs-7">Description</div>
+			<div class="col-xs-4">BadgeSet</div>
 		</div>
-
-		<div class="row col-xs-12 div-list-item" *ngFor="let badgelevel of cleanEmpty(badge.badgelevels)">
-			<div class="col-sm-1 col-xs-12" (click)="checkAdmin()">{{badgelevel.level}}</div>
-			<div class="col-sm-7 col-xs-12" (click)="checkAdmin()"><text class="text-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</div>
-			<div class="col-sm-4 col-xs-12" (click)="checkAdmin()">
-				<div *ngFor="let bs of findBadgeSet(badge.name,badgelevel.level)">
-					<uli (click)="toBSDetail(bs._id)" class="uli-bset">{{bs.name}}</uli><text class="text-red">{{checkCore(bs,badge.name)}}</text>
-				</div>
-	  		</div>
+		<div *ngIf="bedit">
+			<div class="col-xs-2">Level</div>
+			<div class="col-xs-8">Description</div>
+			<div class="col-xs-2"></div>
 		</div>
 	</div>
 
-	<div *ngIf="bedit">
-		<div class="row col-xs-12 header hidden-xs">
-		  <div class="col-xs-2">Level</div>
-		  <div class="col-xs-8">Description</div>
-		  <div class="col-xs-2"></div>
+	<div class="row col-xs-12 div-list-item" *ngFor="let badgelevel of badge.badgelevels">
+		<div *ngIf="!bedit" (click)="onSelect(badgelevel);checkAdmin()">
+			<div class="col-sm-1">{{badgelevel.level}}</div>
+			<div class="col-sm-7"><text class="text-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</div>
+			<div class="col-sm-4">
+				<div *ngFor="let bs of findBadgeSet(badge.name,badgelevel.level)">
+					<uli (click)="toBSDetail(bs._id)" class="uli-bset">{{bs.name}}</uli><text class="text-red">{{checkCore(bs,badge.name)}}</text>
+				</div>
+			</div>
 		</div>
-
-		<div class="row col-xs-12 div-list-item" *ngFor="let badgelevel of badge.badgelevels">
-			<div class="col-sm-2 col-xs-12"><input class="input-tiny form-control" type="number" [(ngModel)]="badgelevel.level" placeholder="" /></div>
-			<div class="col-sm-8 col-xs-12"><text class="text-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="ta-row form-control" [(ngModel)]="badgelevel.desc" placeholder=""></textarea></div>
-			<div class="col-sm-2 col-xs-12"><button *ngIf="bedit && auth.isAdmin()" class="btn-delete btn btn-default" (click)="deleteBadgeLevelPop(badgelevel)">X</button></div>
-		</div>
+		<div *ngIf="bedit && selectedBL.level== badgelevel.level">
+			<div class="col-sm-2">
+				<input class="input-tiny form-control" type="number" [(ngModel)]="badgelevel.level" placeholder="" />
+			</div>
+			<div class="col-sm-8">
+				<text class="text-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="form-control" rows="5" [(ngModel)]="badgelevel.desc" placeholder=""></textarea>
+			</div>
+			<div class="col-sm-2">
+				<button class="btn btn-s btn-success" (click)="bedit=false;updateBadge()">Y</button><br>
+				<button class="btn btn-s btn-danger" (click)="bedit=false;getBadge()">N</button><br>
+				<button class="btn-delete btn btn-default" (click)="deleteBadgeLevelPop(badgelevel)">X</button>
+			</div>
+		</div>	
 	</div>
 
 <!-- 	<div *ngIf="addLevel">
@@ -167,8 +173,8 @@
 	<div *ngIf="auth.isAdmin() && !addLevel">
 		<button class="btn-big btn btn-primary" (click)="addBadge()">New Badge</button>
 		<button class="btn-big btn btn-primary" (click)="deleteBadgePop()">Delete</button>
-		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadge()">Cancel</button>
-		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadge()">Save</button>
+<!-- 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadge()">Cancel</button>
+		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadge()">Save</button> -->
 	</div>
 
 	</div>

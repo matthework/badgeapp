@@ -45,34 +45,29 @@
 				<div class=" col-xs-1"></div>
 			</div>
 			<div class="row col-xs-12 div-list-item form-inline" *ngFor="let tier of tiers | filter:query">
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="text-big col-sm-1">{{tier.tier}}</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.tier"></div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-1">${{tier.grades[0]}}K</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[0]"> K</div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-1" (click)="checkAdmin()">${{tier.grades[1]}}K</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[1]"> K</div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-1" (click)="checkAdmin()">${{tier.grades[2]}}K</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[2]"> K</div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-1" (click)="checkAdmin()">${{tier.grades[3]}}K</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[3]"> K</div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-1" (click)="checkAdmin()">${{tier.grades[4]}}K</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[4]"> K</div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-1" (click)="checkAdmin()">${{tier.grades[5]}}K</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[5]"> K</div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-2" (click)="checkAdmin()">{{tier.judgement}}</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-2"><textarea class="textarea form-control" rows="5" [(ngModel)]="tier.judgement"></textarea></div>
-
-				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()" class="col-sm-2" (click)="checkAdmin()">{{tier.expertise}}</div>
-				<div *ngIf="tedit && selectedTier._id==tier._id" class="col-sm-2"><textarea class="textarea form-control" rows="5" [(ngModel)]="tier.expertise"></textarea></div>
-
-				<div *ngIf="tedit && selectedTier._id==tier._id && auth.isAdmin()" class="col-sm-1"><button class="btn btn-small btn-success" (click)="updateTier(tier);tedit=false">Y</button><button class="btn btn-small btn-danger" (click)="getTiers();tedit=false">N</button><button class="btn btn-delete btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
+				<div *ngIf="!tedit" (click)="onSelect(tier);checkAdmin()">
+					<div class="text-big col-sm-1">{{tier.tier}}</div>
+					<div class="col-sm-1">${{tier.grades[0]}}K</div>
+					<div class="col-sm-1">${{tier.grades[1]}}K</div>
+					<div class="col-sm-1">${{tier.grades[2]}}K</div>
+					<div class="col-sm-1">${{tier.grades[3]}}K</div>
+					<div class="col-sm-1">${{tier.grades[4]}}K</div>
+					<div class="col-sm-1">${{tier.grades[5]}}K</div>
+					<div class="col-sm-2">{{tier.judgement}}</div>
+					<div class="col-sm-2">{{tier.expertise}}</div>
+				</div>
+				<div *ngIf="tedit && selectedTier._id == tier._id">
+					<div class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.tier"></div>
+					<div class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[0]"> K</div>
+					<div class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[1]"> K</div>
+					<div class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[2]"> K</div>
+					<div class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[3]"> K</div>
+					<div class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[4]"> K</div>
+					<div class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[5]"> K</div>
+					<div class="col-sm-2"><textarea class="textarea form-control" rows="5" [(ngModel)]="tier.judgement"></textarea></div>
+					<div class="col-sm-2"><textarea class="textarea form-control" rows="5" [(ngModel)]="tier.expertise"></textarea></div>
+					<div class="col-sm-1"><button class="btn btn-small btn-success" (click)="updateTier(tier);tedit=false">Y</button><button class="btn btn-small btn-danger" (click)="getTiers();tedit=false">N</button><button class="btn btn-delete btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
+				</div>			
 			</div>
 		<!-- </div> -->
 

@@ -13,11 +13,11 @@ export class FilterArrayPipe {
           // console.log('you submitted value: ', key);
           if ((typeof item[key] === 'string' || item[key] instanceof String) && key != '_id' && key != 'timestamp' &&
             (item[key].toLowerCase().indexOf(args.toLowerCase()) !== -1)) {
-            console.log('you submitted value: ', item[key]);
+            // console.log('you submitted value: ', item[key]);
             return true;
           }else if ((typeof item[key] === 'number' || item[key] instanceof Number) &&
             (item[key].toString().indexOf(args) !== -1)) {
-            console.log('you submitted value2: ', item[key]);
+            // console.log('you submitted value2: ', item[key]);
             return true;
           }
         }

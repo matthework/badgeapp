@@ -21,6 +21,7 @@ export class BadgeDetailComponent implements OnInit {
     badge: Badge;
     badges: Badge[] = [];
     badgesets: BadgeSet[] = [];
+    selectedBL: BadgeLevel;
     sub: any;
     id: string;
     newFC = "";
@@ -72,6 +73,10 @@ export class BadgeDetailComponent implements OnInit {
     getBadge() {
         console.log('id from _routeParams: ', this.id); 
         this._badgeService.getBadge(this.id).subscribe((badge) => {this.badge = badge;});
+    }
+
+    onSelect(bl: BadgeLevel) { 
+      this.selectedBL = bl;
     }
 
     getBadges() {
@@ -238,8 +243,9 @@ export class BadgeDetailComponent implements OnInit {
   }
 
   goBack() {
-  window.history.back();
+    window.history.back();
   }
+
 }
 
 
