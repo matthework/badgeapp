@@ -101,7 +101,7 @@
 	<br>
 
 	<div *ngIf="!more">
-		<div class="row col-xs-12 header hidden-xs">
+		<div class="row col col-xs-12 header hidden-xs">
 			<div *ngIf="!bedit">
 			  <div class="col-xs-3">Badge</div>
 			  <div class="col-xs-5">Description</div>
@@ -115,7 +115,7 @@
 			  <div class="col-xs-1"></div>
 		  </div>
 		</div>
-		<div class="row col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">	
+		<div class="row col col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">	
 			<div *ngIf="!bedit">
 				<div class="click text-blue col-sm-3" (click)="onSelect(userbgroup);checkAdmin()">
 					<text (click)="bedit=false;toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></text>
@@ -148,7 +148,7 @@
 		</div>
 	</div>
 
-	<div *ngIf="addNew" class="row col-xs-6 form-inline">
+	<div *ngIf="addNew" class="row col col-xs-6 form-inline">
 		<h3 class="text-blue">Add New Badge</h3><br>
 		<label>Badge: </label>
 		<select class="select-badge form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
@@ -172,13 +172,13 @@
 	</div>
 
 	<div *ngIf="more">
-		<div class="row col-xs-12 header hidden-xs">
+		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
 		  <div class="col-xs-5">Description</div>
 		  <div class="col-xs-3">Badge Set</div>
 		  <div class="col-xs-1">Status</div>
 		</div>
-		<div class="row col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
+		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
 			<div class="col-sm-3"  (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)"><text *ngIf="userbgroup.current" (click)="toBadgeDetail(userbgroup.bid)" class="click text-blue">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><text *ngIf="!userbgroup.current" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0" class="text-blue"><text> [{{userbgroup.focus}}]</text></text></div>
 			<div class="col-sm-5" (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)"><text *ngIf="userbgroup.current" class="text-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
 			<div class="col-sm-3" (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)">

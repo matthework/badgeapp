@@ -30,7 +30,6 @@
          <div class="col-xs-2">Status</div>
          <!-- <div class="col-xs-1"></div> -->
    </div>
-
    <div class="row col-xs-12 div-list-item" *ngFor="let badge of badges | filter:query">
       <div class="col-xs-4 col-sm-2 btn btn-primary wrap" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge);toDetail()">
          <span>{{badge.name}}</span>

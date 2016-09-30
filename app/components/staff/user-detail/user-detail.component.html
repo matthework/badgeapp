@@ -71,14 +71,14 @@
 	</div>
 
 	<div *ngIf="!more">
-		<div class="row col-xs-12 header hidden-xs">
+		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
 		  <div class="col-xs-5">Description</div>
 		  <div class="col-xs-3">Badge Set</div>
 		  <div class="col-xs-1">Status</div>
 		</div>
 
-		<div class="row col-xs-12 div-list-item" *ngFor="let userbgroup of staff.userbgroups">
+		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of staff.userbgroups">
 			<div class="click text-blue col-sm-3 col-xs-12" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></div>
 			<div class="col-sm-5 col-xs-12"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
 			<div class="click text-blue col-sm-3 col-xs-12">
@@ -91,14 +91,14 @@
 	</div>
 
 	<div *ngIf="more">
-		<div class="row col-xs-12 header hidden-xs">
+		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
 		  <div class="col-xs-5">Description</div>
 		  <div class="col-xs-3">Badge Set</div>
 		  <div class="col-xs-1">Status</div>
 		</div>
 
-		<div class="row col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
+		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
 			<div class="col-sm-3 col-xs-12" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="click text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text> <text *ngIf="userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text></div>
 			<div class="col-sm-5 col-xs-12"><text *ngIf="userbgroup.current" class="text-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
 			<div class="col-sm-3 col-xs-12">
@@ -114,7 +114,7 @@
 		<button class="btn btn-apply btn-primary" *ngIf!="active" (click)="active=true">+ Apply New</button>
 	</div>
 
-	<div *ngIf="active" class="row col-xs-6 form-inline">
+	<div *ngIf="active" class="row col col-xs-6 form-inline">
 
 		<h3 class="text-blue">Apply New Badge</h3><br>
 

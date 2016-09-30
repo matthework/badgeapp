@@ -242,6 +242,9 @@ export class BadgeDetailComponent implements OnInit {
     this.updateBadge();
   }
 
+   clickOut() {
+      console.log("click........");
+   }
   goBack() {
     window.history.back();
   }

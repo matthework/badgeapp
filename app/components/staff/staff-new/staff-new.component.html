@@ -43,6 +43,10 @@
 <textarea class="textarea form-control" type="text" [(ngModel)]="newStaff.brief" placeholder=""></textarea><br>
 <br>
 
+<label>Template: </label>
+<select class="form-control" [(ngModel)]="newStaff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<br>
+
 <!-- <label>Others: </label>
 <input class="input-others" type="text" [(ngModel)]="newStaff.others" placeholder="Others" /><br> -->
 

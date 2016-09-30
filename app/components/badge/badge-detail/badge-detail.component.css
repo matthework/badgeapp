@@ -6,6 +6,7 @@
 .btn-big {
   margin-top: 20px;
   margin-right: 5px;
+  margin-left: 0px;
 }
 .input{
   width: 300px;
@@ -16,10 +17,17 @@
 .input-tiny {
   width: 50px;
 }
-.textarea {
+.text-oview {
   width: 350px;
-  height: 120px;
+  height: 300px;
+}
+.textarea {
+  vertical-align: top;
+  width: 350px;
   background-color: transparent;
+}
+.ta {
+  border: 1px #039be5 solid;
 }
 .ta-row {
   width: 700px;
@@ -27,4 +35,7 @@
 }
 .btn-delete {
   margin-top: 5px;
+}
+.btn-oview {
+  vertical-align: top;
 }

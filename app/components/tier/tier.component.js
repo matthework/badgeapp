@@ -26,6 +26,15 @@ var TierComponent = (function () {
         this.toPay = false;
         this.tedit = false;
         this.gmap = { 0: "A", 1: "B", 2: "C", 3: "D", 4: "E", 5: "F" };
+        this.et = false;
+        this.ea = false;
+        this.eb = false;
+        this.ec = false;
+        this.ed = false;
+        this.ee = false;
+        this.ef = false;
+        this.ejud = false;
+        this.eexp = false;
     }
     TierComponent.prototype.ngOnInit = function () {
         this.getTiers();
@@ -44,8 +53,35 @@ var TierComponent = (function () {
         var _this = this;
         this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
     };
-    TierComponent.prototype.onSelect = function (tier) {
+    TierComponent.prototype.onSelect = function (tier, input) {
         this.selectedTier = tier;
+        if (input == 'tier') {
+            this.et = true;
+        }
+        else if (input == 'a') {
+            this.ea = true;
+        }
+        else if (input == 'b') {
+            this.eb = true;
+        }
+        else if (input == 'c') {
+            this.ec = true;
+        }
+        else if (input == 'd') {
+            this.ed = true;
+        }
+        else if (input == 'e') {
+            this.ee = true;
+        }
+        else if (input == 'f') {
+            this.ef = true;
+        }
+        else if (input == 'jud') {
+            this.ejud = true;
+        }
+        else if (input == 'exp') {
+            this.eexp = true;
+        }
     };
     TierComponent.prototype.toTierDetail = function (tid) {
         this._router.navigate(['/tier/detail', tid]);
@@ -91,6 +127,18 @@ var TierComponent = (function () {
         if (this.auth.isAdmin()) {
             this.tedit = true;
         }
+    };
+    TierComponent.prototype.resetEdit = function () {
+        this.tedit = false;
+        this.et = false;
+        this.ea = false;
+        this.eb = false;
+        this.ec = false;
+        this.ed = false;
+        this.ee = false;
+        this.ef = false;
+        this.ejud = false;
+        this.eexp = false;
     };
     TierComponent = __decorate([
         core_1.Component({

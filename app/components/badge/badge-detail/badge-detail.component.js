@@ -214,6 +214,9 @@ var BadgeDetailComponent = (function () {
         }
         this.updateBadge();
     };
+    BadgeDetailComponent.prototype.clickOut = function () {
+        console.log("click........");
+    };
     BadgeDetailComponent.prototype.goBack = function () {
         window.history.back();
     };
