@@ -26,6 +26,15 @@ export class TierComponent {
   toPay = false;
   tedit =false;
   gmap = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E", 5:"F"};
+  et =false;
+  ea =false;
+  eb =false;
+  ec =false;
+  ed =false;
+  ee =false;
+  ef =false;
+  ejud =false;
+  eexp =false;
 
   constructor(
     private _tierService: TierService,
@@ -51,8 +60,27 @@ export class TierComponent {
     this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
   }
 
-  onSelect(tier: Tier) { 
+  onSelect(tier: Tier,input: string) { 
     this.selectedTier = tier; 
+    if(input=='tier') {
+      this.et = true;
+    }else if(input=='a') {
+      this.ea = true;
+    }else if(input=='b') {
+      this.eb = true;
+    }else if(input=='c') {
+      this.ec = true;
+    }else if(input=='d') {
+      this.ed = true;
+    }else if(input=='e') {
+      this.ee = true;
+    }else if(input=='f') {
+      this.ef = true;
+    }else if(input=='jud') {
+      this.ejud = true;
+    }else if(input=='exp') {
+      this.eexp = true;
+    }
   }
 
   toTierDetail(tid:string) {
@@ -109,6 +137,19 @@ export class TierComponent {
       this.tedit = true;
     }
   }
+
+   resetEdit() {
+      this.tedit =false;
+      this.et =false;
+      this.ea =false;
+      this.eb =false;
+      this.ec =false;
+      this.ed =false;
+      this.ee =false;
+      this.ef =false;
+      this.ejud =false;
+      this.eexp =false;
+   }
 
 }
 

@@ -137,3 +137,6 @@ th , td  {
 .input-upper {
   text-transform: uppercase;
 }
+.col {
+  padding-left: 0;
+}
