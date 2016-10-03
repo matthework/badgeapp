@@ -245,10 +245,10 @@
 		</div>
 		<div class="row col col-xs-12 div-list-item" *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
 			<div (click)="onSelect(moreb);checkAdmin();checkCurrent(moreb.current)">
-				<div class="col col-sm-4">
+				<div class="col-sm-4">
 					<text *ngIf="moreb.current" class="click text-blue" (click)="bedit=false;toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}} <text *ngIf="moreb.focus.length!=0"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text>
 				</div>
-				<div class="col col-sm-6">
+				<div class="col-sm-6">
 					<text *ngIf="moreb.current" class="text-blue">{{labels[moreb.level-1]}}</text><text *ngIf="!moreb.current">{{labels[moreb.level-1]}}</text><br>{{getDesc(moreb.bid,moreb.level)}}
 				</div>
 			</div>
