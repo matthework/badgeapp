@@ -3,7 +3,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 import {BadgeSet,BadgeGroup} from '../bs';
 import {BSService} from '../bs.service';
-import {Badge} from '../../badge/badge';
+import {Badge,BadgeLevel} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 import {Tier} from '../../tier/tier';
 import {TierService} from '../../tier/tier.service';
@@ -24,6 +24,7 @@ export class BSDetailComponent implements OnInit {
   badgeset: BadgeSet;
   selectedBG: BadgeGroup;
   badges: Badge[] = [];
+  badge: Badge;
   tiers: Tier[] = [];
   active = false;
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
@@ -43,6 +44,8 @@ export class BSDetailComponent implements OnInit {
   newBID = "";
   newLevel = 0;
   newFocus = [];
+  newL = 0;
+  selectedLevel = 0;
   labels = [  "I understand... ", 
           "I participate... ", 
           "I contribute... ", 
@@ -98,6 +101,21 @@ export class BSDetailComponent implements OnInit {
     this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
   }
 
+  // getBadge(bid:string) {
+  //   this._badgeService.getBadge(bid).subscribe(badge => { this.badge = badge});
+  // }
+
+  getBLs(bid:string) {
+    var bls: BadgeLevel[];
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bls = this.badges[i].badgelevels;
+      }
+    }
+    // console.log('you submitted value: ', bls);
+    return bls;
+  }
+
   getTiers() {
     this._tierService.getTiers().subscribe(tiers => { this.tiers = tiers});
   }
@@ -108,9 +126,9 @@ export class BSDetailComponent implements OnInit {
     // location.reload();
   }
 
-  toBSEdit(bsid:string) {
-    this._router.navigate(['/bs/edit',bsid]);
-  }
+  // toBSEdit(bsid:string) {
+  //   this._router.navigate(['/bs/edit',bsid]);
+  // }
 
   addBadgeSet() {
     this._router.navigate(['/bs/new']);
@@ -275,22 +293,20 @@ export class BSDetailComponent implements OnInit {
     this.badgeset.tags.splice(index,1);
   }
 
-  addBadgeGroup() {
+  addBadgeGroup(level:number) {
     // pasrse string into number
     // this.badgeset.tier = +this.badgeset.tier;
     // for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
     //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
     // }
-    this.newLevel = +this.newLevel;
+    // this.newLevel = +this.newLevel;
+    this.newLevel = level;
     this.badgeset.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus});
     // this.badgeset.badgegroups.sort(this.toCompare);
     // this.badgeset.corebadges.sort(this.toCompare);
     let value = JSON.stringify(this.badgeset)
-    // this._bsService.updateBadgeSet(id,value).subscribe();
+    this._bsService.updateBadgeSet(this.badgeset._id,value).subscribe();
     console.log('you submitted value: ', value);
-    this.newBID = "";
-    this.newLevel = 0;
-    this.newFocus = [];
   }
 
   deleteBadgeGroupPop(selectedGroup: BadgeGroup) {
@@ -316,7 +332,7 @@ export class BSDetailComponent implements OnInit {
     let index = this.badgeset.badgegroups.indexOf(selectedGroup);
     this.badgeset.badgegroups.splice(index,1);
     let value = JSON.stringify(this.badgeset)
-    // this._bsService.updateBadgeSet(id,value).subscribe();
+    this._bsService.updateBadgeSet(this.badgeset._id,value).subscribe();
     console.log('you submitted value: ', value);
   }
 
@@ -348,12 +364,14 @@ export class BSDetailComponent implements OnInit {
         bname = this.badges[i].name;
       }
     }
+    // console.log('you submitted value: ', bname);
     return bname;
   }
 
   resetNewValue() {
     this.newBID = "";
     this.newLevel = 0;
+    this.newFocus = [];
   }
 
   checkEmptyTags() {
@@ -387,25 +405,31 @@ export class BSDetailComponent implements OnInit {
     //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
     console.log(bg.focus);
     // bg.focus = bg.focus;
+   for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
+      if(this.badgeset.badgegroups[i].bid == this.selectedBG.bid && this.badgeset.badgegroups[i].level == this.selectedBG.level) {
+         this.badgeset.badgegroups[i].focus = this.selectedBG.focus;
+      }
+   }
+   this.updateBadgeSet();
   }
 
-  updateCheckedNew(option, event, focus) {
-    console.log('event.target.value ' + event.target.value);
-    var index = focus.indexOf(option);
-    if(event.target.checked) {
-      console.log('add');
-      if(index === -1) {
-        focus.push(option);
+   updateCheckedNew(option, event, focus) {
+      console.log('event.target.value ' + event.target.value);
+      var index = focus.indexOf(option);
+      if(event.target.checked) {
+         console.log('add');
+         if(index === -1) {
+            focus.push(option);
+         }
+      } else {
+         console.log('remove');
+         if(index !== -1) {
+            focus.splice(index, 1);
+         }
       }
-    } else {
-      console.log('remove');
-      if(index !== -1) {
-        focus.splice(index, 1);
-      }
-    }
-    console.log(focus);
-    this.newFocus = focus;
-  }
+      console.log(focus);
+      this.newFocus = focus;
+   }
 
   checkFocus(fc,focus) {
     var result = false;
@@ -424,6 +448,22 @@ export class BSDetailComponent implements OnInit {
       }
    }
 
+   onSelectNewLevel(level:number) {
+      this.newL = level;
+      // console.log('you submitted value: ', this.newL);
+      for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
+         if(this.badgeset.badgegroups[i].bid == this.selectedBG.bid && this.badgeset.badgegroups[i].level == this.selectedBG.level) {
+            this.badgeset.badgegroups[i].level = this.newL;
+            this.badgeset.badgegroups[i].focus = this.selectedBG.focus;
+         }
+      }
+      this.updateBadgeSet();
+   }
+
+   onSelectedLevel(level:number) {
+      this.selectedLevel = level;
+   }
+   
   goBack() {
     window.history.back();
   }

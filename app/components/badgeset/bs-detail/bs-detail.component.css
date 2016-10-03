@@ -3,6 +3,9 @@
   margin-top: 5px;
   margin-right: 5px;
 }
+.btn-b {
+  width: 200px;
+}
 .btn-big {
   margin-top: 20px;
   margin-right: 5px;
@@ -23,13 +26,47 @@
   background-color: transparent;
 }
 .btn-delete {
-  margin-top: 5px;
+  width: 35px;
+  margin-top: 0px;
+  border: 0;
 }
 .btn-bs {
   margin-top: 20px;
   margin-bottom: 20px;
+  margin-right: 5px;
 }
 .label-level {
   width: 6em;
   margin-left: 50px;
+}
+.modal-body {
+  /*height: 100%;*/
+  display: inline-table;
+  padding-top: 5px;
+}
+.div-list {
+  min-height: 60px;
+  margin-left: 1px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px #ddd solid;
+}
+.div-list:hover{
+  background-color: #eee;
+}
+.highlight {
+  min-height: 60px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 1px;
+  border-radius: 4px;
+}
+.focus {
+  color: #039be5;
+}
+.lab {
+  width: 6em;
+}
+.select {
+  width: 200px;
 }
