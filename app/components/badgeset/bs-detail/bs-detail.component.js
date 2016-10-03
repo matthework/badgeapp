@@ -41,6 +41,8 @@ var BSDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
+        this.newL = 0;
+        this.selectedLevel = 0;
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",
@@ -85,6 +87,19 @@ var BSDetailComponent = (function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
     };
+    // getBadge(bid:string) {
+    //   this._badgeService.getBadge(bid).subscribe(badge => { this.badge = badge});
+    // }
+    BSDetailComponent.prototype.getBLs = function (bid) {
+        var bls;
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bls = this.badges[i].badgelevels;
+            }
+        }
+        // console.log('you submitted value: ', bls);
+        return bls;
+    };
     BSDetailComponent.prototype.getTiers = function () {
         var _this = this;
         this._tierService.getTiers().subscribe(function (tiers) { _this.tiers = tiers; });
@@ -94,9 +109,9 @@ var BSDetailComponent = (function () {
         this.getBadgeSets();
         // location.reload();
     };
-    BSDetailComponent.prototype.toBSEdit = function (bsid) {
-        this._router.navigate(['/bs/edit', bsid]);
-    };
+    // toBSEdit(bsid:string) {
+    //   this._router.navigate(['/bs/edit',bsid]);
+    // }
     BSDetailComponent.prototype.addBadgeSet = function () {
         this._router.navigate(['/bs/new']);
     };
@@ -245,22 +260,20 @@ var BSDetailComponent = (function () {
         var index = this.badgeset.tags.indexOf(tag);
         this.badgeset.tags.splice(index, 1);
     };
-    BSDetailComponent.prototype.addBadgeGroup = function () {
+    BSDetailComponent.prototype.addBadgeGroup = function (level) {
         // pasrse string into number
         // this.badgeset.tier = +this.badgeset.tier;
         // for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
         //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
         // }
-        this.newLevel = +this.newLevel;
+        // this.newLevel = +this.newLevel;
+        this.newLevel = level;
         this.badgeset.badgegroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus });
         // this.badgeset.badgegroups.sort(this.toCompare);
         // this.badgeset.corebadges.sort(this.toCompare);
         var value = JSON.stringify(this.badgeset);
-        // this._bsService.updateBadgeSet(id,value).subscribe();
+        this._bsService.updateBadgeSet(this.badgeset._id, value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBID = "";
-        this.newLevel = 0;
-        this.newFocus = [];
     };
     BSDetailComponent.prototype.deleteBadgeGroupPop = function (selectedGroup) {
         var isCore = false;
@@ -285,7 +298,7 @@ var BSDetailComponent = (function () {
         var index = this.badgeset.badgegroups.indexOf(selectedGroup);
         this.badgeset.badgegroups.splice(index, 1);
         var value = JSON.stringify(this.badgeset);
-        // this._bsService.updateBadgeSet(id,value).subscribe();
+        this._bsService.updateBadgeSet(this.badgeset._id, value).subscribe();
         console.log('you submitted value: ', value);
     };
     BSDetailComponent.prototype.removeBadgeSet = function () {
@@ -314,11 +327,13 @@ var BSDetailComponent = (function () {
                 bname = this.badges[i].name;
             }
         }
+        // console.log('you submitted value: ', bname);
         return bname;
     };
     BSDetailComponent.prototype.resetNewValue = function () {
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
     };
     BSDetailComponent.prototype.checkEmptyTags = function () {
         if (this.badgeset.tags != null) {
@@ -352,6 +367,12 @@ var BSDetailComponent = (function () {
         //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
         console.log(bg.focus);
         // bg.focus = bg.focus;
+        for (var i = 0; i < this.badgeset.badgegroups.length; i++) {
+            if (this.badgeset.badgegroups[i].bid == this.selectedBG.bid && this.badgeset.badgegroups[i].level == this.selectedBG.level) {
+                this.badgeset.badgegroups[i].focus = this.selectedBG.focus;
+            }
+        }
+        this.updateBadgeSet();
     };
     BSDetailComponent.prototype.updateCheckedNew = function (option, event, focus) {
         console.log('event.target.value ' + event.target.value);
@@ -385,6 +406,20 @@ var BSDetailComponent = (function () {
         else {
             this.bedit = false;
         }
+    };
+    BSDetailComponent.prototype.onSelectNewLevel = function (level) {
+        this.newL = level;
+        // console.log('you submitted value: ', this.newL);
+        for (var i = 0; i < this.badgeset.badgegroups.length; i++) {
+            if (this.badgeset.badgegroups[i].bid == this.selectedBG.bid && this.badgeset.badgegroups[i].level == this.selectedBG.level) {
+                this.badgeset.badgegroups[i].level = this.newL;
+                this.badgeset.badgegroups[i].focus = this.selectedBG.focus;
+            }
+        }
+        this.updateBadgeSet();
+    };
+    BSDetailComponent.prototype.onSelectedLevel = function (level) {
+        this.selectedLevel = level;
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();
