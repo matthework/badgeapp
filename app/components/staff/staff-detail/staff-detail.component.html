@@ -85,8 +85,8 @@
 	<div *ngIf="brief && auth.isAdmin()" class="form-inline">
 	<label>Brief: </label>
 	<textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
-	<button class="btn-small btn btn-success" (click)="brief=false;updateStaff()">Y</button>
-	<button class="btn-small btn btn-danger" (click)="brief=false;getStaff()">N</button>
+	<button class="btn-small btn-brief btn btn-success" (click)="brief=false;updateStaff()">Y</button>
+	<button class="btn-small btn-brief btn btn-danger" (click)="brief=false;getStaff()">N</button>
 	</div>
 	<br>
 
@@ -95,7 +95,7 @@
 	</div>
 
 	<div *ngIf="staff.userbgroups[0]" class="row col-xs-12">
-	<button *ngIf="!more && !bedit" class="btn btn-big btn-primary pull-right" (click)="more=true">Show More</button>
+	<button *ngIf="!more && !bedit" class="btn btn-big btn-default pull-right" (click)="more=true">Show More</button>
 	<button *ngIf="more && !bedit" class="btn btn-big btn-primary pull-right" (click)="more=false">Show Less</button>
 	</div>
 	<br>
@@ -117,8 +117,9 @@
 		</div>
 		<div class="row col col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">	
 			<div *ngIf="!bedit">
-				<div class="click text-blue col-sm-3" (click)="onSelect(userbgroup);checkAdmin()">
-					<text (click)="bedit=false;toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></text>
+				<div class="col-sm-3">
+					<button class="btn btn-b btn-primary wrap" (click)="onSelect(userbgroup);checkAdmin()">
+					<text (click)="bedit=false;toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></text></button>
 				</div>
 				<div class="col-sm-5" (click)="onSelect(userbgroup);checkAdmin()"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
 				<div class="col-sm-3" *ngIf="!bedit" (click)="checkAdmin()">
@@ -191,9 +192,9 @@
 	</div>
 
 	<div *ngIf="auth.isAdmin() && !addNew" class="row col-xs-12">
-		<button class="btn-big btn btn-primary" (click)="addStaff()">New Person</button>
-		<button class="btn-big btn btn-primary" (click)="deleteStaffPop()">Delete</button>
-		<button class="btn btn-big btn-primary" (click)="addNew=true;resetNewValue()">New Badge</button>
+		<button class="btn-big btn btn-default" (click)="addStaff()">New Person</button>
+		<button class="btn-big btn btn-default" (click)="deleteStaffPop()">Delete</button>
+		<button class="btn btn-big btn-default" (click)="addNew=true;resetNewValue()">New Badge</button>
 <!-- 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getStaff()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateStaff()">Save</button> -->
 	</div>

@@ -16,21 +16,21 @@
 		<div class="form-inline">
 			<div *ngIf="badgesets" class="form-group">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-				<button class="btn-compare btn btn-primary" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
-				<button class="btn btn-big btn-primary" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
-				<button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addBadgeSet()">+</button>
+				<button class="btn-compare btn btn-default" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
+				<button class="btn btn-big btn-default" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
+				<button class="btn btn-small btn-default" *ngIf="auth.isAdmin()" (click)="addBadgeSet()">+</button>
 			</div>
 
 			<div *ngIf="!badgesets && auth.isAdmin()" class="form-group">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-				<button class="btn btn-primary" (click)="addBadgeSet()">+</button><br>
+				<button class="btn btn-small btn-default" (click)="addBadgeSet()">+</button><br>
 			</div>
 		</div>
 		<br>
 
 		<div *ngIf="badgesets" class="row col-xs-12 header hidden-xs">
-			<div class=" col-xs-2">Name</div>
-			<div class=" col-xs-4">Badges</div>
+			<div class=" col-xs-3">Name</div>
+			<div class=" col-xs-3">Badges</div>
 			<div class=" col-xs-1">Tier</div>
 			<div class=" col-xs-1">Grade</div>
 			<div class=" col-xs-1">$$</div>
@@ -40,8 +40,10 @@
 		</div>
 		
 		<div class="row col-xs-12 div-list-item" *ngFor="let badgeset of badgesets | filter:query">
-			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badgeset);toBSDetail(badgeset._id)" class="col-sm-2 col-xs-12 btn btn-primary wrap">{{badgeset.name}}</div>
-			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-badges col-sm-4 col-xs-12">
+			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="col-sm-3">
+				<button class="btn btn-b btn-primary wrap" (click)="onSelect(badgeset);toBSDetail(badgeset._id)">{{badgeset.name}}</button>
+			</div>
+			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="div-badges col-sm-3">
 				<uli *ngFor="let badgegroup of badgeset.badgegroups">
 				<div class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)"><text>{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</text><text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text></div>
 				</uli>

@@ -10,6 +10,7 @@
 
 <div *ngIf="auth.isAdmin()">
 
+<div class="row col-xs-6">
 <!-- <label>Index: </label>
 <input class="input-index" type="number" [(ngModel)]="newBadge.index" placeholder="Index" /><br> -->
 <br>
@@ -101,9 +102,10 @@
 <textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder=""></textarea><br>
 <br>
 
-<div class="row col-xs-6">
+
 <button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
 <button class="btn-big btn btn-success pull-right" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
+
 </div>
 
 </div>

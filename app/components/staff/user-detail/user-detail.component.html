@@ -60,13 +60,13 @@
 	<div *ngIf="brief" class="form-inline">
 	<label>Brief: </label>
 	<textarea class="textarea-small form-control" rows="5" type="text" [(ngModel)]="staff.brief">{{staff.brief}}</textarea>
-	<button class="btn btn-success" (click)="brief=false;updateStaff()">Y</button>
-	<button class="btn btn-danger" (click)="brief=false;getStaffByEmail()">N</button>
+	<button class="btn btn-brief btn-success" (click)="brief=false;updateStaff()">Y</button>
+	<button class="btn btn-brief btn-danger" (click)="brief=false;getStaffByEmail()">N</button>
 	</div>
 	<br>
 
 	<div class="row col-xs-12">
-		<button *ngIf="!more" class="btn btn-big btn-primary pull-right" (click)="more=true">Show More</button>
+		<button *ngIf="!more" class="btn btn-big btn-default pull-right" (click)="more=true">Show More</button>
 		<button *ngIf="more" class="btn btn-big btn-primary pull-right" (click)="more=false">Show Less</button><br>
 	</div>
 
@@ -79,7 +79,9 @@
 		</div>
 
 		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of staff.userbgroups">
-			<div class="click text-blue col-sm-3 col-xs-12" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></div>
+			<div class="col-sm-3 col-xs-12">
+				<button class="btn btn-b btn-primary wrap" ((click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></button>
+			</div>
 			<div class="col-sm-5 col-xs-12"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
 			<div class="click text-blue col-sm-3 col-xs-12">
 				<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
@@ -111,7 +113,7 @@
 	</div>
 
 	<div>
-		<button class="btn btn-apply btn-primary" *ngIf!="active" (click)="active=true">+ Apply New</button>
+		<button class="btn btn-apply btn-default" *ngIf!="active" (click)="active=true">+ Apply New</button>
 	</div>
 
 	<div *ngIf="active" class="row col col-xs-6 form-inline">

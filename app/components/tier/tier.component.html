@@ -16,15 +16,15 @@
 
     <div class="form-inline">
       <div *ngIf="tiers" class="form-group">
-        <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-		<button class="btn btn-primary" *ngIf!="toPay" (click)="toPay=true;tedit=false">Show BadgeSet</button>
-		<button class="btn btn-primary" *ngIf="toPay" (click)="toPay=false;tedit=false">Show $$</button>
-		<button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
+       	<input class="form-control" [(ngModel)]="query" placeholder="Search for">
+			<button class="btn btn-default" *ngIf!="toPay" (click)="toPay=true;tedit=false">Show BadgeSet</button>
+			<button class="btn btn-big btn-primary" *ngIf="toPay" (click)="toPay=false;tedit=false">Show $$</button>
+			<button class="btn btn-small btn-default" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
       </div>
 
       <div class="form-group" *ngIf="!tiers && auth.isAdmin()">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-		<button class="btn btn-primary" (click)="addTier()">+</button>
+		<button class="btn btn-small btn-default" (click)="addTier()">+</button>
       </div>
    </div>
    <br>
@@ -45,7 +45,9 @@
 		</div>
 		<div class="row col-xs-12 div-list-item form-inline" *ngFor="let tier of tiers | filter:query">
 
-			<div *ngIf="!et || !tedit || !(selectedTier._id == tier._id)" (click)="onSelect(tier,'tier');checkAdmin()" class="text-big col-sm-1">{{tier.tier}}</div>
+			<div *ngIf="!et || !tedit || !(selectedTier._id == tier._id)" class="col-sm-1">
+				<button class="btn btn-small btn-primary wrap" (click)="onSelect(tier,'tier');checkAdmin()">{{tier.tier}}</button>
+			</div>
 			<div *ngIf="et && tedit && selectedTier._id == tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.tier"></div>
 
 

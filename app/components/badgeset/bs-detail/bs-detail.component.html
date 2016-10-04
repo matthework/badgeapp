@@ -107,7 +107,7 @@
 
 	<div *ngIf="badgeset.badgegroups[0]" class="row col-xs-12">
 		<button *ngIf="!more && !bedit" class="btn-big btn btn-default pull-right" (click)="more=true">Show More</button>
-		<button *ngIf="more && !bedit" class="btn-big btn btn-default pull-right" (click)="more=false">Show Less</button>
+		<button *ngIf="more && !bedit" class="btn-big btn btn-primary pull-right" (click)="more=false">Show Less</button>
 	</div>
 
 	<div *ngIf="!more">
@@ -116,8 +116,7 @@
 		  <div class="col-xs-3">Focus</div>
 		  <div class="col-xs-6">Description</div>
 		</div>
-		<div class="row col col-xs-12 div-list-item" *ngFor="let badgegroup of badgeset.badgegroups">
-			<div (click)="onSelect(badgegroup)">
+		<div (click)="onSelect(badgegroup)" class="row col col-xs-12 div-list-item" *ngFor="let badgegroup of badgeset.badgegroups">
 			<div class="col-sm-3">
 				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</button>
 			</div>
@@ -133,7 +132,7 @@
 			<div *ngIf="auth.isAdmin()" class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
 				<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 			</div>
-			</div>
+
 <!-- 			<div *ngIf="bedit && selectedBG.bid == badgegroup.bid && selectedBG.level == badgegroup.level">
 				<div class="col-sm-4 form-inline">
 					<select class="form-control" [(ngModel)]="badgegroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="form-control" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.bid)" [value]="lo">{{lo}}</option></select><br><br><text *ngFor="let fc of getFocusOptions(badgegroup.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,badgegroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, badgegroup)">,  </text>
@@ -160,8 +159,7 @@
 					<text *ngFor="let fc of getFocusOptions(selectedBG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedBG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedBG)">,  </text>
 				</div>
 				<div class="modal-body">
-					<div class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedBG.bid)">
-						<div (click)="onSelectNewLevel(bl.level)">
+					<div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedBG.bid)">
 						<div *ngIf="selectedBG.level!=bl.level">
 							<div class="col-sm-2">{{bl.level}}</div>
 							<div class="col-sm-10"><text class="text-blue">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
@@ -169,7 +167,6 @@
 						<div *ngIf="selectedBG.level==bl.level" class="row highlight">					
 							<div class="col-sm-2">{{bl.level}}</div>
 							<div class="col-sm-10"><text class="">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
-						</div>
 						</div>
 					</div>
 				</div>
@@ -231,7 +228,7 @@
 				</div>
  				<br>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)">Ok</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)">Save</button>
 				</div>
 			</div>
 		</div>

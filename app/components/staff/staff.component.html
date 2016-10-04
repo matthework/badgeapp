@@ -17,30 +17,32 @@
     <div class="form-inline">
       <div *ngIf="staffs" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-        <button class="btn btn-primary" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
-        <button class="btn btn-primary" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
-        <button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addStaff()">+</button>
+        <button class="btn btn-default" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
+        <button class="btn btn-default" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
+        <button class="btn btn-default" *ngIf="auth.isAdmin()" (click)="addStaff()">+</button>
       </div>
 
       <div *ngIf="!staffs && auth.isAdmin()" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-        <button class="btn btn-primary" (click)="addStaff()">+</button>
+        <button class="btn btn-default" (click)="addStaff()">+</button>
       </div>
     </div>
     <br>
 
     <div *ngIf!="showBS">
       <div *ngIf="staffs" class="row col-xs-12 header hidden-xs">
-        <div class=" col-xs-2">Name</div>
+        <div class=" col-xs-3">Name</div>
         <div class=" col-xs-5">Badges</div>
         <div class=" col-xs-3">Top BadgeSet</div>
-        <div class=" col-xs-2">Status</div>
+        <div class=" col-xs-1">Status</div>
         <!-- <div class=" col-xs-1"></div> -->
       </div>
 
       <div class="row col-xs-12 div-list-item" *ngFor="let staff of staffs | filter:query">
-        <div (click)="onSelect(staff);toStaffDetail(staff._id)" class="col-sm-2 col-xs-12 btn btn-primary wrap">{{staff.fname}} {{staff.lname}}</div>
-        <div class="staff col-sm-5 col-xs-12">
+        <div  class="col-sm-3 col-xs-12">
+          <button class="btn btn-b btn-primary wrap" (click)="onSelect(staff);toStaffDetail(staff._id)">{{staff.fname}} {{staff.lname}}</button>
+        </div>
+        <div class="col-sm-5 col-xs-12">
         	<div *ngFor="let userbgroup of staff.userbgroups">
         	<uli>
         	<text class="click text-blue" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
@@ -50,7 +52,7 @@
         	</div>
       	</div>
       	<div class="click text-blue col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>
-        <div class="col-sm-2 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div>
+        <div class="col-sm-1 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div>
 <!--         <div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteStaffPop(staff._id)">X</button>
         </div> -->
       </div>

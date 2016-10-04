@@ -15,30 +15,26 @@
    <div class="form-inline">
       <div *ngIf="badges">
          <input class="input form-control" type="text" [(ngModel)]="query" placeholder="Search for">
-         <button class="btn btn-primary" *ngIf="auth.isAdmin()" (click)="addBadge()">+</button>
+         <button class="btn btn-small btn-default" *ngIf="auth.isAdmin()" (click)="addBadge()">+</button>
       </div>
       <div *ngIf="!badges && auth.isAdmin() ">
          <input class="input form-control" type="text" [(ngModel)]="query" placeholder="Search for">
-         <button class="btn btn-primary" (click)="addBadge()">+</button><br>
+         <button class="btn btn-small btn-default" (click)="addBadge()">+</button><br>
       </div>
    </div>
    <br>
 
    <div *ngIf="badges" class="row col-xs-12 header hidden-xs">
-         <div class="col-xs-2">Badge Name</div>
-         <div class="col-xs-8">Overview</div>
+         <div class="col-xs-3">Badge Name</div>
+         <div class="col-xs-7">Overview</div>
          <div class="col-xs-2">Status</div>
-         <!-- <div class="col-xs-1"></div> -->
    </div>
    <div class="row col-xs-12 div-list-item" *ngFor="let badge of badges | filter:query">
-      <div class="col-xs-4 col-sm-2 btn btn-primary wrap" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge);toDetail()">
-         <span>{{badge.name}}</span>
+      <div class="col-sm-3" *ngIf="badge.status=='Accepted' || auth.isAdmin()" >
+         <button class="btn btn-b btn-primary wrap" (click)="onSelect(badge);toDetail()">{{badge.name}}</button>
       </div>
-      <div class="col-xs-6 col-sm-8" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.overview}}</div>
-      <div class="col-xs-2 col-sm-2" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.status}}</div>
-<!--       <div class="col-xs-1 col-sm-1" *ngIf="(badge.status=='Accepted' || auth.isAdmin()) && active">
-         <button class="btn btn-delete btn-default" *ngIf="auth.isAdmin()" (click)="deleteBadgePop(badge._id)">X</button>
-      </div> -->
+      <div class="col-sm-7" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.overview}}</div>
+      <div class="col-sm-2" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.status}}</div>
    </div>
 
 </div>

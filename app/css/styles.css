@@ -118,7 +118,7 @@ th , td  {
   background-color: red;
 }
 .btn-small {
-  width: 40px;
+  width: 38px;
 }
 .btn-big {
   width: 100px;
@@ -139,4 +139,7 @@ th , td  {
 }
 .col {
   padding-left: 0;
+}
+.btn-b {
+  width: 200px;
 }
