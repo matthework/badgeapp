@@ -120,32 +120,22 @@
 			<div class="col-sm-3">
 				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</button>
 			</div>
-			<div *ngIf="!auth.isAdmin()" class="col-sm-3 text-blue">
-				<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
+			<div *ngIf="!auth.isAdmin()">
+			<div class="col-sm-3">
+				<text *ngIf="badgegroup.focus.length!=0">[{{badgegroup.focus}}]</text>
 			</div>
-			<div *ngIf="auth.isAdmin()" class="col-sm-3 text-blue click" data-toggle="modal" data-target="#myModal">
-				<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
-			</div>
-			<div *ngIf="!auth.isAdmin()" class="col-sm-6">
+			<div class="col-sm-6">
 				<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 			</div>
-			<div *ngIf="auth.isAdmin()" class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
+			</div>
+			<div *ngIf="auth.isAdmin()">
+			<div class="col-sm-3 text-blue click" data-toggle="modal" data-target="#myModal">
+				<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
+			</div>
+			<div class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
 				<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 			</div>
-
-<!-- 			<div *ngIf="bedit && selectedBG.bid == badgegroup.bid && selectedBG.level == badgegroup.level">
-				<div class="col-sm-4 form-inline">
-					<select class="form-control" [(ngModel)]="badgegroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="form-control" [(ngModel)]="badgegroup.level"><option *ngFor="let lo of getLevelsOptions(badgegroup.bid)" [value]="lo">{{lo}}</option></select><br><br><text *ngFor="let fc of getFocusOptions(badgegroup.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,badgegroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, badgegroup)">,  </text>
-				</div>
-				<div class="col-sm-6">
-					<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid, badgegroup.level)}}
-				</div>
-				<div class="col-sm-2">
-					<button class="btn btn-s btn-success" (click)="bedit=false;updateBadgeSet()">Y</button><br>
-					<button class="btn btn-s btn-danger" (click)="bedit=false;getBadgeSet()">N</button><br>
-					<button class="btn-delete btn btn-default" (click)="deleteBadgeGroupPop(badgegroup)">X</button>
-				</div>
-			</div> -->
+			</div>
 		</div>
 	</div>
 
@@ -155,7 +145,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedBG.bid)}}</h4><br>
+					<h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedBG.bid)}}</h3><br>
 					<text *ngFor="let fc of getFocusOptions(selectedBG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedBG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedBG)">,  </text>
 				</div>
 				<div class="modal-body">
@@ -205,7 +195,7 @@
 			<div class="modal-content">
 				<div class="modal-header form-inline">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title text-blue" id="myModalLabel">Add New Badge: </h4><br>
+					<h3 class="modal-title text-blue" id="myModalLabel">Add New Badge: </h3><br>
 					<label class="lab">Badge: </label>
 					<select class="select form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><br>
 					<br>
@@ -228,7 +218,7 @@
 				</div>
  				<br>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)">Save</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
 				</div>
 			</div>
 		</div>
@@ -237,13 +227,17 @@
 
 	<div *ngIf="more">
 		<div class="row col col-xs-12 header hidden-xs">
-		  <div class="col-xs-4">Badge</div>
+		  <div class="col-xs-3">Badge</div>
+		  <div class="col-xs-3">Focus</div>
 		  <div class="col-xs-6">Description</div>
 		</div>
 		<div class="row col col-xs-12 div-list-item" *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
 			<div (click)="onSelect(moreb);checkAdmin();checkCurrent(moreb.current)">
-				<div class="col-sm-4">
-					<text *ngIf="moreb.current" class="click text-blue" (click)="bedit=false;toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}} <text *ngIf="moreb.focus.length!=0"> [{{moreb.focus}}]</text></text><text *ngIf="!moreb.current" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text>
+				<div class="col-sm-3 text-big">
+					<text *ngIf="moreb.current" class="click text-blue" (click)="bedit=false;toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text><text *ngIf="!moreb.current" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text>
+				</div>
+				<div class="col-sm-3">
+					<text *ngIf="moreb.current && moreb.focus.length!=0" class="text-blue"> [{{moreb.focus}}]</text>
 				</div>
 				<div class="col-sm-6">
 					<text *ngIf="moreb.current" class="text-blue">{{labels[moreb.level-1]}}</text><text *ngIf="!moreb.current">{{labels[moreb.level-1]}}</text><br>{{getDesc(moreb.bid,moreb.level)}}
@@ -259,7 +253,7 @@
 	<div *ngIf="auth.isAdmin()" class="row col-xs-11">
 		<button class="btn-bs btn btn-default" (click)="addBadgeSet()">New BadgeSet</button>
 		<button class="btn-big btn btn-default" (click)="deleteBadgeSetPop()">Delete</button>
-		<button class="btn-big btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
+		<button class="btn-big btn btn-default" (click)="addNew=true;resetNewValue();more=false" data-toggle="modal" data-target="#myModal-new">New Badge</button>
 <!-- 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadgeSet()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadgeSet()">Save</button> -->
 	</div>

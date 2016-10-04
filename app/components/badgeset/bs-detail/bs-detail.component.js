@@ -334,6 +334,7 @@ var BSDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
+        this.selectedLevel = 0;
     };
     BSDetailComponent.prototype.checkEmptyTags = function () {
         if (this.badgeset.tags != null) {

@@ -33,11 +33,12 @@ var UserDetailComponent = (function () {
         this.newUser = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief: "", others: [] };
         this.gmap = { "A": 0, "B": 1, "C": 2, "D": 3, "E": 4, "F": 5 };
         this.sortStaffBS = [];
-        this.active = false;
+        this.addNew = false;
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
         this.newStatus = false;
+        this.selectedLevel = 0;
         this.more = false;
         this.edit = false;
         this.userName = false;
@@ -271,17 +272,18 @@ var UserDetailComponent = (function () {
         }
         return focusOptions.sort();
     };
-    UserDetailComponent.prototype.addBadgeGroup = function () {
-        this.newLevel = +this.newLevel;
+    UserDetailComponent.prototype.addBadgeGroup = function (level) {
+        // this.newLevel = +this.newLevel;
+        this.newLevel = level;
         this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus });
         this.staff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBID = "";
-        this.newLevel = 0;
-        this.newFocus = [];
-        this.newStatus = false;
+        // this.newBID = "";
+        // this.newLevel = 0;
+        // this.newFocus = [];
+        // this.newStatus = false;
     };
     UserDetailComponent.prototype.toCompare = function (a, b) {
         if (a.badge < b.badge)
@@ -347,6 +349,26 @@ var UserDetailComponent = (function () {
             }
         }
         return hasProfile;
+    };
+    UserDetailComponent.prototype.resetNewValue = function () {
+        this.newBID = "";
+        this.newLevel = 0;
+        this.newFocus = [];
+        this.newStatus = false;
+        this.selectedLevel = 0;
+    };
+    UserDetailComponent.prototype.onSelectedLevel = function (level) {
+        this.selectedLevel = level;
+    };
+    UserDetailComponent.prototype.getBLs = function (bid) {
+        var bls;
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bls = this.badges[i].badgelevels;
+            }
+        }
+        // console.log('you submitted value: ', bls);
+        return bls;
     };
     UserDetailComponent.prototype.goBack = function () {
         window.history.back();

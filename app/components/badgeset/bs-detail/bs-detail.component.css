@@ -61,11 +61,8 @@
   margin-left: 1px;
   border-radius: 4px;
   /*border: 3px limegreen solid;*/
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-.focus {
-  color: #039be5;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .lab {
   width: 6em;

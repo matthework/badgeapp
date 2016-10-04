@@ -372,6 +372,7 @@ export class BSDetailComponent implements OnInit {
     this.newBID = "";
     this.newLevel = 0;
     this.newFocus = [];
+    this.selectedLevel = 0;
   }
 
   checkEmptyTags() {
@@ -463,7 +464,7 @@ export class BSDetailComponent implements OnInit {
    onSelectedLevel(level:number) {
       this.selectedLevel = level;
    }
-   
+
   goBack() {
     window.history.back();
   }
