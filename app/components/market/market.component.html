@@ -13,17 +13,17 @@
 </div>
 <br>
 
-<div class="row col-xs-12 header hidden-xs">
-	<div class="col-xs-2">Badge Name</div>
-	<div class="col-xs-8">Overview</div>
+<div class="row col col-xs-12 header hidden-xs">
+	<div class="col-xs-3">Badge Name</div>
+	<div class="col-xs-7">Overview</div>
 	<div class="col-xs-2">Owner</div>
 </div>
 
-<div class="row col-xs-12 div-list-item" *ngFor="let badge of marketBadges | filter:query">
-  <div class="col-xs-4 col-sm-2 btn btn-primary wrap" *ngIf="badge.published" (click)="onSelect(badge);toDetail()">
-     <span>{{badge.name}}</span>
+<div class="row col col-xs-12 div-list-item" *ngFor="let badge of marketBadges | filter:query">
+  <div class="col-xs-4 col-sm-3" *ngIf="badge.published">
+     <button class="btn btn-b btn-primary wrap" (click)="onSelect(badge);toDetail()">{{badge.name}}</button>
   </div>
-  <div class="col-xs-6 col-sm-8" *ngIf="badge.published" (click)="onSelect(badge)">{{badge.overview}}</div>
+  <div class="col-xs-6 col-sm-7" *ngIf="badge.published" (click)="onSelect(badge)">{{badge.overview}}</div>
   <div class="col-xs-2 col-sm-2" *ngIf="badge.published" (click)="onSelect(badge)">{{badge.owner}}</div>
 </div>
 

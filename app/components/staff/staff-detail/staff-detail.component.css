@@ -3,12 +3,16 @@
   margin-top: 5px;
   margin-right: 5px;
 }
+.btn-b {
+  width: 200px;
+}
 .btn-big {
   margin-top: 20px;
   margin-right: 5px;
   margin-bottom: 20px;
 }
 .textarea {
+  vertical-align: top;
   width: 350px;
   background-color: transparent;
 }
@@ -21,4 +25,7 @@
 .label-level {
   width: 6em;
   margin-left: 20px;
+}
+.btn-brief {
+  vertical-align: top;
 }

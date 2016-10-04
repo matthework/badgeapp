@@ -1,11 +1,7 @@
 .btn-small {
+	margin-left: 5px;
 	margin-right: 5px;
 	margin-bottom: 5px;
-}
-.btn-big {
-	margin-top: 20px;
-	margin-right: 5px;
-	margin-bottom: 20px;
 }
 .input-small {
 	padding-left: 5px;
