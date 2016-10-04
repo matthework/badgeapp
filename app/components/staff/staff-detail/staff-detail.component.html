@@ -102,36 +102,50 @@
 
 	<div *ngIf="!more">
 		<div class="row col col-xs-12 header hidden-xs">
-			<div *ngIf="!bedit">
-			  <div class="col-xs-3">Badge</div>
-			  <div class="col-xs-5">Description</div>
-			  <div class="col-xs-3">Badge Set</div>
-			  <div class="col-xs-1">Status</div>
-		  </div>
-		  <div *ngIf="bedit">
-			  <div class="col-xs-4">Badge</div>
-			  <div class="col-xs-6">Description</div>
-			  <div class="col-xs-1">Status</div>
-			  <div class="col-xs-1"></div>
-		  </div>
+		  <div class="col-xs-3">Badge</div>
+		  <div class="col-xs-2">Focus</div>
+		  <div class="col-xs-4">Description</div>
+		  <div class="col-xs-2">Badge Set</div>
+		  <div class="col-xs-1">Status</div>
 		</div>
-		<div class="row col col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">	
-			<div *ngIf="!bedit">
-				<div class="col-sm-3">
-					<button class="btn btn-b btn-primary wrap" (click)="onSelect(userbgroup);checkAdmin()">
-					<text (click)="bedit=false;toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} <text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text></text></button>
+		<div (click)="onSelect(userbgroup)" class="row col col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">
+			<div class="col-sm-3">
+				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}
+				</button>
+			</div>
+			<div *ngIf="!auth.isAdmin()">
+				<div class="col-sm-2">
+					<text *ngIf="userbgroup.focus.length!=0">[{{userbgroup.focus}}]</text>
 				</div>
-				<div class="col-sm-5" (click)="onSelect(userbgroup);checkAdmin()"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
-				<div class="col-sm-3" *ngIf="!bedit" (click)="checkAdmin()">
+				<div class="col-sm-4">
+					<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}
+				</div>
+				<div class="col-sm-2">
 					<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 						<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 					</div>
 		  		</div>
-		  		<div class="col-sm-1" (click)="onSelect(userbgroup);checkAdmin()">
+		  		<div class="col-sm-1">
 		  			<i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i>
 		  		</div>
 		  	</div>
-		  	<div *ngIf="bedit && selectedUG.bid == userbgroup.bid && selectedUG.level == userbgroup.level">
+		  	<div *ngIf="auth.isAdmin()">
+				<div class="col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
+					<text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text>
+				</div>
+				<div class="col-sm-4 click" data-toggle="modal" data-target="#myModal">
+					<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}
+				</div>
+				<div class="col-sm-2">
+					<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
+						<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+					</div>
+		  		</div>
+		  		<div class="col-sm-1" data-toggle="modal" data-target="#myModal">
+		  			<i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i>
+		  		</div>
+		  	</div>
+		  	<!-- <div *ngIf="bedit && selectedUG.bid == userbgroup.bid && selectedUG.level == userbgroup.level">
 		  		<div class="col-sm-4">
 	  				<select class="form-control" [(ngModel)]="userbgroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="form-control" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.bid)" [value]="lo">{{lo}}</option></select><br><text *ngFor="let fc of getFocusOptions(userbgroup.bid)">{{fc}} <input class="form-control" type="checkbox" [checked]="checkFocus(fc,userbgroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, userbgroup)">, </text>
 		  		</div>
@@ -145,11 +159,45 @@
 					<button class="btn btn-s btn-success" (click)="bedit=false;updateStaff()">Y</button><br><button class="btn btn-s btn-danger" (click)="bedit=false;getStaff()">N</button><br>
 					<button *ngIf="bedit && auth.isAdmin()" class="btn-delete btn-s btn btn-default" (click)="deleteBadgeGroupPop(userbgroup)">X</button>
 				</div>
-		  	</div>
+		  	</div> -->
 		</div>
 	</div>
 
-	<div *ngIf="addNew" class="row col col-xs-6 form-inline">
+	<!-- Modal -->
+	<div *ngIf="selectedUG" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedUG.bid)}}</h3><br>
+					<label class="lab">Approved: </label>
+					<input type="checkbox" [(ngModel)]="selectedUG.status"><br>
+					<label class="lab">Focus: </label>
+					<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedUG)">,  </text>
+				</div>
+				<div class="modal-body">
+					<div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedUG.bid)">
+						<div *ngIf="selectedUG.level!=bl.level">
+							<div class="col-sm-2">{{bl.level}}</div>
+							<div class="col-sm-10"><text class="text-blue">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+						</div>
+						<div *ngIf="selectedUG.level==bl.level" class="row highlight">					
+							<div class="col-sm-2">{{bl.level}}</div>
+							<div class="col-sm-10"><text class="">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+						</div>
+					</div>
+				</div>
+ 				<br>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="removeBadgeGroup(selectedUG)">Delete</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+
+<!-- 	<div *ngIf="addNew" class="row col col-xs-6 form-inline">
 		<h3 class="text-blue">Add New Badge</h3><br>
 		<label>Badge: </label>
 		<select class="select-badge form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
@@ -170,19 +218,60 @@
 
 		<button class="btn-big btn btn-danger pull-right" (click)="addNew=false">Cancel</button>
 		<button class="btn-big btn btn-success pull-right" (click)="addBadgeGroup();addNew=false">Save</button>
+	</div> -->
+
+	<!-- Modal -->
+	<div *ngIf="addNew" class="modal fade" id="myModal-new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header form-inline">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title text-blue" id="myModalLabel">Add New Badge: </h4><br>
+					<label class="lab">Badge: </label>
+					<select class="select form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><br>
+					<br>
+					<label class="lab">Approved: </label>
+					<input type="checkbox" [(ngModel)]="newStatus"><br>
+					<br>
+					<label class="lab">Focus: </label>
+					<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+				</div>
+				<div class="modal-body">
+					<div (click)="onSelectedLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(newBID)">
+						<div *ngIf="selectedLevel!=bl.level">
+							<div class="col-sm-2">{{bl.level}}</div>
+							<div class="col-sm-10"><text class="text-blue">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+						</div>
+						<div *ngIf="selectedLevel==bl.level" class="row highlight">					
+							<div class="col-sm-2">{{bl.level}}</div>
+							<div class="col-sm-10"><text class="">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+						</div>
+					</div>
+				</div>
+ 				<br>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
+				</div>
+			</div>
+		</div>
 	</div>
+	<!-- Modal -->
 
 	<div *ngIf="more">
 		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
-		  <div class="col-xs-5">Description</div>
-		  <div class="col-xs-3">Badge Set</div>
+		  <div class="col col-xs-2">Focus</div>
+		  <div class="col-xs-4">Description</div>
+		  <div class="col-xs-2">Badge Set</div>
 		  <div class="col-xs-1">Status</div>
 		</div>
 		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
-			<div class="col-sm-3"  (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)"><text *ngIf="userbgroup.current" (click)="toBadgeDetail(userbgroup.bid)" class="click text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="!userbgroup.current" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0" class="text-blue"><text> [{{userbgroup.focus}}]</text></text></div>
-			<div class="col-sm-5" (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)"><text *ngIf="userbgroup.current" class="text-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
-			<div class="col-sm-3" (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)">
+			<div class="col-sm-3 text-big"  (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)"><text *ngIf="userbgroup.current" (click)="toBadgeDetail(userbgroup.bid)" class="click text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="!userbgroup.current" class="click" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text></div>
+			<div class="col col-sm-2">
+				<text *ngIf="userbgroup.current && userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text>
+			</div>
+			<div class="col-sm-4" (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)"><text *ngIf="userbgroup.current" class="text-blue">{{labels[userbgroup.level-1]}}</text><text *ngIf="!userbgroup.current">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
+			<div class="col-sm-2" (click)="onSelect(userbgroup);checkAdmin();checkCurrent(userbgroup.current)">
 				<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 					<uli (click)="toBSDetail(bs._id)" *ngIf="userbgroup.current" class="click text-blue">{{bs.name}}</uli>
 				</div>
@@ -191,10 +280,10 @@
 		</div>
 	</div>
 
-	<div *ngIf="auth.isAdmin() && !addNew" class="row col-xs-12">
+	<div *ngIf="auth.isAdmin()" class="row col-xs-12">
 		<button class="btn-big btn btn-default" (click)="addStaff()">New Person</button>
 		<button class="btn-big btn btn-default" (click)="deleteStaffPop()">Delete</button>
-		<button class="btn btn-big btn-default" (click)="addNew=true;resetNewValue()">New Badge</button>
+		<button class="btn btn-big btn-default" (click)="addNew=true;resetNewValue();more=false" data-toggle="modal" data-target="#myModal-new">New Badge</button>
 <!-- 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getStaff()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateStaff()">Save</button> -->
 	</div>

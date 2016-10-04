@@ -42,6 +42,8 @@ var StaffDetailComponent = (function () {
         this.newLevel = 0;
         this.newFocus = [];
         this.newStatus = false;
+        this.newL = 0;
+        this.selectedLevel = 0;
         this.addNew = false;
         this.statusOptions = ['Active', 'Inactive'];
         this.labels = ["I understand... ",
@@ -118,15 +120,17 @@ var StaffDetailComponent = (function () {
     StaffDetailComponent.prototype.addStaff = function () {
         this._router.navigate(['/staff/new']);
     };
-    StaffDetailComponent.prototype.addBadgeGroup = function () {
-        this.newLevel = +this.newLevel;
+    StaffDetailComponent.prototype.addBadgeGroup = function (level) {
+        // this.newLevel = +this.newLevel;
+        this.newLevel = level;
         this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus });
         var value = JSON.stringify(this.staff);
+        this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
-        this.newBID = "";
-        this.newLevel = 0;
-        this.newFocus = [];
-        this.newStatus = false;
+        // this.newBID = "";
+        // this.newLevel = 0;
+        // this.newFocus =[];
+        // this.newStatus = false;
     };
     StaffDetailComponent.prototype.removeStaff = function () {
         this._staffService.deleteStaff(this.id).subscribe();
@@ -154,7 +158,7 @@ var StaffDetailComponent = (function () {
         var index = this.staff.userbgroups.indexOf(selectedGroup);
         this.staff.userbgroups.splice(index, 1);
         var value = JSON.stringify(this.staff);
-        // this._staffService.updateStaff(id,value).subscribe();
+        this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
     };
     StaffDetailComponent.prototype.getDesc = function (bid, l) {
@@ -359,6 +363,12 @@ var StaffDetailComponent = (function () {
             }
         }
         console.log(bg.focus);
+        for (var i = 0; i < this.staff.userbgroups.length; i++) {
+            if (this.staff.userbgroups[i].bid == this.selectedUG.bid && this.staff.userbgroups[i].level == this.selectedUG.level) {
+                this.staff.userbgroups[i].focus = this.selectedUG.focus;
+            }
+        }
+        this.updateStaff();
     };
     StaffDetailComponent.prototype.updateCheckedNew = function (option, event, focus) {
         console.log('event.target.value ' + event.target.value);
@@ -401,6 +411,33 @@ var StaffDetailComponent = (function () {
     StaffDetailComponent.prototype.resetNewValue = function () {
         this.newBID = "";
         this.newLevel = 0;
+        this.newFocus = [];
+        this.newStatus = false;
+        this.selectedLevel = 0;
+    };
+    StaffDetailComponent.prototype.onSelectNewLevel = function (level) {
+        this.newL = level;
+        // console.log('you submitted value: ', this.newL);
+        for (var i = 0; i < this.staff.userbgroups.length; i++) {
+            if (this.staff.userbgroups[i].bid == this.selectedUG.bid && this.staff.userbgroups[i].level == this.selectedUG.level) {
+                this.staff.userbgroups[i].level = this.newL;
+                this.staff.userbgroups[i].focus = this.selectedUG.focus;
+            }
+        }
+        this.updateStaff();
+    };
+    StaffDetailComponent.prototype.onSelectedLevel = function (level) {
+        this.selectedLevel = level;
+    };
+    StaffDetailComponent.prototype.getBLs = function (bid) {
+        var bls;
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bls = this.badges[i].badgelevels;
+            }
+        }
+        // console.log('you submitted value: ', bls);
+        return bls;
     };
     StaffDetailComponent.prototype.goBack = function () {
         window.history.back();

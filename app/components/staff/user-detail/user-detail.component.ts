@@ -3,7 +3,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 import {Staff,UserBGroup} from '../staff';
 import {StaffService} from '../staff.service';
-import {Badge} from '../../badge/badge';
+import {Badge,BadgeLevel} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 import {BadgeSet,BadgeGroup} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
@@ -34,11 +34,12 @@ export class UserDetailComponent implements OnInit {
   sortStaffBS = [];
   // sub: any;
   email: string;
-  active = false;
+  addNew = false;
   newBID = "";
   newLevel = 0;
   newFocus = [];
   newStatus = false;
+  selectedLevel = 0;
   more = false;
   edit = false;
   userName = false;
@@ -299,17 +300,18 @@ export class UserDetailComponent implements OnInit {
     return focusOptions.sort();
   }
 
-  addBadgeGroup() {
-      this.newLevel = +this.newLevel;
-      this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
-      this.staff.userbgroups.sort(this.toCompare);
-      let value = JSON.stringify(this.staff)
-      this._staffService.updateStaff(this.staff._id,value).subscribe();
-      console.log('you submitted value: ', value);
-      this.newBID = "";
-      this.newLevel = 0;
-      this.newFocus = [];
-      this.newStatus = false;
+  addBadgeGroup(level:number) {
+    // this.newLevel = +this.newLevel;
+    this.newLevel = level;
+    this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
+    this.staff.userbgroups.sort(this.toCompare);
+    let value = JSON.stringify(this.staff)
+    this._staffService.updateStaff(this.staff._id,value).subscribe();
+    console.log('you submitted value: ', value);
+    // this.newBID = "";
+    // this.newLevel = 0;
+    // this.newFocus = [];
+    // this.newStatus = false;
   }
 
   toCompare(a,b) {
@@ -380,6 +382,29 @@ export class UserDetailComponent implements OnInit {
       }
     }
     return hasProfile;
+  }
+
+  resetNewValue() {
+    this.newBID = "";
+    this.newLevel = 0;
+    this.newFocus = [];
+    this.newStatus = false;
+    this.selectedLevel = 0;
+  }
+
+  onSelectedLevel(level:number) {
+    this.selectedLevel = level;
+  }
+
+  getBLs(bid:string) {
+    var bls: BadgeLevel[];
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bls = this.badges[i].badgelevels;
+      }
+    }
+    // console.log('you submitted value: ', bls);
+    return bls;
   }
 
   goBack() {

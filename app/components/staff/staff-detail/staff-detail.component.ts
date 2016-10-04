@@ -3,7 +3,7 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 import {Staff,UserBGroup} from '../staff';
 import {StaffService} from '../staff.service';
-import {Badge} from '../../badge/badge';
+import {Badge,BadgeLevel} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 import {BadgeSet,BadgeGroup} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
@@ -43,6 +43,8 @@ export class StaffDetailComponent implements OnInit {
   newLevel = 0;
   newFocus = [];
   newStatus = false;
+  newL = 0;
+  selectedLevel = 0;
   addNew = false;
   statusOptions = ['Active','Inactive'];
 
@@ -137,15 +139,17 @@ export class StaffDetailComponent implements OnInit {
       this._router.navigate(['/staff/new']);
   }
 
-  addBadgeGroup() {
-      this.newLevel = +this.newLevel;
+  addBadgeGroup(level:number) {
+      // this.newLevel = +this.newLevel;
+      this.newLevel = level;
       this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
-      let value = JSON.stringify(this.staff)
+      let value = JSON.stringify(this.staff);
+      this._staffService.updateStaff(this.staff._id,value).subscribe();
       console.log('you submitted value: ', value);
-      this.newBID = "";
-      this.newLevel = 0;
-      this.newFocus =[];
-      this.newStatus = false;
+      // this.newBID = "";
+      // this.newLevel = 0;
+      // this.newFocus =[];
+      // this.newStatus = false;
   }
 
   removeStaff() {
@@ -177,7 +181,7 @@ export class StaffDetailComponent implements OnInit {
       let index = this.staff.userbgroups.indexOf(selectedGroup);
       this.staff.userbgroups.splice(index,1);
       let value = JSON.stringify(this.staff)
-      // this._staffService.updateStaff(id,value).subscribe();
+      this._staffService.updateStaff(this.staff._id,value).subscribe();
       console.log('you submitted value: ', value);
   }
 
@@ -400,6 +404,13 @@ export class StaffDetailComponent implements OnInit {
         }
       }
       console.log(bg.focus);
+
+      for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+         if(this.staff.userbgroups[i].bid == this.selectedUG.bid && this.staff.userbgroups[i].level == this.selectedUG.level) {
+            this.staff.userbgroups[i].focus = this.selectedUG.focus;
+         }
+      }
+      this.updateStaff();
   }
 
   updateCheckedNew(option, event, focus) {
@@ -442,12 +453,42 @@ export class StaffDetailComponent implements OnInit {
          this.bedit = false;
       }
    }
-   
+
   resetNewValue() {
     this.newBID = "";
     this.newLevel = 0;
+    this.newFocus = [];
+    this.newStatus = false;
+    this.selectedLevel = 0;
   }
-  
+
+   onSelectNewLevel(level:number) {
+      this.newL = level;
+      // console.log('you submitted value: ', this.newL);
+      for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+         if(this.staff.userbgroups[i].bid == this.selectedUG.bid && this.staff.userbgroups[i].level == this.selectedUG.level) {
+            this.staff.userbgroups[i].level = this.newL;
+            this.staff.userbgroups[i].focus = this.selectedUG.focus;
+         }
+      }
+      this.updateStaff();
+   }
+
+   onSelectedLevel(level:number) {
+      this.selectedLevel = level;
+   }
+
+  getBLs(bid:string) {
+    var bls: BadgeLevel[];
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bls = this.badges[i].badgelevels;
+      }
+    }
+    // console.log('you submitted value: ', bls);
+    return bls;
+  }
+
   goBack() {
     window.history.back();
   }
