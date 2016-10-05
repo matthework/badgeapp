@@ -440,14 +440,14 @@ export class BSDetailComponent implements OnInit {
     return result;
   }
 
-   checkCurrent(current) {
-      if(current) {
-         this.more = false;
+   // checkCurrent(current) {
+   //    if(current) {
+   //       this.more = false;
          
-      }else {
-         this.bedit = false;
-      }
-   }
+   //    }else {
+   //       this.bedit = false;
+   //    }
+   // }
 
    onSelectNewLevel(level:number) {
       this.newL = level;

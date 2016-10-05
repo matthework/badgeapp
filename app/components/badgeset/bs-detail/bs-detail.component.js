@@ -400,14 +400,13 @@ var BSDetailComponent = (function () {
         }
         return result;
     };
-    BSDetailComponent.prototype.checkCurrent = function (current) {
-        if (current) {
-            this.more = false;
-        }
-        else {
-            this.bedit = false;
-        }
-    };
+    // checkCurrent(current) {
+    //    if(current) {
+    //       this.more = false;
+    //    }else {
+    //       this.bedit = false;
+    //    }
+    // }
     BSDetailComponent.prototype.onSelectNewLevel = function (level) {
         this.newL = level;
         // console.log('you submitted value: ', this.newL);

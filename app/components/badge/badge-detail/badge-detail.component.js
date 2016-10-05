@@ -84,12 +84,12 @@ var BadgeDetailComponent = (function () {
     BadgeDetailComponent.prototype.editBadge = function () {
         this._router.navigate(['/badge/edit', this.id]);
     };
-    BadgeDetailComponent.prototype.findBadgeSet = function (bname, l) {
+    BadgeDetailComponent.prototype.findBadgeSet = function (bid, l) {
         var bset = [];
         if (this.badgesets != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
-                    if (this.badgesets[i].status == 'Accepted' && this.badgesets[i].badgegroups[j].badge == bname && this.badgesets[i].badgegroups[j].level == l) {
+                    if (this.badgesets[i].status == 'Accepted' && this.badgesets[i].badgegroups[j].bid == bid && this.badgesets[i].badgegroups[j].level == l) {
                         bset.push(this.badgesets[i]);
                     }
                 }
