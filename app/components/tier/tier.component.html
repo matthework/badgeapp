@@ -17,14 +17,14 @@
     <div class="form-inline">
       <div *ngIf="tiers" class="form-group">
        	<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-			<button class="btn btn-default" *ngIf!="toPay" (click)="toPay=true;tedit=false">Show BadgeSet</button>
-			<button class="btn btn-big btn-primary" *ngIf="toPay" (click)="toPay=false;tedit=false">Show $$</button>
-			<button class="btn btn-small btn-default" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
+			<button class="btn btn-add btn-default" *ngIf!="toPay" (click)="toPay=true;tedit=false">Show BadgeSet</button>
+			<button class="btn btn-big btn-add btn-default" *ngIf="toPay" (click)="toPay=false;tedit=false">Show $$</button>
+			<button class="btn btn-add btn-s btn-default" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
       </div>
 
       <div class="form-group" *ngIf="!tiers && auth.isAdmin()">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-		<button class="btn btn-small btn-default" (click)="addTier()">+</button>
+		<button class="btn btn-add btn-s btn-default" (click)="addTier()">+</button>
       </div>
    </div>
    <br>
@@ -44,12 +44,16 @@
 			<div class=" col-xs-1"></div>
 		</div>
 		<div class="row col-xs-12 div-list-item form-inline" *ngFor="let tier of tiers | filter:query">
+			<div *ngIf="!auth.isAdmin()">
+				<div class="col-sm-1 tier">{{tier.tier}}</div>
+			</div>
 
+			<div *ngIf="auth.isAdmin()">
 			<div *ngIf="!et || !tedit || !(selectedTier._id == tier._id)" class="col-sm-1">
 				<button class="btn btn-small btn-primary wrap" (click)="onSelect(tier,'tier');checkAdmin()">{{tier.tier}}</button>
 			</div>
 			<div *ngIf="et && tedit && selectedTier._id == tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.tier"></div>
-
+			</div>
 
 			<div *ngIf="!ea || !tedit || !(selectedTier._id == tier._id)" (click)="onSelect(tier,'a');checkAdmin()" class="col-sm-1">${{tier.grades[0]}}K</div>
 			<div *ngIf="ea && tedit && selectedTier._id == tier._id" class="col-sm-1"><input class="input-small form-control" type="number" [(ngModel)]="tier.grades[0]"> K</div>
@@ -75,7 +79,7 @@
 			<div *ngIf="!eexp || !tedit || !(selectedTier._id == tier._id)" (click)="onSelect(tier,'exp');checkAdmin()" class="col-sm-2">{{tier.expertise}}</div>
 			<div *ngIf="eexp && tedit && selectedTier._id == tier._id" class="col-sm-2"><textarea class="textarea form-control" rows="5" [(ngModel)]="tier.expertise"></textarea></div>
 
-			<div *ngIf="tedit && selectedTier._id == tier._id" class="col-sm-1"><button class="btn btn-small btn-success" (click)="updateTier(tier);resetEdit()">Y</button><button class="btn btn-small btn-danger" (click)="getTiers();resetEdit()">N</button><button class="btn btn-delete btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
+			<div *ngIf="tedit && selectedTier._id == tier._id" class="col-sm-1"><button class="btn btn-small btn-success" (click)="updateTier(tier);resetEdit()">Y</button><button class="btn btn-small btn-danger" (click)="getTiers();resetEdit()">N</button><button class="btn btn-del btn-s btn-default" (click)="deleteTierPop(tier._id)">X</button></div>
 
 		</div>	
 	</div>

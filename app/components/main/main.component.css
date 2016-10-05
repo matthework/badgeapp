@@ -3,6 +3,10 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+.btn-b {
+  width: 120px;	
+  margin-right: 10px;
+}
 .input {
   width: 300px;
 }

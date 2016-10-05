@@ -17,14 +17,14 @@
     <div class="form-inline">
       <div *ngIf="staffs" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-        <button class="btn btn-default" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
-        <button class="btn btn-default" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
-        <button class="btn btn-default" *ngIf="auth.isAdmin()" (click)="addStaff()">+</button>
+        <button class="btn btn-add btn-default" *ngIf!="showBS" (click)="showBS=true">Show BadgeSet</button>
+        <button class="btn btn-add btn-default" *ngIf="showBS" (click)="showBS=false">Show Badges</button>
+        <button class="btn btn-add btn-s btn-default" *ngIf="auth.isAdmin()" (click)="addStaff()">+</button>
       </div>
 
       <div *ngIf="!staffs && auth.isAdmin()" class="form-group">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
-        <button class="btn btn-default" (click)="addStaff()">+</button>
+        <button class="btn btn-add btn-s btn-default" (click)="addStaff()">+</button>
       </div>
     </div>
     <br>

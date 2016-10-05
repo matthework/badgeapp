@@ -146,7 +146,7 @@
 		<div *ngIf="bedit && selectedBL.level==badgelevel.level" class="col-sm-1">
 			<button class="btn btn-s btn-success" (click)="bedit=false;updateBadge()">Y</button><br>
 			<button class="btn btn-s btn-danger" (click)="bedit=false;getBadge()">N</button><br>
-			<button class="btn-delete btn btn-default" (click)="deleteBadgeLevelPop(badgelevel)">X</button>
+			<button class="btn-del btn btn-default" (click)="deleteBadgeLevelPop(badgelevel)">X</button>
 		</div>
 	</div>
 
@@ -167,8 +167,8 @@
 	<button *ngIf="!auth.isAdmin() && !bedit" class="btn-big btn btn-default" (click)="goBack()">Back</button>
 
 	<div *ngIf="auth.isAdmin() && !addLevel">
-		<button class="btn-big btn btn-default" (click)="addBadge()">New Badge</button>
-		<button class="btn-big btn btn-default" (click)="deleteBadgePop()">Delete</button>
+		<button class="btn-big btn-add btn btn-default" (click)="addBadge()">New Badge</button>
+		<button class="btn-big btn-delete btn btn-default" (click)="deleteBadgePop()">Delete</button>
 <!-- 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadge()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadge()">Save</button> -->
 	</div>

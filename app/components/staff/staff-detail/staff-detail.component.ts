@@ -445,14 +445,14 @@ export class StaffDetailComponent implements OnInit {
     }
   }
 
-   checkCurrent(current) {
-      if(current) {
-         this.more = false;
+   // checkCurrent(current) {
+   //    if(current) {
+   //       this.more = false;
          
-      }else {
-         this.bedit = false;
-      }
-   }
+   //    }else {
+   //       this.bedit = false;
+   //    }
+   // }
 
   resetNewValue() {
     this.newBID = "";
