@@ -39,3 +39,12 @@
 .btn-oview {
   vertical-align: top;
 }
+.blevel {
+  width: 38px;
+  height: 36px;
+  color: white;
+  text-align: center;
+  background-color: #428bca;
+  border-radius: 4px;
+  padding-top: 8px;
+}

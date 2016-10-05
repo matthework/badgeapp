@@ -92,11 +92,10 @@
 	</div>
 	<br>
 
-	<div *ngIf="auth.isAdmin()" class="form-inline">
-		<label>Published: </label>
-		<input type="checkbox" [(ngModel)]="badge.published" (change)="updatePublish($event)">
+	<div *ngIf="!editOwner && !auth.isAdmin()" class="form-inline">
+		<label>Owner: </label>
+		<text>{{badge.owner}}</text>
 	</div>
-	<br>
 
 	<div *ngIf="!editOwner && auth.isAdmin()" class="form-inline">
 		<label class="click" (click)="editOwner=true">Owner: </label>
@@ -110,6 +109,12 @@
 		<button class="btn-small btn btn-danger" (click)="editOwner=false;getBadge()">N</button>
 	</div>
 	<br>
+
+	<div *ngIf="auth.isAdmin()" class="form-inline">
+		<label>Published: </label>
+		<input type="checkbox" [(ngModel)]="badge.published" (change)="updatePublish($event)">
+	</div>
+	<br>
 	<br>
 
 <!-- 	<div *ngIf="auth.isAdmin() && !addLevel" >
@@ -118,21 +123,24 @@
 
 	<div class="row col col-xs-12 header hidden-xs">
 		<div class="col-xs-1">Level</div>
-		<div class="col-xs-7">Description</div>
-		<div class="col-xs-3">BadgeSet</div>
+		<div class="col-xs-8">Description</div>
+		<div class="col-xs-2">BadgeSet</div>
 		<div class="col-xs-1"></div>
 	</div>
 	<div class="row col col-xs-12 div-list-item" *ngFor="let badgelevel of badge.badgelevels">
-		<div class="col-sm-1">
+		<div *ngIf="!auth.isAdmin()" class="col-sm-1">
+			<div class="blevel">{{badgelevel.level}}</div>
+		</div>
+		<div *ngIf="auth.isAdmin()" class="col-sm-1">
 			<button class="btn btn-small btn-primary wrap" (click)="onSelect(badgelevel);checkAdmin()">{{badgelevel.level}}</button>
 		</div>
-		<div *ngIf="!bedit || !(selectedBL.level==badgelevel.level)" class="col-sm-7" (click)="onSelect(badgelevel);checkAdmin()"><text class="text-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</div>
-		<div *ngIf="bedit && selectedBL.level==badgelevel.level" class="col-sm-7">
+		<div *ngIf="!bedit || !(selectedBL.level==badgelevel.level)" class="col-sm-8" (click)="onSelect(badgelevel);checkAdmin()"><text class="text-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</div>
+		<div *ngIf="bedit && selectedBL.level==badgelevel.level" class="col-sm-8">
 			<text class="text-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="ta form-control" rows="5" [(ngModel)]="badgelevel.desc"></textarea>
 		</div>
-		<div class="col-sm-3" (click)="onSelect(badgelevel);checkAdmin()">
-			<div *ngFor="let bs of findBadgeSet(badge.name,badgelevel.level)">
-				<uli (click)="toBSDetail(bs._id)" class="uli-bset">{{bs.name}}</uli><text class="text-red">{{checkCore(bs,badge.name)}}</text>
+		<div class="col-sm-2">
+			<div *ngFor="let bs of findBadgeSet(badge._id,badgelevel.level)">
+				<uli (click)="toBSDetail(bs._id)" class="text-blue click">{{bs.name}}</uli><text class="text-red">{{checkCore(bs,badge._id)}}</text>
 			</div>
 		</div>
 		<div *ngIf="bedit && selectedBL.level==badgelevel.level" class="col-sm-1">

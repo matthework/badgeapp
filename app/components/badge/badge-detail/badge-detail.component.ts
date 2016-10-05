@@ -97,19 +97,19 @@ export class BadgeDetailComponent implements OnInit {
         this._router.navigate(['/badge/edit', this.id]);
     }
 
-    findBadgeSet(bname:string, l:number) {
-    var bset = [];
-    if (this.badgesets != null) {
-        for (var i = 0; i < this.badgesets.length; i++) { 
+   findBadgeSet(bid:string, l:number) {
+      var bset = [];
+      if (this.badgesets != null) {
+         for (var i = 0; i < this.badgesets.length; i++) { 
             for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {   
-                if (this.badgesets[i].status=='Accepted' && this.badgesets[i].badgegroups[j].badge == bname && this.badgesets[i].badgegroups[j].level == l) {
+               if (this.badgesets[i].status=='Accepted' && this.badgesets[i].badgegroups[j].bid == bid && this.badgesets[i].badgegroups[j].level == l) {
                   bset.push(this.badgesets[i]);
-                }
+               }
             }
-        }
-    }
-    return bset;
-    }
+         }
+      }
+      return bset;
+   }
 
     toBSDetail(bsid:string){
         this._router.navigate(['bs/detail',bsid]);
