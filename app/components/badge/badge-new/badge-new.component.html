@@ -10,12 +10,12 @@
 
 <div *ngIf="auth.isAdmin()">
 
-<div class="row col-xs-6">
+<div class="row col-xs-12">
 <!-- <label>Index: </label>
 <input class="input-index" type="number" [(ngModel)]="newBadge.index" placeholder="Index" /><br> -->
 <br>
 <label>*Name: </label>
-<input class="input-name form-control" type="text" [(ngModel)]="newBadge.name" placeholder="Name"><br>
+<input class="input-big form-control" type="text" [(ngModel)]="newBadge.name" placeholder="Name"><br>
 <br>
 
 <!-- <label>Code: </label>
@@ -26,7 +26,7 @@
 <br>
 
 <label>Focus: </label>
-<input class="input-small form-control" type="text" [(ngModel)]="newFC" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text *ngFor="let fc of newBadge.focus">{{fc}} <button class="btn-small btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text><br>
+<input class="input-small form-control" type="text" [(ngModel)]="newFC" placeholder=""><button class="btn-s btn btn-default" (click)="addFC(newFC)">+</button><text *ngFor="let fc of newBadge.focus">{{fc}} <button class="btn-s btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text><br>
 <br>
 
 <!-- <label>Approved: </label>
@@ -44,7 +44,7 @@
 <br>
 
 <label>Owner: </label>
-<input class="form-control" type="text" [(ngModel)]="newBadge.owner"><br>
+<input class="input-small form-control" type="text" [(ngModel)]="newBadge.owner"><br>
 <br>
 
 <br>
@@ -102,9 +102,10 @@
 <textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder=""></textarea><br>
 <br>
 
-
+<div class="row col-xs-6">
 <button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
 <button class="btn-big btn btn-success pull-right" [disabled]="!newBadge.name" (click)="addBadge()">Save</button>
+</div>
 
 </div>
 

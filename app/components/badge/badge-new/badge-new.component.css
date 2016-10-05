@@ -3,11 +3,20 @@
   margin-right: 5px;
   margin-bottom: 20px;
 }
-.input-name{
+.btn-s {
+	width: 38px;
+	margin-right: 10px;
+}
+.input-small {
+  width: 200px;
+  margin-right: 10px;
+}
+.input-big {
   width: 350px;
 }
 .textarea {
   width: 350px;
   height: 120px;
   background-color: transparent;
+  vertical-align: top;
 }

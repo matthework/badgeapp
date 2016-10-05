@@ -88,7 +88,7 @@ th , td  {
   cursor: hand;
 }
 .click:hover{
-  color: #039be5;
+  color: limegreen;
 }
 .click:visited{
   color: #607D8B;
@@ -108,17 +108,19 @@ th , td  {
 .text-grey {
   color: lightgrey;
 }
-.btn-delete {
+.btn-del {
   width: 40px;
   color: white;
   background-color: pink;
+  border: 0;
 }
-.btn-delete:hover {
+.btn-del:hover {
   color: white;
   background-color: red;
 }
 .btn-small {
-  width: 38px;
+  width: 40px;
+  border: 0;
 }
 .btn-big {
   width: 100px;
@@ -126,13 +128,20 @@ th , td  {
 .label-small {
   width: 6em;
 }
+/*.btn-add {
+  color: white;
+  background-color: lightblue;
+  border: 0;
+}*/
 .btn-add:hover{
   color: white;
-  background-color: limegreen;
+  background-color: #039be5;
+  border: 0;
 }
-.btn-del:hover{
+.btn-delete:hover {
   color: white;
   background-color: red;
+  border: 0;
 }
 .input-upper {
   text-transform: uppercase;

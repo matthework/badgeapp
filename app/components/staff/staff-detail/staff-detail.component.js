@@ -400,14 +400,13 @@ var StaffDetailComponent = (function () {
             this.bedit = true;
         }
     };
-    StaffDetailComponent.prototype.checkCurrent = function (current) {
-        if (current) {
-            this.more = false;
-        }
-        else {
-            this.bedit = false;
-        }
-    };
+    // checkCurrent(current) {
+    //    if(current) {
+    //       this.more = false;
+    //    }else {
+    //       this.bedit = false;
+    //    }
+    // }
     StaffDetailComponent.prototype.resetNewValue = function () {
         this.newBID = "";
         this.newLevel = 0;

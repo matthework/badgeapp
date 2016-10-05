@@ -16,14 +16,14 @@
 		<div class="form-inline">
 			<div *ngIf="badgesets" class="form-group">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-				<button class="btn-compare btn btn-default" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
+				<button class="btn-compare btn-add btn btn-default" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
 				<button class="btn btn-big btn-default" *ngIf="showBS" (click)="toBadgeSets()">Back</button>
-				<button class="btn btn-small btn-default" *ngIf="auth.isAdmin()" (click)="addBadgeSet()">+</button>
+				<button class="btn btn-add btn-s btn-default" *ngIf="auth.isAdmin()" (click)="addBadgeSet()">+</button>
 			</div>
 
 			<div *ngIf="!badgesets && auth.isAdmin()" class="form-group">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
-				<button class="btn btn-small btn-default" (click)="addBadgeSet()">+</button><br>
+				<button class="btn btn-add btn-s btn-default" (click)="addBadgeSet()">+</button><br>
 			</div>
 		</div>
 		<br>

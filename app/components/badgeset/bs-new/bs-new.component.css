@@ -29,3 +29,34 @@
 .label-level {
   margin-left: 40px;
 }
+.modal-body {
+  /*height: 100%;*/
+  display: inline-table;
+  padding-top: 5px;
+}
+.div-list {
+  min-height: 60px;
+  margin-left: 1px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px #ddd solid;
+}
+.div-list:hover{
+  background-color: #eee;
+}
+.highlight {
+  min-height: 60px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 1px;
+  border-radius: 4px;
+  /*border: 3px limegreen solid;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.lab {
+  width: 6em;
+}
+.select {
+  width: 200px;
+}
