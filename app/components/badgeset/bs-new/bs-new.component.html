@@ -19,7 +19,7 @@
 <br>
 
 <label>Tags: </label>
-<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="btn-small btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text><br>
+<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="btn-small btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text><br>
 <br>
 
 <label>Tier: </label>
@@ -66,7 +66,8 @@
 	<div class="row col col-xs-12 header hidden-xs">
 	  <div class="col-xs-3">Badge</div>
 	  <div class="col col-xs-2">Focus</div>
-	  <div class="col-xs-7">Description</div>
+	  <div class="col-xs-6">Description</div>
+	  <div class="col-xs-1"></div>
 	</div>
 	<div (click)="onSelect(badgegroup)" class="row col col-xs-12 div-list-item" *ngFor="let badgegroup of newBS.badgegroups">
 		<div class="col-sm-3">
@@ -75,8 +76,11 @@
 		<div class="col col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
 			<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
 		</div>
-		<div class="col-sm-7 click" data-toggle="modal" data-target="#myModal">
+		<div class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
 			<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
+		</div>
+		<div class="col-sm-1">
+			<button class="btn btn-del btn-danger" (click)="deleteBadgeGroupPop(badgegroup)">X</button>
 		</div>
 	</div>
 </div>
@@ -104,8 +108,8 @@
 			</div>
 				<br>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="removeBadgeGroup(selectedBG)">Delete</button>
-				<button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+<!-- 				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="removeBadgeGroup(selectedBG)">Delete</button> -->
+				<button type="button" class="btn btn-success" data-dismiss="modal">Select</button>
 			</div>
 		</div>
 	</div>
@@ -168,7 +172,7 @@
 
 <br>
 <div *ngIf!="prerequisite" class="row col-xs-5">
-	<button class="btn-big btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
+	<button class="btn-big btn-add btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
 	<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
 	<button class="btn-big btn btn-success pull-right" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>
 </div>

@@ -6,11 +6,13 @@
 </div>
 
 <!-- Content -->
-<div class="col-md-10 col-md-offset-1">
+<div class="margin col-md-10 col-md-offset-1">
 
 <div *ngIf="auth.authenticated()">
 
 	<div *ngIf="badge">
+
+	<div class="col col-xs-12 form-inline">
 
 	<div *ngIf="!bName && !auth.isAdmin()">
 		<h3 class="text-blue">{{badge.name}}</h3>
@@ -21,52 +23,44 @@
 	</div>
 
 	<div *ngIf="bName && auth.isAdmin()" class="form-inline" (clickOutside)="clickOut()">
-		<label class="text-blue"><h3>Badge: </h3></label>
-		<input class="input form-control" type="text" [(ngModel)]="badge.name" placeholder="">
-		<button class="btn-small btn btn-success" (click)="bName=false;updateBadge()">Y</button>
-		<button class="btn-small btn btn-danger" (click)="bName=false;getBadge()">N</button>
+		<input class="border input form-control" type="text" [(ngModel)]="badge.name" placeholder="">
+		<button class="btn-small btn-n btn btn-success" (click)="bName=false;updateBadge()">Y</button>
+		<button class="btn-small btn-n btn btn-danger" (click)="bName=false;getBadge()">N</button>
 	</div>
-	<br>
 
 	<!-- 	<label>Code: </label>
 	<text>{{badge.code}}</text><br> -->
 
-	<div *ngIf="!oview && !auth.isAdmin()" class="form-inline">
-		<label>Overview: </label>
-		<textarea readonly class="textarea form-control" rows="5">{{badge.overview}}</textarea>
+	<div *ngIf="!oview && !auth.isAdmin()" class="col top col-xs-5">
+		<text>{{badge.overview}}</text><br>
 	</div>
 
-	<div *ngIf="!oview && auth.isAdmin()" class="form-inline">
-		<label class="click" (click)="oview=true">Overview: </label>
-		<textarea readonly class="textarea form-control" rows="5" (click)="oview=true" placeholder="">{{badge.overview}}</textarea>
+	<div *ngIf="!oview && auth.isAdmin()" class="col top col-xs-5">
+		<text class="click" (click)="oview=true">{{badge.overview}}</text><br>
 	</div>
 
-	<div *ngIf="oview && auth.isAdmin()" class="form-inline">
-		<label>Overview: </label>
-		<textarea class="ta textarea form-control" rows="5" [(ngModel)]="badge.overview" placeholder=""></textarea>
+	<div *ngIf="oview && auth.isAdmin()" class="col top col-xs-6">
+		<textarea class="border textarea form-control" rows="3" [(ngModel)]="badge.overview"></textarea>
 		<button class="btn-small btn-oview btn btn-success" (click)="oview=false;updateBadge()">Y</button>
-		<button class="btn-small btn-oview btn btn-danger" (click)="oview=false;getBadge()">N</button>
+		<button class="btn-small btn-oview btn btn-danger" (click)="oview=false;getBadge()">N</button><br>
 	</div>
-	<br>
 
-	<div *ngIf="!editFC && !auth.isAdmin()" class="form-inline">
+	<div *ngIf="!editFC && !auth.isAdmin()" class="col top col-xs-12">
 		<label>Focus: </label>
 		<text>{{badge.focus}}</text>
 	</div>
 
-	<div *ngIf="!editFC && auth.isAdmin()" class="form-inline">
+	<div *ngIf="!editFC && auth.isAdmin()" class="col top col-xs-12">
 		<label class="click" (click)="editFC=true">Focus: </label>
 		<text class="click text-blue" (click)="editFC=true">{{badge.focus}}</text>
 	</div>
 
-	<div *ngIf="auth.isAdmin() && editFC" class="form-inline">
-		<label>Focus: </label>
-		<input class="input-small form-control" type="text" [(ngModel)]="newFC" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus">{{fc}} <button class="btn-small btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text>
-
-		<button class="btn-small btn btn-success" (click)="editFC=false;updateBadge()">Y</button>
-		<button class="btn-small btn btn-danger" (click)="editFC=false;getBadge()">N</button>
+	<div *ngIf="auth.isAdmin() && editFC" class="col top col-xs-12">
+		<label class="lab">Focus: </label>
+		<input class="input-small form-control" type="text" [(ngModel)]="newFC"><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus"> {{fc}} <button class="btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text>
+		<button class="btn left btn-small btn-success" (click)="editFC=false;updateBadge()">Y</button>
+		<button class="btn btn-small btn-danger" (click)="editFC=false;getBadge()">N</button>
 	</div>
-	<br>
 
 	<!-- 	<label>Approved: </label>
 	<text>{{badge.approved | yes_no}}</text><br> -->
@@ -74,17 +68,19 @@
 	<!-- 	<label>InUsed: </label>
 	<text>{{badge.inused | yes_no}}</text><br> -->
 
-	<div *ngIf="!editStatus && !auth.isAdmin()" class="form-inline">
+	<div *ngIf="advanced" class="col col-xs-12">
+	<br>
+	<div *ngIf="!editStatus && !auth.isAdmin()" class="">
 		<label>Status: </label>
 		<text>{{badge.status}}</text>
 	</div>
 
-	<div *ngIf="!editStatus && auth.isAdmin()" class="form-inline">
+	<div *ngIf="!editStatus && auth.isAdmin()" class="">
 		<label class="click" (click)="editStatus=true">Status: </label>
 		<text class="click text-blue" (click)="editStatus=true">{{badge.status}}</text>
 	</div>
 
-	<div *ngIf="editStatus && auth.isAdmin()" class="form-inline">
+	<div *ngIf="editStatus && auth.isAdmin()" class="">
 		<label>Status: </label>
 		<select class="form-control" [(ngModel)]="badge.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select>
 		<button class="btn-small btn btn-success" (click)="editStatus=false;updateBadge()">Y</button>
@@ -92,17 +88,17 @@
 	</div>
 	<br>
 
-	<div *ngIf="!editOwner && !auth.isAdmin()" class="form-inline">
+	<div *ngIf="!editOwner && !auth.isAdmin()" class="">
 		<label>Owner: </label>
 		<text>{{badge.owner}}</text>
 	</div>
 
-	<div *ngIf="!editOwner && auth.isAdmin()" class="form-inline">
+	<div *ngIf="!editOwner && auth.isAdmin()" class="">
 		<label class="click" (click)="editOwner=true">Owner: </label>
 		<text class="click text-blue" (click)="editOwner=true">{{badge.owner}}</text>
 	</div>
 
-	<div *ngIf="editOwner && auth.isAdmin()" class="form-inline">
+	<div *ngIf="editOwner && auth.isAdmin()" class="">
 		<label>Owner: </label>
 		<input class="input-upper form-control" type="text" [(ngModel)]="badge.owner">
 		<button class="btn-small btn btn-success" (click)="editOwner=false;updateBadge()">Y</button>
@@ -110,21 +106,25 @@
 	</div>
 	<br>
 
-	<div *ngIf="auth.isAdmin()" class="form-inline">
+	<div *ngIf="auth.isAdmin()" class="">
 		<label>Published: </label>
 		<input type="checkbox" [(ngModel)]="badge.published" (change)="updatePublish($event)">
 	</div>
-	<br>
-	<br>
 
-<!-- 	<div *ngIf="auth.isAdmin() && !addLevel" >
-		<button class="btn-big btn btn-default" (click)="addLevel=true;bedit=true">New Level</button>
-	</div> -->
+	</div>
+
+	<div class="col bottom col-xs-12 form-inline">
+		<button *ngIf="!advanced" class="btn-big btn-add btn btn-default" (click)="advanced=true">Advanced+</button>
+		<button *ngIf="advanced" class="btn-big btn-add btn btn-default" (click)="advanced=false">Hide</button>
+	</div>
+
+	</div>
+
 
 	<div class="row col col-xs-12 header hidden-xs">
 		<div class="col-xs-1">Level</div>
 		<div class="col-xs-8">Description</div>
-		<div class="col-xs-2">BadgeSet</div>
+		<div class="col-xs-2">Badge Set</div>
 		<div class="col-xs-1"></div>
 	</div>
 	<div class="row col col-xs-12 div-list-item" *ngFor="let badgelevel of badge.badgelevels">
@@ -136,7 +136,7 @@
 		</div>
 		<div *ngIf="!bedit || !(selectedBL.level==badgelevel.level)" class="col-sm-8" (click)="onSelect(badgelevel);checkAdmin()"><text class="text-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</div>
 		<div *ngIf="bedit && selectedBL.level==badgelevel.level" class="col-sm-8">
-			<text class="text-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="ta form-control" rows="5" [(ngModel)]="badgelevel.desc"></textarea>
+			<text class="text-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="border form-control" rows="4" [(ngModel)]="badgelevel.desc"></textarea>
 		</div>
 		<div class="col-sm-2">
 			<div *ngFor="let bs of findBadgeSet(badge._id,badgelevel.level)">
@@ -146,9 +146,10 @@
 		<div *ngIf="bedit && selectedBL.level==badgelevel.level" class="col-sm-1">
 			<button class="btn btn-s btn-success" (click)="bedit=false;updateBadge()">Y</button><br>
 			<button class="btn btn-s btn-danger" (click)="bedit=false;getBadge()">N</button><br>
-			<button class="btn-del btn btn-default" (click)="deleteBadgeLevelPop(badgelevel)">X</button>
+			<!-- <button class="btn-del btn btn-default" (click)="deleteBadgeLevelPop(badgelevel)">X</button> -->
 		</div>
 	</div>
+	<br>
 
 <!-- 	<div *ngIf="addLevel">
 		<br>
@@ -164,21 +165,18 @@
 		<button class="btn-big btn btn-danger" (click)="addLevel=false">Cancel</button><br>
 	</div> -->
 
-	<button *ngIf="!auth.isAdmin() && !bedit" class="btn-big btn btn-default" (click)="goBack()">Back</button>
+	<div *ngIf="!auth.isAdmin() && !bedit" class="col col-xs-6">
+	<button class="btn-big btn btn-default" (click)="goBack()">Back</button>
+	</div>
 
-	<div *ngIf="auth.isAdmin() && !addLevel">
-		<button class="btn-big btn-add btn btn-default" (click)="addBadge()">New Badge</button>
+	<div *ngIf="auth.isAdmin() && !addLevel" class="col col-xs-6">
+		<!-- <button class="btn-big btn-add btn btn-default" (click)="addBadge()">New Badge</button> -->
 		<button class="btn-big btn-delete btn btn-default" (click)="deleteBadgePop()">Delete</button>
-<!-- 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadge()">Cancel</button>
-		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadge()">Save</button> -->
 	</div>
 
 	</div>
 
 </div>
-<br>
-<br>
-<br>
 
 <div *ngIf="!auth.authenticated()">
    <h3><i>You are not logged in, please click 'Log in' button to login.</i></h3>

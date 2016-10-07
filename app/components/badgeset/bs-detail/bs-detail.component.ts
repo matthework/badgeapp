@@ -320,7 +320,7 @@ export class BSDetailComponent implements OnInit {
       var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
     }else{
       var name = this.badgeset.name.toUpperCase()
-      var badge = selectedGroup.badge.toUpperCase()
+      var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
       var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
       if (r == true) {
           this.removeBadgeGroup(selectedGroup);

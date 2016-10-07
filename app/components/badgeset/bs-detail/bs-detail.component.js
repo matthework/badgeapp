@@ -287,7 +287,7 @@ var BSDetailComponent = (function () {
         }
         else {
             var name = this.badgeset.name.toUpperCase();
-            var badge = selectedGroup.badge.toUpperCase();
+            var badge = this.getBadgeName(selectedGroup.bid).toUpperCase();
             var r = confirm("Are you sure you want to delete " + badge + " from " + name + " ?");
             if (r == true) {
                 this.removeBadgeGroup(selectedGroup);
