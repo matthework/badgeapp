@@ -1,8 +1,13 @@
 .btn-s {
-  width: 40px;
-  margin-bottom: 5px;
+  vertical-align: bottom;
+  width: 38px;
+  margin-top: 5px;
   margin-right: 5px;
   border: 0;
+}
+.btn-n {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 .btn-big {
   margin-top: 20px;
@@ -11,9 +16,13 @@
 }
 .input{
   width: 300px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.5em;
 }
 .input-small {
   width: 150px;
+  margin-right: 10px;
 }
 .input-tiny {
   width: 50px;
@@ -24,10 +33,10 @@
 }
 .textarea {
   vertical-align: top;
-  width: 350px;
+  width: 80%;
   background-color: transparent;
 }
-.ta {
+.border {
   border: 1px #039be5 solid;
 }
 .ta-row {
@@ -45,4 +54,16 @@
   background-color: #428bca;
   border-radius: 4px;
   padding-top: 8px;
+}
+.lab {
+  vertical-align: top;
+}
+.top {
+  margin-top: 15px;
+}
+.bottom {
+  margin-bottom: 20px;
+}
+.left {
+  margin-left: 10px;
 }

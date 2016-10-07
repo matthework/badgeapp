@@ -8,7 +8,7 @@
 </div>
 
 <!-- Content -->
-<div class="col-md-10 col-md-offset-1">
+<div class="margin col-md-10 col-md-offset-1">
 
 <div *ngIf="auth.authenticated()">
 
@@ -24,17 +24,15 @@
    </div>
    <br>
 
-   <div *ngIf="badges" class="row col-xs-12 header hidden-xs">
+   <div *ngIf="badges" class="row col col-xs-12 header hidden-xs">
          <div class="col-xs-3">Badge Name</div>
-         <div class="col-xs-7">Overview</div>
-         <div class="col-xs-2">Status</div>
+         <div class="col-xs-8">Overview</div>
    </div>
-   <div class="row col-xs-12 div-list-item" *ngFor="let badge of badges | filter:query">
+   <div class="row col col-xs-12 div-list-item" *ngFor="let badge of badges | filter:query">
       <div class="col-sm-3" *ngIf="badge.status=='Accepted' || auth.isAdmin()" >
          <button class="btn btn-b btn-primary wrap" (click)="onSelect(badge);toDetail()">{{badge.name}}</button>
       </div>
-      <div class="col-sm-7" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.overview}}</div>
-      <div class="col-sm-2" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.status}}</div>
+      <div class="col-sm-8" *ngIf="badge.status=='Accepted' || auth.isAdmin()" (click)="onSelect(badge)">{{badge.overview}}</div>
    </div>
 
 </div>

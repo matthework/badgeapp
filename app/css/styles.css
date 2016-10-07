@@ -13,7 +13,7 @@ a {
   cursor: hand;
 }
 label {
-  width: 9em;
+  width: 7em;
 }
 input{
   margin-right: 5px;
@@ -109,7 +109,7 @@ th , td  {
   color: lightgrey;
 }
 .btn-del {
-  width: 40px;
+  width: 38px;
   color: white;
   background-color: pink;
   border: 0;
@@ -119,7 +119,10 @@ th , td  {
   background-color: red;
 }
 .btn-small {
-  width: 40px;
+  width: 38px;
+  margin-right: 0px;
+}
+.btn-border {
   border: 0;
 }
 .btn-big {
@@ -128,15 +131,9 @@ th , td  {
 .label-small {
   width: 6em;
 }
-/*.btn-add {
-  color: white;
-  background-color: lightblue;
-  border: 0;
-}*/
 .btn-add:hover{
   color: white;
   background-color: #039be5;
-  border: 0;
 }
 .btn-delete:hover {
   color: white;
@@ -151,4 +148,7 @@ th , td  {
 }
 .btn-b {
   width: 200px;
+}
+.margin {
+  margin-bottom: 20px;
 }

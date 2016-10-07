@@ -35,6 +35,7 @@ export class BadgeDetailComponent implements OnInit {
     addLevel = false;
     editFC = false;
     editOwner = false;
+    advanced = false;
     labels = [  "I understand... ", 
               "I participate... ", 
               "I contribute... ", 

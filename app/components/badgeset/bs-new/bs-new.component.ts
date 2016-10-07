@@ -414,11 +414,30 @@ export class BSNewComponent{
       this.selectedLevel = level;
    }
 
+  deleteBadgeGroupPop(selectedGroup: BadgeGroup) {
+    var isCore =false;
+    for (var i = 0; i < this.newBS.corebadges.length; i++) { 
+      if (this.newBS.corebadges[i].badge == selectedGroup.badge) {
+        isCore = true;
+      }
+    }
+    if (isCore) {
+      var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
+    }else{
+      var name = this.newBS.name.toUpperCase()
+      var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
+      var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
+      if (r == true) {
+          this.removeBadgeGroup(selectedGroup);
+      }
+    }
+  }
+  
   removeBadgeGroup(selectedGroup: BadgeGroup) {
     let index = this.newBS.badgegroups.indexOf(selectedGroup);
     this.newBS.badgegroups.splice(index,1);
     let value = JSON.stringify(this.newBS)
-    // this._bsService.updateBadgeSet(this.badgeset._id,value).subscribe();
+    // this._bsService.updateBadgeSet(this.newBS._id,value).subscribe();
     console.log('you submitted value: ', value);
   }
 

@@ -34,6 +34,7 @@ var BadgeDetailComponent = (function () {
         this.addLevel = false;
         this.editFC = false;
         this.editOwner = false;
+        this.advanced = false;
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",
