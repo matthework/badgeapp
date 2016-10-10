@@ -6,7 +6,7 @@
 </div>
 
 <!-- Content -->
-<div class="col-md-10 col-md-offset-1 form-inline">
+<div class="margin col-md-10 col-md-offset-1 form-inline">
 
 <div *ngIf="auth.isAdmin()">
 
@@ -100,7 +100,6 @@
 <text class="text-blue">{{labels[8]}}</text><br>
 <label></label>
 <textarea class="textarea form-control" [(ngModel)]="newBadge.badgelevels[8].desc" placeholder=""></textarea><br>
-<br>
 
 <div class="row col-xs-6">
 <button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>

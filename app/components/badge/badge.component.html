@@ -15,11 +15,11 @@
    <div class="form-inline">
       <div *ngIf="badges">
          <input class="input form-control" type="text" [(ngModel)]="query" placeholder="Search for">
-         <button class="btn btn-add btn-default" *ngIf="auth.isAdmin()" (click)="addBadge()">+</button>
+         <button class="btn btn-add btn-s btn-default" *ngIf="auth.isAdmin()" (click)="addBadge()">+</button>
       </div>
       <div *ngIf="!badges && auth.isAdmin() ">
          <input class="input form-control" type="text" [(ngModel)]="query" placeholder="Search for">
-         <button class="btn btn-add btn-default" (click)="addBadge()">+</button><br>
+         <button class="btn btn-add btn-s btn-default" (click)="addBadge()">+</button><br>
       </div>
    </div>
    <br>

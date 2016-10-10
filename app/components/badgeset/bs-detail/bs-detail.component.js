@@ -43,6 +43,7 @@ var BSDetailComponent = (function () {
         this.newFocus = [];
         this.newL = 0;
         this.selectedLevel = 0;
+        this.advanced = false;
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",

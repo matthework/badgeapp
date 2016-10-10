@@ -23,7 +23,7 @@
 	</div>
 
 	<div *ngIf="bName && auth.isAdmin()" class="form-inline" (clickOutside)="clickOut()">
-		<input class="border input form-control" type="text" [(ngModel)]="badge.name" placeholder="">
+		<input class="border input form-control" type="text" [(ngModel)]="badge.name">
 		<button class="btn-small btn-n btn btn-success" (click)="bName=false;updateBadge()">Y</button>
 		<button class="btn-small btn-n btn btn-danger" (click)="bName=false;getBadge()">N</button>
 	</div>
@@ -136,7 +136,7 @@
 		</div>
 		<div *ngIf="!bedit || !(selectedBL.level==badgelevel.level)" class="col-sm-8" (click)="onSelect(badgelevel);checkAdmin()"><text class="text-blue">{{labels[badgelevel.level-1]}}</text><br>{{badgelevel.desc}}</div>
 		<div *ngIf="bedit && selectedBL.level==badgelevel.level" class="col-sm-8">
-			<text class="text-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="border form-control" rows="4" [(ngModel)]="badgelevel.desc"></textarea>
+			<text class="text-blue">{{labels[badgelevel.level-1]}}</text><br><textarea class="border form-control" rows="3" [(ngModel)]="badgelevel.desc"></textarea>
 		</div>
 		<div class="col-sm-2">
 			<div *ngFor="let bs of findBadgeSet(badge._id,badgelevel.level)">

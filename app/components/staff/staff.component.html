@@ -8,7 +8,7 @@
 </div>
 
 <!-- Content -->
-<div class="col-md-10 col-md-offset-1">
+<div class="margin col-md-10 col-md-offset-1">
 
 <div *ngIf="auth.authenticated()">
 
@@ -30,15 +30,15 @@
     <br>
 
     <div *ngIf!="showBS">
-      <div *ngIf="staffs" class="row col-xs-12 header hidden-xs">
+      <div *ngIf="staffs" class="row col col-xs-12 header hidden-xs">
         <div class=" col-xs-3">Name</div>
         <div class=" col-xs-5">Badges</div>
         <div class=" col-xs-3">Top BadgeSet</div>
-        <div class=" col-xs-1">Status</div>
+        <!-- <div class=" col-xs-1">Status</div> -->
         <!-- <div class=" col-xs-1"></div> -->
       </div>
 
-      <div class="row col-xs-12 div-list-item" *ngFor="let staff of staffs | filter:query">
+      <div class="row col col-xs-12 div-list-item" *ngFor="let staff of staffs | filter:query">
         <div  class="col-sm-3 col-xs-12">
           <button class="btn btn-b btn-primary wrap" (click)="onSelect(staff);toStaffDetail(staff._id)">{{staff.fname}} {{staff.lname}}</button>
         </div>
@@ -47,42 +47,44 @@
         	<uli>
         	<text class="click text-blue" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
           <text *ngIf="!userbgroup.status" class="text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="text-grey"> [{{userbgroup.focus}}]</text></text>
-          <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">Approve</button>
+          <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">APPROVE</button>
         	</uli>
         	</div>
       	</div>
       	<div class="click text-blue col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>
-        <div class="col-sm-1 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div>
+        <!-- <div class="col-sm-1 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div> -->
 <!--         <div class="col-sm-1 col-xs-12" *ngIf="auth.isAdmin()"><button class="btn btn-delete btn-default" (click)="deleteStaffPop(staff._id)">X</button>
         </div> -->
       </div>
     </div>
 
     <div *ngIf="showBS">
-      <div *ngIf="staffs" class="row col-xs-12 header hidden-xs">
-        <div class=" col-xs-2">Name</div>
-        <div class=" col-xs-6">Badge Sets</div>
-        <div class=" col-xs-2">Tier / Grade</div>
-        <div class=" col-xs-2">$$</div>
+      <div *ngIf="staffs" class="row col col-xs-12 header hidden-xs">
+        <div class=" col-xs-3">Name</div>
+        <div class=" col-xs-5">Badge Sets</div>
+        <div class=" col-xs-3">Tier/Grade</div>
+        <!-- <div class=" col-xs-2">$$</div> -->
       </div>
 
-      <div class="row col-xs-12 div-list-item" *ngFor="let staff of staffs | filter:query">
-        <div class="staff col-sm-2 col-xs-12" (click)="onSelect(staff);toStaffDetail(staff._id)">{{staff.fname}} {{staff.lname}}</div>
-        <div class="col-sm-6 col-xs-12">
+      <div class="row col col-xs-12 div-list-item" *ngFor="let staff of staffs | filter:query">
+        <div  class="col-sm-3 col-xs-12">
+          <button class="btn btn-b btn-primary wrap" (click)="onSelect(staff);toStaffDetail(staff._id)">{{staff.fname}} {{staff.lname}}</button>
+        </div>
+        <div class="col-sm-5 col-xs-12">
           <div *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
-          <uli class="li-bs" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
+          <uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
           </div>
         </div>
-        <div class="col-sm-2 col-xs-12" (click)="onSelect(staff)">
+        <div class="col-sm-3 col-xs-12" (click)="onSelect(staff)">
           <div *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
-          <uli>{{bs.tier}} - {{bs.grade}}</uli>
+          <uli>{{bs.tier}} - {{bs.grade}} ( ${{bs.pay}}K )</uli>
           </div>
         </div>
-        <div class="col-sm-2 col-xs-12" (click)="onSelect(staff)">
+<!--         <div class="col-sm-2 col-xs-12" (click)="onSelect(staff)">
           <div *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
           <uli>${{bs.pay}}K</uli>
           </div>
-        </div>
+        </div> -->
     </div>
 
 </div>
