@@ -18,7 +18,7 @@
   width: 300px;
   margin-top: 20px;
   margin-bottom: 10px;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 .input-small {
   width: 150px;
@@ -35,9 +35,6 @@
   vertical-align: top;
   width: 80%;
   background-color: transparent;
-}
-.border {
-  border: 1px #039be5 solid;
 }
 .ta-row {
   width: 700px;
@@ -63,7 +60,4 @@
 }
 .bottom {
   margin-bottom: 20px;
-}
-.left {
-  margin-left: 10px;
 }

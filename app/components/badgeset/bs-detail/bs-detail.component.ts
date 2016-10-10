@@ -46,6 +46,7 @@ export class BSDetailComponent implements OnInit {
   newFocus = [];
   newL = 0;
   selectedLevel = 0;
+  advanced = false;
   labels = [  "I understand... ", 
           "I participate... ", 
           "I contribute... ", 

@@ -6,7 +6,7 @@
 </div>
 
 <!-- Content -->
-<div class="col-md-10 col-md-offset-1 form-inline">
+<div class="margin col-md-10 col-md-offset-1 form-inline">
 
 <div *ngIf="auth.isAdmin()">
 
@@ -176,9 +176,6 @@
 	<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
 	<button class="btn-big btn btn-success pull-right" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>
 </div>
-<br>
-<br>
-<br>
 
 </div>
 

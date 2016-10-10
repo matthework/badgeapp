@@ -6,7 +6,7 @@
 </div>
 
 <!-- Content -->
-<div class="col-md-10 col-md-offset-1">
+<div class="margin col-md-10 col-md-offset-1">
 
 <div *ngIf="auth.authenticated()">
 
@@ -21,13 +21,13 @@
 	</div>
 
 	<div *ngIf="bsName && auth.isAdmin()" class="form-inline">
-	<label class="text-blue"><h3>Badge Set:</h3></label>
-	<input class="input form-control" type="text" [(ngModel)]="badgeset.name" placeholder="">
-	<button class="btn-small btn btn-success" (click)="bsName=false;updateBadgeSet()">Y</button>
-	<button class="btn-small btn btn-danger" (click)="bsName=false;getBadgeSet()">N</button>
+	<input class="border input form-control" type="text" [(ngModel)]="badgeset.name">
+	<button class="btn-small btn-n btn btn-success" (click)="bsName=false;updateBadgeSet()">Y</button>
+	<button class="btn-small btn-n btn btn-danger" (click)="bsName=false;getBadgeSet()">N</button>
 	</div>
+	
+	<div *ngIf="advanced" class="col col-xs-12">
 	<br>
-
 	<div *ngIf="!tg && !auth.isAdmin()">
 	<label>Tier/Grade: </label>
 	<text>{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
@@ -43,7 +43,7 @@
 	<select class="form-control" [(ngModel)]="badgeset.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 	<select class="form-control" [(ngModel)]="badgeset.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select>
 	<text>( ${{getPay(badgeset.tier,badgeset.grade)}}K ) </text>
-	<button class="btn-small btn btn-success" (click)="tg=false;updateBadgeSet()">Y</button>
+	<button class="btn-small left btn btn-success" (click)="tg=false;updateBadgeSet()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="tg=false;getBadgeSet()">N</button>
 	</div>
 	<br>
@@ -66,9 +66,9 @@
 
 	<div *ngIf="tag && auth.isAdmin()" class="form-inline">
 	<label>Tags: </label>
-	<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of badgeset.tags">{{tag}} <button class="btn-small btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text>
+	<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of badgeset.tags"> {{tag}} <button class="btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text>
 
-	<button class="btn-small btn btn-success" (click)="tag=false;updateBadgeSet()">Y</button>
+	<button class="btn-small left btn btn-success" (click)="tag=false;updateBadgeSet()">Y</button>
 	<button class="btn-small btn btn-danger" (click)="tag=false;getBadgeSet()">N</button>
 	</div>
 	<br>
@@ -101,14 +101,19 @@
 	<button class="btn-small btn btn-danger" (click)="status=false;getBadgeSet()">N</button>
 	</div>
 
+	</div>
+
 <!-- 	<div *ngIf="auth.isAdmin() && !addNew && !badgeset.badgegroups[0]" >
 	<button class="btn btn-primary" (click)="addNew=true;resetNewValue();bedit=true">New Badge</button>
 	</div> -->
 
 	<div *ngIf="badgeset.badgegroups[0]" class="row col-xs-12">
+		<button *ngIf="!advanced" class="btn-big btn-add btn btn-default" (click)="advanced=true">Advanced+</button>
+		<button *ngIf="advanced" class="btn-big btn-add btn btn-default" (click)="advanced=false">Hide</button>
 		<button *ngIf="!more" class="btn-big btn btn-default pull-right" (click)="more=true">Show More</button>
 		<button *ngIf="more" class="btn-big btn btn-primary pull-right" (click)="more=false">Show Less</button>
 	</div>
+	<br>
 
 	<div *ngIf="!more">
 		<div class="row col col-xs-12 header hidden-xs">

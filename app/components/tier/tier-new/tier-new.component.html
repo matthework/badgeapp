@@ -6,7 +6,7 @@
 </div>
 
 <!-- Content -->
-<div class="col-md-10 col-md-offset-1 form-inline">
+<div class="margin col-md-10 col-md-offset-1 form-inline">
 
 <div *ngIf="auth.isAdmin()">
 
@@ -47,7 +47,6 @@
 
 <label>Grade F: </label>
 <input class="input form-control" type="number" [(ngModel)]="newTier.grades[5]" placeholder="$"> K<br>
-<br>
 
 <div class="row col-xs-5">
 <button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
