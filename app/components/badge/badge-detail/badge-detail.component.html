@@ -45,23 +45,6 @@
 		<button class="btn-small btn-oview btn btn-danger" (click)="oview=false;getBadge()">N</button><br>
 	</div>
 
-	<div *ngIf="!editFC && !auth.isAdmin()" class="col top col-xs-12">
-		<label>Focus: </label>
-		<text>{{badge.focus}}</text>
-	</div>
-
-	<div *ngIf="!editFC && auth.isAdmin()" class="col top col-xs-12">
-		<label class="click" (click)="editFC=true">Focus: </label>
-		<text class="click text-blue" (click)="editFC=true">{{badge.focus}}</text>
-	</div>
-
-	<div *ngIf="auth.isAdmin() && editFC" class="col top col-xs-12">
-		<label class="lab">Focus: </label>
-		<input class="input-small form-control" type="text" [(ngModel)]="newFC"><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus"> {{fc}} <button class="btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text>
-		<button class="btn left btn-small btn-success" (click)="editFC=false;updateBadge()">Y</button>
-		<button class="btn btn-small btn-danger" (click)="editFC=false;getBadge()">N</button>
-	</div>
-
 	<!-- 	<label>Approved: </label>
 	<text>{{badge.approved | yes_no}}</text><br> -->
 
@@ -70,6 +53,24 @@
 
 	<div *ngIf="advanced" class="col col-xs-12">
 	<br>
+	<div *ngIf="!editFC && !auth.isAdmin()" class="">
+		<label>Focus: </label>
+		<text>{{badge.focus}}</text>
+	</div>
+
+	<div *ngIf="!editFC && auth.isAdmin()" class="">
+		<label class="click" (click)="editFC=true">Focus: </label>
+		<text class="click text-blue" (click)="editFC=true">{{badge.focus}}</text>
+	</div>
+
+	<div *ngIf="auth.isAdmin() && editFC" class="">
+		<label class="lab">Focus: </label>
+		<input class="input-small form-control" type="text" [(ngModel)]="newFC"><button class="btn-small btn-add btn btn-default" (click)="addFC(newFC)">+</button><text class="right" *ngFor="let fc of badge.focus"> {{fc}} <button class="btn-del btn btn-default" (click)="deleteFC(fc)">-</button></text>
+		<button class="btn left btn-small btn-success" (click)="editFC=false;updateBadge()">Y</button>
+		<button class="btn btn-small btn-danger" (click)="editFC=false;getBadge()">N</button>
+	</div>
+	<br>
+
 	<div *ngIf="!editStatus && !auth.isAdmin()" class="">
 		<label>Status: </label>
 		<text>{{badge.status}}</text>
