@@ -108,8 +108,8 @@
 	</div> -->
 
 	<div *ngIf="badgeset.badgegroups[0]" class="row col-xs-12">
-		<button *ngIf="!advanced" class="btn-big btn-add btn btn-default" (click)="advanced=true">Advanced+</button>
-		<button *ngIf="advanced" class="btn-big btn-add btn btn-default" (click)="advanced=false">Hide</button>
+		<button *ngIf="!advanced" class="btn-big btn-add btn btn-default" (click)="advanced=true">+ Advanced</button>
+		<button *ngIf="advanced" class="btn-big btn-add btn btn-default" (click)="advanced=false">- Hide</button>
 		<button *ngIf="!more" class="btn-big btn btn-default pull-right" (click)="more=true">Show More</button>
 		<button *ngIf="more" class="btn-big btn btn-primary pull-right" (click)="more=false">Show Less</button>
 	</div>
