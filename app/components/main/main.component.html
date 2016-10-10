@@ -10,12 +10,12 @@
 
   <div *ngIf="checkProfile() && staff" class="row col-xs-12">
 
-    <div class="row padding-large-vertical">
+    <div class="row col-xs-12 padding-large-vertical">
         <h2 *ngIf="auth.userProfile"><i>{{auth.userProfile.name}}, you are just logged in.</i></h2>
         <h2 *ngIf="!checkProfile()"><i>You don't have any badge yet.</i></h2>
     </div>
 
-    <div class="row padding-large-vertical">
+    <div class="row col-xs-12 padding-large-vertical">
       <h4>Top BadgeSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
     </div>
 
@@ -43,7 +43,7 @@
 
   <div class="row col-xs-6 form-inline" *ngIf="!checkProfile()">
 
-    <h3><i>Please create a User profile!</i></h3>
+    <h3><i>Please create a user profile!</i></h3>
     <br>
 
     <label>*FName: </label>
