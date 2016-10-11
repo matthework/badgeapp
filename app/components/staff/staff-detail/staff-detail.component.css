@@ -5,11 +5,25 @@
 }
 .btn-b {
   width: 200px;
+  margin-bottom: 10px;
+}
+.btn-d {
+  width: 120px;
 }
 .btn-big {
   margin-top: 20px;
   margin-right: 5px;
   margin-bottom: 20px;
+}
+.btn-n {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.input-small {
+  width: 150px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.3em;
 }
 .textarea {
   vertical-align: top;

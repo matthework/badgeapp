@@ -407,7 +407,7 @@ export class BSNewComponent{
             this.newBS.badgegroups[i].focus = this.selectedBG.focus;
          }
       }
-      this.updateBadgeSet();
+      // this.updateBadgeSet();
    }
 
    onSelectedLevel(level:number) {
@@ -432,7 +432,7 @@ export class BSNewComponent{
       }
     }
   }
-  
+
   removeBadgeGroup(selectedGroup: BadgeGroup) {
     let index = this.newBS.badgegroups.indexOf(selectedGroup);
     this.newBS.badgegroups.splice(index,1);
@@ -440,6 +440,15 @@ export class BSNewComponent{
     // this._bsService.updateBadgeSet(this.newBS._id,value).subscribe();
     console.log('you submitted value: ', value);
   }
+
+  // resetNewLevel() {
+  //   for (var i = 0; i < this.newBS.badgegroups.length; i++) { 
+  //      if(this.newBS.badgegroups[i].bid == this.selectedBG.bid) {
+  //         this.newBS.badgegroups[i].level = this.selectedBG.level;
+  //         this.newBS.badgegroups[i].focus = this.selectedBG.focus;
+  //      }
+  //   }
+  // }
 
 }
 

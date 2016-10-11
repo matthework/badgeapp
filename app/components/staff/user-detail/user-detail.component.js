@@ -109,6 +109,10 @@ var UserDetailComponent = (function () {
         this._router.navigate(['/badge/detail', bid]);
     };
     UserDetailComponent.prototype.updateStaff = function () {
+        for (var i = 0; i < this.staff.userbgroups.length; i++) {
+            this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
+        }
+        this.staff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
@@ -272,18 +276,14 @@ var UserDetailComponent = (function () {
         }
         return focusOptions.sort();
     };
-    UserDetailComponent.prototype.addBadgeGroup = function (level) {
+    UserDetailComponent.prototype.addUserBGroup = function (level) {
         // this.newLevel = +this.newLevel;
         this.newLevel = level;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, status: this.newStatus });
         this.staff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
-        // this.newBID = "";
-        // this.newLevel = 0;
-        // this.newFocus = [];
-        // this.newStatus = false;
     };
     UserDetailComponent.prototype.toCompare = function (a, b) {
         if (a.badge < b.badge)

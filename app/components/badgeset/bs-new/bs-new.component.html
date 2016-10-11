@@ -19,18 +19,16 @@
 <br>
 
 <label>Tags: </label>
-<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags">{{tag}} <button class="btn-small btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text><br>
+<input class="input-small form-control" type="text" [(ngModel)]="newTag" placeholder=""><button class="btn-small btn-add btn btn-default" (click)="addTag(newTag)">+</button><text *ngFor="let tag of newBS.tags"> {{tag}} <button class="btn-del btn btn-default" (click)="deleteTag(tag)">-</button></text><br>
 <br>
 
-<label>Tier: </label>
+<label>Tier/Grade: </label>
 <select class="select-small form-control" [(ngModel)]="newBS.tier"><option *ngFor="let to of getTiersOptions()" [value]="to">{{to}}</option></select>
 
-<label class="label-small label-grade">Grade: </label>
-<select class="select-small form-control"[(ngModel)]="newBS.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select><br>
-<br>
+<select class="select-small form-control"[(ngModel)]="newBS.grade"><option *ngFor="let go of gradesOptions" [value]="go">{{go}}</option></select>
 
-<label>$$: </label>
-<text>${{getPay(newBS.tier,newBS.grade)}}K</text><br>
+<text> {{newBS.tier}} - {{newBS.grade}} ( ${{getPay(newBS.tier,newBS.grade)}}K )</text><br>
+<!-- <text>${{getPay(newBS.tier,newBS.grade)}}K</text><br> -->
 <br>
 
 <!-- <br>
@@ -42,7 +40,6 @@
 
 <label>Status: </label>
 <select class="form-control" [(ngModel)]="newBS.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
-<br>
 <br>
 
 <!-- <div *ngFor="let i of nums">
@@ -108,8 +105,8 @@
 			</div>
 				<br>
 			<div class="modal-footer">
-<!-- 				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="removeBadgeGroup(selectedBG)">Delete</button> -->
-				<button type="button" class="btn btn-success" data-dismiss="modal">Select</button>
+<!-- 				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="resetNewLevel()">Cancel</button> -->
+				<button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
 			</div>
 		</div>
 	</div>
@@ -143,6 +140,7 @@
 			</div>
 				<br>
 			<div class="modal-footer">
+				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="resetNewValue()">Cancel</button>
 				<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
 			</div>
 		</div>
@@ -170,7 +168,6 @@
 	<button (click)="addNumBadges();prerequisite=false">Done</button>
 </div> -->
 
-<br>
 <div *ngIf!="prerequisite" class="row col-xs-5">
 	<button class="btn-big btn-add btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
 	<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>

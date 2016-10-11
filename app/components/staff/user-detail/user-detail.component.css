@@ -1,20 +1,19 @@
 .btn-big {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-right: 5px;
   margin-bottom: 20px;
 }
 .btn-b {
   width: 200px;
+  margin-bottom: 10px;
 }
 .btn-apply {
   width: 110px;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 .btn-apply:hover{
   color: white;
   background-color: #039be5;
-  border: 0;
 }
 .input{
   width: 300px;
@@ -22,9 +21,15 @@
 .input-medium{
   width: 250px;
 }
+.btn-n {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 .input-small {
   width: 150px;
-  margin-right: 5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.3em;
 }
 .textarea-small {
   vertical-align: top;

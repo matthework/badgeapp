@@ -135,6 +135,7 @@ export class BadgeComponent implements OnInit {
       }
     }
   }
+
 }
 
 

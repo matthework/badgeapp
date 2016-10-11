@@ -17,11 +17,10 @@
 	</div>
 
 	<div *ngIf="userName" class="form-inline">
-	<label class="text-blue"><h3>Name: </h3></label>
-	<input class="input-small form-control" type="text" [(ngModel)]="staff.fname">
-	<input class="input-small form-control" type="text" [(ngModel)]="staff.lname">
-	<button class="btn btn-small btn-success" (click)="userName=false;updateStaff()">Y</button>
-	<button class="btn btn-small btn-danger" (click)="userName=false;getStaffByEmail()">N</button>
+	<input class="border input-small form-control" type="text" [(ngModel)]="staff.fname">
+	<input class="border input-small form-control" type="text" [(ngModel)]="staff.lname">
+	<button class="btn btn-small btn-n btn-success" (click)="userName=false;updateStaff()">Y</button>
+	<button class="btn btn-small btn-n btn-danger" (click)="userName=false;getStaffByEmail()">N</button>
 	</div>
 	<br>
 
@@ -50,9 +49,8 @@
 	<text *ngFor="let bs of getSortStaffBS(staff.userbgroups)">
 		<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}, </uli>
 	</text><br>
-	<br>
 
-	<div *ngIf="!brief" class="form-inline">
+<!-- 	<div *ngIf="!brief" class="form-inline">
 	<label class="click" (click)="brief=true">Brief: </label>
 	<textarea readonly class="textarea-small form-control" rows="5" (click)="brief=true">{{staff.brief}}</textarea>
 	</div>
@@ -63,31 +61,31 @@
 	<button class="btn btn-small btn-brief btn-success" (click)="brief=false;updateStaff()">Y</button>
 	<button class="btn btn-small btn-brief btn-danger" (click)="brief=false;getStaffByEmail()">N</button>
 	</div>
-	<br>
+	<br> -->
 
 	<div class="row col-xs-12">
-		<button *ngIf="!more" class="btn btn-big btn-default pull-right" (click)="more=true">Show More</button>
-		<button *ngIf="more" class="btn btn-big btn-primary pull-right" (click)="more=false">Show Less</button><br>
+		<button class="btn btn-apply btn-default pull-right" (click)="addNew=true;resetNewValue();more=false" data-toggle="modal" data-target="#myModal-new">+ Apply New</button>
 	</div>
 
 	<div *ngIf="!more">
 		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
-		  <div class="col col-xs-2">Focus</div>
-		  <div class="col-xs-4">Description</div>
-		  <div class="col-xs-2">Badge Set</div>
+		  <!-- <div class="col col-xs-2">Focus</div> -->
+		  <div class="col-xs-5">Description</div>
+		  <div class="col-xs-3">Badge Set</div>
 		  <div class="col-xs-1">Status</div>
 		</div>
 
 		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of staff.userbgroups">
 			<div class="col-sm-3 col-xs-12">
-				<button class="btn btn-b btn-primary wrap" ((click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</button>
-			</div>
-			<div class="col col-sm-2">
+				<button class="btn btn-b btn-primary wrap" ((click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</button><br>
 				<text *ngIf="userbgroup.focus.length!=0">[{{userbgroup.focus}}]</text>
 			</div>
-			<div class="col-sm-4 col-xs-12"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
-			<div class="click text-blue col-sm-2 col-xs-12">
+<!-- 			<div class="col col-sm-2">
+				<text *ngIf="userbgroup.focus.length!=0">[{{userbgroup.focus}}]</text>
+			</div> -->
+			<div class="col-sm-5 col-xs-12"><text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}</div>
+			<div class="click text-blue col-sm-3 col-xs-12">
 				<div *ngFor="let bs of findBadgeSet(staff.userbgroups,userbgroup.bid,userbgroup.level)">
 					<uli (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
@@ -106,6 +104,7 @@
 		</div>
 
 		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
+			<div (click)="more=false">
 			<div class="col-sm-3 col-xs-12 text-big" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.current" class="click text-blue">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="click">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text></div>
 			<div class="col col-sm-2">
 				<text *ngIf="userbgroup.current && userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text>
@@ -116,12 +115,16 @@
 					<uli (click)="toBSDetail(bs._id)" *ngIf="userbgroup.current" class="click text-blue">{{bs.name}}</uli>
 				</div>
 	  		</div>
-	  		<div class="col-sm-1 col-xs-12"><i><text class="text-green" *ngIf="userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text></i></div>
+	  		<div class="col-sm-1 col-xs-12">
+	  			<i><text class="text-green" *ngIf="userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text></i>
+	  		</div>
+			</div>
 		</div>
 	</div>
 
-	<div>
-		<button class="btn btn-apply btn-default" (click)="addNew=true;resetNewValue();more=false" data-toggle="modal" data-target="#myModal-new">+ Apply New</button>
+	<div class="row col-xs-12">
+		<button *ngIf="!more" class="btn btn-big btn-default pull-right" (click)="more=true">Show More</button>
+		<button *ngIf="more" class="btn btn-big btn-primary pull-right" (click)="more=false">Show Less</button>
 	</div>
 
 <!-- 	<div *ngIf="active" class="row col col-xs-6 form-inline">
@@ -157,9 +160,6 @@
 					<label class="lab">Badge: </label>
 					<select class="select form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><br>
 					<br>
-					<label class="lab">Approved: </label>
-					<input type="checkbox" [(ngModel)]="newStatus"><br>
-					<br>
 					<label class="lab">Focus: </label>
 					<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
 				</div>
@@ -177,7 +177,8 @@
 				</div>
  				<br>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
+					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="resetNewValue()">Cancel</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addUserBGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
 				</div>
 			</div>
 		</div>
@@ -198,14 +199,13 @@
 		<label>Position: </label>
 		<input class="input form-control" type="text" [(ngModel)]="newUser.position" placeholder="Position"><br>
 		<br>
-		<label>Brief: </label>
+<!-- 		<label>Brief: </label>
 		<textarea class="textarea-small form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea><br>
-		<br>
+		<br> -->
 
-		<div class="right">
-			<button class="btn btn-big btn-danger pull-right" (click)="location.reload()">Cancel</button>
-			<button class="btn btn-big btn-success pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
-		</div>
+		<button class="btn btn-big btn-danger pull-right" (click)="location.reload()">Cancel</button>
+		<button class="btn btn-big btn-success pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
+
 	</div>
 
 </div>

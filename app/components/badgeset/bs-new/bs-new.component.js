@@ -365,7 +365,7 @@ var BSNewComponent = (function () {
                 this.newBS.badgegroups[i].focus = this.selectedBG.focus;
             }
         }
-        this.updateBadgeSet();
+        // this.updateBadgeSet();
     };
     BSNewComponent.prototype.onSelectedLevel = function (level) {
         this.selectedLevel = level;

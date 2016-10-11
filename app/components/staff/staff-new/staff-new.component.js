@@ -13,34 +13,74 @@ var router_1 = require('@angular/router');
 var staff_service_1 = require('../staff.service');
 var badge_service_1 = require('../../badge/badge.service');
 var auth_service_1 = require('../../auth/auth.service');
+var bs_service_1 = require('../../badgeset/bs.service');
 var StaffNewComponent = (function () {
-    function StaffNewComponent(_staffService, _badgeService, _router, auth) {
+    function StaffNewComponent(_staffService, _bsService, _badgeService, _router, auth) {
         this._staffService = _staffService;
+        this._bsService = _bsService;
         this._badgeService = _badgeService;
         this._router = _router;
         this.auth = auth;
         this.badges = [];
+        this.badgesets = [];
         this.active = false;
         this.nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-        this.newBGs = [{ bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] },
-            { bid: "", badge: "", level: 0, status: false, focus: [] }];
+        this.addNew = false;
+        this.newBID = "";
+        this.newLevel = 0;
+        this.newFocus = [];
+        this.newStatus = false;
+        this.newL = 0;
+        this.selectedLevel = 0;
+        this.labels = ["I understand... ",
+            "I participate... ",
+            "I contribute... ",
+            "I lead... ",
+            "I advise... ",
+            "I can teach... ",
+            "I plan sophisticated... ",
+            "I have achieved wide recognition... ",
+            "I am a world leading... "
+        ];
+        this.focusOptions = [];
+        // newBGs = [{bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []},
+        //           {bid: "", badge: "", level: 0, status: false, focus: []}];
         this.statusOptions = ['Active', 'Inactive'];
-        this.newStaff = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief: "", others: [] };
+        this.newStaff = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: false, brief: "", others: [] };
     }
     StaffNewComponent.prototype.ngOnInit = function () {
         this.getBadges();
+        this.getBadgeSets();
     };
     StaffNewComponent.prototype.getBadges = function () {
         var _this = this;
         this._badgeService.getBadges().subscribe(function (badges) { _this.badges = badges; });
+    };
+    StaffNewComponent.prototype.getBadgeSets = function () {
+        var _this = this;
+        this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
+    };
+    StaffNewComponent.prototype.getBadgeSetsOptions = function () {
+        var bsOptions = [];
+        if (this.badgesets != null) {
+            for (var i = 0; i < this.badgesets.length; i++) {
+                if (this.badgesets[i].status == 'Accepted') {
+                    bsOptions.push([this.badgesets[i].name, this.badgesets[i]._id]);
+                }
+            }
+        }
+        return bsOptions.sort();
+    };
+    StaffNewComponent.prototype.onSelect = function (ug) {
+        this.selectedUG = ug;
     };
     StaffNewComponent.prototype.addStaff = function () {
         for (var i = 0; i < this.newStaff.userbgroups.length; i++) {
@@ -53,6 +93,12 @@ var StaffNewComponent = (function () {
         this._staffService.addStaff(value).subscribe();
         console.log('you submitted value: ', value);
         this.toStaffs();
+    };
+    StaffNewComponent.prototype.addBadgeGroup = function (level) {
+        this.newLevel = level;
+        this.newStaff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus });
+        var value = JSON.stringify(this.newStaff);
+        console.log('you submitted value: ', value);
     };
     StaffNewComponent.prototype.toCompare = function (a, b) {
         if (a.badge < b.badge)
@@ -135,7 +181,90 @@ var StaffNewComponent = (function () {
         }
         //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
         console.log(bg.focus);
-        bg.focus = bg.focus;
+        for (var i = 0; i < this.newStaff.userbgroups.length; i++) {
+            if (this.newStaff.userbgroups[i].bid == this.selectedUG.bid && this.newStaff.userbgroups[i].level == this.selectedUG.level) {
+                this.newStaff.userbgroups[i].focus = this.selectedUG.focus;
+            }
+        }
+    };
+    StaffNewComponent.prototype.updateCheckedNew = function (option, event, focus) {
+        console.log('event.target.value ' + event.target.value);
+        var index = focus.indexOf(option);
+        if (event.target.checked) {
+            console.log('add');
+            if (index === -1) {
+                focus.push(option);
+            }
+        }
+        else {
+            console.log('remove');
+            if (index !== -1) {
+                focus.splice(index, 1);
+            }
+        }
+        console.log(focus);
+        this.newFocus = focus;
+    };
+    StaffNewComponent.prototype.checkFocus = function (fc, focus) {
+        var result = false;
+        if (focus.includes(fc)) {
+            result = true;
+        }
+        return result;
+    };
+    StaffNewComponent.prototype.resetNewValue = function () {
+        this.newBID = "";
+        this.newLevel = 0;
+        this.newFocus = [];
+        this.newStatus = false;
+        this.selectedLevel = 0;
+    };
+    StaffNewComponent.prototype.onSelectNewLevel = function (level) {
+        this.newL = level;
+        // console.log('you submitted value: ', this.newL);
+        for (var i = 0; i < this.newStaff.userbgroups.length; i++) {
+            if (this.newStaff.userbgroups[i].bid == this.selectedUG.bid && this.newStaff.userbgroups[i].level == this.selectedUG.level) {
+                this.newStaff.userbgroups[i].level = this.newL;
+                this.newStaff.userbgroups[i].focus = this.selectedUG.focus;
+            }
+        }
+        // this.updateBadgeSet();
+    };
+    StaffNewComponent.prototype.onSelectedLevel = function (level) {
+        this.selectedLevel = level;
+    };
+    StaffNewComponent.prototype.getBLs = function (bid) {
+        var bls;
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bls = this.badges[i].badgelevels;
+            }
+        }
+        // console.log('you submitted value: ', bls);
+        return bls;
+    };
+    StaffNewComponent.prototype.deleteUserBGroupPop = function (selectedGroup) {
+        var name = this.newStaff.fname.toUpperCase() + this.newStaff.lname.toUpperCase();
+        var badge = this.getBadgeName(selectedGroup.bid).toUpperCase();
+        var r = confirm("Are you sure you want to delete " + badge + " from " + name + " ?");
+        if (r == true) {
+            this.removeBadgeGroup(selectedGroup);
+        }
+    };
+    StaffNewComponent.prototype.removeBadgeGroup = function (selectedGroup) {
+        var index = this.newStaff.userbgroups.indexOf(selectedGroup);
+        this.newStaff.userbgroups.splice(index, 1);
+        var value = JSON.stringify(this.newStaff);
+        console.log('you submitted value: ', value);
+    };
+    StaffNewComponent.prototype.getBadgeName = function (bid) {
+        var bname = "";
+        for (var i = 0; i < this.badges.length; i++) {
+            if (this.badges[i]._id == bid) {
+                bname = this.badges[i].name;
+            }
+        }
+        return bname;
     };
     StaffNewComponent.prototype.goBack = function () {
         window.history.back();
@@ -146,7 +275,7 @@ var StaffNewComponent = (function () {
             templateUrl: 'app/components/staff/staff-new/staff-new.component.html',
             styleUrls: ['app/components/staff/staff-new/staff-new.component.css']
         }), 
-        __metadata('design:paramtypes', [staff_service_1.StaffService, badge_service_1.BadgeService, router_1.Router, auth_service_1.AuthService])
+        __metadata('design:paramtypes', [staff_service_1.StaffService, bs_service_1.BSService, badge_service_1.BadgeService, router_1.Router, auth_service_1.AuthService])
     ], StaffNewComponent);
     return StaffNewComponent;
 }());

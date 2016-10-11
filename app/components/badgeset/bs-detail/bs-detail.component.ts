@@ -459,7 +459,7 @@ export class BSDetailComponent implements OnInit {
             this.badgeset.badgegroups[i].focus = this.selectedBG.focus;
          }
       }
-      this.updateBadgeSet();
+      // this.updateBadgeSet();
    }
 
    onSelectedLevel(level:number) {

@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {Staff} from '../staff';
+import {Staff,UserBGroup} from '../staff';
 import {StaffService} from '../staff.service';
-import {Badge} from '../../badge/badge';
+import {Badge,BadgeLevel} from '../../badge/badge';
 import {BadgeService} from '../../badge/badge.service';
 import {AuthService} from '../../auth/auth.service';
+import {BadgeSet} from '../../badgeset/bs';
+import {BSService} from '../../badgeset/bs.service';
 
 @Component({
   selector: 'my-staff-new',
@@ -15,36 +17,79 @@ import {AuthService} from '../../auth/auth.service';
 export class StaffNewComponent {
   
   badges: Badge[] = [];
+  badgesets: BadgeSet[] = [];
+  selectedBadgeSet: BadgeSet;
   active = false;
   nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  selectedUG: UserBGroup;
+  addNew = false;
+  newBID = "";
+  newLevel = 0;
+  newFocus = [];
+  newStatus = false;
+  newL = 0;
+  selectedLevel = 0;
+  labels = [  "I understand... ", 
+          "I participate... ", 
+          "I contribute... ", 
+          "I lead... ", 
+          "I advise... ", 
+          "I can teach... ", 
+          "I plan sophisticated... ",
+          "I have achieved wide recognition... ", 
+          "I am a world leading... "
+        ];
+  focusOptions = [];
 
-  newBGs = [{bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []},
-            {bid: "", badge: "", level: 0, status: false, focus: []}];
+  // newBGs = [{bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []},
+  //           {bid: "", badge: "", level: 0, status: false, focus: []}];
 
   statusOptions = ['Active','Inactive'];
   
-  newStaff = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: this.newBGs, active: false, brief:"", others: []}
+  newStaff = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: false, brief:"", others: []}
 
   constructor(
       private _staffService: StaffService, 
+      private _bsService: BSService,
       private _badgeService: BadgeService,
       private _router: Router,
       private auth: AuthService) {}
 
   ngOnInit() {
     this.getBadges();
+    this.getBadgeSets();
   }
 
   getBadges() {
     this._badgeService.getBadges().subscribe(badges => { this.badges = badges});
+  }
+
+  getBadgeSets() {
+    this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
+  }
+
+  getBadgeSetsOptions() {
+    var bsOptions = [];
+    if (this.badgesets != null) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        if (this.badgesets[i].status=='Accepted') {
+          bsOptions.push([this.badgesets[i].name,this.badgesets[i]._id]);
+        }
+      }
+    }
+    return bsOptions.sort();
+  }
+
+  onSelect(ug: UserBGroup) { 
+    this.selectedUG = ug;
   }
 
   addStaff() {
@@ -58,6 +103,13 @@ export class StaffNewComponent {
     this._staffService.addStaff(value).subscribe();
     console.log('you submitted value: ', value); 
     this.toStaffs();
+  }
+
+  addBadgeGroup(level:number) {
+    this.newLevel = level;
+    this.newStaff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus});
+    let value = JSON.stringify(this.newStaff)
+    console.log('you submitted value: ', value);
   }
 
   toCompare(a,b) {
@@ -146,7 +198,98 @@ export class StaffNewComponent {
     }
     //this.checked[option]=event.target.value; // or `event.target.value` not sure what this event looks like
     console.log(bg.focus);
-    bg.focus = bg.focus;
+    for (var i = 0; i < this.newStaff.userbgroups.length; i++) { 
+      if(this.newStaff.userbgroups[i].bid == this.selectedUG.bid && this.newStaff.userbgroups[i].level == this.selectedUG.level) {
+         this.newStaff.userbgroups[i].focus = this.selectedUG.focus;
+      }
+    }
+  }
+
+   updateCheckedNew(option, event, focus) {
+      console.log('event.target.value ' + event.target.value);
+      var index = focus.indexOf(option);
+      if(event.target.checked) {
+         console.log('add');
+         if(index === -1) {
+            focus.push(option);
+         }
+      } else {
+         console.log('remove');
+         if(index !== -1) {
+            focus.splice(index, 1);
+         }
+      }
+      console.log(focus);
+      this.newFocus = focus;
+   }
+
+  checkFocus(fc,focus) {
+    var result = false;
+    if(focus.includes(fc)) {
+      result = true;
+    }
+    return result;
+  }
+
+  resetNewValue() {
+    this.newBID = "";
+    this.newLevel = 0;
+    this.newFocus = [];
+    this.newStatus = false;
+    this.selectedLevel = 0;
+  }
+
+ onSelectNewLevel(level:number) {
+    this.newL = level;
+    // console.log('you submitted value: ', this.newL);
+    for (var i = 0; i < this.newStaff.userbgroups.length; i++) { 
+       if(this.newStaff.userbgroups[i].bid == this.selectedUG.bid && this.newStaff.userbgroups[i].level == this.selectedUG.level) {
+          this.newStaff.userbgroups[i].level = this.newL;
+          this.newStaff.userbgroups[i].focus = this.selectedUG.focus;
+       }
+    }
+    // this.updateBadgeSet();
+ }
+
+ onSelectedLevel(level:number) {
+    this.selectedLevel = level;
+ }
+
+  getBLs(bid:string) {
+    var bls: BadgeLevel[];
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bls = this.badges[i].badgelevels;
+      }
+    }
+    // console.log('you submitted value: ', bls);
+    return bls;
+  }
+
+  deleteUserBGroupPop(selectedGroup: UserBGroup) {
+    var name = this.newStaff.fname.toUpperCase() + this.newStaff.lname.toUpperCase();
+    var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
+    var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
+    if (r == true) {
+        this.removeBadgeGroup(selectedGroup);
+    }
+  }
+
+  removeBadgeGroup(selectedGroup: UserBGroup) {
+    let index = this.newStaff.userbgroups.indexOf(selectedGroup);
+    this.newStaff.userbgroups.splice(index,1);
+    let value = JSON.stringify(this.newStaff)
+    console.log('you submitted value: ', value);
+  }
+
+  getBadgeName(bid:string) {
+    var bname = "";
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bname = this.badges[i].name;
+      }
+    }
+    return bname;
   }
 
   goBack() {

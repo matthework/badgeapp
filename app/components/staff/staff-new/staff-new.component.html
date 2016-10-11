@@ -39,18 +39,111 @@
 <select class="form-control" [(ngModel)]="newStaff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 <br>
 
-<label>Brief: </label>
+<!-- <label>Brief: </label>
 <textarea class="textarea form-control" type="text" [(ngModel)]="newStaff.brief" placeholder=""></textarea><br>
-<br>
+<br> -->
 
 <label>Template: </label>
-<select class="form-control" [(ngModel)]="newStaff.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
+<select class="form-control" [(ngModel)]="newBID"><option *ngFor="let bso of getBadgeSetsOptions()" [value]="bso[1]">{{bso[0]}}</option></select> NOT working yet...<br>
 <br>
 
 <!-- <label>Others: </label>
 <input class="input-others" type="text" [(ngModel)]="newStaff.others" placeholder="Others" /><br> -->
 
-<br>
+<div *ngIf="newStaff.userbgroups.length!=0">
+	<div class="row col col-xs-12 header hidden-xs">
+	  <div class="col-xs-3">Badge</div>
+	  <div class="col col-xs-2">Focus</div>
+	  <div class="col-xs-6">Description</div>
+	  <div class="col-xs-1"></div>
+	</div>
+	<div (click)="onSelect(userbgroup)" class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of newStaff.userbgroups">
+		<div class="col-sm-3">
+			<div class="text-blue text-big click" data-toggle="modal" data-target="#myModal">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</div>
+		</div>
+		<div class="col col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
+			<text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text>
+		</div>
+		<div class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
+			<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}
+		</div>
+		<div class="col-sm-1">
+			<button class="btn btn-del btn-danger" (click)="deleteUserBGroupPop(userbgroup)">X</button>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="selectedUG" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedUG.bid)}}</h3><br>
+				<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedUG)">,  </text>
+				<label class="lab">Approved: </label>
+				<input type="checkbox" [(ngModel)]="selectedUG.status">
+			</div>
+			<div class="modal-body">
+				<div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedUG.bid)">
+					<div *ngIf="selectedUG.level!=bl.level">
+						<div class="col-sm-2">{{bl.level}}</div>
+						<div class="col-sm-10"><text class="text-blue">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+					</div>
+					<div *ngIf="selectedUG.level==bl.level" class="row highlight">					
+						<div class="col-sm-2">{{bl.level}}</div>
+						<div class="col-sm-10"><text class="">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+					</div>
+				</div>
+			</div>
+				<br>
+			<div class="modal-footer">
+<!-- 				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="getBadgeSet()">Cancel</button> -->
+				<button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+
+<!-- Modal -->
+<div *ngIf="addNew" class="modal fade" id="myModal-new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header form-inline">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title text-blue" id="myModalLabel">Add New Badge: </h3><br>
+				<label class="lab">Badge: </label>
+				<select class="select form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><br>
+				<br>
+				<label class="lab">Focus: </label>
+				<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+				<label class="lab">Approved: </label>
+				<input type="checkbox" [(ngModel)]="newStatus">
+			</div>
+			<div class="modal-body">
+				<div (click)="onSelectedLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(newBID)">
+					<div *ngIf="selectedLevel!=bl.level">
+						<div class="col-sm-2">{{bl.level}}</div>
+						<div class="col-sm-10"><text class="text-blue">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+					</div>
+					<div *ngIf="selectedLevel==bl.level" class="row highlight">					
+						<div class="col-sm-2">{{bl.level}}</div>
+						<div class="col-sm-10"><text class="">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+					</div>
+				</div>
+			</div>
+				<br>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="resetNewValue()">Cancel</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+
+<!-- <br>
 <div *ngFor="let i of nums">
 <br>
 <label>Badge: </label>
@@ -67,9 +160,10 @@
 <input type="checkbox" [(ngModel)]="newStaff.userbgroups[i].status" placeholder="" /><br>
 <br>
 <br>
-</div>
+</div> -->
 
-<div class="row col-xs-6">
+<div class="row col-xs-5">
+<button class="btn-big btn-add btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
 <button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
 <button class="btn-big btn btn-success pull-right" [disabled]="!newStaff.fname||!newStaff.email" (click)="addStaff()">Save</button>
 </div>
