@@ -32,7 +32,7 @@
     <div *ngIf!="showBS">
       <div *ngIf="staffs" class="row col col-xs-12 header hidden-xs">
         <div class=" col-xs-3">Name</div>
-        <div class=" col-xs-5">Badges</div>
+        <div class=" col-xs-6">Badges</div>
         <div class=" col-xs-3">Top BadgeSet</div>
         <!-- <div class=" col-xs-1">Status</div> -->
         <!-- <div class=" col-xs-1"></div> -->
@@ -42,14 +42,12 @@
         <div  class="col-sm-3 col-xs-12">
           <button class="btn btn-b btn-primary wrap" (click)="onSelect(staff);toStaffDetail(staff._id)">{{staff.fname}} {{staff.lname}}</button>
         </div>
-        <div class="col-sm-5 col-xs-12">
-        	<div *ngFor="let userbgroup of staff.userbgroups">
-        	<uli>
-        	<text class="click text-blue" (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
-          <text *ngIf="!userbgroup.status" class="text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="text-grey"> [{{userbgroup.focus}}]</text></text>
-          <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">APPROVE</button>
-        	</uli>
-        	</div>
+        <div class="col-sm-6 col-xs-12">
+        	<text class="click text-blue" *ngFor="let userbgroup of staff.userbgroups">
+        	<text (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
+          <text *ngIf="!userbgroup.status" class="text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="text-grey"> [{{userbgroup.focus}}]</text></text>, 
+          <!-- <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">APPROVE</button> -->
+        	</text>
       	</div>
       	<div class="click text-blue col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>
         <!-- <div class="col-sm-1 col-xs-12" (click)="onSelect(staff)">{{staff.status}}</div> -->
@@ -99,6 +97,7 @@
 
 <div *ngIf="!auth.isAdmin()">
   <h3><i>You are not logged in as an Admin.</i></h3>
+  {{auth.login()}}
 </div>
 
 </div>

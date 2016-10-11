@@ -46,6 +46,7 @@ export class StaffDetailComponent implements OnInit {
   newL = 0;
   selectedLevel = 0;
   addNew = false;
+  advanced = false;
   statusOptions = ['Active','Inactive'];
 
   labels = [  "I understand... ", 
@@ -120,6 +121,7 @@ export class StaffDetailComponent implements OnInit {
       // pasrse string into number
       for (var i = 0; i < this.staff.userbgroups.length; i++) { 
           this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
+          this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
       }
       this.staff.userbgroups.sort(this.toCompare);
       let value = JSON.stringify(this.staff)
@@ -139,17 +141,13 @@ export class StaffDetailComponent implements OnInit {
       this._router.navigate(['/staff/new']);
   }
 
-  addBadgeGroup(level:number) {
+  addUserBGroup(level:number) {
       // this.newLevel = +this.newLevel;
       this.newLevel = level;
       this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
       let value = JSON.stringify(this.staff);
       this._staffService.updateStaff(this.staff._id,value).subscribe();
       console.log('you submitted value: ', value);
-      // this.newBID = "";
-      // this.newLevel = 0;
-      // this.newFocus =[];
-      // this.newStatus = false;
   }
 
   removeStaff() {
@@ -410,7 +408,7 @@ export class StaffDetailComponent implements OnInit {
             this.staff.userbgroups[i].focus = this.selectedUG.focus;
          }
       }
-      this.updateStaff();
+      // this.updateStaff();
   }
 
   updateCheckedNew(option, event, focus) {
@@ -471,7 +469,7 @@ export class StaffDetailComponent implements OnInit {
             this.staff.userbgroups[i].focus = this.selectedUG.focus;
          }
       }
-      this.updateStaff();
+      // this.updateStaff();
    }
 
    onSelectedLevel(level:number) {

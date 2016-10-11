@@ -45,6 +45,7 @@ var StaffDetailComponent = (function () {
         this.newL = 0;
         this.selectedLevel = 0;
         this.addNew = false;
+        this.advanced = false;
         this.statusOptions = ['Active', 'Inactive'];
         this.labels = ["I understand... ",
             "I participate... ",
@@ -104,6 +105,7 @@ var StaffDetailComponent = (function () {
         // pasrse string into number
         for (var i = 0; i < this.staff.userbgroups.length; i++) {
             this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
+            this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
         }
         this.staff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.staff);
@@ -120,17 +122,13 @@ var StaffDetailComponent = (function () {
     StaffDetailComponent.prototype.addStaff = function () {
         this._router.navigate(['/staff/new']);
     };
-    StaffDetailComponent.prototype.addBadgeGroup = function (level) {
+    StaffDetailComponent.prototype.addUserBGroup = function (level) {
         // this.newLevel = +this.newLevel;
         this.newLevel = level;
         this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus });
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
-        // this.newBID = "";
-        // this.newLevel = 0;
-        // this.newFocus =[];
-        // this.newStatus = false;
     };
     StaffDetailComponent.prototype.removeStaff = function () {
         this._staffService.deleteStaff(this.id).subscribe();
@@ -368,7 +366,7 @@ var StaffDetailComponent = (function () {
                 this.staff.userbgroups[i].focus = this.selectedUG.focus;
             }
         }
-        this.updateStaff();
+        // this.updateStaff();
     };
     StaffDetailComponent.prototype.updateCheckedNew = function (option, event, focus) {
         console.log('event.target.value ' + event.target.value);
@@ -423,7 +421,7 @@ var StaffDetailComponent = (function () {
                 this.staff.userbgroups[i].focus = this.selectedUG.focus;
             }
         }
-        this.updateStaff();
+        // this.updateStaff();
     };
     StaffDetailComponent.prototype.onSelectedLevel = function (level) {
         this.selectedLevel = level;

@@ -107,11 +107,10 @@
 	<button class="btn btn-primary" (click)="addNew=true;resetNewValue();bedit=true">New Badge</button>
 	</div> -->
 
-	<div *ngIf="badgeset.badgegroups[0]" class="row col-xs-12">
-		<button *ngIf="!advanced" class="btn-big btn-add btn btn-default" (click)="advanced=true">+ Advanced</button>
-		<button *ngIf="advanced" class="btn-big btn-add btn btn-default" (click)="advanced=false">- Hide</button>
-		<button *ngIf="!more" class="btn-big btn btn-default pull-right" (click)="more=true">Show More</button>
-		<button *ngIf="more" class="btn-big btn btn-primary pull-right" (click)="more=false">Show Less</button>
+	<div class="row col-xs-12">
+		<button *ngIf="!advanced" class="btn-big btn btn-default" (click)="advanced=true">+ Advanced</button>
+		<button *ngIf="advanced" class="btn-big btn btn-default" (click)="advanced=false">- Hide</button>
+		<button *ngIf="auth.isAdmin()" class="btn-big btn-add btn btn-default pull-right" (click)="addNew=true;resetNewValue();more=false" data-toggle="modal" data-target="#myModal-new">Add Badge</button>
 	</div>
 	<br>
 
@@ -171,8 +170,8 @@
 				</div>
  				<br>
 				<div class="modal-footer">
-<!-- 					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="removeBadgeGroup(selectedBG)">Delete</button> -->
-					<button type="button" class="btn btn-success" data-dismiss="modal">Select</button>
+					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="getBadgeSet()">Cancel</button>
+					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateBadgeSet()">Select</button>
 				</div>
 			</div>
 		</div>
@@ -225,6 +224,7 @@
 				</div>
  				<br>
 				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="getBadgeSet()">Cancel</button>
 					<button type="button" class="btn btn-success" data-dismiss="modal" (click)="addBadgeGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
 				</div>
 			</div>
@@ -239,7 +239,7 @@
 		  <div class="col-xs-7">Description</div>
 		</div>
 		<div class="row col col-xs-12 div-list-item" *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
-			<div (click)="onSelect(moreb);checkAdmin()">
+			<div (click)="onSelect(moreb);more=false;checkAdmin()">
 				<div class="col-sm-3 text-big">
 					<text *ngIf="moreb.current" class="click text-blue" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text><text *ngIf="!moreb.current" class="click" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text>
 				</div>
@@ -253,14 +253,12 @@
 		</div>
 	</div>
 
-	<div *ngIf="!auth.isAdmin() && !bedit" class="row col-xs-11">
-		<button class="btn-big btn btn-default" (click)="goBack()">Back</button>
-	</div>
-
-	<div *ngIf="auth.isAdmin()" class="row col-xs-11">
+	<div class="row col-xs-12">
 		<!-- <button class="btn-bs btn-add btn btn-default" (click)="addBadgeSet()">New BadgeSet</button> -->
-		<button class="btn-big btn-delete btn btn-default" (click)="deleteBadgeSetPop()">Delete</button>
-		<button class="btn-big btn-add btn btn-default" (click)="addNew=true;resetNewValue();more=false" data-toggle="modal" data-target="#myModal-new">Add Badge</button>
+		<button *ngIf="!auth.isAdmin() && !bedit" class="btn-big btn btn-default" (click)="goBack()">Back</button>
+		<button *ngIf="auth.isAdmin()" class="btn-big btn-delete btn btn-default" (click)="deleteBadgeSetPop()">Delete BSet</button>
+		<button *ngIf="!more" class="btn-big btn btn-default pull-right" (click)="more=true">Show More</button>
+		<button *ngIf="more" class="btn-big btn btn-primary pull-right" (click)="more=false">Show Less</button>
 <!-- 		<button *ngIf="bedit" class="btn-big btn btn-danger pull-right" (click)="bedit=false;getBadgeSet()">Cancel</button>
 		<button *ngIf="bedit" class="btn-big btn btn-success pull-right" (click)="bedit=false;updateBadgeSet()">Save</button> -->
 	</div>

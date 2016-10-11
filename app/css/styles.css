@@ -131,15 +131,17 @@ th , td  {
 .label-small {
   width: 6em;
 }
+.btn-new:hover{
+  color: white;
+  background-color: limegreen;
+}
 .btn-add:hover{
   color: white;
   background-color: #039be5;
-  border: 0;
 }
 .btn-delete:hover {
   color: white;
   background-color: red;
-  border: 0;
 }
 .input-upper {
   text-transform: uppercase;
