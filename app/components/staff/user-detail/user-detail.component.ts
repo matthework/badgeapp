@@ -28,6 +28,7 @@ export class UserDetailComponent implements OnInit {
   staffs: Staff[] = [];
   badges: Badge[] = [];
   badgesets: BadgeSet[] = [];
+  selectedUG: UserBGroup;
   tiers: Tier[] = [];
   newUser = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief:"", others: []}
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
@@ -45,6 +46,7 @@ export class UserDetailComponent implements OnInit {
   userName = false;
   pos = false;
   brief = false;
+  newL = 0;
   labels = [  "I understand... ", 
             "I participate... ", 
             "I contribute... ", 
@@ -76,6 +78,10 @@ export class UserDetailComponent implements OnInit {
     this.getTiers();
   }
 
+  onSelect(ug: UserBGroup) { 
+    this.selectedUG = ug;
+  }
+  
   getStaffs() {
     this._staffService.getStaffs().subscribe(staffs => { this.staffs = staffs});
   }
@@ -142,6 +148,7 @@ export class UserDetailComponent implements OnInit {
 
   toUserDetail(email:string) {
     this._router.navigate(['/user/detail',email]);
+    location.reload();
   }
 
   getStaffBS(sbgs:UserBGroup[]) {
@@ -394,6 +401,10 @@ export class UserDetailComponent implements OnInit {
 
   onSelectedLevel(level:number) {
     this.selectedLevel = level;
+  }
+
+  onSelectNewLevel(level:number) {
+    this.newL = level;
   }
 
   getBLs(bid:string) {

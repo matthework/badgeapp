@@ -117,27 +117,32 @@
 	<div *ngIf="!more">
 		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
-		  <div class="col col-xs-2">Focus</div>
-		  <div class="col-xs-6">Description</div>
+		  <!-- <div class="col col-xs-2">Focus</div> -->
+		  <div class="col-xs-8">Description</div>
 		  <div class="col-xs-1"></div>
 		</div>
 		<div (click)="onSelect(badgegroup)" class="row col col-xs-12 div-list-item" *ngFor="let badgegroup of badgeset.badgegroups">
-			<div class="col-sm-3">
-				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</button>
-			</div>
 			<div *ngIf="!auth.isAdmin()">
-			<div class="col col-sm-2">
+			<div class="col-sm-3">
+				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</button><br>
 				<text *ngIf="badgegroup.focus.length!=0">[{{badgegroup.focus}}]</text>
 			</div>
-			<div class="col-sm-7">
+<!-- 			<div class="col col-sm-2">
+				<text *ngIf="badgegroup.focus.length!=0">[{{badgegroup.focus}}]</text>
+			</div> -->
+			<div class="col-sm-8">
 				<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 			</div>
 			</div>
 			<div *ngIf="auth.isAdmin()">
-			<div class="col col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
-				<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
+			<div class="col-sm-3">
+				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</button><br>
+				<text class="text-blue click" data-toggle="modal" data-target="#myModal" *ngIf="badgegroup.focus.length!=0">[{{badgegroup.focus}}]</text>
 			</div>
-			<div class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
+<!-- 			<div class="col col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
+				<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
+			</div> -->
+			<div class="col-sm-8 click" data-toggle="modal" data-target="#myModal">
 				<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 			</div>
 			<div class="col-sm-1">
@@ -235,18 +240,19 @@
 	<div *ngIf="more">
 		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
-		  <div class="col col-xs-2">Focus</div>
-		  <div class="col-xs-7">Description</div>
+		  <!-- <div class="col col-xs-2">Focus</div> -->
+		  <div class="col-xs-8">Description</div>
 		</div>
 		<div class="row col col-xs-12 div-list-item" *ngFor="let moreb of getMoreBadges(badgeset.badgegroups)">
 			<div (click)="onSelect(moreb);more=false;checkAdmin()">
-				<div class="col-sm-3 text-big">
-					<text *ngIf="moreb.current" class="click text-blue" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text><text *ngIf="!moreb.current" class="click" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text>
-				</div>
-				<div class="col col-sm-2">
+				<div class="col-sm-3">
+					<text *ngIf="moreb.current" class="click text-blue text-big" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text><text *ngIf="!moreb.current" class="click" (click)="toBadgeDetail(moreb.bid)">{{getBadgeName(moreb.bid)}} {{moreb.level}}</text><br>
 					<text *ngIf="moreb.current && moreb.focus.length!=0" class="text-blue"> [{{moreb.focus}}]</text>
 				</div>
-				<div class="col-sm-7">
+<!-- 				<div class="col col-sm-2">
+					<text *ngIf="moreb.current && moreb.focus.length!=0" class="text-blue"> [{{moreb.focus}}]</text>
+				</div> -->
+				<div class="col-sm-8">
 					<text *ngIf="moreb.current" class="text-blue">{{labels[moreb.level-1]}}</text><text *ngIf="!moreb.current">{{labels[moreb.level-1]}}</text><br>{{getDesc(moreb.bid,moreb.level)}}
 				</div>
 			</div>

@@ -13,3 +13,10 @@
 .textarea {
   width: 300px;
 }
+.btn-badge {
+  width: 200px;
+  margin-bottom: 10px;
+}
+.top {
+  margin-top: 20px;
+}
