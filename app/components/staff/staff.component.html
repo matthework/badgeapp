@@ -43,10 +43,16 @@
           <button class="btn btn-b btn-primary wrap" (click)="onSelect(staff);toStaffDetail(staff._id)">{{staff.fname}} {{staff.lname}}</button>
         </div>
         <div class="col-sm-6 col-xs-12">
-        	<text class="click text-blue" *ngFor="let userbgroup of staff.userbgroups">
-        	<text (click)="toBadgeDetail(userbgroup.bid)"><text *ngIf="userbgroup.status" class="">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="userbgroup.focus.length!=0 && userbgroup.status" class="focus"> [{{userbgroup.focus}}]</text>
-          <text *ngIf="!userbgroup.status" class="text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status" class="text-grey"> [{{userbgroup.focus}}]</text></text>, 
-          <!-- <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">APPROVE</button> -->
+        	<text class="" *ngFor="let userbgroup of staff.userbgroups">
+          	<text *ngIf="userbgroup.status" class="click text-blue" (click)="toBadgeDetail(userbgroup.bid)">
+              <text>{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text>
+              <text *ngIf="userbgroup.focus.length!=0 && userbgroup.status">[{{userbgroup.focus}}]</text>, 
+            </text>
+            <text *ngIf="!userbgroup.status" class="click text-grey">
+              <text class="click text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text>
+              <text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status">[{{userbgroup.focus}}]</text>, 
+            </text>
+            <!-- <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">APPROVE</button> -->
         	</text>
       	</div>
       	<div class="click text-blue col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>

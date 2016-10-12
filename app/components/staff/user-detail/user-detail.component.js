@@ -44,6 +44,7 @@ var UserDetailComponent = (function () {
         this.userName = false;
         this.pos = false;
         this.brief = false;
+        this.newL = 0;
         this.labels = ["I understand... ",
             "I participate... ",
             "I contribute... ",
@@ -64,6 +65,9 @@ var UserDetailComponent = (function () {
         this.getBadges();
         this.getBadgeSets();
         this.getTiers();
+    };
+    UserDetailComponent.prototype.onSelect = function (ug) {
+        this.selectedUG = ug;
     };
     UserDetailComponent.prototype.getStaffs = function () {
         var _this = this;
@@ -126,6 +130,7 @@ var UserDetailComponent = (function () {
     };
     UserDetailComponent.prototype.toUserDetail = function (email) {
         this._router.navigate(['/user/detail', email]);
+        location.reload();
     };
     UserDetailComponent.prototype.getStaffBS = function (sbgs) {
         var allbset = [];
@@ -359,6 +364,9 @@ var UserDetailComponent = (function () {
     };
     UserDetailComponent.prototype.onSelectedLevel = function (level) {
         this.selectedLevel = level;
+    };
+    UserDetailComponent.prototype.onSelectNewLevel = function (level) {
+        this.newL = level;
     };
     UserDetailComponent.prototype.getBLs = function (bid) {
         var bls;
