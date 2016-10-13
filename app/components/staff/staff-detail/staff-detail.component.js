@@ -41,7 +41,7 @@ var StaffDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
-        this.newStatus = false;
+        this.newStatus = true;
         this.newL = 0;
         this.selectedLevel = 0;
         this.addNew = false;
@@ -409,7 +409,7 @@ var StaffDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
-        this.newStatus = false;
+        this.newStatus = true;
         this.selectedLevel = 0;
     };
     StaffDetailComponent.prototype.onSelectNewLevel = function (level) {
