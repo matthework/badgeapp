@@ -292,6 +292,18 @@ export class StaffNewComponent {
     return bname;
   }
 
+  updateStatus(ubg,event) {
+    for (var i = 0; i < this.newStaff.userbgroups.length; i++) { 
+      if(this.newStaff.userbgroups[i].bid == ubg.bid) {
+         if(event.target.checked) {
+            this.newStaff.userbgroups[i].status = true;
+         }else {
+            this.newStaff.userbgroups[i].status = false;
+         }
+      }
+    }
+  }
+
   goBack() {
     window.history.back();
   }

@@ -106,9 +106,10 @@
 		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
 		  <!-- <div class="col-xs-2">Focus</div> -->
-		  <div class="col-xs-6">Description</div>
+		  <div class="col-xs-5">Description</div>
 		  <div class="col-xs-2">Badge Set</div>
-		  <div class="col-xs-1">Status</div>
+		  <div class="col col-xs-1">Approved</div>
+		  <div class="col col-xs-1"></div>
 		</div>
 		<div (click)="onSelect(userbgroup)" class="row col col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">
 	  		<div class="col-sm-3">
@@ -118,7 +119,7 @@
 <!-- 				<div class="col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
 				<text *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text>
 			</div> -->
-			<div class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
+			<div class="col-sm-5 click" data-toggle="modal" data-target="#myModal">
 				<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}
 			</div>
 			<div class="col-sm-2">
@@ -126,9 +127,13 @@
 					<uli class="click text-blue" (click)="toBSDetail(bs._id)">{{bs.name}}</uli>
 				</div>
 	  		</div>
-	  		<div class="col-sm-1" data-toggle="modal" data-target="#myModal">
-	  			<i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i>
+	  		<div class="col-sm-1">
+	  			<input type="checkbox" [(ngModel)]="userbgroup.status" (change)="updateStatus(userbgroup, $event)">
+	  			<!-- <i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i> -->
 	  		</div>
+	  		<div class="col-sm-1">
+				<button class="btn btn-del btn-danger" (click)="deleteUserBGroupPop(userbgroup)">X</button>
+			</div>
 		  	<!-- <div *ngIf="bedit && selectedUG.bid == userbgroup.bid && selectedUG.level == userbgroup.level">
 		  		<div class="col-sm-4">
 	  				<select class="form-control" [(ngModel)]="userbgroup.bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><select class="form-control" [(ngModel)]="userbgroup.level"><option *ngFor="let lo of getLevelsOptions(userbgroup.bid)" [value]="lo">{{lo}}</option></select><br><text *ngFor="let fc of getFocusOptions(userbgroup.bid)">{{fc}} <input class="form-control" type="checkbox" [checked]="checkFocus(fc,userbgroup.focus)" [value]="fc" (change)="updateChecked(fc, $event, userbgroup)">, </text>
@@ -156,8 +161,8 @@
 					<h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedUG.bid)}}</h3><br>
 					<label class="lab">Focus: </label>
 					<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedUG)">,  </text><br>
-					<label class="lab">Approved: </label>
-					<input type="checkbox" [(ngModel)]="selectedUG.status"><br>
+<!-- 					<label class="lab">Approved: </label>
+					<input type="checkbox" [(ngModel)]="selectedUG.status"><br> -->
 				</div>
 				<div class="modal-body">
 					<div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedUG.bid)">
@@ -216,8 +221,8 @@
 					<br>
 					<label class="lab">Focus: </label>
 					<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
-					<label class="lab">Approved: </label>
-					<input type="checkbox" [(ngModel)]="newStatus"><br>
+<!-- 					<label class="lab">Approved: </label>
+					<input type="checkbox" [(ngModel)]="newStatus"><br> -->
 				</div>
 				<div class="modal-body">
 					<div (click)="onSelectedLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(newBID)">
