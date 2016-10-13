@@ -143,9 +143,9 @@ var StaffDetailComponent = (function () {
             this.removeStaff();
         }
     };
-    StaffDetailComponent.prototype.deleteBadgeGroupPop = function (selectedGroup) {
+    StaffDetailComponent.prototype.deleteUserBGroupPop = function (selectedGroup) {
         var name = this.staff.fname.toUpperCase() + " " + this.staff.lname.toUpperCase();
-        var badge = selectedGroup.badge.toUpperCase();
+        var badge = this.getBadgeName(selectedGroup.bid).toUpperCase();
         var level = selectedGroup.level;
         var r = confirm("Are you sure you want to delete " + badge + " " + level + " from " + name + " ?");
         if (r == true) {
@@ -435,6 +435,19 @@ var StaffDetailComponent = (function () {
         }
         // console.log('you submitted value: ', bls);
         return bls;
+    };
+    StaffDetailComponent.prototype.updateStatus = function (ubg, event) {
+        for (var i = 0; i < this.staff.userbgroups.length; i++) {
+            if (this.staff.userbgroups[i].bid == ubg.bid) {
+                if (event.target.checked) {
+                    this.staff.userbgroups[i].status = true;
+                }
+                else {
+                    this.staff.userbgroups[i].status = false;
+                }
+            }
+        }
+        this.updateStaff();
     };
     StaffDetailComponent.prototype.goBack = function () {
         window.history.back();

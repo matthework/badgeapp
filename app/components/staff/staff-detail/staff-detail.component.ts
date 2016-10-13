@@ -165,9 +165,9 @@ export class StaffDetailComponent implements OnInit {
       }
   }
 
-  deleteBadgeGroupPop(selectedGroup: UserBGroup) {
+  deleteUserBGroupPop(selectedGroup: UserBGroup) {
       var name = this.staff.fname.toUpperCase() + " " + this.staff.lname.toUpperCase();
-      var badge = selectedGroup.badge.toUpperCase();
+      var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
       var level = selectedGroup.level;
       var r = confirm("Are you sure you want to delete "+ badge + " " + level + " from " + name +" ?");
       if (r == true) {
@@ -486,6 +486,19 @@ export class StaffDetailComponent implements OnInit {
     // console.log('you submitted value: ', bls);
     return bls;
   }
+
+   updateStatus(ubg,event) {
+      for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+         if(this.staff.userbgroups[i].bid == ubg.bid) {
+            if(event.target.checked) {
+               this.staff.userbgroups[i].status = true;
+            }else {
+               this.staff.userbgroups[i].status = false;
+            }
+         }
+      }
+      this.updateStaff();
+   }
 
   goBack() {
     window.history.back();
