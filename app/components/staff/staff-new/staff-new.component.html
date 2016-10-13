@@ -44,14 +44,15 @@
 <br> -->
 
 <label>Template: </label>
-<select class="form-control" [(ngModel)]="newBID"><option *ngFor="let bso of getBadgeSetsOptions()" [value]="bso[1]">{{bso[0]}}</option></select> NOT working yet...<br>
+<select class="form-control" [(ngModel)]="newBSID" (ngModelChange)="loadTemplate(newBSID)"><option *ngFor="let bso of getBadgeSetsOptions()" [value]="bso[1]">{{bso[0]}}</option></select>
+<!-- <button class="btn btn-default" (click)="loadTemplate(newBSID)" [disabled]="!newBSID">Load</button> --><br>
 <br>
 
 <!-- <label>Others: </label>
 <input class="input-others" type="text" [(ngModel)]="newStaff.others" placeholder="Others" /><br> -->
 
 <div *ngIf="newStaff.userbgroups.length!=0">
-	<div class="row col col-xs-11 header hidden-xs">
+	<div class="row col top col-xs-11 header hidden-xs">
 	  <div class="col-xs-3">Badge</div>
 	  <div class="col-xs-5">Description</div>
 	  <div class="col-xs-2">Approved</div>
