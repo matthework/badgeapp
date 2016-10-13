@@ -26,9 +26,10 @@ export class StaffNewComponent {
   newBID = "";
   newLevel = 0;
   newFocus = [];
-  newStatus = false;
+  newStatus = true;
   newL = 0;
   selectedLevel = 0;
+  newBSID = "";
   labels = [  "I understand... ", 
           "I participate... ", 
           "I contribute... ", 
@@ -107,7 +108,7 @@ export class StaffNewComponent {
 
   addBadgeGroup(level:number) {
     this.newLevel = level;
-    this.newStaff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus});
+    this.newStaff.userbgroups.push({bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, status: true});
     let value = JSON.stringify(this.newStaff)
     console.log('you submitted value: ', value);
   }
@@ -235,7 +236,7 @@ export class StaffNewComponent {
     this.newBID = "";
     this.newLevel = 0;
     this.newFocus = [];
-    this.newStatus = false;
+    this.newStatus = true;
     this.selectedLevel = 0;
   }
 
@@ -300,6 +301,20 @@ export class StaffNewComponent {
          }else {
             this.newStaff.userbgroups[i].status = false;
          }
+      }
+    }
+  }
+
+  loadTemplate(bsid) {
+    console.log("bset id: ", bsid);
+    this.newStaff.userbgroups = [];
+    if(bsid) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        if (this.badgesets[i]._id==bsid && this.badgesets[i].badgegroups.length!=0) {
+          for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
+            this.newStaff.userbgroups.push({bid: this.badgesets[i].badgegroups[j].bid, badge: "", level: this.badgesets[i].badgegroups[j].level, focus:[], status: true});
+          }
+        }
       }
     }
   }
