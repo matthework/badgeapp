@@ -42,7 +42,7 @@ export class StaffDetailComponent implements OnInit {
   newBID = "";
   newLevel = 0;
   newFocus = [];
-  newStatus = false;
+  newStatus = true;
   newL = 0;
   selectedLevel = 0;
   addNew = false;
@@ -456,7 +456,7 @@ export class StaffDetailComponent implements OnInit {
     this.newBID = "";
     this.newLevel = 0;
     this.newFocus = [];
-    this.newStatus = false;
+    this.newStatus = true;
     this.selectedLevel = 0;
   }
 
