@@ -184,8 +184,8 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedUG.bid)}}</h3><br>
-					<label class="lab">Focus: </label>
-					<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}}, </text><br>
+					<!-- <label class="lab">Focus: </label> -->
+					<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}}, </text>
 				</div>
 				<div class="modal-body">
 					<div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedUG.bid)">
