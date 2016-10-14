@@ -159,8 +159,8 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedUG.bid)}}</h3><br>
-					<label class="lab">Focus: </label>
-					<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedUG)">,  </text><br>
+					<!-- <label class="lab">Focus: </label> -->
+					<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedUG)">,  </text>
 <!-- 					<label class="lab">Approved: </label>
 					<input type="checkbox" [(ngModel)]="selectedUG.status"><br> -->
 				</div>

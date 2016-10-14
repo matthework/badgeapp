@@ -44,8 +44,7 @@
 <br> -->
 
 <label>Template: </label>
-<select class="form-control" [(ngModel)]="newBSID" (ngModelChange)="loadTemplate(newBSID)"><option *ngFor="let bso of getBadgeSetsOptions()" [value]="bso[1]">{{bso[0]}}</option></select>
-<!-- <button class="btn btn-default" (click)="loadTemplate(newBSID)" [disabled]="!newBSID">Load</button> --><br>
+<select class="form-control" [(ngModel)]="newBSID" (ngModelChange)="loadTemplate(newBSID)"><option *ngFor="let bso of getBadgeSetsOptions()" [value]="bso[1]">{{bso[0]}}</option></select><br>
 <br>
 
 <!-- <label>Others: </label>
@@ -168,9 +167,9 @@
 </div> -->
 
 <div class="row top col-xs-10">
-<button class="btn-big btn-add btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
-<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
-<button class="btn-big btn btn-success pull-right" [disabled]="!newStaff.fname||!newStaff.email" (click)="addStaff()">Save</button>
+	<button class="btn-big btn-add btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
+	<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
+	<button class="btn-big btn btn-success pull-right" [disabled]="!newStaff.fname||!newStaff.email" (click)="addStaff()">Save</button>
 </div>
 
 </div>

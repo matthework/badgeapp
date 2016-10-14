@@ -82,8 +82,8 @@
 					<tr>
 					  <td>
 					  <div *ngFor="let badgegroup of getBS(bsname1).badgegroups">
-					  <uli>
-					  <text class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="click text-blue">(+${{0}})</text>
+					  <uli class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)">
+					  <text>{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text>(+${{0}})</text>
 					  </uli>
 					  </div>
 					  </td>
@@ -103,8 +103,8 @@
 					<tr>
 					  <td>
 					  <div *ngFor="let badgegroup of getBS(bsname2).badgegroups">
-					  <uli>
-					  <text class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="click text-blue">(+${{getMoney(getBS(bsname2).badgegroups,getBS(bsname2).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
+					  <uli class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)">
+					  <text>{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text>(+${{getMoney(getBS(bsname2).badgegroups,getBS(bsname2).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
 					  </uli>
 					  </div>
 					  </td>
@@ -124,8 +124,8 @@
 					<tr>
 						<td>
 							<div *ngFor="let badgegroup of getBS(bsname3).badgegroups">
-							<uli>
-							<text class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text class="click text-blue">(+${{getMoney(getBS(bsname3).badgegroups,getBS(bsname3).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
+							<uli class="click text-blue" (click)="toBadgeDetail(badgegroup.bid)">
+							<text>{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}} </text><text>(+${{getMoney(getBS(bsname3).badgegroups,getBS(bsname3).pay-getBS(bsname1).pay,badgegroup.level)}})</text>
 							</uli>
 							</div>
 						</td>
