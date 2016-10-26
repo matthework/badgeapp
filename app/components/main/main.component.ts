@@ -122,81 +122,93 @@ export class MainComponent implements OnInit{
 		this._router.navigate(['/badge/detail',bid]);
 	}
 
-	getStaffBS(sbgs:UserBGroup[]) {
-		var allbset = [];
-		var count = 0;
-		var focusCheck = false;
-		if (this.badgesets != null && sbgs != null) {
-			for (var i = 0; i < this.badgesets.length; i++) { 
-				for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
-					for (var k = 0; k < sbgs.length; k++) { 
-						var a1 = sbgs[k].focus;
-						var a2 = this.badgesets[i].badgegroups[j].focus;
-						if (a1.length >= a2.length && a2.every(function(v,i) { return a1.includes(v)})) {
-							focusCheck = true;
-						}   
-						if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
-							count += 1;
-						}
-						focusCheck = false;
-					}
-					
-				}
-				if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].status=='Accepted') {
-					allbset.push(this.badgesets[i]);
-				}
-				count = 0;
-				
-			}
-		}
-		return allbset;
-	}
+  getStaffBS(sbgs:UserBGroup[]) {
+    var allbset = [];
+    var coreCount = 0;
+    var ncCount = 0;
+    var focusCheck = false;
+    var totolCore = 0;
+    if (this.badgesets != null && sbgs != null) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
+          if (this.badgesets[i].badgegroups[j].iscore) {
+            totolCore += 1;
+          }
+        }
 
-	  getSortStaffBS(sbgs:UserBGroup[]) {
-	    var pay = "";
-	    this.sortStaffBS = [];
-	    var allbset = this.getStaffBS(sbgs);
-	    if (allbset != null && sbgs != null) {
-	      for (var i = 0; i < allbset.length; i++) { 
-	        allbset[i].pay = this.getPay(allbset[i].tier, allbset[i].grade);
-	        this.sortStaffBS.push(allbset[i]);
-	      }
-	    }
-	    return this.sortStaffBS.sort(this.toCompareDes);
-	  }
+        for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
+          for (var k = 0; k < sbgs.length; k++) { 
+            var a1 = sbgs[k].focus;
+            var a2 = this.badgesets[i].badgegroups[j].focus;
+            if (a1.length >= a2.length && a2.every(function(v,i) { return a1.includes(v)})) {
+              focusCheck = true;
+            }   
+            if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+              if (this.badgesets[i].badgegroups[j].iscore) {
+                coreCount += 1;
+              }else{
+                ncCount += 1;
+              }
+            }
+            focusCheck = false;
+          }
 
-	  toCompareDes(a,b) {
-	    if (a.pay > b.pay)
-	      return -1;
-	    else if (a.pay < b.pay)
-	      return 1;
-	    else 
-	      return 0;
-	  }
+        }
+        if (coreCount == totolCore && ncCount >= (this.badgesets[i].badgegroups.length-totolCore)*4/5 && this.badgesets[i].status=='Accepted') {
+          allbset.push(this.badgesets[i]);
+        }
+        totolCore = 0;
+        coreCount = 0;
+        ncCount = 0;
+      }
+    }
+    return allbset;
+  }
 
-	  getTopStaffBS(sbgs:UserBGroup[]) {
-	    var topBS = [];
-	    if (this.getSortStaffBS(sbgs) !=null && this.getSortStaffBS(sbgs).length > 0) {
-	      topBS.push(this.getSortStaffBS(sbgs)[0]._id);
-	      topBS.push(this.getSortStaffBS(sbgs)[0].name);
-	      topBS.push(this.getSortStaffBS(sbgs)[0].tier);
-	      topBS.push(this.getSortStaffBS(sbgs)[0].grade);
-	    }
-	    return topBS;
-	  }
+  getSortStaffBS(sbgs:UserBGroup[]) {
+    var pay = "";
+    this.sortStaffBS = [];
+    var allbset = this.getStaffBS(sbgs);
+    if (allbset != null && sbgs != null) {
+      for (var i = 0; i < allbset.length; i++) { 
+        allbset[i].pay = this.getPay(allbset[i].tier, allbset[i].grade);
+        this.sortStaffBS.push(allbset[i]);
+      }
+    }
+    return this.sortStaffBS.sort(this.toCompareDes);
+  }
 
-	  getPay(t:number, g:string) {
-	    var pay = 0;
-	    if (this.tiers != null && t != 0 && g != "") {
-	      for (var i = 0; i < this.tiers.length; i++) { 
-	        if (this.tiers[i].tier == t) {
-	          pay = this.tiers[i].grades[this.gmap[g]];
-	        }
-	      }
-	    }
-	    return pay;
-	  }
+  toCompareDes(a,b) {
+    if (a.pay > b.pay)
+      return -1;
+    else if (a.pay < b.pay)
+      return 1;
+    else 
+      return 0;
+  }
 
+  getTopStaffBS(sbgs:UserBGroup[]) {
+    var topBS = [];
+    if (this.getSortStaffBS(sbgs) !=null && this.getSortStaffBS(sbgs).length > 0) {
+      topBS.push(this.getSortStaffBS(sbgs)[0]._id);
+      topBS.push(this.getSortStaffBS(sbgs)[0].name);
+      topBS.push(this.getSortStaffBS(sbgs)[0].tier);
+      topBS.push(this.getSortStaffBS(sbgs)[0].grade);
+    }
+    return topBS;
+  }
+
+  getPay(t:number, g:string) {
+    var pay = 0;
+    if (this.tiers != null && t != 0 && g != "") {
+      for (var i = 0; i < this.tiers.length; i++) { 
+        if (this.tiers[i].tier == t) {
+          pay = this.tiers[i].grades[this.gmap[g]];
+        }
+      }
+    }
+    return pay;
+  }
 
 	findBadgeSet(sbgs:UserBGroup[], bid:string, l:number) {
 		var bset = [];
