@@ -44,6 +44,7 @@ export class BSDetailComponent implements OnInit {
   newBID = "";
   newLevel = 0;
   newFocus = [];
+  newCore = false;
   newL = 0;
   selectedLevel = 0;
   advanced = false;
@@ -244,18 +245,6 @@ export class BSDetailComponent implements OnInit {
     return tiersOptions.sort();
   }
 
-  checkCore(b:string) {
-    var result = "No";
-    if (this.badgeset != null) {
-        for (var i = 0; i < this.badgeset.corebadges.length; i++) { 
-            if (this.badgeset.corebadges[i].badge == b) {
-                result = "Yes";
-            }
-        }
-    }
-    return result;
-  }
-
   toBadgeDetail(bid:string) {
     this._router.navigate(['/badge/detail',bid]);
   }
@@ -302,7 +291,7 @@ export class BSDetailComponent implements OnInit {
     // }
     // this.newLevel = +this.newLevel;
     this.newLevel = level;
-    this.badgeset.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus});
+    this.badgeset.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, iscore: this.newCore});
     // this.badgeset.badgegroups.sort(this.toCompare);
     // this.badgeset.corebadges.sort(this.toCompare);
     let value = JSON.stringify(this.badgeset)
@@ -311,22 +300,28 @@ export class BSDetailComponent implements OnInit {
   }
 
   deleteBadgeGroupPop(selectedGroup: BadgeGroup) {
-    var isCore =false;
-    for (var i = 0; i < this.badgeset.corebadges.length; i++) { 
-      if (this.badgeset.corebadges[i].badge == selectedGroup.badge) {
-        isCore = true;
-      }
-    }
-    if (isCore) {
-      var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
-    }else{
+    // var isCore =false;
+    // for (var i = 0; i < this.badgeset.corebadges.length; i++) { 
+    //   if (this.badgeset.corebadges[i].badge == selectedGroup.badge) {
+    //     isCore = true;
+    //   }
+    // }
+    // if (isCore) {
+    //   var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
+    // }else{
+    //   var name = this.badgeset.name.toUpperCase()
+    //   var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
+    //   var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
+    //   if (r == true) {
+    //       this.removeBadgeGroup(selectedGroup);
+    //   }
+    // }
       var name = this.badgeset.name.toUpperCase()
       var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
       var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
       if (r == true) {
-          this.removeBadgeGroup(selectedGroup);
+         this.removeBadgeGroup(selectedGroup);
       }
-    }
   }
 
   removeBadgeGroup(selectedGroup: BadgeGroup) {
@@ -464,6 +459,19 @@ export class BSDetailComponent implements OnInit {
 
    onSelectedLevel(level:number) {
       this.selectedLevel = level;
+   }
+
+   updateIsCore(bg,event) {
+      for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
+         if(this.badgeset.badgegroups[i].bid == bg.bid) {
+            if(event.target.checked) {
+               this.badgeset.badgegroups[i].iscore = true;
+            }else {
+               this.badgeset.badgegroups[i].iscore = false;
+            }
+         }
+      }
+      this.updateBadgeSet();
    }
 
   goBack() {

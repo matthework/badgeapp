@@ -41,41 +41,32 @@
 <label>Status: </label>
 <select class="form-control" [(ngModel)]="newBS.status"><option *ngFor="let so of statusOptions" [value]="so">{{so}}</option></select><br>
 <br>
-
-<!-- <div *ngFor="let i of nums">
 <br>
-<label>Badge: </label>
-<select class="select-badge form-control" [(ngModel)]="newBS.badgegroups[i].bid"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select>
-
-<label class="label-small label-level">Level: </label>
-<select class="select-small form-control" [(ngModel)]="newBS.badgegroups[i].level"><option *ngFor="let lo of getLevelsOptions(newBS.badgegroups[i].bid)" [value]="lo">{{lo}}</option></select><br>
-<br>
-
-<label>Focus: </label>
-<text *ngFor="let fc of getFocusOptions(newBS.badgegroups[i].bid)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateChecked(fc, $event, newBS.badgegroups[i])">, </text><br>
-
-<label>Description: </label>
-<textarea readonly class="textarea form-control" placeholder="">{{getDesc(newBS.badgegroups[i].bid,newBS.badgegroups[i].level)}}</textarea><br>
-<br>
-</div> -->
 
 <div *ngIf="newBS.badgegroups.length!=0">
 	<div class="row col col-xs-12 header hidden-xs">
 	  <div class="col-xs-3">Badge</div>
-	  <div class="col col-xs-2">Focus</div>
-	  <div class="col-xs-6">Description</div>
+	  <div class="col-xs-7">Description</div>
+	   <div class="col-xs-1">IsCore</div>
 	  <div class="col-xs-1"></div>
 	</div>
 	<div (click)="onSelect(badgegroup)" class="row col col-xs-12 div-list-item" *ngFor="let badgegroup of newBS.badgegroups">
-		<div class="col-sm-3">
+<!-- 		<div class="col-sm-3">
 			<div class="text-blue text-big click" data-toggle="modal" data-target="#myModal">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</div>
 		</div>
 		<div class="col col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
 			<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
+		</div> -->
+		<div class="col-sm-3">
+			<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(badgegroup.bid)">{{getBadgeName(badgegroup.bid)}} {{badgegroup.level}}</button><br>
+			<text class="text-blue click" data-toggle="modal" data-target="#myModal" *ngIf="badgegroup.focus.length!=0">[{{badgegroup.focus}}]</text>
 		</div>
-		<div class="col-sm-6 click" data-toggle="modal" data-target="#myModal">
+		<div class="col-sm-7 click" data-toggle="modal" data-target="#myModal">
 			<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 		</div>
+		<div class="col-sm-1">
+	  		<input type="checkbox" [(ngModel)]="badgegroup.iscore" (change)="updateIsCore(badgegroup, $event)">
+	  	</div>
 		<div class="col-sm-1">
 			<button class="btn btn-del btn-danger" (click)="deleteBadgeGroupPop(badgegroup)">X</button>
 		</div>
@@ -148,27 +139,7 @@
 </div>
 <!-- Modal -->
 
-<!-- <br>
-<button class="button-pre" *ngIf!="prerequisite" (click)="prerequisite=true;getTotalBadges(newBS.badgegroups)">Prerequisite+</button><br>
-<br>
-
-<div *ngIf="prerequisite">
-	<h3>Prerequisite: </h3><br>
-	<label>Numbers: </label>
-	<input class="input-numBadges" type="number" [(ngModel)]="numBadges" placeholder="Number of Badges"> Require {{numBadges}} out of {{total}} Badges<br>
-
-	<div *ngFor="let corebadge of newBS.corebadges">
-	<label>CoreBadge: </label>
-	<input readonly class="input-corebadge" type="text" placeholder="{{corebadge.badge}} - {{corebadge.level}}"><button class="button-c-delete" (click)="deleteCoreBadgePop(corebadge)">-</button><br>
-	</div>
-
-	<label>Add New: </label>
-	<select class="select-badge" [(ngModel)]="coreBadge"><option *ngFor="let cbo of getCoreBadgesOptions(newBS.badgegroups)" [value]="cbo">{{cbo}}</option></select><button class="button-s-add" (click)="addCoreBadge(coreBadge)">+</button><br>
-
-	<button (click)="addNumBadges();prerequisite=false">Done</button>
-</div> -->
-
-<div *ngIf!="prerequisite" class="row col-xs-5">
+<div class="row col-xs-5">
 	<button class="btn-big btn-add btn btn-default" (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new">New Badge</button>
 	<button class="btn-big btn btn-danger pull-right" (click)="goBack()">Cancel</button>
 	<button class="btn-big btn btn-success pull-right" [disabled]="!newBS.name" (click)="addBadgeSet()">Save</button>

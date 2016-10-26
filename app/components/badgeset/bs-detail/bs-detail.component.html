@@ -28,6 +28,11 @@
 	
 	<div *ngIf="advanced" class="col col-xs-12">
 	<br>
+	<div>
+	<label>Prerequisite: </label>
+	<text>Core Badges (100% match) and Non-core Badges (80% match)</text>
+	</div>
+	<br>
 	<div *ngIf="!tg && !auth.isAdmin()">
 	<label>Tier/Grade: </label>
 	<text>{{badgeset.tier}} - {{badgeset.grade}}   ( ${{getPay(badgeset.tier,badgeset.grade)}}K )</text>
@@ -118,7 +123,8 @@
 		<div class="row col col-xs-12 header hidden-xs">
 		  <div class="col-xs-3">Badge</div>
 		  <!-- <div class="col col-xs-2">Focus</div> -->
-		  <div class="col-xs-8">Description</div>
+		  <div class="col-xs-7">Description</div>
+		  <div class="col col-xs-1">IsCore</div>
 		  <div class="col-xs-1"></div>
 		</div>
 		<div (click)="onSelect(badgegroup)" class="row col col-xs-12 div-list-item" *ngFor="let badgegroup of badgeset.badgegroups">
@@ -142,9 +148,12 @@
 <!-- 			<div class="col col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
 				<text *ngIf="badgegroup.focus.length!=0"> [{{badgegroup.focus}}]</text>
 			</div> -->
-			<div class="col-sm-8 click" data-toggle="modal" data-target="#myModal">
+			<div class="col-sm-7 click" data-toggle="modal" data-target="#myModal">
 				<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 			</div>
+			<div class="col-sm-1">
+	  			<input type="checkbox" [(ngModel)]="badgegroup.iscore" (change)="updateIsCore(badgegroup, $event)">
+	  		</div>
 			<div class="col-sm-1">
 				<button class="btn btn-del btn-danger" (click)="deleteBadgeGroupPop(badgegroup)">X</button>
 			</div>

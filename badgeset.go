@@ -15,8 +15,6 @@ type BadgeSet struct {
 	Grade	string	`json:"grade" bson:"grade"`
 	Pay	int	`json:"pay" bson:"pay"`
 	Tags 	[]string	`json:"tags" bson:"tags"`
-	NumBadges 	int	`json:"numbadges" bson:"numbadges"`	
-	CoreBadges	[]BadgeGroup	`json:"corebadges" bson:"corebadges"`
 	Approved	bool	`json:"approved" bson:"approved"`
 	InUsed	bool	`json:"inused" bson:"inused"`
 	Status	string	`json:"status" bson:"status"`
@@ -29,6 +27,7 @@ type BadgeGroup struct {
 	Badge 	string	`json:"badge" bson:"badge"`	
 	Level	int	`json:"level" bson:"level"`
 	Focus 	[]string	`json:"focus" bson:"focus"`
+	IsCore	bool	`json:"iscore" bson:"iscore"`
 }
 
 var col_badgeset = "badgeset"

@@ -41,6 +41,7 @@ var BSDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
+        this.newCore = false;
         this.newL = 0;
         this.selectedLevel = 0;
         this.advanced = false;
@@ -217,17 +218,6 @@ var BSDetailComponent = (function () {
         // console.log('getTiersOptions: ', tiersOptions);
         return tiersOptions.sort();
     };
-    BSDetailComponent.prototype.checkCore = function (b) {
-        var result = "No";
-        if (this.badgeset != null) {
-            for (var i = 0; i < this.badgeset.corebadges.length; i++) {
-                if (this.badgeset.corebadges[i].badge == b) {
-                    result = "Yes";
-                }
-            }
-        }
-        return result;
-    };
     BSDetailComponent.prototype.toBadgeDetail = function (bid) {
         this._router.navigate(['/badge/detail', bid]);
     };
@@ -269,7 +259,7 @@ var BSDetailComponent = (function () {
         // }
         // this.newLevel = +this.newLevel;
         this.newLevel = level;
-        this.badgeset.badgegroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus });
+        this.badgeset.badgegroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, iscore: this.newCore });
         // this.badgeset.badgegroups.sort(this.toCompare);
         // this.badgeset.corebadges.sort(this.toCompare);
         var value = JSON.stringify(this.badgeset);
@@ -277,22 +267,27 @@ var BSDetailComponent = (function () {
         console.log('you submitted value: ', value);
     };
     BSDetailComponent.prototype.deleteBadgeGroupPop = function (selectedGroup) {
-        var isCore = false;
-        for (var i = 0; i < this.badgeset.corebadges.length; i++) {
-            if (this.badgeset.corebadges[i].badge == selectedGroup.badge) {
-                isCore = true;
-            }
-        }
-        if (isCore) {
-            var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!");
-        }
-        else {
-            var name = this.badgeset.name.toUpperCase();
-            var badge = this.getBadgeName(selectedGroup.bid).toUpperCase();
-            var r = confirm("Are you sure you want to delete " + badge + " from " + name + " ?");
-            if (r == true) {
-                this.removeBadgeGroup(selectedGroup);
-            }
+        // var isCore =false;
+        // for (var i = 0; i < this.badgeset.corebadges.length; i++) { 
+        //   if (this.badgeset.corebadges[i].badge == selectedGroup.badge) {
+        //     isCore = true;
+        //   }
+        // }
+        // if (isCore) {
+        //   var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
+        // }else{
+        //   var name = this.badgeset.name.toUpperCase()
+        //   var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
+        //   var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
+        //   if (r == true) {
+        //       this.removeBadgeGroup(selectedGroup);
+        //   }
+        // }
+        var name = this.badgeset.name.toUpperCase();
+        var badge = this.getBadgeName(selectedGroup.bid).toUpperCase();
+        var r = confirm("Are you sure you want to delete " + badge + " from " + name + " ?");
+        if (r == true) {
+            this.removeBadgeGroup(selectedGroup);
         }
     };
     BSDetailComponent.prototype.removeBadgeGroup = function (selectedGroup) {
@@ -421,6 +416,19 @@ var BSDetailComponent = (function () {
     };
     BSDetailComponent.prototype.onSelectedLevel = function (level) {
         this.selectedLevel = level;
+    };
+    BSDetailComponent.prototype.updateIsCore = function (bg, event) {
+        for (var i = 0; i < this.badgeset.badgegroups.length; i++) {
+            if (this.badgeset.badgegroups[i].bid == bg.bid) {
+                if (event.target.checked) {
+                    this.badgeset.badgegroups[i].iscore = true;
+                }
+                else {
+                    this.badgeset.badgegroups[i].iscore = false;
+                }
+            }
+        }
+        this.updateBadgeSet();
     };
     BSDetailComponent.prototype.goBack = function () {
         window.history.back();
