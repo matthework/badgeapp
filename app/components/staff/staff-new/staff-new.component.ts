@@ -313,7 +313,7 @@ export class StaffNewComponent {
       for (var i = 0; i < this.badgesets.length; i++) { 
         if (this.badgesets[i]._id==bsid && this.badgesets[i].badgegroups.length!=0) {
           for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
-            this.newStaff.userbgroups.push({bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus:[], status: true});
+            this.newStaff.userbgroups.push({bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: true});
           }
         }
       }

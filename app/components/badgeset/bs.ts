@@ -7,8 +7,6 @@ export class BadgeSet {
 	grade: string;
 	pay: number;
 	tags: string[];
-	numbadges: number;
-	corebadges: BadgeGroup[];
 	approved: boolean;
   	inused: boolean;
   	status: string;
@@ -21,4 +19,5 @@ export class BadgeGroup {
 	badge: string;
 	level: number;
 	focus: string[];
+	iscore: boolean;
 }

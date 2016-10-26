@@ -104,8 +104,8 @@ var BadgeDetailComponent = (function () {
     BadgeDetailComponent.prototype.checkCore = function (bs, b) {
         var result = "";
         if (bs != null) {
-            for (var i = 0; i < bs.corebadges.length; i++) {
-                if (bs.corebadges[i].badge == b) {
+            for (var i = 0; i < bs.badgegroups.length; i++) {
+                if (bs.badgegroups[i].bid == b && bs.badgegroups[i].iscore) {
                     result = " ** ";
                 }
             }

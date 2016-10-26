@@ -134,10 +134,17 @@ var UserDetailComponent = (function () {
     };
     UserDetailComponent.prototype.getStaffBS = function (sbgs) {
         var allbset = [];
-        var count = 0;
+        var coreCount = 0;
+        var ncCount = 0;
         var focusCheck = false;
+        var totolCore = 0;
         if (this.badgesets != null && sbgs != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
+                for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
+                    if (this.badgesets[i].badgegroups[j].iscore) {
+                        totolCore += 1;
+                    }
+                }
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
                     for (var k = 0; k < sbgs.length; k++) {
                         var a1 = sbgs[k].focus;
@@ -146,15 +153,22 @@ var UserDetailComponent = (function () {
                             focusCheck = true;
                         }
                         if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
-                            count += 1;
+                            if (this.badgesets[i].badgegroups[j].iscore) {
+                                coreCount += 1;
+                            }
+                            else {
+                                ncCount += 1;
+                            }
                         }
                         focusCheck = false;
                     }
                 }
-                if (count >= this.badgesets[i].badgegroups.length && this.badgesets[i].status == 'Accepted') {
+                if (coreCount == totolCore && ncCount >= (this.badgesets[i].badgegroups.length - totolCore) * 4 / 5 && this.badgesets[i].status == 'Accepted') {
                     allbset.push(this.badgesets[i]);
                 }
-                count = 0;
+                totolCore = 0;
+                coreCount = 0;
+                ncCount = 0;
             }
         }
         return allbset;

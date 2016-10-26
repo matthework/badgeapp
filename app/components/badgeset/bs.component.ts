@@ -185,17 +185,17 @@ export class BSComponent implements OnInit {
 		return result;
 	}
 
-	checkCore(bs:BadgeSet,bid:string) {
-		var result = "";
-		if (bs != null) {
-			for (var i = 0; i < bs.corebadges.length; i++) { 
-				if (bs.corebadges[i].bid == bid) {
-					result = " ** ";
-				}
-			}
-		}
-		return result;
-	}
+	// checkCore(bs:BadgeSet,bid:string) {
+	// 	var result = "";
+	// 	if (bs != null) {
+	// 		for (var i = 0; i < bs.corebadges.length; i++) { 
+	// 			if (bs.corebadges[i].bid == bid) {
+	// 				result = " ** ";
+	// 			}
+	// 		}
+	// 	}
+	// 	return result;
+	// }
 
 	getMoney(bg:BadgeGroup[],m:number,l:number) {
 		var result = 0;

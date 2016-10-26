@@ -24,10 +24,9 @@ export class BSNewComponent{
   gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
   gradesOptions =["A", "B", "C", "D", "E", "F"]; 
   nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  prerequisite = false;
-  numBadges = -1;
-  coreBadge: BadgeGroup;
-  newcbs: BadgeGroup[] = [];
+  // numBadges = -1;
+  // coreBadge: BadgeGroup;
+  // newcbs: BadgeGroup[] = [];
   total =0;
   newTag = "";
   checked: string[] = [];
@@ -35,6 +34,7 @@ export class BSNewComponent{
   newBID = "";
   newLevel = 0;
   newFocus = [];
+  newCore = false;
   newL = 0;
   selectedLevel = 0;
   selectedBG: BadgeGroup;
@@ -51,20 +51,9 @@ export class BSNewComponent{
         ];
   focusOptions = [];
 
-  // newBGs = [{bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []},
-  //           {bid: "", badge: "", level: 0, focus: []}];
-
   statusOptions = ['Accepted','Draft','NotUsed'];
 
-  newBS = {index: 0, name: "", status: "Accepted", badgegroups: [], tier: 0, grade: "", pay: 0, tags: [], numbadges: this.numBadges, corebadges: this.newcbs, approved: true, inused:true, others:[]}
+  newBS = {index: 0, name: "", iscore: false, status: "Accepted", badgegroups: [], tier: 0, grade: "", pay: 0, tags: [], approved: true, inused:true, others:[]}
 
   constructor(
     private _bsService: BSService, 
@@ -108,10 +97,6 @@ export class BSNewComponent{
       //   this.total += 1;
       // }
     }
-    // if (this.numBadges==-1) {
-    //   this.numBadges = Math.round(this.total/2);
-    // }
-    // this.newBS.numbadges = this.numBadges;
     this.newBS.pay = +this.getPay(this.newBS.tier, this.newBS.grade)
     console.log('you submitted total: ', this.total); 
 
@@ -126,7 +111,7 @@ export class BSNewComponent{
 
   addBadgeGroup(level:number) {
     this.newLevel = level;
-    this.newBS.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus});
+    this.newBS.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, iscore: this.newCore});
     // this.badgeset.badgegroups.sort(this.toCompare);
     // this.badgeset.corebadges.sort(this.toCompare);
     let value = JSON.stringify(this.newBS)
@@ -246,49 +231,49 @@ export class BSNewComponent{
     // }else{
 
     // }
-    this.numBadges = Math.round(this.total/2);
+    // this.numBadges = Math.round(this.total/2);
     
     return this.total;
   }
 
-  getCoreBadgesOptions(bgs:BadgeGroup[]) {
-    var corebadgesOptions = [];
-    if (bgs != null) {
-      for (var i = 0; i < bgs.length; i++) { 
-        if (bgs[i].badge != "" && bgs[i].level != 0) {
-          corebadgesOptions.push(bgs[i].badge + " - " + bgs[i].level);
-        }
-      }
-    }
-    return corebadgesOptions.sort();
-  }
+  // getCoreBadgesOptions(bgs:BadgeGroup[]) {
+  //   var corebadgesOptions = [];
+  //   if (bgs != null) {
+  //     for (var i = 0; i < bgs.length; i++) { 
+  //       if (bgs[i].badge != "" && bgs[i].level != 0) {
+  //         corebadgesOptions.push(bgs[i].badge + " - " + bgs[i].level);
+  //       }
+  //     }
+  //   }
+  //   return corebadgesOptions.sort();
+  // }
 
-  addCoreBadge(cb:BadgeGroup) {
-    var array = cb.toString().split(' - ');
-    console.log('you submitted cb value: ', array); 
-    var b = array[0];
-    var l = +array[1]; // parse into number
-    this.newBS.corebadges.push({bid: "", badge: b, level: l, focus: []});
-  }
+  // addCoreBadge(cb:BadgeGroup) {
+  //   var array = cb.toString().split(' - ');
+  //   console.log('you submitted cb value: ', array); 
+  //   var b = array[0];
+  //   var l = +array[1]; // parse into number
+  //   this.newBS.corebadges.push({bid: "", badge: b, level: l, focus: [], iscore: false});
+  // }
 
-  deleteCoreBadgePop(corebadge:BadgeGroup) {
-    var name = this.newBS.name.toUpperCase()
-    var cbadge = (corebadge.badge + " " + corebadge.level).toUpperCase()
-    var r = confirm("Are you sure you want to delete CORE BADGE "+ cbadge + " from " + name +" ?");
-    if (r == true) {
-      this.removeCoreBadge(corebadge);
-    }
-  }
+  // deleteCoreBadgePop(corebadge:BadgeGroup) {
+  //   var name = this.newBS.name.toUpperCase()
+  //   var cbadge = (corebadge.badge + " " + corebadge.level).toUpperCase()
+  //   var r = confirm("Are you sure you want to delete CORE BADGE "+ cbadge + " from " + name +" ?");
+  //   if (r == true) {
+  //     this.removeCoreBadge(corebadge);
+  //   }
+  // }
 
-  removeCoreBadge(selectedCoreBadge:BadgeGroup) {
-    let index = this.newBS.corebadges.indexOf(selectedCoreBadge);
-    this.newBS.corebadges.splice(index,1);
-  }
+  // removeCoreBadge(selectedCoreBadge:BadgeGroup) {
+  //   let index = this.newBS.corebadges.indexOf(selectedCoreBadge);
+  //   this.newBS.corebadges.splice(index,1);
+  // }
 
-  addNumBadges() {
-    // this.newBS.numbadges = this.numBadges;
-     console.log('you submitted this.numBadges: ', this.numBadges); 
-  }
+  // addNumBadges() {
+  //   // this.newBS.numbadges = this.numBadges;
+  //    console.log('you submitted this.numBadges: ', this.numBadges); 
+  // }
 
   addTag(tag:string) {
     this.newBS.tags.push(tag.toUpperCase());
@@ -320,8 +305,8 @@ export class BSNewComponent{
       if(this.newBS.badgegroups[i].bid == this.selectedBG.bid && this.newBS.badgegroups[i].level == this.selectedBG.level) {
          this.newBS.badgegroups[i].focus = this.selectedBG.focus;
       }
-   }
-   this.updateBadgeSet();
+    }
+    this.updateBadgeSet();
   }
 
    updateCheckedNew(option, event, focus) {
@@ -365,6 +350,7 @@ export class BSNewComponent{
     this.newBID = "";
     this.newLevel = 0;
     this.newFocus = [];
+    this.newCore = false;
     this.selectedLevel = 0;
   }
 
@@ -415,21 +401,27 @@ export class BSNewComponent{
    }
 
   deleteBadgeGroupPop(selectedGroup: BadgeGroup) {
-    var isCore =false;
-    for (var i = 0; i < this.newBS.corebadges.length; i++) { 
-      if (this.newBS.corebadges[i].badge == selectedGroup.badge) {
-        isCore = true;
-      }
-    }
-    if (isCore) {
-      var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
-    }else{
-      var name = this.newBS.name.toUpperCase()
-      var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
-      var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
-      if (r == true) {
-          this.removeBadgeGroup(selectedGroup);
-      }
+    // var isCore =false;
+    // for (var i = 0; i < this.newBS.corebadges.length; i++) { 
+    //   if (this.newBS.corebadges[i].badge == selectedGroup.badge) {
+    //     isCore = true;
+    //   }
+    // }
+    // if (isCore) {
+    //   var s = confirm("WARNING: PLEASE REMOVE THIS BADGE FROM COREBADGE BEFORE DELETE IT!")
+    // }else{
+    //   var name = this.newBS.name.toUpperCase()
+    //   var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
+    //   var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
+    //   if (r == true) {
+    //       this.removeBadgeGroup(selectedGroup);
+    //   }
+    // }
+    var name = this.newBS.name.toUpperCase()
+    var badge = this.getBadgeName(selectedGroup.bid).toUpperCase()
+    var r = confirm("Are you sure you want to delete "+ badge + " from " + name +" ?");
+    if (r == true) {
+      this.removeBadgeGroup(selectedGroup);
     }
   }
 
@@ -440,6 +432,19 @@ export class BSNewComponent{
     // this._bsService.updateBadgeSet(this.newBS._id,value).subscribe();
     console.log('you submitted value: ', value);
   }
+
+   updateIsCore(bg,event) {
+      for (var i = 0; i < this.newBS.badgegroups.length; i++) { 
+         if(this.newBS.badgegroups[i].bid == bg.bid) {
+            if(event.target.checked) {
+               this.newBS.badgegroups[i].iscore = true;
+            }else {
+               this.newBS.badgegroups[i].iscore = false;
+            }
+         }
+      }
+      this.updateBadgeSet();
+   }
 
   // resetNewLevel() {
   //   for (var i = 0; i < this.newBS.badgegroups.length; i++) { 

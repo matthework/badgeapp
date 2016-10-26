@@ -162,17 +162,17 @@ var BSComponent = (function () {
         }
         return result;
     };
-    BSComponent.prototype.checkCore = function (bs, bid) {
-        var result = "";
-        if (bs != null) {
-            for (var i = 0; i < bs.corebadges.length; i++) {
-                if (bs.corebadges[i].bid == bid) {
-                    result = " ** ";
-                }
-            }
-        }
-        return result;
-    };
+    // checkCore(bs:BadgeSet,bid:string) {
+    // 	var result = "";
+    // 	if (bs != null) {
+    // 		for (var i = 0; i < bs.corebadges.length; i++) { 
+    // 			if (bs.corebadges[i].bid == bid) {
+    // 				result = " ** ";
+    // 			}
+    // 		}
+    // 	}
+    // 	return result;
+    // }
     BSComponent.prototype.getMoney = function (bg, m, l) {
         var result = 0;
         var totalLevels = 0;

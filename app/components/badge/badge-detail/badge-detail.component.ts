@@ -117,15 +117,15 @@ export class BadgeDetailComponent implements OnInit {
     }
 
     checkCore(bs:BadgeSet,b:string) {
-        var result = "";
-        if (bs != null) {
-            for (var i = 0; i < bs.corebadges.length; i++) { 
-                if (bs.corebadges[i].badge == b) {
-                result = " ** ";
-                }
-            }
-        }
-        return result;
+      var result = "";
+      if (bs != null) {
+         for (var i = 0; i < bs.badgegroups.length; i++) { 
+             if (bs.badgegroups[i].bid == b && bs.badgegroups[i].iscore) {
+             result = " ** ";
+             }
+         }
+      }
+      return result;
     }
 
   updateBadge() {
