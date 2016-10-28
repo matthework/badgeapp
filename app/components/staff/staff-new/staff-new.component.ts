@@ -26,7 +26,7 @@ export class StaffNewComponent {
   newBID = "";
   newLevel = 0;
   newFocus = [];
-  newStatus = true;
+  newApproved = true;
   newL = 0;
   selectedLevel = 0;
   newBSID = "";
@@ -41,17 +41,6 @@ export class StaffNewComponent {
           "I am a world leading... "
         ];
   focusOptions = [];
-
-  // newBGs = [{bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []},
-  //           {bid: "", badge: "", level: 0, status: false, focus: []}];
 
   statusOptions = ['Active','Inactive'];
   
@@ -108,7 +97,7 @@ export class StaffNewComponent {
 
   addBadgeGroup(level:number) {
     this.newLevel = level;
-    this.newStaff.userbgroups.push({bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, status: true});
+    this.newStaff.userbgroups.push({bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: true});
     this.newStaff.userbgroups.sort(this.toCompare);
     let value = JSON.stringify(this.newStaff)
     console.log('you submitted value: ', value);
@@ -237,7 +226,7 @@ export class StaffNewComponent {
     this.newBID = "";
     this.newLevel = 0;
     this.newFocus = [];
-    this.newStatus = true;
+    this.newApproved = true;
     this.selectedLevel = 0;
   }
 
@@ -294,13 +283,13 @@ export class StaffNewComponent {
     return bname;
   }
 
-  updateStatus(ubg,event) {
+  updateApproved(ubg,event) {
     for (var i = 0; i < this.newStaff.userbgroups.length; i++) { 
       if(this.newStaff.userbgroups[i].bid == ubg.bid) {
          if(event.target.checked) {
-            this.newStaff.userbgroups[i].status = true;
+            this.newStaff.userbgroups[i].approved = true;
          }else {
-            this.newStaff.userbgroups[i].status = false;
+            this.newStaff.userbgroups[i].approved = false;
          }
       }
     }
@@ -313,7 +302,7 @@ export class StaffNewComponent {
       for (var i = 0; i < this.badgesets.length; i++) { 
         if (this.badgesets[i]._id==bsid && this.badgesets[i].badgegroups.length!=0) {
           for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
-            this.newStaff.userbgroups.push({bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: true});
+            this.newStaff.userbgroups.push({bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, approved: true});
           }
         }
       }

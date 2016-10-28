@@ -20,5 +20,5 @@ export class UserBGroup {
 	badge: string;
 	level: number;
   focus: string[];
-  status: boolean;
+  approved: boolean;
 }

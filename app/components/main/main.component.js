@@ -126,7 +126,7 @@ var MainComponent = (function () {
                         if (a1.length >= a2.length && a2.every(function (v, i) { return a1.includes(v); })) {
                             focusCheck = true;
                         }
-                        if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        if (focusCheck && sbgs[k].approved && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             if (this.badgesets[i].badgegroups[j].iscore) {
                                 coreCount += 1;
                             }
@@ -210,7 +210,7 @@ var MainComponent = (function () {
         if (this.staffs != null && this.staffs.length != 0) {
             for (var i = 0; i < this.staffs.length; i++) {
                 for (var j = 0; j < this.staffs[i].userbgroups.length; j++) {
-                    if (!this.staffs[i].userbgroups[j].status) {
+                    if (!this.staffs[i].userbgroups[j].approved) {
                         numOfPending += 1;
                     }
                 }
@@ -227,7 +227,7 @@ var MainComponent = (function () {
             for (var i = 0; i < this.staffs.length; i++) {
                 var b = false;
                 for (var j = 0; j < this.staffs[i].userbgroups.length; j++) {
-                    if (!this.staffs[i].userbgroups[j].status) {
+                    if (!this.staffs[i].userbgroups[j].approved) {
                         b = true;
                     }
                 }

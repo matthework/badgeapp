@@ -130,7 +130,7 @@ var StaffComponent = (function () {
                         if (a1.length >= a2.length && a2.every(function (v, i) { return a1.includes(v); })) {
                             focusCheck = true;
                         }
-                        if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        if (focusCheck && sbgs[k].approved && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             if (this.badgesets[i].badgegroups[j].iscore) {
                                 coreCount += 1;
                             }
@@ -161,7 +161,7 @@ var StaffComponent = (function () {
     // 		for (var i = 0; i < this.badgesets.length; i++) { 
     // 			for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
     // 				for (var k = 0; k < sbgs.length; k++) {      
-    // 					if (sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+    // 					if (sbgs[k].approved && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
     // 						count += 1;
     // 					}
     // 				}
@@ -237,7 +237,7 @@ var StaffComponent = (function () {
     };
     StaffComponent.prototype.approveBadge = function (staff, userbgroup) {
         // for (var i = 0; i < staff.userbgroups.length; i++) { 
-        // 	if (staff.userbgroups[i].bid == userbgroup.bid && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].status) {
+        // 	if (staff.userbgroups[i].bid == userbgroup.bid && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].approved) {
         // 		let index = staff.userbgroups.indexOf(staff.userbgroups[i]);
         //   			staff.userbgroups.splice(index,1);
         // 	}

@@ -28,7 +28,7 @@ type UserBGroup struct {
 	Badge 	string	`json:"badge" bson:"badge"`	
 	Level	int	`json:"level" bson:"level"`
 	Focus 	[]string	`json:"focus" bson:"focus"`
-	Status	bool	`json:"status" bson:"status"`
+	Approved	bool	`json:"approved" bson:"approved"`
 }
 
 var col_staff = "staff"

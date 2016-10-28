@@ -69,7 +69,7 @@
 			<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid,userbgroup.level)}}
 		</div>
 		<div class="col-sm-2">
-	  		<input type="checkbox" [(ngModel)]="userbgroup.status" (change)="updateStatus(userbgroup, $event)">
+	  		<input type="checkbox" [(ngModel)]="userbgroup.approved" (change)="updateApproved(userbgroup, $event)">
 	  	</div>
 		<div class="col-sm-1">
 			<button class="btn btn-del btn-danger" (click)="removeBadgeGroup(userbgroup)">X</button>
@@ -86,7 +86,7 @@
 				<h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedUG.bid)}}</h3><br>
 				<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedUG)">,  </text>
 <!-- 				<label class="lab">Approved: </label>
-				<input type="checkbox" [(ngModel)]="selectedUG.status"> -->
+				<input type="checkbox" [(ngModel)]="selectedUG.approved"> -->
 			</div>
 			<div class="modal-body">
 				<div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedUG.bid)">
@@ -123,7 +123,7 @@
 				<label class="lab">Focus: </label>
 				<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
 <!-- 				<label class="lab">Approved: </label>
-				<input type="checkbox" [(ngModel)]="newStatus"> -->
+				<input type="checkbox" [(ngModel)]="newApproved"> -->
 			</div>
 			<div class="modal-body">
 				<div (click)="onSelectedLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(newBID)">
@@ -161,7 +161,7 @@
 <textarea readonly class="textarea form-control" placeholder="Description">{{getDesc(newStaff.userbgroups[i].bid,newStaff.userbgroups[i].level)}}</textarea><br>
 <br>
 <label>Approved: </label>
-<input type="checkbox" [(ngModel)]="newStaff.userbgroups[i].status" placeholder="" /><br>
+<input type="checkbox" [(ngModel)]="newStaff.userbgroups[i].approved" placeholder="" /><br>
 <br>
 <br>
 </div> -->

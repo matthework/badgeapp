@@ -29,7 +29,7 @@ var StaffNewComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
-        this.newStatus = true;
+        this.newApproved = true;
         this.newL = 0;
         this.selectedLevel = 0;
         this.newBSID = "";
@@ -44,16 +44,6 @@ var StaffNewComponent = (function () {
             "I am a world leading... "
         ];
         this.focusOptions = [];
-        // newBGs = [{bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []},
-        //           {bid: "", badge: "", level: 0, status: false, focus: []}];
         this.statusOptions = ['Active', 'Inactive'];
         this.newStaff = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: false, brief: "", others: [] };
     }
@@ -97,7 +87,7 @@ var StaffNewComponent = (function () {
     };
     StaffNewComponent.prototype.addBadgeGroup = function (level) {
         this.newLevel = level;
-        this.newStaff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, status: true });
+        this.newStaff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: true });
         this.newStaff.userbgroups.sort(this.toCompare);
         var value = JSON.stringify(this.newStaff);
         console.log('you submitted value: ', value);
@@ -218,7 +208,7 @@ var StaffNewComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
-        this.newStatus = true;
+        this.newApproved = true;
         this.selectedLevel = 0;
     };
     StaffNewComponent.prototype.onSelectNewLevel = function (level) {
@@ -268,14 +258,14 @@ var StaffNewComponent = (function () {
         }
         return bname;
     };
-    StaffNewComponent.prototype.updateStatus = function (ubg, event) {
+    StaffNewComponent.prototype.updateApproved = function (ubg, event) {
         for (var i = 0; i < this.newStaff.userbgroups.length; i++) {
             if (this.newStaff.userbgroups[i].bid == ubg.bid) {
                 if (event.target.checked) {
-                    this.newStaff.userbgroups[i].status = true;
+                    this.newStaff.userbgroups[i].approved = true;
                 }
                 else {
-                    this.newStaff.userbgroups[i].status = false;
+                    this.newStaff.userbgroups[i].approved = false;
                 }
             }
         }
@@ -287,7 +277,7 @@ var StaffNewComponent = (function () {
             for (var i = 0; i < this.badgesets.length; i++) {
                 if (this.badgesets[i]._id == bsid && this.badgesets[i].badgegroups.length != 0) {
                     for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
-                        this.newStaff.userbgroups.push({ bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus: this.badgesets[i].badgegroups[j].focus, status: true });
+                        this.newStaff.userbgroups.push({ bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus: this.badgesets[i].badgegroups[j].focus, approved: true });
                     }
                 }
             }

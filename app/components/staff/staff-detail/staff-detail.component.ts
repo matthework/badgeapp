@@ -42,7 +42,7 @@ export class StaffDetailComponent implements OnInit {
   newBID = "";
   newLevel = 0;
   newFocus = [];
-  newStatus = true;
+  newApproved = true;
   newL = 0;
   selectedLevel = 0;
   addNew = false;
@@ -120,10 +120,11 @@ export class StaffDetailComponent implements OnInit {
   updateStaff() {
       // pasrse string into number
       for (var i = 0; i < this.staff.userbgroups.length; i++) { 
-          this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
+          // this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
           this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
       }
       this.staff.userbgroups.sort(this.toCompare);
+      this.staff.userbgroups.sort(this.sortApproved);
       let value = JSON.stringify(this.staff)
       this._staffService.updateStaff(this.staff._id,value).subscribe();
   }
@@ -137,16 +138,25 @@ export class StaffDetailComponent implements OnInit {
         return 0;
   }
 
+  sortApproved(a,b) {
+    if (a.approved > b.approved)
+      return -1;
+    else if (a.approved < b.approved)
+      return 1;
+    else 
+      return 0;
+  }
+
   addStaff() {
       this._router.navigate(['/staff/new']);
   }
 
   addUserBGroup(level:number) {
-      // this.newLevel = +this.newLevel;
       this.newLevel = level;
-      this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, status: this.newStatus});
+      this.staff.userbgroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, approved: this.newApproved});
       let value = JSON.stringify(this.staff);
-      this._staffService.updateStaff(this.staff._id,value).subscribe();
+      // this._staffService.updateStaff(this.staff._id,value).subscribe();
+      this.updateStaff();
       console.log('you submitted value: ', value);
   }
 
@@ -220,7 +230,7 @@ export class StaffDetailComponent implements OnInit {
             if (a1.length >= a2.length && a2.every(function(v,i) { return a1.includes(v)})) {
               focusCheck = true;
             }   
-            if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+            if (focusCheck && sbgs[k].approved && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
               if (this.badgesets[i].badgegroups[j].iscore) {
                 coreCount += 1;
               }else{
@@ -317,10 +327,10 @@ export class StaffDetailComponent implements OnInit {
         for (var j = 0; j < this.badges.length; j++) { 
           for (var k = 0; k < this.badges[j].badgelevels.length; k++) { 
             if (bgs[i].bid == this.badges[j]._id && bgs[i].level>this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus":"", "current":false});
+              moreBadges.push({"approved":bgs[i].approved, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus":"", "current":false});
             }
             if (bgs[i].bid == this.badges[j]._id && bgs[i].level==this.badges[j].badgelevels[k].level) {
-              moreBadges.push({"status":bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus":bgs[i].focus, "current":true});
+              moreBadges.push({"approved":bgs[i].approved, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus":bgs[i].focus, "current":true});
             }
           }
         }
@@ -469,7 +479,7 @@ export class StaffDetailComponent implements OnInit {
     this.newBID = "";
     this.newLevel = 0;
     this.newFocus = [];
-    this.newStatus = true;
+    this.newApproved = true;
     this.selectedLevel = 0;
   }
 
@@ -500,13 +510,13 @@ export class StaffDetailComponent implements OnInit {
     return bls;
   }
 
-   updateStatus(ubg,event) {
+   updateApproved(ubg,event) {
       for (var i = 0; i < this.staff.userbgroups.length; i++) { 
          if(this.staff.userbgroups[i].bid == ubg.bid) {
             if(event.target.checked) {
-               this.staff.userbgroups[i].status = true;
+               this.staff.userbgroups[i].approved = true;
             }else {
-               this.staff.userbgroups[i].status = false;
+               this.staff.userbgroups[i].approved = false;
             }
          }
       }
