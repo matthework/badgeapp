@@ -136,9 +136,12 @@
 <!-- 			<div class="col col-sm-2">
 				<text *ngIf="badgegroup.focus.length!=0">[{{badgegroup.focus}}]</text>
 			</div> -->
-			<div class="col-sm-8">
+			<div class="col-sm-7">
 				<text class="text-blue">{{labels[badgegroup.level-1]}}</text><br>{{getDesc(badgegroup.bid,badgegroup.level)}}
 			</div>
+			<div class="col-sm-1">
+	  			<input type="checkbox" onclick="return false" [(ngModel)]="badgegroup.iscore">
+	  		</div>
 			</div>
 			<div *ngIf="auth.isAdmin()">
 			<div class="col-sm-3">
