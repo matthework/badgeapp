@@ -141,7 +141,8 @@ export class BSDetailComponent implements OnInit {
         this.badgeset.tags = [];
     }
     for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
-      this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+      // this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+      this.badgeset.badgegroups[i].badge = this.getBadgeName(this.badgeset.badgegroups[i].bid);
       if(this.badgeset.badgegroups[i].focus == null) {
         this.badgeset.badgegroups[i].focus = [];
       }
@@ -149,6 +150,7 @@ export class BSDetailComponent implements OnInit {
     this.badgeset.tier = +this.badgeset.tier;
     this.badgeset.pay = +this.getPay(this.badgeset.tier, this.badgeset.grade)
     this.badgeset.badgegroups.sort(this.toCompare);
+    this.badgeset.badgegroups.sort(this.sortIsCore);
     this.badgeset.tags = this.badgeset.tags.sort();
     let value = JSON.stringify(this.badgeset)
     this._bsService.updateBadgeSet(this.id,value).subscribe();
@@ -159,6 +161,15 @@ export class BSDetailComponent implements OnInit {
     if (a.badge < b.badge)
       return -1;
     else if (a.badge > b.badge)
+      return 1;
+    else 
+      return 0;
+  }
+
+  sortIsCore(a,b) {
+    if (a.iscore > b.iscore)
+      return -1;
+    else if (a.iscore < b.iscore)
       return 1;
     else 
       return 0;
@@ -287,15 +298,20 @@ export class BSDetailComponent implements OnInit {
     // pasrse string into number
     // this.badgeset.tier = +this.badgeset.tier;
     // for (var i = 0; i < this.badgeset.badgegroups.length; i++) { 
-    //   this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+    //   // this.badgeset.badgegroups[i].level = +this.badgeset.badgegroups[i].level;
+    //   this.badgeset.badgegroups[i].badge = this.getBadgeName(this.badgeset.badgegroups[i].bid);
+    //   if(this.badgeset.badgegroups[i].focus == null) {
+    //     this.badgeset.badgegroups[i].focus = [];
+    //   }
     // }
     // this.newLevel = +this.newLevel;
     this.newLevel = level;
     this.badgeset.badgegroups.push({bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, iscore: this.newCore});
     // this.badgeset.badgegroups.sort(this.toCompare);
-    // this.badgeset.corebadges.sort(this.toCompare);
+    // this.badgeset.badgegroups.sort(this.sortIsCore);
     let value = JSON.stringify(this.badgeset)
-    this._bsService.updateBadgeSet(this.badgeset._id,value).subscribe();
+    // this._bsService.updateBadgeSet(this.badgeset._id,value).subscribe();
+    this.updateBadgeSet();
     console.log('you submitted value: ', value);
   }
 

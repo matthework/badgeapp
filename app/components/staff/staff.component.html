@@ -34,7 +34,7 @@
         <div class=" col-xs-3">Name</div>
         <div class=" col-xs-6">Badges</div>
         <div class=" col-xs-3">Top BadgeSet</div>
-        <!-- <div class=" col-xs-1">Status</div> -->
+        <!-- <div class=" col-xs-1">Approved</div> -->
         <!-- <div class=" col-xs-1"></div> -->
       </div>
 
@@ -44,15 +44,15 @@
         </div>
         <div class="col-sm-6 col-xs-12">
         	<text class="" *ngFor="let userbgroup of staff.userbgroups">
-          	<text *ngIf="userbgroup.status" class="click text-blue" (click)="toBadgeDetail(userbgroup.bid)">
+          	<text *ngIf="userbgroup.approved" class="click text-blue" (click)="toBadgeDetail(userbgroup.bid)">
               <text>{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text>
-              <text *ngIf="userbgroup.focus.length!=0 && userbgroup.status">[{{userbgroup.focus}}]</text>, 
+              <text *ngIf="userbgroup.focus.length!=0 && userbgroup.approved">[{{userbgroup.focus}}]</text>, 
             </text>
-            <text *ngIf="!userbgroup.status" class="click text-grey">
+            <text *ngIf="!userbgroup.approved" class="click text-grey">
               <text class="click text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text>
-              <text *ngIf="userbgroup.focus.length!=0 && !userbgroup.status">[{{userbgroup.focus}}]</text>, 
+              <text *ngIf="userbgroup.focus.length!=0 && !userbgroup.approved">[{{userbgroup.focus}}]</text>, 
             </text>
-            <!-- <button *ngIf="!userbgroup.status" class="btn-approve" (click)="userbgroup.status=true;approveBadge(staff,userbgroup)">APPROVE</button> -->
+            <!-- <button *ngIf="!userbgroup.approved" class="btn-approve" (click)="userbgroup.approved=true;approveBadge(staff,userbgroup)">APPROVE</button> -->
         	</text>
       	</div>
       	<div class="click text-blue col-sm-3 col-xs-12" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</div>

@@ -52,7 +52,7 @@
 
 	<div>
 	<label>Top BSet: </label>
-	<text class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text>
+	<text class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text>
 	</div>
 	<br>
 
@@ -113,7 +113,7 @@
 		</div>
 		<div (click)="onSelect(userbgroup)" class="row col col-xs-12 div-list-item form-inline"  *ngFor="let userbgroup of staff.userbgroups">
 	  		<div class="col-sm-3">
-				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</button><br>
+				<button class="btn btn-b btn-primary wrap" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</button><br>
 				<text class="text-blue click" data-toggle="modal" data-target="#myModal" *ngIf="userbgroup.focus.length!=0">[{{userbgroup.focus}}]</text>
 			</div>
 <!-- 				<div class="col-sm-2 text-blue click" data-toggle="modal" data-target="#myModal">
@@ -128,8 +128,8 @@
 				</div>
 	  		</div>
 	  		<div class="col-sm-1">
-	  			<input type="checkbox" [(ngModel)]="userbgroup.status" (change)="updateStatus(userbgroup, $event)">
-	  			<!-- <i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i> -->
+	  			<input type="checkbox" [(ngModel)]="userbgroup.approved" (change)="updateApproved(userbgroup, $event)">
+	  			<!-- <i><text class="text-green" *ngIf="userbgroup.approved">{{userbgroup.approved | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.approved">{{userbgroup.approved | approved_pending}}</text></i> -->
 	  		</div>
 	  		<div class="col-sm-1">
 				<button class="btn btn-del btn-danger" (click)="deleteUserBGroupPop(userbgroup)">X</button>
@@ -142,7 +142,7 @@
 					<text class="text-blue">{{labels[userbgroup.level-1]}}</text><br>{{getDesc(userbgroup.bid, userbgroup.level)}}
 				</div>
 				<div class="col-sm-1">
-					<input type="checkbox" [(ngModel)]="userbgroup.status">
+					<input type="checkbox" [(ngModel)]="userbgroup.approved">
 				</div>
 				<div class="col-sm-1">
 					<button class="btn btn-s btn-success" (click)="bedit=false;updateStaff()">Y</button><br><button class="btn btn-s btn-danger" (click)="bedit=false;getStaff()">N</button><br>
@@ -162,7 +162,7 @@
 					<!-- <label class="lab">Focus: </label> -->
 					<text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc" (change)="updateChecked(fc, $event, selectedUG)">,  </text>
 <!-- 					<label class="lab">Approved: </label>
-					<input type="checkbox" [(ngModel)]="selectedUG.status"><br> -->
+					<input type="checkbox" [(ngModel)]="selectedUG.approved"><br> -->
 				</div>
 				<div class="modal-body">
 					<div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedUG.bid)">
@@ -203,7 +203,7 @@
 		<br>
 
 		<label>Approved: </label>
-		<input type="checkbox" [(ngModel)]="newStatus" placeholder=""><br>
+		<input type="checkbox" [(ngModel)]="newApproved" placeholder=""><br>
 
 		<button class="btn-big btn btn-danger pull-right" (click)="addNew=false">Cancel</button>
 		<button class="btn-big btn btn-success pull-right" (click)="addBadgeGroup();addNew=false">Save</button>
@@ -222,7 +222,7 @@
 					<label class="lab">Focus: </label>
 					<text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
 <!-- 					<label class="lab">Approved: </label>
-					<input type="checkbox" [(ngModel)]="newStatus"><br> -->
+					<input type="checkbox" [(ngModel)]="newApproved"><br> -->
 				</div>
 				<div class="modal-body">
 					<div (click)="onSelectedLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(newBID)">
@@ -252,12 +252,12 @@
 		  <!-- <div class="col col-xs-2">Focus</div> -->
 		  <div class="col-xs-6">Description</div>
 		  <div class="col-xs-2">Badge Set</div>
-		  <div class="col-xs-1">Status</div>
+		  <div class="col-xs-1">Approved</div>
 		</div>
 		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
 			<div (click)="more=false"> 
 			<div class="col-sm-3 col-xs-12">
-				<text *ngIf="userbgroup.current" (click)="toBadgeDetail(userbgroup.bid)" class="click text-blue text-big">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><text *ngIf="!userbgroup.current" class="click text-big" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}} </text><br>
+				<text *ngIf="userbgroup.current" (click)="toBadgeDetail(userbgroup.bid)" class="click text-blue text-big">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><text *ngIf="!userbgroup.current" class="click text-big" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text><br>
 				<text *ngIf="userbgroup.current && userbgroup.focus.length!=0" class="text-blue"> [{{userbgroup.focus}}]</text>
 			</div>
 <!-- 			<div class="col col-sm-2">
@@ -270,7 +270,7 @@
 				</div>
 	  		</div>
 	  		<div class="col-sm-1 col-xs-12">
-	  			<i><text class="text-green" *ngIf="userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text></i>
+	  			<i><text class="text-green" *ngIf="userbgroup.approved && userbgroup.current">{{userbgroup.approved | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.approved && userbgroup.current">{{userbgroup.approved | approved_pending}}</text></i>
 	  		</div>
 	  		</div>
 		</div>

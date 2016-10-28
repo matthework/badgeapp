@@ -62,7 +62,7 @@
 	<br> -->
 
 	<label>Top BSet: </label>
-	<text class="click text-blue" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
+	<text class="click text-blue" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text><br>
 	<br>
 
 	<label>Badge Sets: </label>
@@ -93,12 +93,12 @@
 		  <!-- <div class="col col-xs-2">Focus</div> -->
 		  <div class="col-xs-6">Description</div>
 		  <div class="col-xs-2">Badge Set</div>
-		  <div class="col-xs-1">Status</div>
+		  <div class="col-xs-1">Approved</div>
 		</div>
 
 		<div (click)="onSelect(userbgroup)" class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of staff.userbgroups">
 			<div class="col-sm-3 col-xs-12" (click)="toBadgeDetail(userbgroup.bid)">
-				<button class="btn btn-b btn-primary wrap">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</button><br>
+				<button class="btn btn-b btn-primary wrap">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</button><br>
 				<text class="click text-blue" *ngIf="userbgroup.focus.length!=0">[{{userbgroup.focus}}]</text>
 			</div>
 <!-- 			<div class="col col-sm-2">
@@ -113,7 +113,7 @@
 				</div>
 	  		</div>
 	  		<div class="col-sm-1 col-xs-12" data-toggle="modal" data-target="#myModal">
-	  			<i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i>
+	  			<i><text class="text-green" *ngIf="userbgroup.approved">{{userbgroup.approved | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.approved">{{userbgroup.approved | approved_pending}}</text></i>
 	  		</div>
 		</div>
 	</div>
@@ -124,13 +124,13 @@
 		  <!-- <div class="col col-xs-2">Focus</div> -->
 		  <div class="col-xs-6">Description</div>
 		  <div class="col-xs-2">Badge Set</div>
-		  <div class="col-xs-1">Status</div>
+		  <div class="col-xs-1">Approved</div>
 		</div>
 
 		<div class="row col col-xs-12 div-list-item" *ngFor="let userbgroup of getMoreBadges(staff.userbgroups)">
 			<div (click)="more=false">
 			<div class="col-sm-3 col-xs-12" (click)="toBadgeDetail(userbgroup.bid)">
-				<text *ngIf="userbgroup.current" class="click text-blue text-big">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="click text-big">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</text><br>
+				<text *ngIf="userbgroup.current" class="click text-blue text-big">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><text *ngIf="!userbgroup.current" class="click text-big">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text><br>
 				<text *ngIf="userbgroup.current && userbgroup.focus.length!=0" class="click text-blue"> [{{userbgroup.focus}}]</text>
 			</div>
 <!-- 			<div class="col col-sm-2">
@@ -143,7 +143,7 @@
 				</div>
 	  		</div>
 	  		<div class="col-sm-1 col-xs-12">
-	  			<i><text class="text-green" *ngIf="userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status && userbgroup.current">{{userbgroup.status | approved_pending}}</text></i>
+	  			<i><text class="text-green" *ngIf="userbgroup.approved && userbgroup.current">{{userbgroup.approved | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.approved && userbgroup.current">{{userbgroup.approved | approved_pending}}</text></i>
 	  		</div>
 			</div>
 		</div>

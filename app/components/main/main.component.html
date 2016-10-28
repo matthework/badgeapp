@@ -37,7 +37,7 @@
     </div>
 
     <div class="row margin col-xs-12">
-      <h4>Top BSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}} - {{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
+      <h4>Top BSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
     </div>
 
     <!-- Badge container -->
@@ -48,7 +48,7 @@
     </div>
     <div *ngFor="let userbgroup of staff.userbgroups" class="row col col-xs-10 div-list-item form-inline">
       <div class="col-sm-4">
-        <button class="btn btn-badge btn-primary wrap" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} - {{userbgroup.level}}</button><br>
+        <button class="btn btn-badge btn-primary wrap" (click)="toBadgeDetail(userbgroup.bid)">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</button><br>
         <text class="click text-blue" *ngIf="userbgroup.focus.length!=0"> [{{userbgroup.focus}}]</text>
       </div>
       <div class="col-sm-4">

@@ -37,7 +37,7 @@ var UserDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
-        this.newStatus = false;
+        this.newApproved = false;
         this.selectedLevel = 0;
         this.more = false;
         this.edit = false;
@@ -117,6 +117,7 @@ var UserDetailComponent = (function () {
             this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
         }
         this.staff.userbgroups.sort(this.toCompare);
+        this.staff.userbgroups.sort(this.sortApproved);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
@@ -152,7 +153,7 @@ var UserDetailComponent = (function () {
                         if (a1.length >= a2.length && a2.every(function (v, i) { return a1.includes(v); })) {
                             focusCheck = true;
                         }
-                        if (focusCheck && sbgs[k].status && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
+                        if (focusCheck && sbgs[k].approved && this.badgesets[i].badgegroups[j].bid == sbgs[k].bid && this.badgesets[i].badgegroups[j].level <= sbgs[k].level) {
                             if (this.badgesets[i].badgegroups[j].iscore) {
                                 coreCount += 1;
                             }
@@ -298,16 +299,24 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.addUserBGroup = function (level) {
         // this.newLevel = +this.newLevel;
         this.newLevel = level;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, status: this.newStatus });
-        this.staff.userbgroups.sort(this.toCompare);
+        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved });
         var value = JSON.stringify(this.staff);
-        this._staffService.updateStaff(this.staff._id, value).subscribe();
+        // this._staffService.updateStaff(this.staff._id,value).subscribe();
+        this.updateStaff();
         console.log('you submitted value: ', value);
     };
     UserDetailComponent.prototype.toCompare = function (a, b) {
         if (a.badge < b.badge)
             return -1;
         else if (a.badge > b.badge)
+            return 1;
+        else
+            return 0;
+    };
+    UserDetailComponent.prototype.sortApproved = function (a, b) {
+        if (a.approved > b.approved)
+            return -1;
+        else if (a.approved < b.approved)
             return 1;
         else
             return 0;
@@ -319,10 +328,10 @@ var UserDetailComponent = (function () {
                 for (var j = 0; j < this.badges.length; j++) {
                     for (var k = 0; k < this.badges[j].badgelevels.length; k++) {
                         if (bgs[i].bid == this.badges[j]._id && bgs[i].level > this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "status": bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus": "", "current": false });
+                            moreBadges.push({ "approved": bgs[i].approved, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus": "", "current": false });
                         }
                         if (bgs[i].bid == this.badges[j]._id && bgs[i].level == this.badges[j].badgelevels[k].level) {
-                            moreBadges.push({ "status": bgs[i].status, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current": true });
+                            moreBadges.push({ "approved": bgs[i].approved, "bid": this.badges[j]._id, "level": this.badges[j].badgelevels[k].level, "focus": bgs[i].focus, "current": true });
                         }
                     }
                 }
@@ -373,7 +382,7 @@ var UserDetailComponent = (function () {
         this.newBID = "";
         this.newLevel = 0;
         this.newFocus = [];
-        this.newStatus = false;
+        this.newApproved = false;
         this.selectedLevel = 0;
     };
     UserDetailComponent.prototype.onSelectedLevel = function (level) {
