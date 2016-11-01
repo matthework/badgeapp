@@ -57,6 +57,9 @@ export class UserDetailComponent implements OnInit {
             "I have achieved wide recognition... ", 
             "I am a world leading... "
           ];
+  bsname1 = "";
+  bsname2 = "";
+  showCompare = false;
 
   constructor(
     private _staffService: StaffService, 
@@ -441,6 +444,50 @@ export class UserDetailComponent implements OnInit {
     }
     // console.log('you submitted value: ', bls);
     return bls;
+  }
+
+  getComBS() {
+    if (this.badgesets != null) {
+      this.bsname1 = this.badgesets[0].name;
+      this.bsname2 = this.badgesets[0].name;
+      if (this.getTopStaffBS(this.staff.userbgroups).length != 0){
+        this.bsname2 = this.getTopStaffBS(this.staff.userbgroups)[1];
+      }
+      
+    }else {
+      this.bsname1 = "";
+      this.bsname2 = "";
+    }
+  }
+
+  getBS(bsname:string) {
+    var result: BadgeSet;
+    if (this.badgesets != null) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        if (this.badgesets[i].name == bsname) {
+          return this.badgesets[i];
+        }
+      }
+    }
+    return result;
+  }
+
+  compareBS(bsname:string) {
+    var result = [];
+    if (this.badgesets != null) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        if (this.badgesets[i].name == bsname) {
+          for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
+            for (var k = 0; k < this.staff.userbgroups.length; k++) { 
+              if (this.badgesets[i].badgegroups[j].bid == this.staff.userbgroups[k].bid && this.badgesets[i].badgegroups[j].level > this.staff.userbgroups[k].level) {
+                result.push({bid:this.badgesets[i].badgegroups[j].bid, level:this.badgesets[i].badgegroups[j].level});
+              }
+            }
+          }
+        }
+      }
+    }
+    return result;
   }
 
   goBack() {

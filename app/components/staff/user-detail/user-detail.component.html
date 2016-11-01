@@ -83,7 +83,11 @@
 	</div>
 	<br> -->
 
+	<div *ngIf="!showCompare">
+
 	<div class="row col-xs-12">
+		<br>
+		<button class="btn-compare btn-add btn btn-default" (click)="showCompare=true;getComBS()">Compare</button>
 		<button class="btn btn-apply btn-default pull-right" (click)="addNew=true;resetNewValue();more=false" data-toggle="modal" data-target="#myModal-new">+ Apply New</button>
 	</div>
 
@@ -243,6 +247,59 @@
 	</div>
 	<!-- Modal -->
 
+	</div>
+
+	</div>
+
+	<div *ngIf="showCompare">
+		<br>
+		<div class="row col-xs-7">
+		<button class="btn btn-back btn-primary" (click)="showCompare=false">Back</button>
+		</div>
+		<div class="row col-xs-12">
+		<table *ngIf="badgesets" class="table-big">
+			<tr>
+				<td>
+					<label class="label-bs1">Current Badges: </label>
+					<table class="table-c">
+					<tr>
+						<td>
+						<text class="click text-blue" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text>
+						<text *ngIf="!getTopStaffBS(staff.userbgroups)[0]">None</text>
+						</td>
+					</tr>
+					<tr>
+					  <td>
+					  <div *ngFor="let ubg of staff.userbgroups">
+					  <uli class="click text-blue" (click)="toBadgeDetail(ubg.bid)">
+					  <text>{{getBadgeName(ubg.bid)}} {{ubg.level}} </text>
+					  </uli>
+					  </div>
+					  </td>
+					</tr>
+					</table>
+				</td>
+				<td>
+					<label class="label-bs2">Compare to: </label>
+					<select class="select-bs" [(ngModel)]="bsname2"><option *ngFor="let badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
+					<table class="table-c">
+					<tr>
+						<td class="click text-blue" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}  ({{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} ${{getBS(bsname2).pay}}K)</td>
+					</tr>
+					<tr>
+					  <td>
+					  <div *ngFor="let bg of compareBS(bsname2)">
+					  <uli class="click text-blue" (click)="toBadgeDetail(bg.bid)">
+					  <text>{{getBadgeName(bg.bid)}} {{bg.level}} </text>
+					  </uli>
+					  </div>
+					  </td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		</div>
 	</div>
 
 </div>

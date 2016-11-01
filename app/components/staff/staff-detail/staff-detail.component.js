@@ -133,7 +133,13 @@ var StaffDetailComponent = (function () {
     };
     StaffDetailComponent.prototype.addUserBGroup = function (level) {
         this.newLevel = level;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: "", level: this.newLevel, focus: this.newFocus, approved: this.newApproved });
+        for (var i = 0; i < this.staff.userbgroups.length; i++) {
+            if (this.staff.userbgroups[i].bid == this.newBID && this.staff.userbgroups[i].level <= this.newLevel) {
+                var index = this.staff.userbgroups.indexOf(this.staff.userbgroups[i]);
+                this.staff.userbgroups.splice(index, 1);
+            }
+        }
+        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(this.staff._id,value).subscribe();
         this.updateStaff();
