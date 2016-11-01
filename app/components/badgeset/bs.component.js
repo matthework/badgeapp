@@ -179,7 +179,7 @@ var BSComponent = (function () {
         for (var i = 0; i < bg.length; i++) {
             totalLevels += bg[i].level;
         }
-        result = Math.round(m * 1000 * 0.9 / totalLevels * l);
+        result = Math.round(m * 1000 / totalLevels * l);
         return result;
     };
     BSComponent.prototype.getBadgeName = function (bid) {

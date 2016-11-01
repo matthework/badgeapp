@@ -1,3 +1,54 @@
+.table-big {
+  width: 65%;
+  border: 0;
+  background-color: white;
+  text-align: top;
+  margin-bottom: 0;
+}
+.table-big td {
+  border: 0;
+  vertical-align: top;
+}
+.table-big tr {
+  border: 0;
+}
+.table-big th {
+  border: 0;
+}
+.table-big tr:nth-child(odd) {
+  background-color: white;
+}
+.table-big tr:nth-child(even) {
+  background-color: white;
+}
+.select-bs {
+  background: transparent;
+  width: 65%;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-bottom: 10px;
+  margin-right: 0;
+}
+.table-c {
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
+  border: 0;
+}
+.table-c td {
+  border: 1px solid grey;
+}
+.table-c tr {
+  line-height: 25px; 
+}
+.td-center {
+  text-align: center;
+}
 .btn-big {
   margin-top: 20px;
   margin-right: 5px;
@@ -85,4 +136,20 @@
 }
 .right {
   margin-right: 50px;
+}
+.btn-compare {
+  width: 100px;
+  margin-right: 5px;
+}
+.label-bs1 {
+  font-size: 1.1em;
+  width: 8em;
+  margin-bottom: 18px;
+}
+.label-bs2 {
+  font-size: 1.1em;
+}
+.btn-back {
+  width: 100px;
+  margin-bottom: 10px;
 }
