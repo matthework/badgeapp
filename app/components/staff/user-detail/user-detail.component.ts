@@ -474,19 +474,35 @@ export class UserDetailComponent implements OnInit {
 
   compareBS(bsname:string) {
     var result = [];
+    var check = false;
+    var has = false;
     if (this.badgesets != null) {
       for (var i = 0; i < this.badgesets.length; i++) { 
         if (this.badgesets[i].name == bsname) {
           for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
             for (var k = 0; k < this.staff.userbgroups.length; k++) { 
-              if (this.badgesets[i].badgegroups[j].bid == this.staff.userbgroups[k].bid && this.badgesets[i].badgegroups[j].level > this.staff.userbgroups[k].level) {
-                result.push({bid:this.badgesets[i].badgegroups[j].bid, level:this.badgesets[i].badgegroups[j].level});
+              if (this.staff.userbgroups[k].approved && this.badgesets[i].badgegroups[j].bid == this.staff.userbgroups[k].bid) {
+                has = true;
+                if(this.badgesets[i].badgegroups[j].level > this.staff.userbgroups[k].level) {
+                  result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, status: true});
+                  check = true;
+                }
               }
             }
+            if (!has) {
+              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, status: true});
+              check = true;
+            }
+            if(!check){
+              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, status: false});
+            }
+            has = false;
+            check = false;
           }
         }
       }
     }
+    result.sort(this.toCompare);
     return result;
   }
 
