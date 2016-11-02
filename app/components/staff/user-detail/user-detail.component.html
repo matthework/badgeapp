@@ -289,8 +289,9 @@
 					<tr>
 					  <td>
 					  <div *ngFor="let bg of compareBS(bsname2)">
-					  <uli class="click text-blue" (click)="toBadgeDetail(bg.bid)">
-					  <text>{{getBadgeName(bg.bid)}} {{bg.level}} </text>
+					  <uli (click)="toBadgeDetail(bg.bid)">
+					  <text *ngIf="bg.status" class="click text-blue">{{getBadgeName(bg.bid)}} {{bg.level}} </text>
+					  <text *ngIf="!bg.status" class="click text-grey">{{getBadgeName(bg.bid)}} {{bg.level}} </text>
 					  </uli>
 					  </div>
 					  </td>
