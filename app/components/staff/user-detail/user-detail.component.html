@@ -254,7 +254,7 @@
 	<div *ngIf="showCompare">
 		<br>
 		<div class="row col-xs-7">
-		<button class="btn btn-back btn-primary" (click)="showCompare=false">Back</button>
+		<button class="btn btn-add btn-back btn-default" (click)="showCompare=false">Back</button>
 		</div>
 		<div class="row col-xs-12">
 		<table *ngIf="badgesets" class="table-big">
@@ -272,7 +272,8 @@
 					  <td>
 					  <div *ngFor="let ubg of staff.userbgroups">
 					  <uli class="click text-blue" (click)="toBadgeDetail(ubg.bid)">
-					  <text>{{getBadgeName(ubg.bid)}} {{ubg.level}} </text>
+					  <text *ngIf="ubg.focus.length==0">{{getBadgeName(ubg.bid)}} {{ubg.level}}</text>
+					  <text *ngIf="ubg.focus.length!=0">{{getBadgeName(ubg.bid)}} {{ubg.level}} [{{ubg.focus}}]</text>
 					  </uli>
 					  </div>
 					  </td>
@@ -290,8 +291,14 @@
 					  <td>
 					  <div *ngFor="let bg of compareBS(bsname2)">
 					  <uli (click)="toBadgeDetail(bg.bid)">
-					  <text *ngIf="bg.status" class="click text-blue">{{getBadgeName(bg.bid)}} {{bg.level}} </text>
-					  <text *ngIf="!bg.status" class="click text-grey">{{getBadgeName(bg.bid)}} {{bg.level}} </text>
+					  <text *ngIf="bg.status" class="click text-red">
+					  		<text *ngIf="bg.focus.length==0">{{getBadgeName(bg.bid)}} {{bg.level}}</text>
+					  		<text *ngIf="bg.focus.length!=0">{{getBadgeName(bg.bid)}} {{bg.level}} [{{bg.focus}}]</text>
+					  	</text>
+					  <text *ngIf="!bg.status" class="click text-grey">
+					  		<text *ngIf="bg.focus.length==0">{{getBadgeName(bg.bid)}} {{bg.level}}</text>
+					  		<text *ngIf="bg.focus.length!=0">{{getBadgeName(bg.bid)}} {{bg.level}} [{{bg.focus}}]</text>
+					  </text>
 					  </uli>
 					  </div>
 					  </td>
