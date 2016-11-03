@@ -44,7 +44,7 @@
     <div class="row col col-xs-10 header hidden-xs">
       <div class="col-xs-4">Badge</div>
       <div class="col-xs-4">Badge Set</div>
-      <div class="col-xs-1">Status</div>
+      <div class="col-xs-1">Approved</div>
     </div>
     <div *ngFor="let userbgroup of staff.userbgroups" class="row col col-xs-10 div-list-item form-inline">
       <div class="col-sm-4">
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="col-sm-1">
-        <i><text class="text-green" *ngIf="userbgroup.status">{{userbgroup.status | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.status">{{userbgroup.status | approved_pending}}</text></i>
+        <i><text class="text-green" *ngIf="userbgroup.approved">{{userbgroup.approved | approved_pending}}</text><text class="text-red" *ngIf="!userbgroup.approved">{{userbgroup.approved | approved_pending}}</text></i>
       </div>
     </div>
 
