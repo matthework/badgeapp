@@ -12,17 +12,20 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var badge_service_1 = require('../badge.service');
 var bs_service_1 = require('../../badgeset/bs.service');
+var staff_service_1 = require('../../staff/staff.service');
 var auth_service_1 = require('../../auth/auth.service');
 var yes_no_pipe_1 = require('../../pipe/yes-no-pipe');
 var BadgeDetailComponent = (function () {
-    function BadgeDetailComponent(_badgeService, _bsService, _router, route, auth) {
+    function BadgeDetailComponent(_badgeService, _bsService, _staffService, _router, route, auth) {
         this._badgeService = _badgeService;
         this._bsService = _bsService;
+        this._staffService = _staffService;
         this._router = _router;
         this.route = route;
         this.auth = auth;
         this.badges = [];
         this.badgesets = [];
+        this.staffs = [];
         this.newFC = "";
         this.newLevel = 0;
         this.newDesc = "";
@@ -51,6 +54,7 @@ var BadgeDetailComponent = (function () {
         this.getBadge();
         this.getBadges();
         this.getBadgeSets();
+        this.getStaffs();
     };
     BadgeDetailComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
@@ -76,6 +80,10 @@ var BadgeDetailComponent = (function () {
     BadgeDetailComponent.prototype.getBadgeSets = function () {
         var _this = this;
         this._bsService.getBadgeSets().subscribe(function (badgesets) { _this.badgesets = badgesets; });
+    };
+    BadgeDetailComponent.prototype.getStaffs = function () {
+        var _this = this;
+        this._staffService.getStaffs().subscribe(function (staffs) { _this.staffs = staffs; });
     };
     BadgeDetailComponent.prototype.toBadges = function () {
         this._router.navigate(['/badges']);
@@ -128,7 +136,35 @@ var BadgeDetailComponent = (function () {
     };
     BadgeDetailComponent.prototype.removeBadge = function () {
         this._badgeService.deleteBadge(this.id).subscribe();
+        this.removeBadgeFromBSet(this.id);
+        this.removeBadgeFromUBG(this.id);
         this.toBadges();
+    };
+    BadgeDetailComponent.prototype.removeBadgeFromBSet = function (bid) {
+        for (var i = 0; i < this.badgesets.length; i++) {
+            for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
+                if (this.badgesets[i].badgegroups[j].bid == bid) {
+                    var index = j;
+                    this.badgesets[i].badgegroups.splice(index, 1);
+                    var value = JSON.stringify(this.badgesets[i]);
+                    this._bsService.updateBadgeSet(this.badgesets[i]._id, value).subscribe();
+                    console.log('you submitted value: ', value);
+                }
+            }
+        }
+    };
+    BadgeDetailComponent.prototype.removeBadgeFromUBG = function (bid) {
+        for (var i = 0; i < this.staffs.length; i++) {
+            for (var j = 0; j < this.staffs[i].userbgroups.length; j++) {
+                if (this.staffs[i].userbgroups[j].bid == bid) {
+                    var index = j;
+                    this.staffs[i].userbgroups.splice(index, 1);
+                    var value = JSON.stringify(this.staffs[i]);
+                    this._staffService.updateStaff(this.staffs[i]._id, value).subscribe();
+                    console.log('you submitted value: ', value);
+                }
+            }
+        }
     };
     BadgeDetailComponent.prototype.deleteBadgePop = function () {
         var name = this.badge.name;
@@ -228,7 +264,7 @@ var BadgeDetailComponent = (function () {
             styleUrls: ['app/components/badge/badge-detail/badge-detail.component.css'],
             pipes: [yes_no_pipe_1.YesNoPipe]
         }), 
-        __metadata('design:paramtypes', [badge_service_1.BadgeService, bs_service_1.BSService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
+        __metadata('design:paramtypes', [badge_service_1.BadgeService, bs_service_1.BSService, staff_service_1.StaffService, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
     ], BadgeDetailComponent);
     return BadgeDetailComponent;
 }());
