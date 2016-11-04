@@ -5,6 +5,9 @@ import {Badge,BadgeLevel} from '../badge';
 import {BadgeService} from '../badge.service';
 import {BadgeSet} from '../../badgeset/bs';
 import {BSService} from '../../badgeset/bs.service';
+import {Staff,UserBGroup} from '../../staff/staff';
+import {StaffService} from '../../staff/staff.service';
+
 import {AuthService} from '../../auth/auth.service';
 
 import {YesNoPipe} from '../../pipe/yes-no-pipe';
@@ -21,6 +24,7 @@ export class BadgeDetailComponent implements OnInit {
     badge: Badge;
     badges: Badge[] = [];
     badgesets: BadgeSet[] = [];
+    staffs: Staff[] = [];
     selectedBL: BadgeLevel;
     sub: any;
     id: string;
@@ -50,6 +54,7 @@ export class BadgeDetailComponent implements OnInit {
     constructor(
         private _badgeService: BadgeService, 
         private _bsService: BSService,
+        private _staffService: StaffService,
         private _router: Router,
         private route: ActivatedRoute,
         private auth: AuthService) {}
@@ -59,6 +64,7 @@ export class BadgeDetailComponent implements OnInit {
         this.getBadge();
         this.getBadges()
         this.getBadgeSets();
+        this.getStaffs();
     }
 
     ngOnDestroy() {
@@ -87,6 +93,10 @@ export class BadgeDetailComponent implements OnInit {
     getBadgeSets() {
         this._bsService.getBadgeSets().subscribe(badgesets => { this.badgesets = badgesets});
     }
+
+   getStaffs() {
+      this._staffService.getStaffs().subscribe(staffs => { this.staffs = staffs});
+   }
 
     toBadges() {
         this._router.navigate(['/badges']);
@@ -146,8 +156,38 @@ export class BadgeDetailComponent implements OnInit {
 
   removeBadge() {
     this._badgeService.deleteBadge(this.id).subscribe();
+    this.removeBadgeFromBSet(this.id);
+    this.removeBadgeFromUBG(this.id);
     this.toBadges();
   }
+
+   removeBadgeFromBSet(bid) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+         for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
+            if (this.badgesets[i].badgegroups[j].bid == bid) {
+               let index = j;
+               this.badgesets[i].badgegroups.splice(index,1);
+               let value = JSON.stringify(this.badgesets[i])
+               this._bsService.updateBadgeSet(this.badgesets[i]._id,value).subscribe();
+               console.log('you submitted value: ', value);
+            }
+         }
+      }
+   }
+
+   removeBadgeFromUBG(bid) {
+      for (var i = 0; i < this.staffs.length; i++) { 
+         for (var j = 0; j < this.staffs[i].userbgroups.length; j++) { 
+            if (this.staffs[i].userbgroups[j].bid == bid) {
+               let index = j;
+               this.staffs[i].userbgroups.splice(index,1);
+               let value = JSON.stringify(this.staffs[i])
+               this._staffService.updateStaff(this.staffs[i]._id,value).subscribe();
+               console.log('you submitted value: ', value);
+            }
+         }
+      }
+   }
 
   deleteBadgePop() {
     var name = this.badge.name
