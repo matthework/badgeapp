@@ -48,8 +48,8 @@
               <text>{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}}</text>
               <text *ngIf="userbgroup.focus.length!=0 && userbgroup.approved">[{{userbgroup.focus}}]</text>, 
             </text>
-            <text *ngIf="!userbgroup.approved" class="click text-grey">
-              <text class="click text-grey">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text>
+            <text *ngIf="!userbgroup.approved" class="click text-red">
+              <text class="click text-red">{{getBadgeName(userbgroup.bid)}} {{userbgroup.level}} </text>
               <text *ngIf="userbgroup.focus.length!=0 && !userbgroup.approved">[{{userbgroup.focus}}]</text>, 
             </text>
             <!-- <button *ngIf="!userbgroup.approved" class="btn-approve" (click)="userbgroup.approved=true;approveBadge(staff,userbgroup)">APPROVE</button> -->
