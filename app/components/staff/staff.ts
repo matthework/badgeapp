@@ -21,4 +21,5 @@ export class UserBGroup {
 	level: number;
   focus: string[];
   approved: boolean;
+  ubtimestamp: string;
 }

@@ -333,7 +333,7 @@ export class UserDetailComponent implements OnInit {
   addUserBGroup(level:number) {
     // this.newLevel = +this.newLevel;
     this.newLevel = level;
-    this.staff.userbgroups.push({bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved});
+    this.staff.userbgroups.push({bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp:""});
     let value = JSON.stringify(this.staff)
     // this._staffService.updateStaff(this.staff._id,value).subscribe();
     this.updateStaff();
@@ -511,6 +511,14 @@ export class UserDetailComponent implements OnInit {
     }
     result.sort(this.toCompare);
     return result;
+  }
+
+  checkFocus(fc,focus) {
+      var result = false;
+      if(focus.includes(fc)) {
+        result = true;
+      }
+      return result;
   }
 
   goBack() {

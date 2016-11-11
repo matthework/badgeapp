@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../../css/circle.css">
+
 <!-- Header -->
 <div class="docs-header">
    <h1 class=" col-md-10 col-md-offset-1" >PHL Badge App</h1>
@@ -8,7 +10,7 @@
 
 <div *ngIf="auth.authenticated()">
 
-  <div class="row col-xs-5 form-inline" *ngIf="!checkProfile()">
+<!--   <div class="row col-xs-5 form-inline" *ngIf="!checkProfile()">
     <h3><i>Please create a user profile!</i></h3>
     <br>
     <label>*FName: </label>
@@ -21,27 +23,173 @@
     <input class="input form-control" type="text" [(ngModel)]="newUser.position" placeholder="Position"><br>
     <br>
 
-    <!--     <label>Brief: </label>
-    <textarea class="textarea form-control" rows="5" type="text" [(ngModel)]="newUser.brief" placeholder="Brief"></textarea><br>
-    <br> -->
-
     <button class="btn btn-big btn-danger pull-right" (click)="location.reload()">Cancel</button>
     <button class="btn btn-big btn-success pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
+  </div> -->
+
+  <div *ngIf="staff && checkProfile()" class="row col-xs-12">
+
+    <div class="row margin col-xs-12">
+        <h2 *ngIf="auth.userProfile"><i>{{auth.userProfile.name}}</i></h2>
+    </div>
+
+    <div class="row margin col-xs-12 border ">
+      <i><h4><i>Top BSet: </i><text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
+      <text>Latest Badge earned: </text><br>
+      <text>Latest Badge Set earned: </text><br></i><br>
+      <button *ngIf="!showCompare" class="btn-compare btn-add btn btn-default" (click)="showCompare=true;getComBS()">Compare</button>
+      <button *ngIf="showCompare" class="btn btn-add btn-back btn-default" (click)="showCompare=false">Back</button>
+    </div>
+    <br>
+
+    <div *ngIf="!showCompare">
+
+    <h3 *ngIf="staff.userbgroups.length==0"><i>You don't have any badge yet.</i></h3>
+
+    <div (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new" class="c100 blue p100">
+        <span>+</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+        <span><br><h4><text class="text-blue click">+ Apply Badge</text></h4></span>
+    </div>
+
+    <div *ngFor="let userbgroup of staff.userbgroups">
+      <div (click)="onSelect(userbgroup)" data-toggle="modal" data-target="#myModal" class={{getCircleLevel(userbgroup.level,userbgroup.approved)}}>
+        <span>{{userbgroup.level}}</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+        <span><br><h4><text *ngIf="userbgroup.approved" class="text-green click">{{getBadgeName(userbgroup.bid)}}</text><text *ngIf="!userbgroup.approved" class="text-red click">{{getBadgeName(userbgroup.bid)}}</text></h4></span>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div *ngIf="selectedUG" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title text-blue" id="myModalLabel">{{getBadgeName(selectedUG.bid)}}</h3><br>
+            <!-- <label class="lab">Focus: </label> -->
+            <text *ngFor="let fc of getFocusOptions(selectedUG.bid)">{{fc}} <input type="checkbox" onclick="return false" [checked]="checkFocus(fc,selectedUG.focus)" [value]="fc">,  </text>
+          </div>
+          <div class="modal-body">
+            <div (click)="onSelectNewLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(selectedUG.bid)">
+              <div *ngIf="selectedUG.level!=bl.level">
+                <div class="col-sm-2">{{bl.level}}</div>
+                <div class="col-sm-10"><text class="text-blue">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+              </div>
+              <div *ngIf="selectedUG.level==bl.level" class="row highlight">          
+                <div class="col-sm-2">{{bl.level}}</div>
+                <div class="col-sm-10"><text class="">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+
+    <!-- Modal -->
+    <div *ngIf="addNew" class="modal fade" id="myModal-new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header form-inline">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-blue" id="myModalLabel">Apply New Badge: </h4><br>
+            <label class="lab">Badge: </label>
+            <select class="select form-control" [(ngModel)]="newBID"><option *ngFor="let bo of getBadgesOptions()" [value]="bo[1]">{{bo[0]}}</option></select><br>
+            <br>
+            <label class="lab">Focus: </label>
+            <text *ngFor="let fc of getFocusOptions(newBID)">{{fc}} <input type="checkbox" [value]="fc" (change)="updateCheckedNew(fc, $event, newFocus)">, </text><br>
+          </div>
+          <div class="modal-body">
+            <div (click)="onSelectedLevel(bl.level)" class="row col col-xs-12 div-list form-inline" *ngFor="let bl of getBLs(newBID)">
+              <div *ngIf="selectedLevel!=bl.level">
+                <div class="col-sm-2">{{bl.level}}</div>
+                <div class="col-sm-10"><text class="text-blue">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+              </div>
+              <div *ngIf="selectedLevel==bl.level" class="row highlight">         
+                <div class="col-sm-2">{{bl.level}}</div>
+                <div class="col-sm-10"><text class="">{{labels[bl.level-1]}}</text><br>{{bl.desc}}</div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" (click)="resetNewValue()">Cancel</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addUserBGroup(selectedLevel)" [disabled]="!newBID || !selectedLevel">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
   </div>
 
-  <div *ngIf="checkProfile() && staff" class="row col-xs-12">
-
-    <div class="row margin col-xs-12">
-        <h2 *ngIf="auth.userProfile"><i>{{auth.userProfile.name}}, you are just logged in.</i></h2>
-        <h2 *ngIf="!checkProfile()"><i>You don't have any badge yet.</i></h2>
+  <div *ngIf="showCompare">
+    <br>
+    <div class="row col-xs-12">
+    <table *ngIf="badgesets" class="table-big">
+      <tr>
+        <td>
+          <label class="label-bs1">Current Badges: </label>
+          <table class="table-c">
+          <tr>
+            <td>
+            <text class="click text-blue" *ngIf="getTopStaffBS(staff.userbgroups)[0]" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</text>
+            <text *ngIf="!getTopStaffBS(staff.userbgroups)[0]">None</text>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <div *ngFor="let ubg of staff.userbgroups">
+            <uli class="click text-blue" (click)="toBadgeDetail(ubg.bid)">
+            <text *ngIf="ubg.focus.length==0">{{getBadgeName(ubg.bid)}} {{ubg.level}}</text>
+            <text *ngIf="ubg.focus.length!=0">{{getBadgeName(ubg.bid)}} {{ubg.level}} [{{ubg.focus}}]</text>
+            </uli>
+            </div>
+            </td>
+          </tr>
+          </table>
+        </td>
+        <td>
+          <label class="label-bs2">Compare to: </label>
+          <select class="select-bs" [(ngModel)]="bsname2"><option *ngFor="let badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
+          <table class="table-c">
+          <tr>
+            <td class="click text-blue" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}  ({{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} ${{getBS(bsname2).pay}}K)</td>
+          </tr>
+          <tr>
+            <td>
+            <div *ngFor="let bg of compareBS(bsname2)">
+            <uli (click)="toBadgeDetail(bg.bid)">
+            <text *ngIf="bg.status" class="click text-red">
+                <text *ngIf="bg.focus.length==0">{{getBadgeName(bg.bid)}} {{bg.level}}</text>
+                <text *ngIf="bg.focus.length!=0">{{getBadgeName(bg.bid)}} {{bg.level}} [{{bg.focus}}]</text>
+              </text>
+            <text *ngIf="!bg.status" class="click text-grey">
+                <text *ngIf="bg.focus.length==0">{{getBadgeName(bg.bid)}} {{bg.level}}</text>
+                <text *ngIf="bg.focus.length!=0">{{getBadgeName(bg.bid)}} {{bg.level}} [{{bg.focus}}]</text>
+            </text>
+            </uli>
+            </div>
+            </td>
+          </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
     </div>
+  </div>
 
-    <div class="row margin col-xs-12">
-      <h4>Top BSet: <text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
-    </div>
-
-    <!-- Badge container -->
-    <div class="row col col-xs-10 header hidden-xs">
+<!--     <div class="row col col-xs-10 header hidden-xs">
       <div class="col-xs-4">Badge</div>
       <div class="col-xs-4">Badge Set</div>
       <div class="col-xs-1">Status</div>
@@ -63,7 +211,6 @@
 
   </div>
 
-  <!-- Button group-->
   <div class="row top col-xs-8">
     <div>
       <button *ngIf="checkProfile()" class="btn btn-b btn-default" (click)="toUserDetail(auth.userProfile.email)">User Page</button><text *ngIf="checkProfile()"> You can manage your badges in user page.</text>
@@ -72,8 +219,9 @@
     <div *ngIf="auth.isAdmin() && checkProfile()">
       <button class="btn btn-b btn-default" (click)="toPerson()">Admin Page</button><text> You have <text class="text-blue">{{checkNumPending()}}</text> badge(s) request(s) pending from <text class="text-blue">{{checkPendingStaff()}}</text> staff(s).</text>
     </div>
-  </div>
+  </div> -->
 
+</div>
 </div>
 
 <br>

@@ -302,7 +302,7 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.addUserBGroup = function (level) {
         // this.newLevel = +this.newLevel;
         this.newLevel = level;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp: "" });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(this.staff._id,value).subscribe();
         this.updateStaff();
@@ -466,6 +466,13 @@ var UserDetailComponent = (function () {
             }
         }
         result.sort(this.toCompare);
+        return result;
+    };
+    UserDetailComponent.prototype.checkFocus = function (fc, focus) {
+        var result = false;
+        if (focus.includes(fc)) {
+            result = true;
+        }
         return result;
     };
     UserDetailComponent.prototype.goBack = function () {

@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {Badge} from '../badge/badge';
+import {Badge,BadgeLevel} from '../badge/badge';
 import {BadgeService} from '../badge/badge.service';
 import {BadgeSet,BadgeGroup} from '../badgeset/bs';
 import {BSService} from '../badgeset/bs.service';
@@ -25,6 +25,13 @@ export class MainComponent implements OnInit{
 
   	badges: Badge[] = [];
   	badgesets: BadgeSet[] = [];
+  	selectedUG: UserBGroup;
+	newBID = "";
+	newLevel = 0;
+	newFocus = [];
+	newApproved = false;
+	selectedLevel = 0;
+	newL = 0;
 	staffs: Staff[] = [];
 	staff: Staff;
 	tiers: Tier[] = [];
@@ -32,7 +39,21 @@ export class MainComponent implements OnInit{
 	gmap = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5};
 	sortStaffBS = [];
 	newUser = {index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: true, brief:"", others: []}
-
+	nums = [1,2,3,4,5,6];
+	bsname1 = "";
+  	bsname2 = "";
+  	showCompare = false;
+  	addNew = false;
+   labels = [  "I understand... ", 
+         "I participate... ", 
+         "I contribute... ", 
+         "I lead... ", 
+         "I advise... ", 
+         "I can teach... ", 
+         "I plan sophisticated... ",
+         "I have achieved wide recognition... ", 
+         "I am a world leading... "
+       ];
 	
 	constructor(private auth: AuthService,
 				private _router: Router,
@@ -51,6 +72,10 @@ export class MainComponent implements OnInit{
     	this.getStaffs();
     	this.getTiers();
 	}
+
+  onSelect(ug: UserBGroup) { 
+    this.selectedUG = ug;
+  }
 
 	getStaffs() {
 		this._staffService.getStaffs().subscribe(staffs => { this.staffs = staffs});
@@ -275,6 +300,200 @@ export class MainComponent implements OnInit{
     return bname;
   }
   
+    getFocusOptions(bid:string) {
+    var focusOptions = [];
+    if (this.badges != null) {
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i]._id == bid && this.badges[i].focus != null) {
+              for (var j = 0; j < this.badges[i].focus.length; j++) { 
+                focusOptions.push(this.badges[i].focus[j]);
+              }
+            }
+        }
+    }
+    return focusOptions.sort();
+  }
+
+   getBLs(bid:string) {
+    var bls: BadgeLevel[];
+    for (var i = 0; i < this.badges.length; i++) { 
+      if(this.badges[i]._id == bid) {
+        bls = this.badges[i].badgelevels;
+      }
+    }
+    return bls;
+  }
+
+  onSelectedLevel(level:number) {
+    this.selectedLevel = level;
+  }
+
+  onSelectNewLevel(level:number) {
+    this.newL = level;
+  }
+
+  checkFocus(fc,focus) {
+      var result = false;
+      if(focus.includes(fc)) {
+        result = true;
+      }
+      return result;
+  }
+
+  updateCheckedNew(option, event, focus) {
+    console.log('event.target.value ' + event.target.value);
+    var index = focus.indexOf(option);
+    if(event.target.checked) {
+      console.log('add');
+      if(index === -1) {
+        focus.push(option);
+      }
+    } else {
+      console.log('remove');
+      if(index !== -1) {
+        focus.splice(index, 1);
+      }
+    }
+    console.log(focus);
+    this.newFocus = focus;
+  }
+
+  getCircleLevel(level,approved) {
+  	var result="";
+  	if(approved){
+  		result="c100 green p";
+  	}else{
+  		result="c100 red p";
+  	}
+  	return result + Math.round(level/9*100).toString();
+  }
+
+   getComBS() {
+    if (this.badgesets != null) {
+      this.bsname1 = this.badgesets[0].name;
+      this.bsname2 = this.badgesets[0].name;
+      if (this.getTopStaffBS(this.staff.userbgroups).length != 0){
+        this.bsname2 = this.getTopStaffBS(this.staff.userbgroups)[1];
+      }
+      
+    }else {
+      this.bsname1 = "";
+      this.bsname2 = "";
+    }
+  }
+
+  getBadgesOptions() {
+    var badgesOptions = [];
+    if (this.badges != null) {
+        for (var i = 0; i < this.badges.length; i++) { 
+            if (this.badges[i].status=='Accepted') {
+                badgesOptions.push([this.badges[i].name,this.badges[i]._id]);
+            }
+        }
+    }
+    return badgesOptions.sort();
+  }
+
+  addUserBGroup(level:number) {
+    // this.newLevel = +this.newLevel;
+    this.newLevel = level;
+    this.staff.userbgroups.push({bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp:""});
+    let value = JSON.stringify(this.staff)
+    // this._staffService.updateStaff(this.staff._id,value).subscribe();
+    this.updateStaff();
+    console.log('you submitted value: ', value);
+  }
+
+    updateStaff() {
+      for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+          this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
+      }
+      this.staff.userbgroups.sort(this.toCompare);
+      this.staff.userbgroups.sort(this.sortApproved);
+      let value = JSON.stringify(this.staff)
+      this._staffService.updateStaff(this.staff._id,value).subscribe();
+      console.log('you submitted value: ', value); 
+  }
+
+  toCompare(a,b) {
+    if (a.badge < b.badge)
+      return -1;
+    else if (a.badge > b.badge)
+      return 1;
+    else 
+      return 0;
+  }
+
+  sortApproved(a,b) {
+    if (a.approved > b.approved)
+      return -1;
+    else if (a.approved < b.approved)
+      return 1;
+    else 
+      return 0;
+  }
+
+  resetNewValue() {
+    this.newBID = "";
+    this.newLevel = 0;
+    this.newFocus = [];
+    this.newApproved = false;
+    this.selectedLevel = 0;
+  }
+
+  getBS(bsname:string) {
+    var result: BadgeSet;
+    if (this.badgesets != null) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        if (this.badgesets[i].name == bsname) {
+          return this.badgesets[i];
+        }
+      }
+    }
+    return result;
+  }
+
+  compareBS(bsname:string) {
+    var result = [];
+    var check = false;
+    var has = false;
+    var focusCheck = false;
+    if (this.badgesets != null) {
+      for (var i = 0; i < this.badgesets.length; i++) { 
+        if (this.badgesets[i].name == bsname) {
+          for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) { 
+            for (var k = 0; k < this.staff.userbgroups.length; k++) { 
+              var a1 = this.staff.userbgroups[k].focus;
+              var a2 = this.badgesets[i].badgegroups[j].focus;
+              if (a1.length >= a2.length && a2.every(function(v,i) { return a1.includes(v)})) {
+                focusCheck = true;
+              } 
+              if (this.staff.userbgroups[k].approved && focusCheck && this.badgesets[i].badgegroups[j].bid == this.staff.userbgroups[k].bid) {
+                has = true;
+                if(this.badgesets[i].badgegroups[j].level > this.staff.userbgroups[k].level) {
+                  result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: true});
+                  check = true;
+                }
+              }
+              focusCheck = false;
+            }
+            if (!has) {
+              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: true});
+              check = true;
+            }
+            if(!check){
+              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: false});
+            }
+            has = false;
+            check = false;
+          }
+        }
+      }
+    }
+    result.sort(this.toCompare);
+    return result;
+  }
+
 }
 
 
