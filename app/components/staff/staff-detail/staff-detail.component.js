@@ -133,13 +133,13 @@ var StaffDetailComponent = (function () {
     };
     StaffDetailComponent.prototype.addUserBGroup = function (level) {
         this.newLevel = level;
-        for (var i = 0; i < this.staff.userbgroups.length; i++) {
-            if (this.staff.userbgroups[i].bid == this.newBID && this.staff.userbgroups[i].level <= this.newLevel) {
-                var index = this.staff.userbgroups.indexOf(this.staff.userbgroups[i]);
-                this.staff.userbgroups.splice(index, 1);
-            }
-        }
-        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved });
+        // for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+        //    if (this.staff.userbgroups[i].bid == this.newBID && this.staff.userbgroups[i].level <= this.newLevel) {
+        //       let index = this.staff.userbgroups.indexOf(this.staff.userbgroups[i]);
+        //       this.staff.userbgroups.splice(index,1);
+        //    }
+        // }  
+        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp: "2006-01-01T15:04:05Z07:00" });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(this.staff._id,value).subscribe();
         this.updateStaff();
@@ -470,6 +470,8 @@ var StaffDetailComponent = (function () {
             if (this.staff.userbgroups[i].bid == ubg.bid) {
                 if (event.target.checked) {
                     this.staff.userbgroups[i].approved = true;
+                    console.log("Approved at TimeStamp: ", new Date().toISOString());
+                    this.staff.userbgroups[i].ubtimestamp = new Date().toISOString();
                 }
                 else {
                     this.staff.userbgroups[i].approved = false;

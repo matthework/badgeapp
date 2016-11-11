@@ -263,17 +263,17 @@ export class StaffComponent {
 		this._router.navigate(['/bs/detail',bsid]);
 	}
 
-    approveBadge(staff:Staff, userbgroup:UserBGroup) {
-		// for (var i = 0; i < staff.userbgroups.length; i++) { 
-		// 	if (staff.userbgroups[i].bid == userbgroup.bid && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].approved) {
-		// 		let index = staff.userbgroups.indexOf(staff.userbgroups[i]);
-  //   			staff.userbgroups.splice(index,1);
-		// 	}
-		// }	        
-		let value = JSON.stringify(staff)
-        this._staffService.updateStaff(staff._id,value).subscribe();
-        console.log('you submitted value: ', value); 
-    }
+	approveBadge(staff:Staff, userbgroup:UserBGroup) {
+	// for (var i = 0; i < staff.userbgroups.length; i++) { 
+	// 	if (staff.userbgroups[i].bid == userbgroup.bid && staff.userbgroups[i].level < userbgroup.level && staff.userbgroups[i].approved) {
+	// 		let index = staff.userbgroups.indexOf(staff.userbgroups[i]);
+	//   			staff.userbgroups.splice(index,1);
+	// 	}
+	// }	        
+	let value = JSON.stringify(staff)
+	  this._staffService.updateStaff(staff._id,value).subscribe();
+	  console.log('you submitted value: ', value); 
+	}
 
   getBadgeName(bid:string) {
     var bname = "";

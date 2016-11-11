@@ -1,3 +1,80 @@
+.table-big {
+  width: 65%;
+  border: 0;
+  background-color: white;
+  text-align: top;
+  margin-bottom: 0;
+}
+.table-big td {
+  border: 0;
+  vertical-align: top;
+}
+.table-big tr {
+  border: 0;
+}
+.table-big th {
+  border: 0;
+}
+.table-big tr:nth-child(odd) {
+  background-color: white;
+}
+.table-big tr:nth-child(even) {
+  background-color: white;
+}
+.select-bs {
+  background: transparent;
+  width: 60%;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-bottom: 10px;
+  margin-right: 0;
+}
+.table-c {
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
+  border: 0;
+}
+.table-c td {
+  border: 1px solid grey;
+}
+.table-c tr {
+  line-height: 25px; 
+}
+.td-center {
+  text-align: center;
+}
+.modal-body {
+  display: inline-table;
+  padding-top: 5px;
+}
+.div-list {
+  min-height: 60px;
+  margin-left: 1px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px #ddd solid;
+}
+.div-list:hover{
+  background-color: #eee;
+}
+.highlight {
+  min-height: 60px;
+  color: white;
+  background-color: #039be5;
+  margin-left: 1px;
+  border-radius: 4px;
+  /*border: 3px limegreen solid;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
 .btn-big {
   margin-top: 20px;
   margin-right: 5px;
@@ -19,4 +96,38 @@
 }
 .top {
   margin-top: 20px;
+}
+.badge-text {
+  margin-top: 80px;
+}
+.btop {
+  margin-top: 0px;
+}
+.text {
+  text-align: center;
+}
+.text-green {
+  font-size: 0.9em;
+  color: limegreen;
+  text-align: center;
+}
+.text-red {
+  font-size: 0.9em;
+  color: red;
+  text-align: center;
+}
+.btn-compare {
+  width: 100px;
+  margin-left: 0;
+  margin-right: 5px;
+  margin-bottom: 20px;
+}
+.label-bs1 {
+  font-size: 1em;
+  width: 8em;
+  margin-bottom: 20px;
+}
+.btn-back {
+  width: 100px;
+  margin-bottom: 20px;
 }

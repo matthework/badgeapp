@@ -50,6 +50,7 @@ func addNewStaff(w http.ResponseWriter, r *http.Request) {
 	}
 	var bgs []UserBGroup
 	for i := range staff.UserBGroups {
+		staff.UserBGroups[i].UBTimeStamp = time.Now()
 		if staff.UserBGroups[i].BID != "" && staff.UserBGroups[i].Level != 0 {
 			bgs = append(bgs, staff.UserBGroups[i])
 		}

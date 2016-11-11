@@ -29,6 +29,7 @@ type UserBGroup struct {
 	Level	int	`json:"level" bson:"level"`
 	Focus 	[]string	`json:"focus" bson:"focus"`
 	Approved	bool	`json:"approved" bson:"approved"`
+	UBTimeStamp time.Time 	`json:"ubtimestamp" bson:"ubtimestamp"`
 }
 
 var col_staff = "staff"
@@ -50,7 +51,7 @@ func listStaffsSort() (staffs []Staff) {
 	defer session.Close()
 
 	collection := session.DB(DB).C(col_staff)
-	err := collection.Find(nil).Sort("status","fname","lname").All(&staffs)
+	err := collection.Find(nil).Sort("fname","lname").All(&staffs)
 	if err != nil {
 		fmt.Println(err)
 	}
