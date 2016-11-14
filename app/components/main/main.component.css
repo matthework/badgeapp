@@ -1,5 +1,5 @@
 .table-big {
-  width: 65%;
+  width: 100%;
   border: 0;
   background-color: white;
   text-align: top;
@@ -106,6 +106,10 @@
 .text {
   text-align: center;
 }
+.text-green1 {
+  color: limegreen;
+  text-align: center;
+}
 .text-green {
   font-size: 0.9em;
   color: limegreen;
@@ -120,7 +124,7 @@
   width: 100px;
   margin-left: 0;
   margin-right: 5px;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 .label-bs1 {
   font-size: 1em;
@@ -129,5 +133,6 @@
 }
 .btn-back {
   width: 100px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }

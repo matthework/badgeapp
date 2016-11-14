@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
+	// "time"
 	"encoding/json"
 	"github.com/gorilla/mux"
 )
@@ -42,7 +42,7 @@ func addNewBadgeSet(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	badgeset.BadgeGroups = bgs
-	badgeset.TimeStamp = time.Now()
+	// badgeset.TimeStamp = time.Now()
 	if badgeset.Name != "" {
 		if err := insertBadgeSet(badgeset); err != nil {
 			fmt.Println(err)
@@ -64,7 +64,7 @@ func updateBadgeSet(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	badgeset.BadgeGroups = bgs
-	badgeset.TimeStamp = time.Now()
+	// badgeset.TimeStamp = time.Now()
 	if id != "" {
 		if err := updateBadgeSetByID(id,badgeset); err != nil {
 			fmt.Println(err)

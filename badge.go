@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"time"
+	// "time"
 	"gopkg.in/mgo.v2/bson"	
 )
 
@@ -19,7 +19,7 @@ type Badge struct {
 	InUsed	bool	`json:"inused" bson:"inused"`
 	Published	bool	`json:"published" bson:"published"`
 	Status	string	`json:"status" bson:"status"`
-	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
+	TimeStamp string 	`json:"timestamp" bson:"timestamp"`
 }
 
 type BadgeLevel struct {

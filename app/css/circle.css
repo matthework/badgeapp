@@ -248,6 +248,7 @@
 }
 .c100.small {
   font-size: 80px;
+  margin: 0.1em 0.5em 0.5em 0;
 }
 .c100 > span {
   position: absolute;

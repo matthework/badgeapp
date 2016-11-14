@@ -45,7 +45,7 @@ var StaffNewComponent = (function () {
         ];
         this.focusOptions = [];
         this.statusOptions = ['Active', 'Inactive'];
-        this.newStaff = { index: 0, fname: "", lname: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: false, brief: "", others: [] };
+        this.newStaff = { index: 0, fname: "", lname: "", latestbadge: "", latestbadgetime: "", latestbset: "", latestbsettime: "", timestamp: "", status: "Active", position: "", salary: 0, email: "", phone: "", userbgroups: [], active: false, brief: "", others: [] };
     }
     StaffNewComponent.prototype.ngOnInit = function () {
         this.getBadges();
@@ -80,6 +80,7 @@ var StaffNewComponent = (function () {
             }
         }
         this.newStaff.userbgroups.sort(this.toCompare);
+        this.newStaff.timestamp = new Date().toISOString();
         var value = JSON.stringify(this.newStaff);
         this._staffService.addStaff(value).subscribe();
         console.log('you submitted value: ', value);
@@ -87,8 +88,10 @@ var StaffNewComponent = (function () {
     };
     StaffNewComponent.prototype.addBadgeGroup = function (level) {
         this.newLevel = level;
-        this.newStaff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: true });
+        this.newStaff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: true, ubtimestamp: new Date().toISOString() });
         this.newStaff.userbgroups.sort(this.toCompare);
+        this.newStaff.latestbadge = this.getBadgeName(this.newBID) + " " + this.newLevel;
+        this.newStaff.latestbadgetime = new Date().toISOString();
         var value = JSON.stringify(this.newStaff);
         console.log('you submitted value: ', value);
     };
@@ -259,29 +262,37 @@ var StaffNewComponent = (function () {
         return bname;
     };
     StaffNewComponent.prototype.updateApproved = function (ubg, event) {
+        var latestb = "";
         for (var i = 0; i < this.newStaff.userbgroups.length; i++) {
             if (this.newStaff.userbgroups[i].bid == ubg.bid) {
                 if (event.target.checked) {
                     this.newStaff.userbgroups[i].approved = true;
+                    latestb = this.getBadgeName(this.newStaff.userbgroups[i].bid) + " " + this.newStaff.userbgroups[i].level;
                 }
                 else {
                     this.newStaff.userbgroups[i].approved = false;
                 }
             }
         }
+        this.newStaff.latestbadge = latestb;
+        this.newStaff.latestbadge = new Date().toISOString();
     };
     StaffNewComponent.prototype.loadTemplate = function (bsid) {
         console.log("bset id: ", bsid);
         this.newStaff.userbgroups = [];
+        var latestb = "";
         if (bsid) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 if (this.badgesets[i]._id == bsid && this.badgesets[i].badgegroups.length != 0) {
                     for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
-                        this.newStaff.userbgroups.push({ bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus: this.badgesets[i].badgegroups[j].focus, approved: true });
+                        this.newStaff.userbgroups.push({ bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, focus: this.badgesets[i].badgegroups[j].focus, approved: true, ubtimestamp: new Date().toISOString() });
+                        latestb = this.getBadgeName(this.badgesets[i].badgegroups[j].bid) + " " + this.badgesets[i].badgegroups[j].level;
                     }
                 }
             }
         }
+        this.newStaff.latestbadge = latestb;
+        this.newStaff.latestbadgetime = new Date().toISOString();
     };
     StaffNewComponent.prototype.goBack = function () {
         window.history.back();

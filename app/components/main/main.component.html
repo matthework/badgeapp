@@ -33,19 +33,39 @@
         <h2 *ngIf="auth.userProfile"><i>{{auth.userProfile.name}}</i></h2>
     </div>
 
-    <div class="row margin col-xs-12 border ">
+    <div class="row margin col-xs-10 border ">
       <i><h4><i>Top BSet: </i><text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
-      <text>Latest Badge earned: </text><br>
-      <text>Latest Badge Set earned: </text><br></i><br>
-      <button *ngIf="!showCompare" class="btn-compare btn-add btn btn-default" (click)="showCompare=true;getComBS()">Compare</button>
-      <button *ngIf="showCompare" class="btn btn-add btn-back btn-default" (click)="showCompare=false">Back</button>
+      <text>Latest Badge earned: {{staff.latestbadge}} at {{staff.latestbadgetime}}</text><br>
+      <text>Latest Badge Set earned: {{staff.latestbset}} at {{staff.latestbsettime}}</text><br></i><br>
     </div>
     <br>
 
     <div *ngIf="!showCompare">
 
     <h3 *ngIf="staff.userbgroups.length==0"><i>You don't have any badge yet.</i></h3>
+    
+    <div class="row margin col-xs-10">
+    <div (click)="showCompare=true;getComBS()" class="c100 blue small p100">
+        <span>+</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+        <span><br><h5><text class="text-blue click">Compare</text></h5></span>
+    </div>
+    <div (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])" class="c100 green small p100">
+        <span>100%</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+        <span><br><h5><text class="text-green1 click">{{getTopStaffBS(staff.userbgroups)[1]}}</text></h5></span>
+    </div>
 
+<!--     <button *ngIf="!showCompare" class="btn-compare btn-add btn btn-default pull-right" (click)="showCompare=true;getComBS()">Compare</button> -->
+    </div>
+
+    <div class="row margin col-xs-11">
     <div (click)="addNew=true;resetNewValue()" data-toggle="modal" data-target="#myModal-new" class="c100 blue p100">
         <span>+</span>
         <div class="slice">
@@ -54,7 +74,6 @@
         </div>
         <span><br><h4><text class="text-blue click">+ Apply Badge</text></h4></span>
     </div>
-
     <div *ngFor="let userbgroup of staff.userbgroups">
       <div (click)="onSelect(userbgroup)" data-toggle="modal" data-target="#myModal" class={{getCircleLevel(userbgroup.level,userbgroup.approved)}}>
         <span>{{userbgroup.level}}</span>
@@ -64,6 +83,7 @@
         </div>
         <span><br><h4><text *ngIf="userbgroup.approved" class="text-green click">{{getBadgeName(userbgroup.bid)}}</text><text *ngIf="!userbgroup.approved" class="text-red click">{{getBadgeName(userbgroup.bid)}}</text></h4></span>
       </div>
+    </div>
     </div>
 
     <!-- Modal -->
@@ -135,7 +155,8 @@
 
   <div *ngIf="showCompare">
     <br>
-    <div class="row col-xs-12">
+    <div class="row col-xs-10">
+    <button class="btn btn-add btn-back btn-default" (click)="showCompare=false">Back</button><br>
     <table *ngIf="badgesets" class="table-big">
       <tr>
         <td>
@@ -187,6 +208,20 @@
       </tr>
     </table>
     </div>
+
+    <div class="row margin col-xs-11">
+    <div *ngFor="let userbgroup of staff.userbgroups">
+      <div (click)="onSelect(userbgroup)" data-toggle="modal" data-target="#myModal" class={{getCircleLevel(userbgroup.level,userbgroup.approved)}}>
+        <span>{{userbgroup.level}}</span>
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+        <span><br><h4><text *ngIf="userbgroup.approved" class="text-green click">{{getBadgeName(userbgroup.bid)}}</text><text *ngIf="!userbgroup.approved" class="text-red click">{{getBadgeName(userbgroup.bid)}}</text></h4></span>
+      </div>
+    </div>
+    </div>
+
   </div>
 
 <!--     <div class="row col col-xs-10 header hidden-xs">

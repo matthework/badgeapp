@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"time"
+	// "time"
 	"gopkg.in/mgo.v2/bson"	
 )
 
@@ -13,7 +13,7 @@ type Tier struct {
 	Grades	[]int	`json:"grades" bson:"grades"`
 	Judgement string	`json:"judgement" bson:"judgement"`	
 	Expertise	string	`json:"expertise" bson:"expertise"`	
-	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
+	TimeStamp string 	`json:"timestamp" bson:"timestamp"`
 }
 
 var col_tier = "tier"

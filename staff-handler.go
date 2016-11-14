@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
+	// "time"
 	"encoding/json"
 	"github.com/gorilla/mux"
 )
@@ -50,13 +50,13 @@ func addNewStaff(w http.ResponseWriter, r *http.Request) {
 	}
 	var bgs []UserBGroup
 	for i := range staff.UserBGroups {
-		staff.UserBGroups[i].UBTimeStamp = time.Now()
+		// staff.UserBGroups[i].UBTimeStamp = time.Now()
 		if staff.UserBGroups[i].BID != "" && staff.UserBGroups[i].Level != 0 {
 			bgs = append(bgs, staff.UserBGroups[i])
 		}
 	}
 	staff.UserBGroups = bgs
-	staff.TimeStamp = time.Now()
+	// staff.TimeStamp = time.Now()
 	if staff.FName != "" {
 		if err := insertStaff(staff); err != nil {
 			fmt.Println(err)
@@ -71,7 +71,7 @@ func updateStaff(w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
-	staff.TimeStamp = time.Now()
+	// staff.TimeStamp = time.Now()
 	if id != "" {
 		if err := updateStaffByID(id,staff); err != nil {
 			fmt.Println(err)
