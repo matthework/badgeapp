@@ -378,6 +378,16 @@ export class MainComponent implements OnInit{
   	return result + Math.round(level/9*100).toString();
   }
 
+  getCircleLevelCompare(level,clevel,approved) {
+  	var result="";
+  	if(approved){
+  		result="c100 green p";
+  	}else{
+  		result="c100 red p";
+  	}
+  	return result + Math.round(level/clevel*100).toString();
+  }
+
    getComBS() {
     if (this.badgesets != null) {
       this.bsname1 = this.badgesets[0].name;
@@ -468,6 +478,7 @@ export class MainComponent implements OnInit{
     var check = false;
     var has = false;
     var focusCheck = false;
+    var ulevel = 0; 
     if (this.badgesets != null) {
       for (var i = 0; i < this.badgesets.length; i++) { 
         if (this.badgesets[i].name == bsname) {
@@ -481,18 +492,21 @@ export class MainComponent implements OnInit{
               if (this.staff.userbgroups[k].approved && focusCheck && this.badgesets[i].badgegroups[j].bid == this.staff.userbgroups[k].bid) {
                 has = true;
                 if(this.badgesets[i].badgegroups[j].level > this.staff.userbgroups[k].level) {
-                  result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: true});
+                  result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, level1:this.staff.userbgroups[k].level, focus:this.badgesets[i].badgegroups[j].focus, status: false});
                   check = true;
+                }else {
+                	ulevel = this.staff.userbgroups[k].level;
                 }
               }
+              
               focusCheck = false;
             }
             if (!has) {
-              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: true});
+              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, level1:ulevel, focus:this.badgesets[i].badgegroups[j].focus, status: false});
               check = true;
             }
             if(!check){
-              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, focus:this.badgesets[i].badgegroups[j].focus, status: false});
+              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, level1:ulevel, focus:this.badgesets[i].badgegroups[j].focus, status: true});
             }
             has = false;
             check = false;
@@ -501,9 +515,36 @@ export class MainComponent implements OnInit{
       }
     }
     result.sort(this.toCompare);
+    result.sort(this.sortStatus);
     return result;
   }
 
+  sortStatus(a,b) {
+    if (a.status > b.status)
+      return -1;
+    else if (a.status < b.status)
+      return 1;
+    else 
+      return 0;
+  }
+
+  getPercent(bsname:string) {
+  	var percent = "";
+  	var target = this.compareBS(bsname);
+  	var c1 = 0;
+  	var c2 = 0;
+  	for (var i = 0; i < target.length; i++) { 
+  		if (target[i].status) {
+      	c1 += target[i].level;
+      }
+      if (!target[i].status) {
+      	c1 += target[i].level1;
+      }
+      c2 += target[i].level;
+   }
+   percent = Math.round((c1/c2)*100).toString() + "%";
+  	return percent;
+  }
 }
 
 

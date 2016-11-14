@@ -118,16 +118,17 @@ export class StaffDetailComponent implements OnInit {
   }
 
   updateStaff() {
-      // pasrse string into number
-      for (var i = 0; i < this.staff.userbgroups.length; i++) { 
-          // this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
-          this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
-      }
-      this.staff.userbgroups.sort(this.toCompare);
-      this.staff.userbgroups.sort(this.sortApproved);
-      this.staff.timestamp = new Date().toISOString();
-      let value = JSON.stringify(this.staff)
-      this._staffService.updateStaff(this.staff._id,value).subscribe();
+    // pasrse string into number
+    for (var i = 0; i < this.staff.userbgroups.length; i++) { 
+        // this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
+        this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
+    }
+    this.staff.timestamp = new Date().toISOString();
+    this.staff.userbgroups.sort(this.toCompare);
+    this.staff.userbgroups.sort(this.sortApproved);
+    let value = JSON.stringify(this.staff)
+    this._staffService.updateStaff(this.staff._id,value).subscribe();
+    console.log('you submitted value: ', value);
   }
 
   toCompare(a,b) {

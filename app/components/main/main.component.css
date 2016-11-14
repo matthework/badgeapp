@@ -1,5 +1,5 @@
 .table-big {
-  width: 100%;
+  width: 90%;
   border: 0;
   background-color: white;
   text-align: top;
@@ -20,6 +20,19 @@
 }
 .table-big tr:nth-child(even) {
   background-color: white;
+}
+.select-bs1 {
+  background: transparent;
+  width: 30%;
+  height: 30px;
+  color: #999;
+  padding: 5px;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 3;
+  border: 1px solid #cccccc;
+  margin-bottom: 10px;
+  margin-right: 0;
 }
 .select-bs {
   background: transparent;
@@ -133,6 +146,5 @@
 }
 .btn-back {
   width: 100px;
-  margin-top: 10px;
   margin-bottom: 20px;
 }

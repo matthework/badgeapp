@@ -107,11 +107,12 @@ var StaffDetailComponent = (function () {
             // this.staff.userbgroups[i].level = +this.staff.userbgroups[i].level;
             this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
         }
+        this.staff.timestamp = new Date().toISOString();
         this.staff.userbgroups.sort(this.toCompare);
         this.staff.userbgroups.sort(this.sortApproved);
-        this.staff.timestamp = new Date().toISOString();
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
+        console.log('you submitted value: ', value);
     };
     StaffDetailComponent.prototype.toCompare = function (a, b) {
         if (a.badge < b.badge)
