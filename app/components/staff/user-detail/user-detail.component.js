@@ -121,6 +121,7 @@ var UserDetailComponent = (function () {
         }
         this.staff.userbgroups.sort(this.toCompare);
         this.staff.userbgroups.sort(this.sortApproved);
+        this.staff.timestamp = new Date().toISOString();
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
@@ -302,7 +303,7 @@ var UserDetailComponent = (function () {
     UserDetailComponent.prototype.addUserBGroup = function (level) {
         // this.newLevel = +this.newLevel;
         this.newLevel = level;
-        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp: "" });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp: new Date().toISOString() });
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(this.staff._id,value).subscribe();
         this.updateStaff();

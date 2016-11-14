@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"time"
+	// "time"
 	"gopkg.in/mgo.v2/bson"	
 )
 
@@ -20,7 +20,11 @@ type Staff struct {
 	Brief	string	`json:"brief" bson:"brief"`
 	Status	string	`json:"status" bson:"status"`	
 	Others []string 	`json:"others" bson:"others"`	
-	TimeStamp time.Time 	`json:"timestamp" bson:"timestamp"`
+	TimeStamp string 	`json:"timestamp" bson:"timestamp"`
+	LatestBadge string 	`json:"latestbadge" bson:"latestbadge"`
+	LatestBadgeTime string 	`json:"latestbadgetime" bson:"latestbadgetime"`
+	LatestBSet string 	`json:"latestbset" bson:"latestbset"`
+	LatestBSetTime string 	`json:"latestbsettime" bson:"latestbsettime"`
 }
 
 type UserBGroup struct {
@@ -29,7 +33,7 @@ type UserBGroup struct {
 	Level	int	`json:"level" bson:"level"`
 	Focus 	[]string	`json:"focus" bson:"focus"`
 	Approved	bool	`json:"approved" bson:"approved"`
-	UBTimeStamp time.Time 	`json:"ubtimestamp" bson:"ubtimestamp"`
+	UBTimeStamp string 	`json:"ubtimestamp" bson:"ubtimestamp"`
 }
 
 var col_staff = "staff"

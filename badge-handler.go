@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
+	// "time"
 	"encoding/json"
 	"github.com/gorilla/mux"
 )
@@ -51,7 +51,7 @@ func addNewBadge(w http.ResponseWriter, r *http.Request) {
 	// 	}
 	// }
 	// badge.BadgeLevels = bls
-	badge.TimeStamp = time.Now()
+	// badge.TimeStamp = time.Now()
 	if badge.Name != "" {
 		if err := insertBadge(badge); err != nil {
 			fmt.Println(err)
@@ -66,7 +66,7 @@ func updateBadge(w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
-	badge.TimeStamp = time.Now()
+	// badge.TimeStamp = time.Now()
 	if id != "" {
 		if err := updateBadgeByID(id,badge); err != nil {
 			fmt.Println(err)

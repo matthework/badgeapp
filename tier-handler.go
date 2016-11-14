@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"time"
+	// "time"
 	"encoding/json"
 	"github.com/gorilla/mux"
 )
@@ -35,7 +35,7 @@ func addNewTier(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewDecoder(r.Body).Decode(&tier); err != nil {
 		fmt.Println(err)
 	}
-	tier.TimeStamp = time.Now()
+	// tier.TimeStamp = time.Now()
 	if tier.Tier != 0 {
 		if err := insertTier(tier); err != nil {
 			fmt.Println(err)
@@ -50,7 +50,7 @@ func updateTier(w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
-	tier.TimeStamp = time.Now()
+	// tier.TimeStamp = time.Now()
 
 	if id != "" {
 		if err := updateTierByID(id,tier); err != nil {

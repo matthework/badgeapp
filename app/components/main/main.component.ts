@@ -153,6 +153,7 @@ export class MainComponent implements OnInit{
     var ncCount = 0;
     var focusCheck = false;
     var totolCore = 0;
+    var latestbs = "";
     if (this.badgesets != null && sbgs != null) {
       for (var i = 0; i < this.badgesets.length; i++) { 
         for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
@@ -181,11 +182,20 @@ export class MainComponent implements OnInit{
         }
         if (coreCount == totolCore && ncCount >= (this.badgesets[i].badgegroups.length-totolCore)*4/5 && this.badgesets[i].status=='Accepted') {
           allbset.push(this.badgesets[i]);
+          latestbs = this.badgesets[i].name;
         }
         totolCore = 0;
         coreCount = 0;
         ncCount = 0;
       }
+    }
+    if(allbset.length != 0 && latestbs!=this.staff.latestbset) {
+    	this.staff.latestbset = latestbs;
+    	this.staff.latestbsettime = new Date().toISOString();
+    }
+    if(allbset.length == 0) {
+    	this.staff.latestbset = "";
+    	this.staff.latestbsettime = "";
     }
     return allbset;
   }

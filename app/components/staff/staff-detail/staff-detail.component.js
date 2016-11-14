@@ -109,6 +109,7 @@ var StaffDetailComponent = (function () {
         }
         this.staff.userbgroups.sort(this.toCompare);
         this.staff.userbgroups.sort(this.sortApproved);
+        this.staff.timestamp = new Date().toISOString();
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
     };
@@ -139,7 +140,9 @@ var StaffDetailComponent = (function () {
         //       this.staff.userbgroups.splice(index,1);
         //    }
         // }  
-        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp: "2006-01-01T15:04:05Z07:00" });
+        this.staff.userbgroups.push({ bid: this.newBID, badge: this.getBadgeName(this.newBID), level: this.newLevel, focus: this.newFocus, approved: this.newApproved, ubtimestamp: new Date().toISOString() });
+        this.staff.latestbadge = this.getBadgeName(this.newBID) + " " + this.newLevel;
+        this.staff.latestbadgetime = new Date().toISOString();
         var value = JSON.stringify(this.staff);
         // this._staffService.updateStaff(this.staff._id,value).subscribe();
         this.updateStaff();
@@ -195,6 +198,7 @@ var StaffDetailComponent = (function () {
         var ncCount = 0;
         var focusCheck = false;
         var totolCore = 0;
+        var latestbs = "";
         if (this.badgesets != null && sbgs != null) {
             for (var i = 0; i < this.badgesets.length; i++) {
                 for (var j = 0; j < this.badgesets[i].badgegroups.length; j++) {
@@ -466,18 +470,22 @@ var StaffDetailComponent = (function () {
         return bls;
     };
     StaffDetailComponent.prototype.updateApproved = function (ubg, event) {
+        var latestb = "";
         for (var i = 0; i < this.staff.userbgroups.length; i++) {
             if (this.staff.userbgroups[i].bid == ubg.bid) {
                 if (event.target.checked) {
                     this.staff.userbgroups[i].approved = true;
                     console.log("Approved at TimeStamp: ", new Date().toISOString());
                     this.staff.userbgroups[i].ubtimestamp = new Date().toISOString();
+                    latestb = this.getBadgeName(this.staff.userbgroups[i].bid) + " " + this.staff.userbgroups[i].level;
                 }
                 else {
                     this.staff.userbgroups[i].approved = false;
                 }
             }
         }
+        this.staff.latestbadge = latestb;
+        this.staff.latestbadgetime = new Date().toISOString();
         this.updateStaff();
     };
     StaffDetailComponent.prototype.goBack = function () {

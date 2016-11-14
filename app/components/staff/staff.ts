@@ -13,6 +13,10 @@ export class Staff {
   status: string;
   others: string[];
   timestamp: string;
+  latestbadge: string;
+  latestbadgetime: string;
+  latestbset: string;
+  latestbsettime: string;
 }
 
 export class UserBGroup {
