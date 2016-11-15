@@ -35,8 +35,8 @@
 
     <div class="row margin col-xs-10 border ">
       <i><h4><i>Top BSet: </i><text *ngIf="getTopStaffBS(staff.userbgroups)[0]" class="click text-blue" (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])"><i> {{getTopStaffBS(staff.userbgroups)[1]}} ( {{getTopStaffBS(staff.userbgroups)[2]}}-{{getTopStaffBS(staff.userbgroups)[3]}} ${{getPay(getTopStaffBS(staff.userbgroups)[2],getTopStaffBS(staff.userbgroups)[3])}}K )</i></text></h4>
-      <text>Latest Badge earned: {{staff.latestbadge}} at {{staff.latestbadgetime}}</text><br>
-      <text>Latest Badge Set earned: {{staff.latestbset}} at {{staff.latestbsettime}}</text><br></i><br>
+      <text *ngIf="staff.latestbadge">Latest Badge earned: <text class="text-blue">{{staff.latestbadge}}</text> at {{staff.latestbadgetime}}</text><br>
+      <text *ngIf="staff.latestbset">Latest Badge Set earned: <text class="text-blue">{{staff.latestbset}}</text> at {{staff.latestbsettime}}</text><br></i><br>
     </div>
     <br>
 
@@ -218,7 +218,8 @@
          <!--  <select class="select-bs" [(ngModel)]="bsname2"><option *ngFor="let badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select> -->
           <table class="table-c">
           <tr>
-            <td class="click text-blue" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}  ({{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} ${{getBS(bsname2).pay}}K)</td>
+            <td *ngIf="checkBSet(bsname2)" class="click text-green" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}  ({{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} ${{getBS(bsname2).pay}}K)</td>
+            <td *ngIf="!checkBSet(bsname2)" class="click text-red" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}  ({{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} ${{getBS(bsname2).pay}}K)</td>
           </tr>
           <tr>
             <td>

@@ -109,7 +109,7 @@ var StaffDetailComponent = (function () {
         }
         this.staff.timestamp = new Date().toISOString();
         this.staff.userbgroups.sort(this.toCompare);
-        this.staff.userbgroups.sort(this.sortApproved);
+        // this.staff.userbgroups.sort(this.sortApproved);
         var value = JSON.stringify(this.staff);
         this._staffService.updateStaff(this.staff._id, value).subscribe();
         console.log('you submitted value: ', value);
@@ -233,6 +233,7 @@ var StaffDetailComponent = (function () {
                 ncCount = 0;
             }
         }
+        // this.staff.latestbadgetime = new Date().toISOString();
         return allbset;
     };
     StaffDetailComponent.prototype.getSortStaffBS = function (sbgs) {
@@ -479,14 +480,13 @@ var StaffDetailComponent = (function () {
                     console.log("Approved at TimeStamp: ", new Date().toISOString());
                     this.staff.userbgroups[i].ubtimestamp = new Date().toISOString();
                     latestb = this.getBadgeName(this.staff.userbgroups[i].bid) + " " + this.staff.userbgroups[i].level;
+                    this.staff.latestbadge = latestb;
                 }
                 else {
                     this.staff.userbgroups[i].approved = false;
                 }
             }
         }
-        this.staff.latestbadge = latestb;
-        this.staff.latestbadgetime = new Date().toISOString();
         this.updateStaff();
     };
     StaffDetailComponent.prototype.goBack = function () {
