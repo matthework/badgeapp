@@ -159,7 +159,7 @@
     <label class="label-bs2">Compare to: </label>
     <select class="select-bs1" [(ngModel)]="bsname2"><option *ngFor="let badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
     <button class="btn btn-add btn-back btn-default pull-right" (click)="showCompare=false">Back</button><br>
-    <div (click)="toBSDetail(bsname2._id)" class={{getCirclePercent(bsname2)}}>
+    <div class={{getCirclePercent(bsname2)}}>
         <span>{{getPercent(bsname2)}}%</span>
         <div class="slice">
           <div class="bar"></div>
@@ -171,7 +171,7 @@
 
     <div class="row margin col-xs-11">
     <div *ngFor="let bg of compareBS(bsname2)">
-      <div (click)="onSelect(bg)" data-toggle="modal" data-target="#myModal" class={{getCircleLevelCompare(bg.level1,bg.level,bg.status)}}>
+      <div data-toggle="modal" data-target="#myModal" class={{getCircleLevelCompare(bg.level1,bg.level,bg.status)}}>
         <span>{{bg.level1}}</span>
         <div class="slice">
           <div class="bar"></div>
