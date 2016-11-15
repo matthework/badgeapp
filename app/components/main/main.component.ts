@@ -54,6 +54,7 @@ export class MainComponent implements OnInit{
          "I have achieved wide recognition... ", 
          "I am a world leading... "
        ];
+   staffBSet = [];
 	
 	constructor(private auth: AuthService,
 				private _router: Router,
@@ -197,6 +198,7 @@ export class MainComponent implements OnInit{
     	this.staff.latestbset = "";
     	this.staff.latestbsettime = "";
     }
+    this.staffBSet = allbset;
     return allbset;
   }
 
@@ -385,14 +387,28 @@ export class MainComponent implements OnInit{
 
   getCirclePercent(bsname) {
   	var result="";
-  	var p = this.getPercent(bsname);
-  	if(p>80){
+  	var color = this.checkBSet(bsname);
+  	if(color){
   		result="c100 green small p";
   	}else{
   		result="c100 red small p";
   	}
+  	var p = this.getPercent(bsname);
   	return result + p.toString();
   }
+
+	checkBSet(bsname) {
+		var result =false;
+		var allbset = this.staffBSet;
+		if (allbset != null) {
+			for (var i = 0; i < allbset.length; i++) { 
+				if(allbset[i].name==bsname){
+					result = true;
+				}
+			}
+		}
+		return result;
+	}
 
   getCircleLevelCompare(level,clevel,approved) {
   	var result="";
@@ -445,7 +461,7 @@ export class MainComponent implements OnInit{
     console.log('you submitted value: ', value);
   }
 
-    updateStaff() {
+   updateStaff() {
       for (var i = 0; i < this.staff.userbgroups.length; i++) { 
           this.staff.userbgroups[i].badge = this.getBadgeName(this.staff.userbgroups[i].bid);
       }
