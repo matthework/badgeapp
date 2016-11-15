@@ -67,6 +67,17 @@ var MainComponent = (function () {
     MainComponent.prototype.onSelect = function (ug) {
         this.selectedUG = ug;
     };
+    // getBadge(bid:string) {
+    //   var result: Badge;
+    //   if (this.badges != null) {
+    //     for (var i = 0; i < this.badges.length; i++) { 
+    //       if (this.badges[i]._id == bid) {
+    //         return this.badges[i];
+    //       }
+    //     }
+    //   }
+    //   return result;
+    // }
     MainComponent.prototype.getStaffs = function () {
         var _this = this;
         this._staffService.getStaffs().subscribe(function (staffs) { _this.staffs = staffs; });

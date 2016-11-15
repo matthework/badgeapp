@@ -78,6 +78,18 @@ export class MainComponent implements OnInit{
     this.selectedUG = ug;
   }
 
+  // getBadge(bid:string) {
+  //   var result: Badge;
+  //   if (this.badges != null) {
+  //     for (var i = 0; i < this.badges.length; i++) { 
+  //       if (this.badges[i]._id == bid) {
+  //         return this.badges[i];
+  //       }
+  //     }
+  //   }
+  //   return result;
+  // }
+
 	getStaffs() {
 		this._staffService.getStaffs().subscribe(staffs => { this.staffs = staffs});
 	}
