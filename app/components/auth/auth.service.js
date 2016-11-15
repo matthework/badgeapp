@@ -20,6 +20,7 @@ var AuthService = (function () {
         this.adminList = [
             "matt.wang@propellerhead.co.nz",
             "andrew.weston@propellerhead.co.nz",
+            "andrew.goldie@propellerhead.co.nz",
             "jonathan.cupples@propellerhead.co.nz"
         ];
         // env: Env;
