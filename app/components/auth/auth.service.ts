@@ -14,6 +14,7 @@ export class AuthService {
   adminList = [
     "matt.wang@propellerhead.co.nz",
     "andrew.weston@propellerhead.co.nz",
+    "andrew.goldie@propellerhead.co.nz",
     "jonathan.cupples@propellerhead.co.nz"
     ]
   
