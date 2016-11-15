@@ -51,15 +51,15 @@
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h5><text class="text-blue click">Compare</text></h5></span>
+        <span><br><h5><text class="">Compare</text></h5></span>
     </div>
-    <div (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])" class="c100 green small p100">
-        <span>100%</span>
+    <div (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])" class={{getCirclePercent(getTopStaffBS(staff.userbgroups)[1])}}>
+        <span>{{getPercent(getTopStaffBS(staff.userbgroups)[1])}}%</span>
         <div class="slice">
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h5><text class="text-green1 click">{{getTopStaffBS(staff.userbgroups)[1]}}</text></h5></span>
+        <span><br><h5><text class="">{{getTopStaffBS(staff.userbgroups)[1]}}</text></h5></span>
     </div>
 
 <!--     <button *ngIf="!showCompare" class="btn-compare btn-add btn btn-default pull-right" (click)="showCompare=true;getComBS()">Compare</button> -->
@@ -72,7 +72,7 @@
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h4><text class="text-blue click">+ Apply Badge</text></h4></span>
+        <span><br><h4><text class="">+ Apply Badge</text></h4></span>
     </div>
     <div *ngFor="let userbgroup of staff.userbgroups">
       <div (click)="onSelect(userbgroup)" data-toggle="modal" data-target="#myModal" class={{getCircleLevel(userbgroup.level,userbgroup.approved)}}>
@@ -81,7 +81,7 @@
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h4><text *ngIf="userbgroup.approved" class="text-green click">{{getBadgeName(userbgroup.bid)}}</text><text *ngIf="!userbgroup.approved" class="text-red click">{{getBadgeName(userbgroup.bid)}}</text></h4></span>
+        <span><br><h4><text *ngIf="userbgroup.approved" class="">{{getBadgeName(userbgroup.bid)}}</text><text *ngIf="!userbgroup.approved" class="">{{getBadgeName(userbgroup.bid)}}</text></h4></span>
       </div>
     </div>
     </div>
@@ -159,13 +159,13 @@
     <label class="label-bs2">Compare to: </label>
     <select class="select-bs1" [(ngModel)]="bsname2"><option *ngFor="let badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
     <button class="btn btn-add btn-back btn-default pull-right" (click)="showCompare=false">Back</button><br>
-    <div (click)="toBSDetail(bsname2._id)" class="c100 green small p100">
-        <span>{{getPercent(bsname2)}}</span>
+    <div (click)="toBSDetail(bsname2._id)" class={{getCirclePercent(bsname2)}}>
+        <span>{{getPercent(bsname2)}}%</span>
         <div class="slice">
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h5><text class="text-green1 click">{{getBS(bsname2).name}}</text></h5></span>
+        <span><br><h5><text class="">{{getBS(bsname2).name}}</text></h5></span>
     </div>
     </div>
 
@@ -177,7 +177,7 @@
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h4><text *ngIf="bg.status" class="text-green click">{{getBadgeName(bg.bid)}} {{bg.level}}</text><text *ngIf="!bg.status" class="text-red click">{{getBadgeName(bg.bid)}} {{bg.level}}</text></h4></span>
+        <span><br><h4><text *ngIf="bg.status" class="">{{getBadgeName(bg.bid)}} {{bg.level}}</text><text *ngIf="!bg.status" class="">{{getBadgeName(bg.bid)}} {{bg.level}}</text></h4></span>
       </div>
     </div>
     </div>
@@ -199,7 +199,11 @@
           <tr>
             <td>
             <div *ngFor="let ubg of staff.userbgroups">
-            <uli class="click text-blue" (click)="toBadgeDetail(ubg.bid)">
+            <uli *ngIf="ubg.approved" class="click text-blue" (click)="toBadgeDetail(ubg.bid)">
+            <text *ngIf="ubg.focus.length==0">{{getBadgeName(ubg.bid)}} {{ubg.level}}</text>
+            <text *ngIf="ubg.focus.length!=0">{{getBadgeName(ubg.bid)}} {{ubg.level}} [{{ubg.focus}}]</text>
+            </uli>
+            <uli *ngIf="!ubg.approved" class="click text-red" (click)="toBadgeDetail(ubg.bid)">
             <text *ngIf="ubg.focus.length==0">{{getBadgeName(ubg.bid)}} {{ubg.level}}</text>
             <text *ngIf="ubg.focus.length!=0">{{getBadgeName(ubg.bid)}} {{ubg.level}} [{{ubg.focus}}]</text>
             </uli>
@@ -209,8 +213,9 @@
           </table>
         </td>
         <td>
-          <label class="label-bs2">Compare to: </label>
-          <select class="select-bs" [(ngModel)]="bsname2"><option *ngFor="let badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select>
+          <label class="label-bs1">Compare to: </label>
+          <br>
+         <!--  <select class="select-bs" [(ngModel)]="bsname2"><option *ngFor="let badgeset of badgesets" [value]="badgeset.name">{{badgeset.name}}</option></select> -->
           <table class="table-c">
           <tr>
             <td class="click text-blue" (click)="toBSDetail(getBS(bsname2)._id)">{{getBS(bsname2).name}}  ({{getBS(bsname2).tier}}-{{getBS(bsname2).grade}} ${{getBS(bsname2).pay}}K)</td>
@@ -223,7 +228,7 @@
                 <text *ngIf="bg.focus.length==0">{{getBadgeName(bg.bid)}} {{bg.level}}</text>
                 <text *ngIf="bg.focus.length!=0">{{getBadgeName(bg.bid)}} {{bg.level}} [{{bg.focus}}]</text>
               </text>
-            <text *ngIf="bg.status" class="click text-grey">
+            <text *ngIf="bg.status" class="click text-green">
                 <text *ngIf="bg.focus.length==0">{{getBadgeName(bg.bid)}} {{bg.level}}</text>
                 <text *ngIf="bg.focus.length!=0">{{getBadgeName(bg.bid)}} {{bg.level}} [{{bg.focus}}]</text>
             </text>
