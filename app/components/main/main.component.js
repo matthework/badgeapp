@@ -339,23 +339,44 @@ var MainComponent = (function () {
     };
     MainComponent.prototype.getCircleLevel = function (level, approved) {
         var result = "";
+        var p = 0;
         if (approved) {
             result = "c100 green p";
         }
         else {
             result = "c100 red p";
         }
-        return result + Math.round(level / 9 * 100).toString();
+        p = Math.round(level / 9 * 100);
+        if (p > 100) {
+            p = 100;
+        }
+        return result + p.toString();
+    };
+    MainComponent.prototype.getCirclePercent = function (bsname) {
+        var result = "";
+        var p = this.getPercent(bsname);
+        if (p > 80) {
+            result = "c100 green small p";
+        }
+        else {
+            result = "c100 red small p";
+        }
+        return result + p.toString();
     };
     MainComponent.prototype.getCircleLevelCompare = function (level, clevel, approved) {
         var result = "";
+        var p = 0;
         if (approved) {
             result = "c100 green p";
         }
         else {
             result = "c100 red p";
         }
-        return result + Math.round(level / clevel * 100).toString();
+        p = Math.round(level / clevel * 100);
+        if (p > 100) {
+            p = 100;
+        }
+        return result + p.toString();
     };
     MainComponent.prototype.getComBS = function () {
         if (this.badgesets != null) {
@@ -463,7 +484,7 @@ var MainComponent = (function () {
                             focusCheck = false;
                         }
                         if (!has) {
-                            result.push({ bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, level1: ulevel, focus: this.badgesets[i].badgegroups[j].focus, status: false });
+                            result.push({ bid: this.badgesets[i].badgegroups[j].bid, badge: this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level: this.badgesets[i].badgegroups[j].level, level1: 0, focus: this.badgesets[i].badgegroups[j].focus, status: false });
                             check = true;
                         }
                         if (!check) {
@@ -488,10 +509,10 @@ var MainComponent = (function () {
             return 0;
     };
     MainComponent.prototype.getPercent = function (bsname) {
-        var percent = "";
         var target = this.compareBS(bsname);
         var c1 = 0;
         var c2 = 0;
+        var p = 0;
         for (var i = 0; i < target.length; i++) {
             if (target[i].status) {
                 c1 += target[i].level;
@@ -501,8 +522,11 @@ var MainComponent = (function () {
             }
             c2 += target[i].level;
         }
-        percent = Math.round((c1 / c2) * 100).toString() + "%";
-        return percent;
+        p = Math.round((c1 / c2) * 100);
+        if (p > 100) {
+            p = 100;
+        }
+        return p;
     };
     MainComponent = __decorate([
         core_1.Component({

@@ -370,22 +370,43 @@ export class MainComponent implements OnInit{
 
   getCircleLevel(level,approved) {
   	var result="";
+  	var p = 0;
   	if(approved){
   		result="c100 green p";
   	}else{
   		result="c100 red p";
   	}
-  	return result + Math.round(level/9*100).toString();
+  	p = Math.round(level/9*100);
+  	if(p>100) {
+  		p = 100;
+  	}
+  	return result + p.toString();
+  }
+
+  getCirclePercent(bsname) {
+  	var result="";
+  	var p = this.getPercent(bsname);
+  	if(p>80){
+  		result="c100 green small p";
+  	}else{
+  		result="c100 red small p";
+  	}
+  	return result + p.toString();
   }
 
   getCircleLevelCompare(level,clevel,approved) {
   	var result="";
+  	var p = 0;
   	if(approved){
   		result="c100 green p";
   	}else{
   		result="c100 red p";
   	}
-  	return result + Math.round(level/clevel*100).toString();
+  	p = Math.round(level/clevel*100);
+  	if(p>100) {
+  		p = 100;
+  	}
+  	return result + p.toString();
   }
 
    getComBS() {
@@ -498,11 +519,10 @@ export class MainComponent implements OnInit{
                 	ulevel = this.staff.userbgroups[k].level;
                 }
               }
-              
               focusCheck = false;
             }
             if (!has) {
-              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, level1:ulevel, focus:this.badgesets[i].badgegroups[j].focus, status: false});
+              result.push({bid:this.badgesets[i].badgegroups[j].bid, badge:this.getBadgeName(this.badgesets[i].badgegroups[j].bid), level:this.badgesets[i].badgegroups[j].level, level1:0, focus:this.badgesets[i].badgegroups[j].focus, status: false});
               check = true;
             }
             if(!check){
@@ -529,10 +549,10 @@ export class MainComponent implements OnInit{
   }
 
   getPercent(bsname:string) {
-  	var percent = "";
   	var target = this.compareBS(bsname);
   	var c1 = 0;
   	var c2 = 0;
+  	var p = 0;
   	for (var i = 0; i < target.length; i++) { 
   		if (target[i].status) {
       	c1 += target[i].level;
@@ -542,8 +562,11 @@ export class MainComponent implements OnInit{
       }
       c2 += target[i].level;
    }
-   percent = Math.round((c1/c2)*100).toString() + "%";
-  	return percent;
+   p = Math.round((c1/c2)*100);
+   if(p>100) {
+   	p = 100;
+   }
+  	return p;
   }
 }
 

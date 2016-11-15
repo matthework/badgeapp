@@ -229,7 +229,7 @@
   height: 1em;
   border-radius: 50%;
   float: left;
-  margin: 0.1em 0.5em 0.5em 0;
+  margin: 0.1em 0.7em 0.5em 0;
   background-color: lightgrey;
 }
 .c100 *,
@@ -247,8 +247,8 @@
   font-size: 240px;
 }
 .c100.small {
-  font-size: 80px;
-  margin: 0.1em 0.5em 0.5em 0;
+  font-size: 100px;
+  margin: 0.1em 0.8em 0.5em 0;
 }
 .c100 > span {
   position: absolute;
