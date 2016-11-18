@@ -88,7 +88,7 @@ th , td  {
   cursor: hand;
 }
 .click:hover{
-  color: purple;
+  text-decoration: underline;;
 }
 .click:visited{
   color: #607D8B;
