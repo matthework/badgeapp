@@ -116,7 +116,8 @@ var MainComponent = (function () {
         var value = JSON.stringify(this.newUser);
         this._staffService.addStaff(value).subscribe();
         console.log('you submitted value: ', value);
-        this.toUserDetail(this.newUser.email);
+        location.reload();
+        // this.toUserDetail(this.newUser.email);
     };
     MainComponent.prototype.toUserDetail = function (email) {
         this._router.navigate(['/user/detail', email]);

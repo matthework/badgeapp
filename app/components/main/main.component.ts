@@ -129,7 +129,8 @@ export class MainComponent implements OnInit{
 		let value = JSON.stringify(this.newUser)
 		this._staffService.addStaff(value).subscribe();
 		console.log('you submitted value: ', value);
-		this.toUserDetail(this.newUser.email);
+		location.reload();
+		// this.toUserDetail(this.newUser.email);
 	}
 
 	toUserDetail(email:string) {
