@@ -49,6 +49,7 @@ var AuthService = (function () {
                 localStorage.setItem('profile', JSON.stringify(profile));
                 _this.userProfile = profile;
             });
+            _this.toMain();
         });
     }
     AuthService.prototype.login = function () {
