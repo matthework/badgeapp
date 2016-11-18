@@ -30,7 +30,8 @@
   <div *ngIf="staff && checkProfile()" class="row col-xs-12">
 
     <div class="row margin col-xs-12">
-        <h2 *ngIf="auth.userProfile"><i>{{auth.userProfile.name}}</i></h2>
+        <!-- <h2 *ngIf="auth.userProfile"><i>{{auth.userProfile.name}}</i></h2> -->
+        <h2 class="click text-blue" (click)="toUserDetail(staff.email)"><i>{{staff.fname}} {{staff.lname}}</i></h2>
     </div>
 
     <div class="row margin col-xs-10 border ">
