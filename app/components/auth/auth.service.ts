@@ -3,8 +3,6 @@ import {Router} from '@angular/router';
 import {tokenNotExpired} from 'angular2-jwt';
 import {Http} from '@angular/http';
 
-// import {Env} from './env';
-
 // Avoid name not found warnings
 declare var Auth0Lock: any;
 
@@ -17,8 +15,6 @@ export class AuthService {
     "andrew.goldie@propellerhead.co.nz",
     "jonathan.cupples@propellerhead.co.nz"
     ]
-  
-  // env: Env;
 
   // Configure Auth0
   lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
@@ -60,15 +56,6 @@ export class AuthService {
     });
   }
 
-  // ngOnInit() {
-  //   this.getEnv();
-  //   console.log('you submitted value: ', this.env);
-  // }
-
-  // getEnv() {
-  //   this._http.get('/api/login').map(r => r.json()).subscribe(env => { this.env = env});
-  // }
-
   public login() {
     // Call the show method to display the widget.
     this.lock.show();
@@ -96,8 +83,8 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('profile');
     this.userProfile = undefined;
-    location.reload();
-    // this.toMain();
+    // location.reload();
+    this.toMain();
   };
 
   toMain() {

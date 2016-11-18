@@ -10,7 +10,7 @@
 
 <div *ngIf="auth.authenticated()">
 
-<!--   <div class="row col-xs-5 form-inline" *ngIf="!checkProfile()">
+  <div class="row col-xs-5 form-inline" *ngIf="!checkProfile()">
     <h3><i>Please create a user profile!</i></h3>
     <br>
     <label>*FName: </label>
@@ -25,7 +25,7 @@
 
     <button class="btn btn-big btn-danger pull-right" (click)="location.reload()">Cancel</button>
     <button class="btn btn-big btn-success pull-right" [disabled]="!newUser.fname||!newUser.lname" (click)="addNewUser()">Save</button>
-  </div> -->
+  </div>
 
   <div *ngIf="staff && checkProfile()" class="row col-xs-12">
 
@@ -41,10 +41,9 @@
     <br>
 
     <div *ngIf="!showCompare">
-
-    <h3 *ngIf="staff.userbgroups.length==0"><i>You don't have any badge yet.</i></h3>
     
     <div class="row margin col-xs-10">
+    <h3 *ngIf="staff.userbgroups.length==0"><i>You don't have any badge yet.</i></h3>
     <div (click)="showCompare=true;getComBS()" class="c100 blue small p100">
         <span>+</span>
         <div class="slice">

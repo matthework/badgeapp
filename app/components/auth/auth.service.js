@@ -23,7 +23,6 @@ var AuthService = (function () {
             "andrew.goldie@propellerhead.co.nz",
             "jonathan.cupples@propellerhead.co.nz"
         ];
-        // env: Env;
         // Configure Auth0
         this.lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
             theme: {
@@ -52,13 +51,6 @@ var AuthService = (function () {
             });
         });
     }
-    // ngOnInit() {
-    //   this.getEnv();
-    //   console.log('you submitted value: ', this.env);
-    // }
-    // getEnv() {
-    //   this._http.get('/api/login').map(r => r.json()).subscribe(env => { this.env = env});
-    // }
     AuthService.prototype.login = function () {
         // Call the show method to display the widget.
         this.lock.show();
@@ -86,8 +78,8 @@ var AuthService = (function () {
         localStorage.removeItem('id_token');
         localStorage.removeItem('profile');
         this.userProfile = undefined;
-        location.reload();
-        // this.toMain();
+        // location.reload();
+        this.toMain();
     };
     ;
     AuthService.prototype.toMain = function () {
