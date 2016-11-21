@@ -51,8 +51,9 @@ export class AuthService {
         profile.user_metadata = profile.user_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
+        this.toMain();
+        // location.reload();
       });
-      this.toMain();
 
     });
   }
