@@ -48,8 +48,9 @@ var AuthService = (function () {
                 profile.user_metadata = profile.user_metadata || {};
                 localStorage.setItem('profile', JSON.stringify(profile));
                 _this.userProfile = profile;
+                _this.toMain();
+                // location.reload();
             });
-            _this.toMain();
         });
     }
     AuthService.prototype.login = function () {
