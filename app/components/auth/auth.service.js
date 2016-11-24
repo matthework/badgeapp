@@ -17,12 +17,12 @@ var AuthService = (function () {
         var _this = this;
         this._router = _router;
         this._http = _http;
-        this.adminList = [
-            "matt.wang@propellerhead.co.nz",
-            "andrew.weston@propellerhead.co.nz",
-            "andrew.goldie@propellerhead.co.nz",
-            "jonathan.cupples@propellerhead.co.nz"
-        ];
+        // adminList = [
+        //   "matt.wang@propellerhead.co.nz",
+        //   "andrew.weston@propellerhead.co.nz",
+        //   "andrew.goldie@propellerhead.co.nz",
+        //   "jonathan.cupples@propellerhead.co.nz"
+        //   ]
         // Configure Auth0
         this.lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
             theme: {
@@ -46,6 +46,7 @@ var AuthService = (function () {
                     return;
                 }
                 profile.user_metadata = profile.user_metadata || {};
+                profile.app_metadata = profile.app_metadata || {};
                 localStorage.setItem('profile', JSON.stringify(profile));
                 _this.userProfile = profile;
                 _this.toMain();
@@ -64,15 +65,23 @@ var AuthService = (function () {
         return angular2_jwt_1.tokenNotExpired();
     };
     ;
+    // public isAdmin() {
+    //   // Check if there's an admin account
+    //   var result = false
+    //   if (this.userProfile) {
+    //     if (this.adminList.indexOf(this.userProfile.email)!=-1) {
+    //       result = true
+    //     }
+    //   }
+    //   return result
+    // };
     AuthService.prototype.isAdmin = function () {
-        // Check if there's an admin account
-        var result = false;
-        if (this.userProfile) {
-            if (this.adminList.indexOf(this.userProfile.email) != -1) {
-                result = true;
-            }
+        // Check if it is admin user
+        var isAdmin = false;
+        if (this.userProfile && this.userProfile.app_metadata && this.userProfile.app_metadata.isAdmin) {
+            isAdmin = true;
         }
-        return result;
+        return isAdmin;
     };
     ;
     AuthService.prototype.logout = function () {

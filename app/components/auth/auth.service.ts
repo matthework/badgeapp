@@ -9,12 +9,12 @@ declare var Auth0Lock: any;
 @Injectable()
 export class AuthService {
 
-  adminList = [
-    "matt.wang@propellerhead.co.nz",
-    "andrew.weston@propellerhead.co.nz",
-    "andrew.goldie@propellerhead.co.nz",
-    "jonathan.cupples@propellerhead.co.nz"
-    ]
+  // adminList = [
+  //   "matt.wang@propellerhead.co.nz",
+  //   "andrew.weston@propellerhead.co.nz",
+  //   "andrew.goldie@propellerhead.co.nz",
+  //   "jonathan.cupples@propellerhead.co.nz"
+  //   ]
 
   // Configure Auth0
   lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
@@ -49,6 +49,7 @@ export class AuthService {
         }
 
         profile.user_metadata = profile.user_metadata || {};
+        profile.app_metadata = profile.app_metadata || {};
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
         this.toMain();
@@ -69,17 +70,26 @@ export class AuthService {
     return tokenNotExpired();
   };
 
-  public isAdmin() {
-    // Check if there's an admin account
-    var result = false
-    if (this.userProfile) {
-      if (this.adminList.indexOf(this.userProfile.email)!=-1) {
-        result = true
-      }
-    }
-    return result
-  };
+  // public isAdmin() {
+  //   // Check if there's an admin account
+  //   var result = false
+  //   if (this.userProfile) {
+  //     if (this.adminList.indexOf(this.userProfile.email)!=-1) {
+  //       result = true
+  //     }
+  //   }
+  //   return result
+  // };
 
+  public isAdmin() {
+    // Check if it is admin user
+    var isAdmin = false;
+    if(this.userProfile && this.userProfile.app_metadata && this.userProfile.app_metadata.isAdmin) {
+      isAdmin = true;
+    }
+    return isAdmin;
+  };
+  
   public logout() {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
