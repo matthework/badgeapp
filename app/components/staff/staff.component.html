@@ -3,7 +3,7 @@
    <h1 class=" col-md-10 col-md-offset-1" >
       <span *ngIf="staffs">Admin</span>
       <span *ngIf="!staffs && auth.isAdmin()" >Add New Person</span>
-      <span *ngIf="!staffs && !auth.isAdmin()">There is NO Person!</span>
+      <span *ngIf="!staffs && !auth.isAdmin()">There is no person !</span>
    </h1>
 </div>
 

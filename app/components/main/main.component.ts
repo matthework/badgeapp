@@ -341,9 +341,11 @@ export class MainComponent implements OnInit{
 
    getBLs(bid:string) {
     var bls: BadgeLevel[];
-    for (var i = 0; i < this.badges.length; i++) { 
-      if(this.badges[i]._id == bid) {
-        bls = this.badges[i].badgelevels;
+    if(this.badges) {
+      for (var i = 0; i < this.badges.length; i++) { 
+        if(this.badges[i]._id == bid) {
+          bls = this.badges[i].badgelevels;
+        }
       }
     }
     return bls;
@@ -407,9 +409,35 @@ export class MainComponent implements OnInit{
   		result="c100 red small p";
   	}
   	var p = this.getPercent(bsname);
-  	return result + p.toString();
+    if(p){
+      return result + p.toString();
+    }else{
+      return result + '0';
+    }
+  	
   }
 
+  getPercent(bsname:string) {
+    var target = this.compareBS(bsname);
+    var c1 = 0;
+    var c2 = 0;
+    var p = 0;
+    for (var i = 0; i < target.length; i++) { 
+      if (target[i].status) {
+        c1 += target[i].level;
+      }
+      if (!target[i].status) {
+        c1 += target[i].level1;
+      }
+      c2 += target[i].level;
+   }
+   p = Math.round((c1/c2)*100);
+   if(p>100) {
+    p = 100;
+   }
+    return p;
+  }
+  
 	checkBSet(bsname) {
 		var result =false;
 		var allbset = this.staffBSet;
@@ -513,7 +541,7 @@ export class MainComponent implements OnInit{
 
   getBS(bsname:string) {
     var result: BadgeSet;
-    if (this.badgesets != null) {
+    if (this.badgesets) {
       for (var i = 0; i < this.badgesets.length; i++) { 
         if (this.badgesets[i].name == bsname) {
           return this.badgesets[i];
@@ -577,26 +605,6 @@ export class MainComponent implements OnInit{
       return 0;
   }
 
-  getPercent(bsname:string) {
-  	var target = this.compareBS(bsname);
-  	var c1 = 0;
-  	var c2 = 0;
-  	var p = 0;
-  	for (var i = 0; i < target.length; i++) { 
-  		if (target[i].status) {
-      	c1 += target[i].level;
-      }
-      if (!target[i].status) {
-      	c1 += target[i].level1;
-      }
-      c2 += target[i].level;
-   }
-   p = Math.round((c1/c2)*100);
-   if(p>100) {
-   	p = 100;
-   }
-  	return p;
-  }
 }
 
 
