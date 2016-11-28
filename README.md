@@ -1,11 +1,10 @@
-# badge
+# badge app  
 
-Badge System!
+Badge System!  
 
 ******************* todo list *******************  
 improve login system  
 improve warning dialog for delete  
-badge category  
 
 
 ******************* deploy on heroku *******************  
@@ -21,7 +20,7 @@ $ godep save
 $ godep save ./...  
 
 // create Procfile of commands to run on Heroku  
-$ echo 'web: badge' > Procfile  
+$ echo 'web: badgeapp' > Procfile  
 
 // heroku login  
 $ heroku login  
