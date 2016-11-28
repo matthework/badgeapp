@@ -409,12 +409,7 @@ export class MainComponent implements OnInit{
   		result="c100 red small p";
   	}
   	var p = this.getPercent(bsname);
-    if(p){
-      return result + p.toString();
-    }else{
-      return result + '0';
-    }
-  	
+    return result + p.toString();
   }
 
   getPercent(bsname:string) {
@@ -437,7 +432,7 @@ export class MainComponent implements OnInit{
    }
     return p;
   }
-  
+
 	checkBSet(bsname) {
 		var result =false;
 		var allbset = this.staffBSet;
