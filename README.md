@@ -14,7 +14,7 @@ badge category
 $ go get github.com/tools/godep  
 
 // go to project root folder  
-$GOPATH/src/github.com/propellerheadnz/badge/  
+$GOPATH/src/github.com/matthework/badgeapp/  
 
 // create Godeps.json for Dependencies (or godep save for current folder only)  
 $ godep save  
@@ -33,7 +33,7 @@ $ heroku local web
 
 ******************* run locally *******************  
 // project root folder  
-cd $GOPATH/src/github.com/propellerheadnz/badge  
+cd $GOPATH/src/github.com/matthework/badgeapp  
 
 // run mongoDB server  
 mongod  
@@ -84,6 +84,6 @@ db.dropDatabase()
 
 ******************* others *******************  
 
-matt.wang@propellerhead.co.nz  
+
 
 

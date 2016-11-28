@@ -397,12 +397,13 @@ var UserDetailComponent = (function () {
     };
     UserDetailComponent.prototype.getBLs = function (bid) {
         var bls;
-        for (var i = 0; i < this.badges.length; i++) {
-            if (this.badges[i]._id == bid) {
-                bls = this.badges[i].badgelevels;
+        if (this.badges) {
+            for (var i = 0; i < this.badges.length; i++) {
+                if (this.badges[i]._id == bid) {
+                    bls = this.badges[i].badgelevels;
+                }
             }
         }
-        // console.log('you submitted value: ', bls);
         return bls;
     };
     UserDetailComponent.prototype.getComBS = function () {

@@ -17,13 +17,13 @@ export class AuthService {
   //   ]
 
   // Configure Auth0
-  lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
+  lock = new Auth0Lock('dn6vHGxvwMJzGNuJE3QIOBKIHugB478U', 'matthework.auth0.com', {
     theme: {
       logo: "plogo.png",
       primaryColor: "#4CAF50"
     },
     languageDictionary: {
-      title: "My Badge"
+      title: "Badge App"
     },
     // rememberLastLogin: true,
     // redirect: false

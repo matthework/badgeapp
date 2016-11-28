@@ -53,13 +53,13 @@
         </div>
         <span><br><h5><text class="">Compare</text></h5></span>
     </div>
-    <div (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])" class={{getCirclePercent(getTopStaffBS(staff.userbgroups)[1])}}>
+    <div class={{getCirclePercent(getTopStaffBS(staff.userbgroups)[1])}}>
         <span>{{getPercent(getTopStaffBS(staff.userbgroups)[1])}}%</span>
         <div class="slice">
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h5><text class="">{{getTopStaffBS(staff.userbgroups)[1]}}</text></h5></span>
+        <span><br><h5><text (click)="toBSDetail(getTopStaffBS(staff.userbgroups)[0])">{{getTopStaffBS(staff.userbgroups)[1]}}</text></h5></span>
     </div>
 
 <!--     <button *ngIf="!showCompare" class="btn-compare btn-add btn btn-default pull-right" (click)="showCompare=true;getComBS()">Compare</button> -->
@@ -165,7 +165,7 @@
           <div class="bar"></div>
           <div class="fill"></div>
         </div>
-        <span><br><h5><text class="">{{getBS(bsname2).name}}</text></h5></span>
+        <span><br><h5><text *ngIf="getBS(bsname2)">{{getBS(bsname2).name}}</text></h5></span>
     </div>
     </div>
 

@@ -24,13 +24,13 @@ var AuthService = (function () {
         //   "jonathan.cupples@propellerhead.co.nz"
         //   ]
         // Configure Auth0
-        this.lock = new Auth0Lock('HZeBxWHzhhebpsDpSR8E5IJaZGHcuii7', 'mattwangprop.auth0.com', {
+        this.lock = new Auth0Lock('dn6vHGxvwMJzGNuJE3QIOBKIHugB478U', 'matthework.auth0.com', {
             theme: {
                 logo: "plogo.png",
                 primaryColor: "#4CAF50"
             },
             languageDictionary: {
-                title: "My Badge"
+                title: "Badge App"
             },
         });
         // Set userProfile attribute if already saved profile
