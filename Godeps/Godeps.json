@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/matthework/badge",
+	"ImportPath": "github.com/matthework/badgeapp",
 	"GoVersion": "go1.6",
 	"GodepVersion": "v74",
 	"Deps": [
