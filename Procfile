@@ -1,1 +1,1 @@
-web: badge
+web: badgeapp
