@@ -24,7 +24,7 @@ var AuthService = (function () {
         //   "jonathan.cupples@propellerhead.co.nz"
         //   ]
         // Configure Auth0
-        this.lock = new Auth0Lock('dn6vHGxvwMJzGNuJE3QIOBKIHugB478U', 'matthework.auth0.com', {
+        this.lock = new Auth0Lock('hpY2B9mgVDJAgycoZ1iODbYVARedrZLZ', 'matthework.auth0.com', {
             theme: {
                 logo: "blogo.png",
                 primaryColor: "#4CAF50"

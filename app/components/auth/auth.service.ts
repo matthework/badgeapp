@@ -17,7 +17,7 @@ export class AuthService {
   //   ]
 
   // Configure Auth0
-  lock = new Auth0Lock('dn6vHGxvwMJzGNuJE3QIOBKIHugB478U', 'matthework.auth0.com', {
+  lock = new Auth0Lock('hpY2B9mgVDJAgycoZ1iODbYVARedrZLZ', 'matthework.auth0.com', {
     theme: {
       logo: "blogo.png",
       primaryColor: "#4CAF50"
