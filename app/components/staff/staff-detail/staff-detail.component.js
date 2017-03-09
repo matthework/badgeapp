@@ -481,6 +481,7 @@ var StaffDetailComponent = (function () {
                     this.staff.userbgroups[i].ubtimestamp = new Date().toISOString();
                     latestb = this.getBadgeName(this.staff.userbgroups[i].bid) + " " + this.staff.userbgroups[i].level;
                     this.staff.latestbadge = latestb;
+                    this.staff.latestbadgetime = new Date().toISOString();
                 }
                 else {
                     this.staff.userbgroups[i].approved = false;

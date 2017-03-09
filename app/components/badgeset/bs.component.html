@@ -8,24 +8,24 @@
 </div>
 
 <!-- Content -->
-<div class="margin col-md-10 col-md-offset-1">
+<div class="b80 col-md-10 col-md-offset-1">
 
 <div *ngIf="auth.authenticated()">
 
 	<div *ngIf="!showCompare">
-		<div class="col margin col-xs-11 form-inline">
-			<div *ngIf="badgesets" class="col col-xs-12 form-group">
+		<div class="form-inline">
+			<div *ngIf="badgesets">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
 				<button class="btn-compare btn-add btn btn-default" *ngIf="!showBS" (click)="showCompare=true;getComBS()">Compare</button>
 				<button class="btn btn-big btn-primary pull-right" *ngIf="showBS" (click)="getBadgeSets();showBS=false">Back</button>
 				<button class="btn btn-add btn-s btn-default" *ngIf="!showBS && auth.isAdmin()" (click)="addBadgeSet()">+</button>
 			</div>
-
-			<div *ngIf="!badgesets && auth.isAdmin()" class="form-group">
+			<div *ngIf="!badgesets && auth.isAdmin()">
 				<input class="form-control" [(ngModel)]="query" placeholder="Search for">
 				<button class="btn btn-add btn-s btn-default" (click)="addBadgeSet()">+</button><br>
 			</div>
 		</div>
+		<br>
 
 		<div *ngIf="badgesets" class="row col col-xs-12 header hidden-xs">
 			<div class=" col-xs-3">Name</div>
@@ -33,7 +33,6 @@
 			<div class=" col-xs-2">Tier/Grade</div>
 			<div class=" col-xs-2">Tags</div>
 		</div>
-		
 		<div class="row col col-xs-12 div-list-item" *ngFor="let badgeset of badgesets | filter:query">
 			<div *ngIf="badgeset.status=='Accepted' || auth.isAdmin()" class="col-sm-3">
 				<button class="btn btn-b btn-primary wrap" (click)="onSelect(badgeset);toBSDetail(badgeset._id)">{{badgeset.name}}</button>

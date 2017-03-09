@@ -7,7 +7,16 @@ improve login system
 improve warning dialog for delete  
 
 
-******************* deploy on heroku *******************  
+******************* setup *******************    
+go 1.6+  
+node.js (including npm manager)  
+heroku cli  
+mongodb (if test mongodb locally)  
+npm install typings  
+npm install typescript    
+
+
+******************* deploy on heroku *******************    
 
 // install godep  
 $ go get github.com/tools/godep  
@@ -79,10 +88,3 @@ db.badge.drop()
 
 // drop a database  
 db.dropDatabase()  
-
-
-******************* others *******************  
-
-
-
-
