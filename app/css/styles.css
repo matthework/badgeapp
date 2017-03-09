@@ -161,3 +161,13 @@ th , td  {
 .left {
   margin-left: 10px;
 }
+
+.footer {
+  padding-top: 15px;
+  position: relative;
+  top: 20px;
+  bottom: 20px;
+  width: 100%;
+/*  height: 50px;
+  background-color: #f5f5f5;*/
+}
