@@ -8,28 +8,26 @@
 </div>
 
 <!-- Content -->
-<div class="margin col-md-10 col-md-offset-1">
+<div class="b80 col-md-10 col-md-offset-1">
 
 <div *ngIf="auth.authenticated()">
 
 <!-- <div *ngIf="auth.isAdmin()"> -->
 
     <div class="form-inline">
-      <div *ngIf="tiers" class="form-group">
+      <div *ngIf="tiers">
        	<input class="form-control" [(ngModel)]="query" placeholder="Search for">
 			<button class="btn btn-add btn-default" *ngIf!="toPay" (click)="toPay=true;tedit=false">Show BadgeSet</button>
 			<button class="btn btn-big btn-add btn-default" *ngIf="toPay" (click)="toPay=false;tedit=false">Show $$</button>
 			<button class="btn btn-add btn-s btn-default" *ngIf="auth.isAdmin()" (click)="addTier()">+</button>
       </div>
-
-      <div class="form-group" *ngIf="!tiers && auth.isAdmin()">
+      <div *ngIf="!tiers && auth.isAdmin()">
         <input class="form-control" [(ngModel)]="query" placeholder="Search for">
 		<button class="btn btn-add btn-s btn-default" (click)="addTier()">+</button>
       </div>
    </div>
    <br>
 
-   <br>
    <div *ngIf!="toPay">
 		<div *ngIf="tiers" class="row col col-xs-12 header hidden-xs">
 			<div class=" col-xs-1">Tier</div>
